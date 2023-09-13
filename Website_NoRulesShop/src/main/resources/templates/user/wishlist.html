@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<title>Wish List</title>
+</head>
+<body>
+	<nav aria-label="breadcrumb" class="w-100 float-left">
+		<ol class="breadcrumb parallax justify-content-center" data-source-url="img/banner/parallax.jpg"
+		    style="background-image: url(&quot;img/banner/parallax.jpg&quot;); background-position: 50% 0.809717%;">
+			<li class="breadcrumb-item"><a href="#">Home</a></li>
+		</ol>
+	</nav>
+
+	<div class="cart-area table-area pt-110 pb-95 float-left w-100">
+		<div class="container">
+			<div class=" cart-wrapper float-left w-100">
+				<div class="table-responsive">
+					<table class="table product-table text-center">
+						<thead>
+						<tr>
+							<th class="table-remove text-uppercase">remove</th>
+							<th class="table-image text-uppercase">image</th>
+							<th class="table-p-name text-uppercase">product</th>
+							<th class="table-p-price text-uppercase">price</th>
+							<th class="table-p-qty text-uppercase">Stock Status</th>
+							<th class="table-total text-uppercase">add to cart</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td class="table-remove"><button><i class="material-icons">delete</i></button></td>
+							<td class="table-image"><a href="product-details"><img src="img/products/02.jpg"
+							                                                            alt=""></a></td>
+							<td class="table-p-name text-capitalize"><a href="product-details">aspetur autodit
+							                                                                        autfugit</a></td>
+							<td class="table-p-price">
+								<p>$100.00</p>
+							</td>
+							<td class="table-p-qty">in stock</td>
+							<td class="table-addtocart"><a href="cart_page" class="btn-primary btn">Add to
+							                                                                             cart</a></td>
+						</tr>
+						<tr>
+							<td class="table-remove"><button><i class="material-icons">delete</i></button></td>
+							<td class="table-image"><a href="product-details"><img src="img/products/03.jpg"
+							                                                            alt=""></a></td>
+							<td class="table-p-name text-capitalize"><a href="product-details">magni dolores
+							                                                                        eosquies</a></td>
+							<td class="table-p-price">
+								<p>$100.00</p>
+							</td>
+							<td class="table-p-qty">in stock</td>
+							<td class="table-addtocart"><a href="cart_page" class="btn-primary btn">Add to cart</a></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+	</script>
+	<!--End of Tawk.to Script-->
+</body>
+</html>
