@@ -1,3 +1,4 @@
+-- drop database norule_shop;
 create database norule_shop;
 use norule_shop;
 create table `account_status`(
@@ -102,7 +103,7 @@ create table `information_type`(
 );
 
 create table `detail_information_type`(
-	detail_information_type int auto_increment primary key,
+	detail_information_type_id int auto_increment primary key,
     information_type_id int,
     detail_Information_type_name nvarchar(255),
 	foreign key (information_type_id) references `information_type`(information_type_id)
@@ -234,12 +235,12 @@ create table `delivery_method`(
     delivery_method_name nvarchar(255)
 );
 
-create table `order`(
+create table `orders`(
 	order_id int auto_increment primary key, 
     order_time datetime,
     discount_amout int not null,
     recipient_name nvarchar(255) not null,
-    phonenunber char(10) not null,
+    phonenumber varchar(255)  not null,
     specified_address nvarchar(255) not null,
 	account_id int,
     voucher_id int null ,
@@ -263,7 +264,7 @@ create table `order_detail`(
     total_price int not null,
     order_id int not null,
     product_id int not null,
-	foreign key (order_id) references `order`(order_id),
+	foreign key (order_id) references `orders`(order_id),
     foreign key (product_id) references `product`(product_id)
 );
 
@@ -292,7 +293,7 @@ create table `report_status`(
 );
 
 create table `feedback_report`(
-	deedback_report  int AUTO_INCREMENT primary key,
+	feedback_report_id  int AUTO_INCREMENT primary key,
     report_date date not null,
     `description` nvarchar(1000) not null,
     feedback_id int not null,
@@ -454,7 +455,7 @@ INSERT INTO `delivery_method` (delivery_method_name) VALUES
     ('Express Shipping');
 
 -- Insert data into `order` table
-INSERT INTO `order` (order_time, discount_amout, recipient_name, phonenunber, specified_address, account_id, voucher_id, payment_status_id, order_status_id, payment_method_id) VALUES
+INSERT INTO `orders` (order_time, discount_amout, recipient_name, phonenumber, specified_address, account_id, voucher_id, payment_status_id, order_status_id, payment_method_id) VALUES
     ('2023-09-11 10:00:00', 10, 'John Doe', '1234567890', '123 Main St, Apt 4B', 1, 1, 2, 1, 1),
     ('2023-09-12 11:30:00', 15, 'Jane Smith', '9876543210', '456 Elm St, Suite 202', 2, 2, 1, 2, 2);
 
@@ -482,5 +483,5 @@ INSERT INTO `report_status` (report_status_name) VALUES
 INSERT INTO `feedback_report` (report_date, `description`, feedback_id, account_id, report_status_id) VALUES
     ('2023-09-15', 'Reported inappropriate content', 1, 2, 1),
     ('2023-09-16', 'Resolved issue', 2, 1, 2);
-
-select * from feedback
+    
+    
