@@ -111,7 +111,7 @@ public class FindAllService {
     
     @Autowired
     private VoucherService voucherService;
-    
+
     public void findAllDataFromServices() {
         List<Account> accounts = accountService.getAllAccounts();
         List<AccountStatus> accountStatuses = accountStatusService.getAllAccountStatuses();
@@ -147,7 +147,49 @@ public class FindAllService {
         List<Role> roles = roleService.getAllRoles();
         List<Ranked> rankeds = rankedService.getAllRankeds();
         List<Voucher> vouchers = voucherService.getAllVouchers();
-        
-        // You can process or use the data from these lists as needed
+
+        // Gọi hàm printAllValuesInList cho từng danh sách
+        printAllValuesInList(accounts);
+        printAllValuesInList(accountStatuses);
+        printAllValuesInList(addresses);
+        printAllValuesInList(addressTypes);
+        printAllValuesInList(brands);
+        printAllValuesInList(brandImages);
+        printAllValuesInList(categoryLevel1s);
+        printAllValuesInList(categoryLevel2s);
+        printAllValuesInList(categoryLevel1Details);
+        printAllValuesInList(categoryLevel2Details);
+        printAllValuesInList(categoryQuantities);
+        printAllValuesInList(deliveryMethods);
+        printAllValuesInList(detailInformationTypes);
+        printAllValuesInList(directories);
+        printAllValuesInList(directoryLv1s);
+        printAllValuesInList(directoryLv2s);
+        printAllValuesInList(directoryLv3s);
+        printAllValuesInList(feedbacks);
+        printAllValuesInList(feedbackImages);
+        printAllValuesInList(feedbackReports);
+        printAllValuesInList(informationTypes);
+        printAllValuesInList(orders);
+        printAllValuesInList(orderDetails);
+        printAllValuesInList(orderStatuses);
+        printAllValuesInList(paymentMethods);
+        printAllValuesInList(paymentStatuses);
+        printAllValuesInList(points);
+        printAllValuesInList(products);
+        printAllValuesInList(productDiscounts);
+        printAllValuesInList(productImages);
+        printAllValuesInList(reportStatuses);
+        printAllValuesInList(roles);
+        printAllValuesInList(rankeds);
+        printAllValuesInList(vouchers);
     }
+
+    public void printAllValuesInList(List<?> list) {
+        for (Object item : list) {
+            System.out.println(item);
+        }
+    }
+
+
 }
