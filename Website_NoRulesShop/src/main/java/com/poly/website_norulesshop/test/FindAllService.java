@@ -56,12 +56,6 @@ public class FindAllService {
     private DirectoryLv1Service directoryLv1Service;
     
     @Autowired
-    private DirectoryLv2Service directoryLv2Service;
-    
-    @Autowired
-    private DirectoryLv3Service directoryLv3Service;
-    
-    @Autowired
     private FeedbackService feedbackService;
     
     @Autowired
@@ -128,8 +122,6 @@ public class FindAllService {
         List<DetailInformationType> detailInformationTypes = detailInformationTypeService.getAllDetailInformationTypes();
         List<Directory> directories = directoryService.getAllDirectories();
         List<DirectoryLv1> directoryLv1s = directoryLv1Service.getAllDirectoryLv1s();
-        List<DirectoryLv2> directoryLv2s = directoryLv2Service.getAllDirectoryLv2s();
-        List<DirectoryLv3> directoryLv3s = directoryLv3Service.getAllDirectoryLv3s();
         List<Feedback> feedbacks = feedbackService.getAllFeedbacks();
         List<FeedbackImage> feedbackImages = feedbackImageService.getAllFeedbackImages();
         List<FeedbackReport> feedbackReports = feedbackReportService.getAllFeedbackReports();
@@ -164,8 +156,6 @@ public class FindAllService {
         printAllValuesInList(detailInformationTypes);
         printAllValuesInList(directories);
         printAllValuesInList(directoryLv1s);
-        printAllValuesInList(directoryLv2s);
-        printAllValuesInList(directoryLv3s);
         printAllValuesInList(feedbacks);
         printAllValuesInList(feedbackImages);
         printAllValuesInList(feedbackReports);
