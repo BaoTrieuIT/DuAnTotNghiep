@@ -5,21 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-@Table(name = "directory_lv3")
-public class DirectoryLv3 {
+@Table(name = "directory_lv1_brand")
+public class DirectoryLv1Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "directory_lv3_id")
-    private Integer directory_lv3_id;
-
-    private String directory_lv3_name;
-
+    @Column(name = "directory_lv1_brand_id")
+    private Integer directory_lv1_brand_id;
     @ManyToOne
-    @JoinColumn(name = "directory_lv2_id")
-    private DirectoryLv2 directoryLv2;
-
-    // Getters and setters
+    @JoinColumn(name = "directory_lv1_id")
+    private DirectoryLv1 directoryLv1;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 }
