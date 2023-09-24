@@ -53,8 +53,7 @@ public class FindAllService {
     private DirectoryService directoryService;
     
     @Autowired
-    private DirectoryLv1Service directoryLv1Service;
-    
+    private DirectoryLv1Service directoryLv1Service;    
     @Autowired
     private FeedbackService feedbackService;
     
@@ -106,7 +105,11 @@ public class FindAllService {
     @Autowired
     private VoucherService voucherService;
 
+    @Autowired
+    private DirectoryLv1BrandService directoryLv1BrandService;
+
     public void findAllDataFromServices() {
+        List<DirectoryLv1Brand> directoryLv1Brands = directoryLv1BrandService.getAllDirectoryLv1Brands();
         List<Account> accounts = accountService.getAllAccounts();
         List<AccountStatus> accountStatuses = accountStatusService.getAllAccountStatuses();
         List<Address> addresses = addressService.getAllAddresses();
@@ -141,6 +144,7 @@ public class FindAllService {
         List<Voucher> vouchers = voucherService.getAllVouchers();
 
         // Gọi hàm printAllValuesInList cho từng danh sách
+        printAllValuesInList(directoryLv1Brands);
         printAllValuesInList(accounts);
         printAllValuesInList(accountStatuses);
         printAllValuesInList(addresses);

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
 import java.util.List;
 
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
@@ -25,6 +24,8 @@ public class DirectoryLv1 {
     // Getters and setters
 
     @OneToMany(mappedBy = "directoryLv1")
-    List<Brand> listBrand;
+    List<Brand> brandList;
+    @OneToMany(mappedBy = "directoryLv1")
+    List<DirectoryLv1Brand> directoryLv1ImageList;
 
 }

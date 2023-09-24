@@ -346,6 +346,8 @@ INSERT INTO `directory_lv1` (directory_lv1_name, directory_id) VALUES
     ('Category 1', 1),
     ('Category 2', 1);
 
+
+-- deleted
 -- Insert data into `directory_lv2` table
 INSERT INTO `directory_lv2` (directory_lv2_name, directory_lv1_id) VALUES
     ('Subcategory 1-1', 1),
@@ -358,6 +360,10 @@ INSERT INTO `directory_lv3` (directory_lv3_name, directory_lv2_id) VALUES
     ('Sub-subcategory 1-1-2', 1),
     ('Sub-subcategory 1-2-1', 2),
     ('Sub-subcategory 2-1-1', 3);
+-- deleted
+
+
+
 
 -- Insert data into `information_type` table
 INSERT INTO `information_type` (information_type_name, directory_id) VALUES
@@ -483,7 +489,15 @@ INSERT INTO `report_status` (report_status_name) VALUES
 INSERT INTO `feedback_report` (report_date, `description`, feedback_id, account_id, report_status_id) VALUES
     ('2023-09-15', 'Reported inappropriate content', 1, 2, 1),
     ('2023-09-16', 'Resolved issue', 2, 1, 2);
+alter table product drop column is_accepted;
+drop table directory_lv3;
+drop table directory_lv2;
 
-Alter table product drop column is_accepted;
-Drop table directory_lv2;
-Drop table directory_lv3;
+create table `directory_lv1_brand`(
+	directory_lv1_brand_id int auto_increment primary key ,
+    directory_lv1_id int,
+    brand_id int,
+    foreign key (directory_lv1_id) references directory_lv1(directory_lv1_id),
+    foreign key (brand_id) references brand(brand_id)
+);
+

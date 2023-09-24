@@ -1,5 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/admin/layout.html :: admin(~{::body})}">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin</title>
+</head>
+<body>
+<style>
+	.search{
+		position: relative;
+	}
+	.a{
+		position: absolute;
+		top: 6px;
+		right: 16px;
+		color: black;
+	}
+	.nav-tabss .nav-item .nav-link.active{
+		color: #5d6df3;
+		border-bottom-color: #5d6df3;
+	}
+	.nav-tabss .nav-item .nav-link:hover{
+		color: #5d6df3;
 
+	}
+	.nav-tabs .nav-item .nav-link.active{
+		color: #5d6df3;
+		font-weight: 600;
+
+	}
+	.nav-tabs .nav-item .nav-link{
+		color: black;
+		font: inherit;
+
+	}
+	.nav-tabs .nav-item .nav-link:hover{
+		color: #5d6df3;
+
+
+	}
+	.ghl{
+		background-color: #5d6df3;
+		border: none;
+		color: white;
+	}.ghl:hover{
+		 background-color: #5d6df3;
+		 border: none;
+		 color: white;
+	 }
+	.dl:hover{
+		background-color: #6c757d;
+		color: white;
+	}
+</style>
 	<main id="main" class="main">
+
 		<div class="pagetitle">
 			<h1>Quản lý vận chuyển</h1>
 			<nav>
@@ -10,4 +66,713 @@
 				</ol>
 			</nav>
 		</div><!-- End Page Title -->
+		<div class="card">
+			<div class="card-body">
+				<!-- Bordered Tabs -->
+				<ul class="nav nav-tabss nav-tabs-bordered" id="borderedTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#bordered-all" type="button" role="tab" aria-controls="home" aria-selected="true">Tất cả</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="cxn-tab" data-bs-toggle="tab" data-bs-target="#bordered-cxn" type="button" role="tab" aria-controls="profile" aria-selected="false">Chờ xác nhận</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="clh-tab" data-bs-toggle="tab" data-bs-target="#bordered-clh" type="button" role="tab" aria-controls="contact" aria-selected="false">Chờ lấy hàng</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="dg-tab" data-bs-toggle="tab" data-bs-target="#bordered-dg" type="button" role="tab" aria-controls="contact" aria-selected="false">Đang giao</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="dagiao-tab" data-bs-toggle="tab" data-bs-target="#bordered-dagiao" type="button" role="tab" aria-controls="contact" aria-selected="false">Đã giao</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="dh-tab" data-bs-toggle="tab" data-bs-target="#bordered-dh" type="button" role="tab" aria-controls="contact" aria-selected="false">Đơn Huỷ</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="ht-tab" data-bs-toggle="tab" data-bs-target="#bordered-ht" type="button" role="tab" aria-controls="contact" aria-selected="false">Trả hàng/Hoàn tiền</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="ktc-tab" data-bs-toggle="tab" data-bs-target="#bordered-ktc" type="button" role="tab" aria-controls="contact" aria-selected="false">Giao không thành công</button>
+					</li>
+				</ul>
+				<div class="tab-content pt-2" id="borderedTabContent">
+					<div class="tab-pane fade show active" id="bordered-all" role="tabpanel" aria-labelledby="home-tab">
+						<div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-secondary dl"  style="width: 95px;border: 1px solid #f0f0f0;">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+										<div class="row">
+											<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+												<span>0 đơn hàng</span>
+											</div>
+											<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex";>
+												<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+											</div>
+								</div><!-- End Default Tabs -->
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-cxn" role="tabpanel" aria-labelledby="profile-tab">
+						<div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<div class="row">
+									<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+										<span>0 đơn hàng</span>
+									</div>
+									<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex";>
+										<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+									</div>
+								</div><!-- End Default Tabs -->
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-clh" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+									<li class="nav-item" role="presentation">
+										<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" >Tất cả
+										</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" >Chưa xử lý</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" >Đã xử lý</button>
+									</li>
+								</ul>
+								<div class="tab-content pt-2" id="myTabContent">
+									<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+										<div class="row">
+											<div class="col-md-9"></div>
+											<div class="col-md-3" style="margin-bottom: 24px; margin-top: 24px;display: flex">
+												<div class="dropdown "  >
+													<button style="width: 170px;padding: 10px" class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="bi bi-sort-down"></i>
+														<span>Sắp xếp theo</span>
+
+													</button>
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="#">Action</a></li>
+														<li><a class="dropdown-item" href="#">Another action</a></li>
+														<li><a class="dropdown-item" href="#">Something else here</a></li>
+													</ul>
+												</div>
+												<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+										<div class="row">
+											<div class="col-md-9"></div>
+											<div class="col-md-3" style="margin-bottom: 24px; margin-top: 24px;display: flex">
+												<div class="dropdown "  >
+													<button style="width: 170px;padding: 10px" class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="bi bi-sort-down"></i>
+														<span>Sắp xếp theo</span>
+
+													</button>
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="#">Action</a></li>
+														<li><a class="dropdown-item" href="#">Another action</a></li>
+														<li><a class="dropdown-item" href="#">Something else here</a></li>
+													</ul>
+												</div>
+												<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+										<div class="row">
+											<div class="col-md-6"></div>
+
+											<div class="col-md-6" style="margin-bottom: 24px; margin-top: 24px;display: flex">
+												<span  style="margin-right: 10px; padding-top: 10px">Chọn hàng tại bưu cục</span>
+												<div class="dropdown "  >
+													<button style="width: 160px;padding: 10px;margin-right: 5px" class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+														<span>Tất cả đơn hàng</span>
+
+													</button>
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="#">Tất cả đơn hàng</a></li>
+														<li><a class="dropdown-item" href="#">Gửi hàng tại bưu cục</a></li>
+
+													</ul>
+												</div>
+												<div class="dropdown "  >
+													<button style="width: 170px;padding: 10px" class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="bi bi-sort-down"></i>
+														<span>Sắp xếp theo</span>
+
+													</button>
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="#">Action</a></li>
+														<li><a class="dropdown-item" href="#">Another action</a></li>
+														<li><a class="dropdown-item" href="#">Something else here</a></li>
+													</ul>
+												</div>
+												<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+
+											</div>
+										</div>
+									</div>
+								</div><!-- End Default Tabs -->
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-dg" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<div class="row">
+									<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+										<span>0 đơn hàng</span>
+									</div>
+									<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex";>
+										<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+									</div>
+								</div><!-- End Default Tabs -->
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-dagiao" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<div class="row">
+									<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+										<span>0 đơn hàng</span>
+									</div>
+									<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex";>
+										<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+									</div>
+								</div><!-- End Default Tabs -->
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-dh" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<ul class="nav nav-tabs mt-5" id="myTab2" role="tablist">
+									<li class="nav-item" role="presentation">
+										<button class="nav-link active" id="home-tab2" data-bs-toggle="tab" data-bs-target="#home12" type="button" role="tab" aria-controls="home" aria-selected="true" >Tất cả
+										</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="profile-tab2" data-bs-toggle="tab" data-bs-target="#cph" type="button" role="tab" aria-controls="profile" aria-selected="false" >Chờ phản hồi</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-tab2" data-bs-toggle="tab" data-bs-target="#dh" type="button" role="tab" aria-controls="contact" aria-selected="false" >Đã hủy</button>
+									</li>
+								</ul>
+								<div class="tab-content pt-2" id="myTabContent2">
+									<div class="tab-pane fade  show active " id="home12" role="tabpanel" aria-labelledby="profile-tab">
+										a
+									</div>
+									<div class="tab-pane fade" id="cph" role="tabpanel" aria-labelledby="profile-tab">
+										b
+									</div>
+									<div class="tab-pane fade" id="dh" role="tabpanel" aria-labelledby="contact-tab">
+										c
+									</div>
+								</div><!-- End Default Tabs -->
+								<div class="row">
+									<div class="col-md-10">
+										<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+											<span>0 đơn hàng</span>
+										</div>
+									</div>
+									<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex">
+										<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+									</div>
+								</div>
+							</div>
+</div>
+
+
+
+						</div>
+					<div class="tab-pane fade" id="bordered-ht" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="container" style="display: flex;justify-content: flex-end;margin-bottom: 24px;padding-top: 24px">
+								<button type="button" class="btn btn-outline-secondary" style="margin-right: 18px">
+									<i class="bi bi-justify"></i>
+									<span>Tỉ lệ trả hàng/hoàn tiền</span> </button>
+								<button type="button" class="btn btn-outline-secondary" style="">
+									<i class="bi bi-book"></i>
+									<span>Quy trình trả hàng/hoàn tiền</span> </button>
+							</div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<ul class="nav nav-tabs mt-5" id="myTab1" role="tablist">
+									<li class="nav-item" role="presentation">
+										<button class="nav-link active" id="home-tab1" data-bs-toggle="tab" data-bs-target="#homeAll" type="button" role="tab" aria-controls="home" aria-selected="true" >Tất cả
+										</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="profile-tab1" data-bs-toggle="tab" data-bs-target="#ycm" type="button" role="tab" aria-controls="profile" aria-selected="false" >Yêu cầu mới</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-tab1" data-bs-toggle="tab" data-bs-target="#canphanhoi" type="button" role="tab" aria-controls="contact" aria-selected="false" >Cần phản hồi</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-tab12" data-bs-toggle="tab" data-bs-target="#dph" type="button" role="tab" aria-controls="contact" aria-selected="false" >Đã phản hồi</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-tab123" data-bs-toggle="tab" data-bs-target="#hthanh" type="button" role="tab" aria-controls="contact" aria-selected="false" >Hoàn thành</button>
+									</li>
+								</ul>
+								<div class="tab-content pt-2" id="myTable">
+									<div class="tab-pane fade show active" id="homeAll" role="tabpanel" aria-labelledby="home-tab">
+										a
+
+									</div>
+									<div class="tab-pane fade" id="ycm" role="tabpanel" aria-labelledby="profile-tab">
+										b
+
+									</div>
+									<div class="tab-pane fade" id="canphanhoi" role="tabpanel" aria-labelledby="contact-tab">
+										c
+
+									</div>
+									<div class="tab-pane fade" id="dph" role="tabpanel" aria-labelledby="contact-tab">
+										d
+
+									</div>
+									<div class="tab-pane fade" id="hthanh" role="tabpanel" aria-labelledby="contact-tab">
+										e
+
+									</div>
+								</div><!-- End Default Tabs -->
+								<div class="row">
+									<div class="col-md-10">
+										<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+											<span>0 đơn hàng</span>
+										</div>
+									</div>
+									<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex">
+										<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="tab-pane fade" id="bordered-ktc" role="tabpanel" aria-labelledby="contact-tab">
+						<div>
+							<div class="container" style="display: flex;justify-content: flex-end;margin-bottom: 24px;padding-top: 24px">
+
+								<button type="button" class="btn btn-outline-secondary" style="">
+									<i class="bi bi-book"></i>
+									<span>Quản lí đơn giao không thành công</span> </button>
+							</div>
+							<div class="row">
+								<div class="col-md-6"></div>
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-2 p-0 mt-2">Ngày đặt hàng:</label>
+										<div class="col-md-5 p-0">
+											<input type="date" class="form-control">
+										</div>
+										<div class="col-md-5">
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">Xuất</button>
+											<button type="button" class="btn btn-outline-secondary" style="border: 1px solid #f0f0f0">
+												<i class="ri-menu-fill"></i>
+											</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 mt-3 p-0">
+									<select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+										<option selected>Open this select menu</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-md-7 mt-3 p-0 " style="box-shadow: none; " >
+									<div class="search">
+										<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+										<a class="a"><i class="bi bi-search"></i></a>
+									</div>
+								</div>
+								<div class="col-md-2 mt-3 " style="box-shadow: none; " >
+									<button type="button" class="btn btn-outline-primary" style="margin-right: 7px; background-color: #5d6df3; border: none;color: white;width: 110px">Tìm kiếm</button>
+									<button type="button" class="btn btn-outline-success dl"  style="width: 95px;border: 1px solid #f0f0f0;color: #333">Đặt lại</button>
+								</div>
+								<!-- Default Tabs -->
+								<ul class="nav nav-tabs mt-5" id="myTab12" role="tablist">
+									<li class="nav-item" role="presentation">
+										<button class="nav-link active" id="Hall" data-bs-toggle="tab" data-bs-target="#Hoall" type="button" role="tab" aria-controls="home" aria-selected="true" >Tất cả
+										</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="profile-dangTH" data-bs-toggle="tab" data-bs-target="#dangTH" type="button" role="tab" aria-controls="profile" aria-selected="false" >Đang trả hàng</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-daTH" data-bs-toggle="tab" data-bs-target="#daTH" type="button" role="tab" aria-controls="contact" aria-selected="false" >Đã trả hàng</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-fail" data-bs-toggle="tab" data-bs-target="#fail" type="button" role="tab" aria-controls="contact" aria-selected="false" >Trả hàng không thành công</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button class="nav-link" id="contact-KHTLac" data-bs-toggle="tab" data-bs-target="#KHTLac" type="button" role="tab" aria-controls="contact" aria-selected="false" >Kiện hàng bị thất lạc</button>
+									</li>
+								</ul>
+								<div class="tab-content pt-2" id="myTabContent1">
+									<div class="tab-pane fade show active" id="Hoall" role="tabpanel" aria-labelledby="home-tab">
+										a
+
+									</div>
+									<div class="tab-pane fade" id="dangTH" role="tabpanel" aria-labelledby="profile-tab">
+										b
+
+									</div>
+									<div class="tab-pane fade" id="daTH" role="tabpanel" aria-labelledby="contact-tab">
+										c
+
+									</div>
+									<div class="tab-pane fade" id="fail" role="tabpanel" aria-labelledby="contact-tab">
+										d
+
+									</div>
+									<div class="tab-pane fade" id="KHTLac" role="tabpanel" aria-labelledby="contact-tab">
+										e
+
+									</div>
+								</div><!-- End Default Tabs -->
+								<div class="row">
+									<div class="col-md-10">
+										<div class="col-md-10" style="padding-top: 40px;font-weight: 800; font-size: larger">
+											<span>0 đơn hàng</span>
+										</div>
+									</div>
+									<div class="col-md-2" style="margin-bottom: 24px; margin-top: 24px;display: flex">
+										<button type="button" class="btn btn-outline-success ghl" style="margin-left: 5px; width: 170px;padding: 10px"> <i class="bi bi-bucket-fill"></i> Giao Hàng Loạt</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div><!-- End Bordered Tabs -->
+				<div class="table">
+					<table class="table">
+						<thead>
+						<tr>
+							<th scope="col">Sản Phẩm</th>
+							<th scope="col">Tổng đơn hàng</th>
+							<th scope="col">Trạng thái</th>
+							<th scope="col">Đếm ngược</th>
+							<th scope="col">Tất cả ĐVVC</th>
+							<th scope="col">Thao tác</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>@fat</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td colspan="2">Larry the Bird</td>
+							<td>@twitter</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</main><!-- End #main -->
+</body>
+</html>
