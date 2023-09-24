@@ -483,5 +483,7 @@ INSERT INTO `report_status` (report_status_name) VALUES
 INSERT INTO `feedback_report` (report_date, `description`, feedback_id, account_id, report_status_id) VALUES
     ('2023-09-15', 'Reported inappropriate content', 1, 2, 1),
     ('2023-09-16', 'Resolved issue', 2, 1, 2);
-    
-    
+
+Alter table product drop column is_accepted;
+Drop table directory_lv2;
+Drop table directory_lv3;

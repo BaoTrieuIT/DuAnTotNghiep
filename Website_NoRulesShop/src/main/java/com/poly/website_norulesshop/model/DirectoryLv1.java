@@ -27,5 +27,7 @@ public class DirectoryLv1 {
     List<Brand> brandList;
     @OneToMany(mappedBy = "directoryLv1")
     List<DirectoryLv1Brand> directoryLv1ImageList;
+    List<Brand> listBrand;
+
 
 }

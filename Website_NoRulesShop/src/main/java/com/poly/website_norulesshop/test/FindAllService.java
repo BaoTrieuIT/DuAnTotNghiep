@@ -53,9 +53,7 @@ public class FindAllService {
     private DirectoryService directoryService;
     
     @Autowired
-    private DirectoryLv1Service directoryLv1Service;
-
-    
+    private DirectoryLv1Service directoryLv1Service;    
     @Autowired
     private FeedbackService feedbackService;
     
