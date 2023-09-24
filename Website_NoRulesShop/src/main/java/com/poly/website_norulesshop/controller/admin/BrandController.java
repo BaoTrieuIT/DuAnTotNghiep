@@ -1,13 +1,12 @@
 package com.poly.website_norulesshop.controller.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("admin")
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/rest/manage_brand")
 public class BrandController {
-    @RequestMapping("manage_brand")
-    public static String manage_brand(){
-        return "admin/manage_brand";
-    }
 }

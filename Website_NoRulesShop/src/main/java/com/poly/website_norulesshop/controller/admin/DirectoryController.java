@@ -1,13 +1,12 @@
 package com.poly.website_norulesshop.controller.admin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("admin")
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/rest/manage_directory")
 public class DirectoryController {
-    @RequestMapping("manage_directory")
-    public static String manage_directory(){
-        return "admin/manage_directory";
-    }
 }
