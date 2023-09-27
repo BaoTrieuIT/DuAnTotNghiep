@@ -37,7 +37,7 @@
 				<hr>
 
 				<div class="mask-channel-group mt-3">
-					<div class="mask-channel-group-header row">
+					<div class="mask-channel-group-header  row">
 						<div class="mask-channel-group-header-letf col-md-8">
 							<div class="title" style="font-size:18px; font-weight: 600;" >Hỏa tốc</div>
 							<div class="sub_title mb-3" style="color: #999999; font-size: 13px;">Với kênh Hỏa Tốc, người bán sẽ có thể giao hàng đến tận tay người mua trong vòng 4 giờ.</div>
@@ -51,21 +51,21 @@
 						</div>
 
 					</div>
-					<div class="mask-channel-list " style="border-radius: 4px;border: 1px #9999 solid ">
-						<div class="shipping-item-header d-flex flex-row" style="border-bottom: 1px solid #999;" >
+					<div class="mask-channel-list accordion-item" style="border-radius: 4px;border: 1px #9999 solid ">
+						<div class="shipping-item-header d-flex flex-row accordion-header" style="border-bottom: 1px solid #999;" >
 
-							<div class="col grid vertical-center col-5 row" >
+							<button type="button" class="col grid vertical-center col-5 row accordion-button" >
 								<div class="col local-name m-2" style="max-width: fit-content; font-weight: 500">Hỏa Tốc</div>
 								<div class="col text-danger m-2" style="font-size: 14px"> [COD đã được kích hoạt] </div>
-							</div>
+								<div class="icon col-7 d-flex justify-content-end flex-grow-1 ">
+									<div class="btn">
+										<i class="bi bi-chevron-down ms-auto"></i>
+									</div>
+								</div>
+							</button>
 
-							<div class="icon col-7 d-flex justify-content-end flex-grow-1 ">
-								<button class="btn">
-									<i class="bi bi-chevron-down ms-auto"></i>
-								</button>
-							</div>
 						</div>
-						<div class="shipping-item-body row mt-1">
+						<div class="shipping-item-body row mt-1 accordion-collapse collapse show">
 							<div class="col-6" style="border-right: 1px solid #999;">
 							</div>
 							<div class="col-5 ml-auto p-2" style="margin-left:20px " >
@@ -179,6 +179,68 @@
 				</div>
 
 				<hr class="m-4">
+
+				<div class="card-body">
+					<h5 class="card-title">Reports <span>/Today</span></h5>
+
+					<!-- Line Chart -->
+					<div id="reportsChart"></div>
+
+					<script>
+						document.addEventListener("DOMContentLoaded", () => {
+							new ApexCharts(document.querySelector("#reportsChart"), {
+								series: [{
+									name: 'Sales',
+									data: [31, 40, 28, 51, 42, 82, 56],
+								}, {
+									name: 'Revenue',
+									data: [11, 32, 45, 32, 34, 52, 41]
+								}, {
+									name: 'Customers',
+									data: [15, 11, 32, 18, 9, 24, 11]
+								}],
+								chart: {
+									height: 350,
+									type: 'area',
+									toolbar: {
+										show: false
+									},
+								},
+								markers: {
+									size: 4
+								},
+								colors: ['#4154f1', '#2eca6a', '#ff771d'],
+								fill: {
+									type: "gradient",
+									gradient: {
+										shadeIntensity: 1,
+										opacityFrom: 0.3,
+										opacityTo: 0.4,
+										stops: [0, 90, 100]
+									}
+								},
+								dataLabels: {
+									enabled: false
+								},
+								stroke: {
+									curve: 'smooth',
+									width: 2
+								},
+								xaxis: {
+									type: 'datetime',
+									categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+								},
+								tooltip: {
+									x: {
+										format: 'dd/MM/yy HH:mm'
+									},
+								}
+							}).render();
+						});
+					</script>
+					<!-- End Line Chart -->
+
+				</div>
 
 
 			</div>
