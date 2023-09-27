@@ -1231,3 +1231,48 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+ .search{
+   position: relative;
+ }
+.a{
+  position: absolute;
+  top: 6px;
+  right: 16px;
+  color: black;
+}
+.nav-tabss .nav-item .nav-link.active{
+  color: #5d6df3;
+  border-bottom-color: #5d6df3;
+}
+.nav-tabss .nav-item .nav-link:hover{
+  color: #5d6df3;
+
+}
+.nav-tabs .nav-item .nav-link.active{
+  color: #5d6df3;
+  font-weight: 600;
+
+}
+.nav-tabs .nav-item .nav-link{
+  color: black;
+  font: inherit;
+
+}
+.nav-tabs .nav-item .nav-link:hover{
+  color: #5d6df3;
+
+
+}
+.ghl{
+  background-color: #5d6df3;
+  border: none;
+  color: white;
+}.ghl:hover{
+   background-color: #5d6df3;
+   border: none;
+   color: white;
+ }
+.dl:hover{
+  background-color: #6c757d;
+  color: white;
+}
