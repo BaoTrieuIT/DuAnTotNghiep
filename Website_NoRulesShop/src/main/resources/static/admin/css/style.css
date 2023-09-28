@@ -1231,3 +1231,76 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+ .search{
+   position: relative;
+ }
+.a{
+  position: absolute;
+  top: 6px;
+  right: 16px;
+  color: black;
+}
+.nav-tabss .nav-item .nav-link.active{
+  color: #5d6df3;
+  border-bottom-color: #5d6df3;
+}
+.nav-tabss .nav-item .nav-link:hover{
+  color: #5d6df3;
+
+}
+.nav-tabs .nav-item .nav-link.active{
+  color: #5d6df3;
+  font-weight: 600;
+
+}
+.nav-tabs .nav-item .nav-link{
+  color: black;
+  font: inherit;
+
+}
+.nav-tabs .nav-item .nav-link:hover{
+  color: #5d6df3;
+
+
+}
+.ghl{
+  background-color: #5d6df3;
+  border: none;
+  color: white;
+}.ghl:hover{
+   background-color: #5d6df3;
+   border: none;
+   color: white;
+ }
+.dl:hover{
+  background-color: #6c757d;
+  color: white;
+}
+.item{
+  display: flex;margin-left: 10px
+}
+.item .card{
+  border:1px solid #e5e5e5;height: 85px;width: 16%;margin-right: 5px;
+}
+.item .card .card-title{
+  margin: 3px 20px;
+  font-size: 14px;
+  color: black;
+  line-height: 18px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}.item .card .card-body{
+   padding: 0px 20px 5px 20px;
+ }
+.item .card .card-footer{
+  padding: 0px 0px 5px 20px; border-top: none;font-size: 12px;line-height: 14px;
+}
+.item span{
+  margin-left: 10px;
+}
+.link-more:hover{
+  background-color: white;
+}
+.ranking th{
+  text-align: center;
+}

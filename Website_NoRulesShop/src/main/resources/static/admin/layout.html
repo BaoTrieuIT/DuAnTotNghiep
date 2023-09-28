@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Favicons -->
+	<link href="/adminCss/img/favicon.png"
+	      rel="icon">
+	<link href="/adminCss/img/apple-touch-icon.png"
+	      rel="apple-touch-icon">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.gstatic.com"
+	      rel="preconnect">
+	<link
+			href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+			rel="stylesheet">
+
+	<!-- Vendor CSS Files -->
+	<link href="/adminCss/vendor/bootstrap/css/bootstrap.min.css"
+	      rel="stylesheet">
+	<link href="/adminCss/vendor/bootstrap-icons/bootstrap-icons.css"
+	      rel="stylesheet">
+	<link href="/adminCss/vendor/boxicons/css/boxicons.min.css"
+	      rel="stylesheet">
+	<link href="/adminCss/vendor/quill/quill.snow.css"
+	      rel="stylesheet">
+	<link href="/adminCss/vendor/quill/quill.bubble.css"
+	      rel="stylesheet">
+	<link href="/adminCss/vendor/remixicon/remixicon.css"
+	      rel="stylesheet">
+	<link href="/adminCss/vendor/simple-datatables/style.css"
+	      rel="stylesheet">
+
+	<!-- Template Main CSS File -->
+	<link href="/adminCss/css/style.css"
+	      rel="stylesheet">
+	<title></title>
+</head>
+<body ng-app="app">
+
+	<header ng-include="'/admin/menu/header.html'"></header>
+	<div ng-include="'/admin/menu/sidebar.html'"></div>
+	<main>
+		<p class="ng-view"></p>
+
+	</main>
+	<footer ng-include="'/admin/menu/footer.html'"></footer>
+	<a href="#"
+	   class="back-to-top d-flex align-items-center justify-content-center">
+		<i class="bi bi-arrow-up-short"></i>
+	</a>
+	<!-- Vendor JS Files -->
+<!--	<script href="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
+<!--	<script href="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>-->
+	<script src="/angular-1.8.2/angular.js"></script>
+	<script src="/angular-1.8.2/angular-route.js"></script>
+	<script src="/adminCss/vendor/apexcharts/apexcharts.min.js"></script>
+	<script src="/adminCss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/adminCss/vendor/chart.js/chart.umd.js"></script>
+	<script src="/adminCss/vendor/echarts/echarts.min.js"></script>
+	<script src="/adminCss/vendor/quill/quill.min.js"></script>
+	<script src="/adminCss/vendor/simple-datatables/simple-datatables.js"></script>
+	<script src="/adminCss/vendor/tinymce/tinymce.min.js"></script>
+	<script src="/adminCss/vendor/php-email-form/validate.js"></script>
+	<!-- Template Main JS File -->
+	<script src="/adminCss/js/main.js"></script>
+	<script src="/adminCss/js/admin/admin_app.js"></script>
+	<script src="/adminCss/js/admin/account_ctrl.js"></script>
+	<script src="/adminCss/js/admin/product_ctrl.js"></script>
+	<script src="/adminCss/js/admin/directory_ctrl.js"></script>
+	<script src="/adminCss/js/admin/shipping_ctrl.js"></script>
+	<script src="/adminCss/js/admin/order_ctrl.js"></script>
+	<script src="/adminCss/js/admin/brand_ctrl.js"></script>
+	<script src="/adminCss/js/admin/overview_ctrl.js"></script>
+
+</body>
+</html>

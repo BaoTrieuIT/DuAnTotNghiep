@@ -1,0 +1,85 @@
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Dữ liệu</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Trang chủ</a>
+                </li>
+                <li class="breadcrumb-item">Dữ liệu</li>
+                <li class="breadcrumb-item active">Tổng quan</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="col-xl-12">
+        <section ng-include="'/admin/overview_time.html'"></section>
+    </div>
+    <div class="col-xl-12">
+        <section ng-include="'/admin/overview_overview.html'"></section>
+    </div>
+    <div class="row">
+        <div class="col-xl-8" style="padding-right: 3px">
+            <div class="card " >
+                <div class="card-body pt-3" style="min-height: 600px;">
+                    <div class="ranking-title" style="display: flex; justify-content: space-between">
+                        <span style="font-size: 18px;display: block;margin: 0;line-height: 20px;">Thứ hạng sản phẩm</span>
+                        <div class="link-more">
+                            <button class="btn btn-outline-success link-more" style="border: none;padding: 0;color: #0a53be">
+                                <span>Xem thêm</span>
+                                <i class="bi bi-arrow-right-short"></i>
+                            </button>
+                        </div>
+                    </div>
+                   <div class="tabs" style="margin-top: 20px;">
+                       <!-- Bordered Tabs -->
+                       <ul class="nav nav-tabs nav-tabs-bordered" id="borderedTab" role="tablist">
+                           <li class="nav-item" role="presentation">
+                               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-home" type="button" role="tab" aria-controls="home" aria-selected="true">Theo doanh số</button>
+                           </li>
+                           <li class="nav-item" role="presentation">
+                               <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Theo số sản phẩm</button>
+                           </li>
+                           <li class="nav-item" role="presentation">
+                               <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Theo lượt xem</button>
+                           </li>
+                           <li class="nav-item" role="presentation">
+                               <button class="nav-link" id="contact-tab1" data-bs-toggle="tab" data-bs-target="#bordered-contact1" type="button" role="tab" aria-controls="contact" aria-selected="false">Theo tỷ lệ chuyển đổi</button>
+                           </li>
+                           <li  style="margin-left: auto;" >
+                               <select class="form-select" style="box-shadow: none; border-radius: 5px 5px 5px 5px" >
+                                   <option selected>Open this select menu</option>
+                                   <option value="1">One</option>
+                                   <option value="2">Two</option>
+                                   <option value="3">Three</option>
+                               </select>
+                           </li>
+                       </ul>
+                       <div class="tab-content pt-2" id="borderedTabContent">
+                           <div class="tab-pane fa de show active" id="bordered-home" role="tabpanel" aria-labelledby="home-tab">
+                               <section ng-include="'/admin/overview_sales.html'"></section>
+                           </div>
+                           <div class="tab-pane fade" id="bordered-profile" role="tabpanel" aria-labelledby="profile-tab">
+                               <section ng-include="'/admin/overview_product.html'"></section>
+                           </div>
+                           <div class="tab-pane fade" id="bordered-contact" role="tabpanel" aria-labelledby="contact-tab">
+                               <section ng-include="'/admin/overview_views.html'"></section>
+                           </div>
+                           <div class="tab-pane fade" id="bordered-contact1" role="tabpanel" aria-labelledby="contact-tab">
+                               <section ng-include="'/admin/overview_convert.html'"></section>
+                           </div>
+                       </div><!-- End Bordered Tabs -->
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body pt-3" style="min-height: 600px">
+                    <section ng-include="'/admin/overview_ranking.html'"></section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main><!-- End #main -->
+
