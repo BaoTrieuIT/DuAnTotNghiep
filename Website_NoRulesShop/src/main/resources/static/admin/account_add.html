@@ -1,0 +1,105 @@
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Tài khoản vi phạm</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+					<li class="breadcrumb-item">Tài khản</li>
+					<li class="breadcrumb-item active">Thêm tài khoản</li>
+				</ol>
+			</nav>
+		</div><!-- End Page Title -->
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title">Thông tin tài khoản</h5>
+
+				<!-- Floating Labels Form -->
+				<form class="row g-3">
+					<div class="col-md-12">
+						<label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Ảnh đại diện</label>
+						<div class="col-md-8 col-lg-9">
+							<img src="/adminCss/img/profile-img.jpg" alt="Profile">
+							<div class="pt-2">
+								<a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+								<a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-floating">
+							<input type="text" class="form-control" id="floatingName" placeholder="Username">
+							<label for="floatingName">Tên tài khoản</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-floating">
+							<input type="text" class="form-control" id="floatingFullName" placeholder="Họ và tên">
+							<label for="floatingName">Họ và tên</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-floating">
+							<input type="text" class="form-control" id="floatingPhoneNumber" placeholder="Số điện thoại">
+							<label for="floatingName">Số điện thoại</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-floating">
+							<input type="email" class="form-control" id="floatingEmail" placeholder="Email">
+							<label for="floatingEmail">Email</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-floating">
+							<input type="date" id="floatingDate"  class="form-control">
+							<label for="floatingDate">Ngày sinh</label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-floating">
+							<input type="password" class="form-control" id="floatingPassword" placeholder="Mật khẩu">
+							<label for="floatingPassword">Mật khẩu</label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-floating">
+							<input type="password" class="form-control" id="floatingRePassword" placeholder="RePassword">
+							<label for="floatingPassword">Xác nhận mật khẩu</label>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Địa chĩ" id="floatingTextarea" style="height: 100px;"></textarea>
+							<label for="floatingTextarea">Địa chỉ</label>
+						</div>
+					</div>
+					<fieldset class="col-12">
+						<legend class="col-form-label col-sm-2 pt-0">Quyền</legend>
+						<div class="col-sm-10">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1">
+								<label class="form-check-label" for="gridRadios1">
+									Admin
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+								<label class="form-check-label" for="gridRadios2">
+									Người dùng
+								</label>
+							</div>
+
+						</div>
+					</fieldset>
+					<div class="text-center">
+						<button type="submit" class="btn btn-primary">Xác nhận</button>
+						<button type="reset" class="btn btn-secondary">Đặt lại</button>
+					</div>
+				</form><!-- End floating Labels Form -->
+
+			</div>
+		</div>
+
+	</main><!-- End #main -->
