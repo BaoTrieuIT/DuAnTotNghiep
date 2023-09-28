@@ -1,0 +1,42 @@
+.inputDnD {
+    .form-control-file {
+        position: relative;
+        margin-left: 1%;
+        width: 100px;
+        height: 120px;
+        min-height: 5em;
+        outline: none;
+        visibility: hidden;
+        cursor: pointer;
+        background-color: #c61c23;
+
+        &:before {
+            content: attr(data-title);
+            position: absolute;
+            top: 0.5em;
+            left: 0;
+            width: 80px;
+            min-height: 5em;
+            line-height: 2em;
+            padding-top: 1.3em;
+            opacity: 1;
+            visibility: visible;
+            text-align: center;
+            border: 0.1em dashed currentColor;
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+            overflow: hidden;
+        }
+        &:hover {
+            &:before {
+                border-style: solid;
+                box-shadow: inset 0px 0px 0px 0.1em currentColor;
+            }
+        }
+    }
+}
+
+
+.add-img{
+    font-size: 12px;
+    margin-left: 10px;
+}
