@@ -49,4 +49,8 @@ app.config(function ($routeProvider) {
             templateUrl: "/admin/product_report.html",
             controller: "product_ctrl"
         })
+        .when("/overview", {
+            templateUrl: "/admin/overview.html",
+            controller: "overview_ctrl"
+        })
 })
