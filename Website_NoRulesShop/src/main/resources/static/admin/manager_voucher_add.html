@@ -1,0 +1,93 @@
+<div class="card-body">
+    <h5 class="card-title">THÊM VOUCHER MỚI</h5>
+    <form>
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Tên chương trình giảm giá
+            </label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control"><p  style="font-size: small;">Tên Voucher sẽ không được hiển thị cho Người mua
+            </p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Mã voucher
+            </label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" autocapitalize="characters" maxlength="7"><div style="font-size: small;"><p>Vui lòng chỉ nhập các kí tự chữ cái (A-Z), số (0-9); tối đa 7 kí tự.
+                <br>Mã giảm giá đầy đủ ví dụ là: NORULES</p></div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Thời gian sử dụng mã
+            </label>
+            <div class="col-md-3">
+                <input class="form-control"
+                       id="party"
+                       type="datetime-local"
+                       name="partydate"
+                       value="2023-01-01T08:30"
+
+                />
+            </div>
+            <div class="col-md-3">
+                <input class="form-control"
+                       id="party"
+                       type="datetime-local"
+                       name="partydate"
+                       value="2024-01-01T08:30"
+
+                />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Loại giảm giá | Mức giảm </label>
+
+            <div class="col-sm-2 mt-2 p-0" style="margin-left: 10px;">
+                <select class="form-select" style="box-shadow: none; border-radius: 5px 0 0 5px">
+                    <option selected>Theo số tiền</option>
+                    <option value="1">Theo phần trăm</option>
+                </select>
+            </div>
+            <div class="col-sm-3 mt-2 p-0 " style="box-shadow: none; " >
+                <div class="search">
+                    <input type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" style="border-radius: 0px 5px 5px 0px;box-shadow: none">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Tổng lượt sử dụng tối đa
+            </label>
+            <div class="col-sm-4">
+                <input type="number"  min="1" max="10000" class="form-control"><p  style="font-size: small;">Tổng số Mã giảm giá có thể sử dụng
+            </p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Lượt sử dụng tối đa/Người mua
+            </label>
+            <div class="col-sm-4">
+                <input type="number" min="1" max="100" class="form-control"><p  style="font-size: small;">Đây là số lượt sử dụng voucher tối đa của mỗi Người mua
+            </p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="inputText" class="col-sm-2 col-form-label">Sản phẩm được áp dụng
+            </label>
+            <div class="col-sm-6">
+                <label for="">Tất cả sản phẩm</label>
+                <p  style="color: red; font-size: small;">Những sản phẩm bị hạn chế chạy khuyến mại theo quy định của Nhà nước sẽ không được hiển thị nếu nằm trong danh sách sản phẩm đã chọn.</p>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <button style="margin-left: 17%;" type="submit" class="btn btn-outline-primary">Hủy</button>
+                <button style="margin-left: 1%;" type="submit" class="btn btn-primary">Thêm</button>
+            </div>
+        </div>
+    </form><!-- End General Form Elements -->
+</div>
