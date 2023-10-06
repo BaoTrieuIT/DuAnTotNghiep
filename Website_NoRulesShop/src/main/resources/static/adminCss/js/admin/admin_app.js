@@ -53,4 +53,8 @@ app.config(function ($routeProvider) {
             templateUrl: "/admin/overview.html",
             controller: "overview_ctrl"
         })
+        .when("/discount", {
+            templateUrl: "/admin/discount.html",
+            controller: "discount_ctrl"
+        })
 })
