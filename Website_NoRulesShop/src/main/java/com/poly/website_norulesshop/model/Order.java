@@ -21,6 +21,7 @@ public class Order {
     private String recipient_name;
     private String phonenumber;
     private String specified_address;
+    private String order_note;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

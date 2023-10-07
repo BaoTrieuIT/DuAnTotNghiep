@@ -43,8 +43,6 @@ public class Account {
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;
     @OneToMany(mappedBy = "account")
-    public List<FeedbackReport> feedbackReportList;
-    @OneToMany(mappedBy = "account")
     public List<Order> orderList;
 
     @OneToMany(mappedBy = "account")

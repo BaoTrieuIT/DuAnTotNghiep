@@ -14,11 +14,12 @@ public class ProductDiscount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_discount_id")
     private Integer product_discount_id;
-
+    private String product_discount_name;
     private Date product_discount_valid_from;
     private Date product_discount_valid_to;
     private Float product_discount_value;
     private Integer quantity;
+    private String product_discount_description;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

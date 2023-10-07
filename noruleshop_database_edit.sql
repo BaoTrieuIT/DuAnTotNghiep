@@ -1,4 +1,4 @@
--- drop database norule_shop;
+drop database norule_shop;
 create database norule_shop;
 use norule_shop;
 create table `account_status`(
@@ -47,10 +47,11 @@ create table `points`(
     foreign key (account_id) references `account`(account_id)
 );
 
-create table `address_type`(
-	address_type_id int auto_increment primary key,
-    Address_type_name nvarchar(50)
-) ;
+-- delete this table 
+-- create table `address_type`(
+-- 	address_type_id int auto_increment primary key,
+--     Address_type_name nvarchar(50)
+-- ) ;
 
 
 -- Addres
@@ -60,9 +61,9 @@ create table `address`(
     recipient_phone_number varchar(10),
     general_address nvarchar(255),
     specific_address nvarchar(255),
-    Address_type_id int,
+ --    Address_type_id int,
     account_id int,
-    foreign key (Address_type_id) references `Address_type`(Address_type_id),
+--    foreign key (Address_type_id) references `Address_type`(Address_type_id),
     foreign key (account_id) references `account`(account_id)
 );
 
@@ -146,9 +147,11 @@ create table `product`(
 
 create table `product_discount`(
 	product_discount_id int auto_increment primary key,
+    product_discount_name nvarchar(255),
 	product_discount_valid_from date not null,
     product_discount_valid_to date not null,
     product_discount_value float not null,
+    product_discount_description nvarchar(1000),
     quantity int null,
     product_id int,
     foreign key (product_id) references `product`(product_id)
@@ -158,7 +161,8 @@ create table `product_discount`(
 create table `product_image`(
 	product_image_id int auto_increment primary key,
 	image_url varchar(255) not null,
-    create_date date not null,
+--     create_date date not null,
+--     create_date date not null,
     product_id int not null,
     foreign key (product_id) references `product`(product_id)
 );
@@ -229,11 +233,11 @@ create table `order_status`(
     order_status_name nvarchar(255) not null
 );
 
-
-create table `delivery_method`(
-	delivery_method_id int auto_increment primary key,
-    delivery_method_name nvarchar(255)
-);
+-- delete this database 
+-- create table `delivery_method`(
+-- 	delivery_method_id int auto_increment primary key,
+--     delivery_method_name nvarchar(255)
+-- );
 
 create table `orders`(
 	order_id int auto_increment primary key, 
@@ -247,6 +251,7 @@ create table `orders`(
 	payment_status_id int,
     order_status_id int,
     payment_method_id int,
+    order_note nvarchar(10000),
     foreign key (account_id) references `account`(account_id),
     foreign key (voucher_id) references `voucher`(voucher_id),
     foreign key (payment_status_id) references `payment_status`(payment_status_id),
@@ -304,6 +309,13 @@ create table `feedback_report`(
 	foreign key (report_status_id) references `report_status`(report_status_id)
 );
 
+create table `product_infromation_type`(
+	product_infromation_type_id int auto_increment primary key,
+    product_id int,
+    information_type_id int,
+    infromation_type_value nvarchar(10000),
+    foreign key (product_id) references product(product_id)
+);
 -- Insert data into `account_status` table
 INSERT INTO `account_status` (account_status_name) VALUES
     ('Active'),
@@ -326,15 +338,16 @@ INSERT INTO `account` (password, fullname, phone_number, email, username, create
     ('password1', 'John Doe', '1234567890', 'john@example.com', 'johndoe', '2023-09-11', '1990-01-15', 'avatar1.jpg', 2, 1, 1),
     ('password2', 'Jane Smith', '9876543210', 'jane@example.com', 'janesmith', '2023-09-11', '1985-03-20', 'avatar2.jpg', 2, 2, 1);
 
+-- delete this data
 -- Insert data into `address_type` table
-INSERT INTO `address_type` (Address_type_name) VALUES
-    ('Home'),
-    ('Work');
+-- INSERT INTO `address_type` (Address_type_name) VALUES
+--     ('Home'),
+--     ('Work');
 
 -- Insert data into `address` table
-INSERT INTO `address` (recipient_name, recipient_phone_number, general_address, specific_address, Address_type_id, account_id) VALUES
-    ('John Home', '1234567890', '123 Main St', 'Apt 4B', 1, 1),
-    ('Jane Work', '9876543210', '456 Elm St', 'Suite 202', 2, 2);
+INSERT INTO `address` (recipient_name, recipient_phone_number, general_address, specific_address, account_id) VALUES
+    ('John Home', '1234567890', '123 Main St', 'Apt 4B', 1),
+    ('Jane Work', '9876543210', '456 Elm St', 'Suite 202', 2);
 -- Insert data into `directory` table
 INSERT INTO `directory` (directory_name) VALUES
     ('Main Directory'),
@@ -393,16 +406,16 @@ INSERT INTO `product` (product_name, product_rating, create_date, is_accepted, i
     ('Product 3', 4.8, '2023-09-11', 1, 0, 'Description of Product 3', 2, 45);
 
 -- Insert data into `product_discount` table
-INSERT INTO `product_discount` (product_discount_valid_from, product_discount_valid_to, product_discount_value, quantity, product_id) VALUES
-    ('2023-09-11', '2023-09-30', 10.0, 100, 1),
-    ('2023-09-11', '2023-09-30', 15.0, 50, 2),
-    ('2023-09-11', '2023-09-30', 5.0, 200, 3);
+INSERT INTO `product_discount` (product_discount_name,product_discount_valid_from, product_discount_valid_to, product_discount_value, product_discount_description,quantity, product_id) VALUES
+    ('voucher 1','2023-09-11', '2023-09-30', 10.0,'desscription for the this voucher', 100, 1),
+    ('voucher 2','2023-09-11', '2023-09-30', 15.0,'desscription for the this voucher', 50, 2),
+    ('voucher 3','2023-09-11', '2023-09-30', 5.0,'desscription for the this voucher', 200, 3);
 
 -- Insert data into `product_image` table
-INSERT INTO `product_image` (image_url, create_date, product_id) VALUES
-    ('product1_image.jpg', '2023-09-11', 1),
-    ('product2_image.jpg', '2023-09-11', 2),
-    ('product3_image.jpg', '2023-09-11', 3);
+INSERT INTO `product_image` (image_url, product_id) VALUES
+    ('product1_image.jpg', 1),
+    ('product2_image.jpg', 2),
+    ('product3_image.jpg',3);
 
 -- Insert data into `category_level_1` table
 INSERT INTO `category_level_1` (category_level_1_name) VALUES
@@ -455,10 +468,10 @@ INSERT INTO `order_status` (order_status_name) VALUES
     ('Shipped'),
     ('Delivered');
 
--- Insert data into `delivery_method` table
-INSERT INTO `delivery_method` (delivery_method_name) VALUES
-    ('Standard Shipping'),
-    ('Express Shipping');
+-- delete this data Insert data into `delivery_method` table
+-- INSERT INTO `delivery_method` (delivery_method_name) VALUES
+--     ('Standard Shipping'),
+--     ('Express Shipping');
 
 -- Insert data into `order` table
 INSERT INTO `orders` (order_time, discount_amout, recipient_name, phonenumber, specified_address, account_id, voucher_id, payment_status_id, order_status_id, payment_method_id) VALUES
@@ -479,20 +492,7 @@ INSERT INTO `feedback` (feedback_rating, comment, feedback_time, account_id, ord
 INSERT INTO `feedback_image` (image_url, feedback_id) VALUES
     ('feedback_image1.jpg', 1),
     ('feedback_image2.jpg', 2);
-
--- Insert data into `report_status` table
-INSERT INTO `report_status` (report_status_name) VALUES
-    ('Open'),
-    ('Closed');
-
--- Insert data into `feedback_report` table
-INSERT INTO `feedback_report` (report_date, `description`, feedback_id, account_id, report_status_id) VALUES
-    ('2023-09-15', 'Reported inappropriate content', 1, 2, 1),
-    ('2023-09-16', 'Resolved issue', 2, 1, 2);
-alter table product drop column is_accepted;
-drop table directory_lv3;
-drop table directory_lv2;
-
+    
 create table `directory_lv1_brand`(
 	directory_lv1_brand_id int auto_increment primary key ,
     directory_lv1_id int,

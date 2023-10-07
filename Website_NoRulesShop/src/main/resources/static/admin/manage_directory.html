@@ -28,19 +28,9 @@
 				<div class="tab-content pt-2">
 
 					<div class="tab-pane fade show active profile-overview" id="list-directory">
-
-					</div>
-
-					<div class="tab-pane fade profile-edit pt-3" id="manage-directory">
 						<div class="card-body">
 							<h3 class="card-title">
-								<nav style="--bs-breadcrumb-divider: '>';">
-									<ol class="breadcrumb" style=" font-size: 19px">
-										<li class="breadcrumb-item" ><a href="index.html">Thời trang</a></li>
-										<li class="breadcrumb-item"><a href="#">Quần</a></li>
-										<li class="breadcrumb-item active" style=" font-size: 22px">Quần Jeans</li>
-									</ol>
-								</nav>
+								
 							</h3>
 
 							<!-- Table with stripped rows -->
@@ -112,10 +102,341 @@
 								<div class="datatable-bottom">
 									<div class="datatable-info">Showing 1 to 5 of 5 entries</div>
 									<nav class="datatable-pagination"><ul class="datatable-pagination-list"></ul></nav>
-								</div></div>
+								</div>
+							</div>
 							<!-- End Table with stripped rows -->
-
 						</div>
+					</div>
+
+					<div class=" tab-pane fade profile-edit chanel-container pt-3" id="manage-directory">
+<!--						<div class="col-lg-6">-->
+
+							<div class="card">
+								<div class="card-body">
+									<div class="card-title row flex-row justify-content-between">
+
+										<div class="col-8 row mb-3">
+											<label class="col-sm-2 col-form-label">GIỚI TÍNH</label>
+											<div class="col-sm-10">
+												<select class="form-select" aria-label="Default select example">
+													<option selected="">UNISEX</option>
+													<option value="1">NAM</option>
+													<option value="2">NỮ</option>
+												</select>
+											</div>
+										</div>
+<!--										<div class="col-2">-->
+<!--											<button class=" btn btn-danger d-flex align-items-center disabled" type="button">-->
+<!--												<i class="bx bxs-hide"></i><b>Ẩn danh mục</b>-->
+<!--											</button>-->
+<!--										</div>-->
+
+										<div class="col-3 ">
+											<button class=" btn btn-primary d-flex align-items-center" type="button">
+												<i class="bx bx-plus"></i><b>Thêm danh mục</b>
+											</button>
+										</div>
+
+
+									</div>
+
+									<!-- Default Accordion -->
+									<div class="accordion" id="accordionExample" >
+										<div class="header">
+
+										</div>
+										<div class="accordion-item">
+											<div class="accordion-header" id="headingOne">
+												<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+														aria-expanded="true" aria-controls="collapseOne">
+													<h5>Quần</h5>
+
+												</button>
+											</div>
+
+											<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<ul>
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox" checked>
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Quần tây</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox" checked>
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox" checked>
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Quần Chino</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox" checked>
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Quần Jeans</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox" checked>
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox" >
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Quần short</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input" type="checkbox" checked>
+															</div>
+
+														</li>
+
+													</ul>
+													<div class="d-flex flex-row-reverse justify-content-end">
+														<button class="btn btn-danger d-flex align-items-center m-2" type="button" style="font-size: 14px;">
+															<i class="bx bx-minus"></i>
+															<b>Xóa danh mục</b>
+														</button>
+														<button class="btn btn-primary d-flex align-items-center m-2" type="button" style="font-size: 14px;">
+															<i class="bx bx-plus"></i>
+															<b>Thêm danh mục con</b>
+														</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingTwo">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+													<h5>Áo</h5>
+												</button>
+											</h2>
+											<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+
+												<div class="accordion-body">
+													<ul>
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Áo sơ mi</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Áo Polo</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Áo khoác</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Áo thun</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+													</ul>
+													<div class="d-flex flex-row-reverse justify-content-end">
+														<button class="btn btn-danger d-flex align-items-center disabled m-2" type="button" style="font-size: 14px;">
+															<i class="bx bx-minus"></i>
+															<b>Xóa danh mục</b>
+														</button>
+														<button class="btn btn-primary d-flex align-items-center m-2" type="button" style="font-size: 14px;">
+															<i class="bx bx-plus"></i>
+															<b>Thêm danh mục con</b>
+														</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingThree">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+														aria-expanded="false" aria-controls="collapseThree">
+													<h5>Phụ kiện</h5>
+												</button>
+											</h2>
+											<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<ul>
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Thắt lưng</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Mũ nón</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Nhẫn</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+														<li class="row d-flex flex-row align-items-center p-3">
+
+															<div class="col-1 form-check ">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+															<div class="col-10 name_directory_lv1 ">
+																<a class="mb-3" href="#">Vòng/ lắc đeo tay</a>
+																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+															</div>
+
+															<div class="col-1 form-check form-switch">
+																<input class="form-check-input " type="checkbox">
+															</div>
+
+														</li>
+
+													</ul>
+													<div class="d-flex flex-row-reverse justify-content-end">
+														<button class="btn btn-danger d-flex align-items-center disabled m-2" type="button" style="font-size: 14px;">
+															<i class="bx bx-minus"></i>
+															<b>Xóa danh mục</b>
+														</button>
+														<button class="btn btn-primary d-flex align-items-center m-2" type="button" style="font-size: 14px;">
+															<i class="bx bx-plus"></i>
+															<b>Thêm danh mục con</b>
+														</button>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div><!-- End Default Accordion Example -->
+
+								</div>
+							</div>
+
+<!--						</div>-->
+
+
+
 					</div>
 
 				</div><!-- End Bordered Tabs -->

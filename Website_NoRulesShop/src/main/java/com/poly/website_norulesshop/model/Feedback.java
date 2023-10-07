@@ -31,6 +31,4 @@ public class Feedback {
 
     @OneToMany(mappedBy = "feedback")
     List<FeedbackImage> feedbackImageList;
-    @OneToMany(mappedBy = "feedback")
-    List<FeedbackReport> feedbackReportList;
 }

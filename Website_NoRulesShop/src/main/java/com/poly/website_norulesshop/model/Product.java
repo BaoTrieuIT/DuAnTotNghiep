@@ -40,4 +40,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     List<ProductImage> productImageList;
+
+    @OneToMany(mappedBy = "product")
+    List<ProductInformationType> informationTypeList;
 }

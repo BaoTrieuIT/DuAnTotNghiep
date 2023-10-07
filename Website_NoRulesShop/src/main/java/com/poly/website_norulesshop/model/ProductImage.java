@@ -14,10 +14,7 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_image_id")
     private Integer product_image_id;
-
     private String image_url;
-    private Date create_date;
-
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

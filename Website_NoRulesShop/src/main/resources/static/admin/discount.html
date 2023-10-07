@@ -1,0 +1,43 @@
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Dữ liệu</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="index.html">Trang chủ</a>
+                </li>
+                <li class="breadcrumb-item">Giảm giá</li>
+                <li class="breadcrumb-item active">Tổng quan</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="card">
+        <div class="card-body">
+        <ul class="nav nav-tabss nav-tabs-bordered" id="borderedTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#bordered-all" type="button" role="tab" aria-controls="home" aria-selected="true">Form</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cxn-tab" data-bs-toggle="tab" data-bs-target="#bordered-cxn" type="button" role="tab" aria-controls="profile" aria-selected="false">Table</button>
+            </li>
+
+        </ul>
+        <div class="tab-content pt-2" id="borderedTabContent">
+            <div class="tab-pane fade show active" id="bordered-all" role="tabpanel" aria-labelledby="home-tab">
+                <section ng-include="'/admin/discount_form.html'"></section>
+            </div>
+            <div class="tab-pane fade" id="bordered-cxn" role="tabpanel" aria-labelledby="profile-tab">
+                <section ng-include="'/admin/discount_table.html'"></section>
+            </div>
+
+        </div><!-- End Bordered Tabs -->
+        </div>
+    </div>
+
+
+
+
+
+
+</main><!-- End #main -->
