@@ -21,9 +21,6 @@ public class Address {
     private String general_address;
     private String specific_address;
 
-    @ManyToOne
-    @JoinColumn(name = "Address_type_id")
-    private AddressType addressType;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

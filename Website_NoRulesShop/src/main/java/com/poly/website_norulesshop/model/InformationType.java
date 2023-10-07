@@ -24,4 +24,6 @@ public class InformationType {
 
     @OneToMany(mappedBy = "informationType")
     List<DetailInformationType> detailInformationTypeList;
+    @OneToMany(mappedBy = "information_type")
+    List<ProductInformationType> informationTypeList;
 }
