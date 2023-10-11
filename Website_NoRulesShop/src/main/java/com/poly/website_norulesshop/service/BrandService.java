@@ -8,9 +8,8 @@ import java.util.List;
 public interface BrandService {
     Brand saveBrand(Brand brand);
 
-    Brand getBrandById(Long id);
+    Brand getBrandById(int id);
 
     List<Brand> getAllBrands();
-
-    void deleteBrand(Long id);
+    void deleteBrand(int id);
 }

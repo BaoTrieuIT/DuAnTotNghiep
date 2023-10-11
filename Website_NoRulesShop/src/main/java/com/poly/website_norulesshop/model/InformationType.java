@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,9 +22,10 @@ public class InformationType {
     @ManyToOne
     @JoinColumn(name = "directory_id")
     private Directory directory;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "informationType")
     List<DetailInformationType> detailInformationTypeList;
+    @JsonIgnore
     @OneToMany(mappedBy = "information_type")
     List<ProductInformationType> informationTypeList;
 }

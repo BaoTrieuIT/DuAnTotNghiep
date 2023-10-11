@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class Ranked {
 
     private String rank_name;
     private Integer minimum_point;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "ranked")
     public List<Account> accountList;
 }

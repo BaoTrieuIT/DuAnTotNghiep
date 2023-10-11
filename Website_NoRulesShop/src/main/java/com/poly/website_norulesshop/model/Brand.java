@@ -1,15 +1,16 @@
 package com.poly.website_norulesshop.model;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.io.Serializable;
 import java.util.List;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Data
+@Entity
 @Table(name = "brand")
-public class Brand {
+public class Brand implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "brand_id")
@@ -25,13 +26,15 @@ public class Brand {
     @JoinColumn(name = "directory_lv1_id")
     private DirectoryLv1 directoryLv1;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<BrandImage> brandImageList;
     // Getters and setters
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<Product> productList;
+    @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<DirectoryLv1Brand> directoryLv1ImageList;
 }

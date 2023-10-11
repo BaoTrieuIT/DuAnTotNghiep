@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,19 +29,20 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
-
+    @JsonIgnore
     // Getters and setters
     @OneToMany(mappedBy = "product")
     List<CategoryQuantity> categoryQuantityList;
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<OrderDetail> orderDetailList;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductDiscount> productDiscounts;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductImage> productImageList;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
 }

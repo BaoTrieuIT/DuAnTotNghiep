@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +21,7 @@ public class Role {
 
     @Column(name = "role_name", nullable = false, length = 50)
     private String role_name;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "role")
     public List<Account> accountList;
 }

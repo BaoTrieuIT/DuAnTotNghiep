@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,9 +23,10 @@ public class DirectoryLv1 {
     private Directory directory;
 
     // Getters and setters
-
+    @JsonIgnore
     @OneToMany(mappedBy = "directoryLv1")
     List<Brand> brandList;
+    @JsonIgnore
     @OneToMany(mappedBy = "directoryLv1")
     List<DirectoryLv1Brand> directoryLv1ImageList;
 

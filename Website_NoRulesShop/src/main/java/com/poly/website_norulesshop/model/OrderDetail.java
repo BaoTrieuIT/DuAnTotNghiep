@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class OrderDetail {
     private Product product;
 
 
-
+    @JsonIgnore
     @OneToMany(mappedBy =  "orderDetail")
     public List<Feedback> feedbackList;
     // Getters and setters

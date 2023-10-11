@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,15 +37,16 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     private AccountStatus accountStatus;
-
+@JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Address> addressList;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;
+    @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Order> orderList;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "account")
     List<Points> pointsList;
 

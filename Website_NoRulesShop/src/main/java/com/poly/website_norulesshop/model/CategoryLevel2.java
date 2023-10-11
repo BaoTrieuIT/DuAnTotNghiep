@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class CategoryLevel2 {
     private Integer category_level_2_id;
 
     private String category_level_2_name;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "categoryLevel2")
     List<CategoryLevel2Detail> categoryLevel2DetailList;
     // Getters and setters

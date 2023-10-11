@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class Feedback {
     private OrderDetail orderDetail;
 
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "feedback")
     List<FeedbackImage> feedbackImageList;
 }

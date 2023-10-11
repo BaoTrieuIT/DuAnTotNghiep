@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,10 +19,10 @@ public class Directory {
 
     private String directory_name;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "directory")
     List<DirectoryLv1> directoryLv1List;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "directory")
     List<InformationType> informationTypes;
     // Getters and setters

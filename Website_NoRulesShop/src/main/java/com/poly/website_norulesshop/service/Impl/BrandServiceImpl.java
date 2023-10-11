@@ -24,7 +24,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand getBrandById(Long id) {
+    public Brand getBrandById(int id) {
         return brandRepository.findById(id).orElse(null);
     }
 
@@ -32,9 +32,8 @@ public class BrandServiceImpl implements BrandService {
     public List<Brand> getAllBrands() {
         return brandRepository.findAll();
     }
-
     @Override
-    public void deleteBrand(Long id) {
+    public void deleteBrand(int id) {
         brandRepository.deleteById(id);
     }
 }

@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,7 +44,7 @@ public class Order {
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod  paymentMethod;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "order")
     List<OrderDetail> orderDetailList;
     // Getters and setters

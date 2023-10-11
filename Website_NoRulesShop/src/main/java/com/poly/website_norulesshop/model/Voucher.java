@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,8 +23,7 @@ public class Voucher {
     private Date valid_to;
     private Long minimize_order_amount;
     private Integer quantity_available;
-
-    // Getters and setters
+    @JsonIgnore
     @OneToMany(mappedBy = "voucher")
     List<Order> orderList;
 }
