@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,13 +8,17 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "points")
 public class Points {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "points_id")
-    private Integer points_id;
+    private Integer pointsId;
 
     private Integer points;
 
@@ -23,5 +28,5 @@ public class Points {
     @JoinColumn(name = "account_id")
     private Account account;
 
-
+    // Getters and setters
 }

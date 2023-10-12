@@ -9,19 +9,24 @@ import lombok.Setter;
 
 import java.util.List;
 
-
 @Entity
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
-@Table (name = "role")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private Integer role_id;
+    private Integer roleId;
 
     @Column(name = "role_name", nullable = false, length = 50)
-    private String role_name;
+    private String roleName;
+
     @JsonIgnore
     @OneToMany(mappedBy = "role")
-    public List<Account> accountList;
+    private List<Account> accountList;
+
+    // Getters and setters
 }

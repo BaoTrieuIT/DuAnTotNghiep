@@ -2,7 +2,6 @@ package com.poly.website_norulesshop.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -11,11 +10,17 @@ public class Ranked {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ranked_id")
-    private Integer ranked_id;
+    private Integer rankedId;
 
-    private String rank_name;
-    private Integer minimum_point;
+    @Column(name = "rank_name")
+    private String rankName;
+
+    @Column(name = "minimum_point")
+    private Integer minimumPoint;
+
     @JsonIgnore
     @OneToMany(mappedBy = "ranked")
-    public List<Account> accountList;
+    private List<Account> accountList;
+
+    // Getters and setters
 }

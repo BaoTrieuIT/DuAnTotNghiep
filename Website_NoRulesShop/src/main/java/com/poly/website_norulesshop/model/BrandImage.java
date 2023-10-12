@@ -1,21 +1,25 @@
 package com.poly.website_norulesshop.model;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "brand_image")
 public class BrandImage {
     @Id
-    @Column(name= "brand_image_id")
+    @Column(name = "brand_image_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer brand_image_id;
+    private Integer brandImageId;
 
-    private String imag_url;
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
