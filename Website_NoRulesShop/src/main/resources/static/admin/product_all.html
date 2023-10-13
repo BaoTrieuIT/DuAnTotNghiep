@@ -60,19 +60,6 @@
 										<input type="text" class="form-control" placeholder="Search..." ng-model="search_product_name">
 									</div>
 
-<!--									<div class="col-md-6">-->
-<!--										<div class="col-md-12">Kho hàng-->
-<!--											<input style=" border-radius: 5px; margin-left: 10px; width:120px; height: 40px;" type="number" name="quantity" min="1" max="1000" placeholder="Tối thiếu">  - -->
-<!--											<input style=" border-radius: 5px; margin-left: 10px; width:120px; height: 40px;" type="number" name="quantity" min="1" max="1000" placeholder="Tối đa">-->
-<!--										</div>-->
-<!--									</div>-->
-
-<!--									<div class="col-md-6">-->
-<!--										<div class="col-md-12">Doanh số-->
-<!--											<input style=" border-radius: 5px; margin-left: 10px;  width:120px; height: 40px;" type="number" name="quantity" min="1" max="1000" placeholder="Tối thiếu">    - -->
-<!--											<input style=" border-radius: 5px; margin-left: 10px;  width:120px; height: 40px;" type="number" name="quantity" min="1" max="1000" placeholder="Tối đa">-->
-<!--										</div>-->
-<!--									</div>-->
 									<div class="text-center">
 										<button type="submit" class="btn btn-primary" ng-click="SearchByName(search_product_name)">Search</button>
 										<button type="reset" class="btn btn-secondary">Reset</button>
@@ -93,33 +80,25 @@
 								<!-- Bordered Tabs -->
 								<ul class="nav nav-tabs nav-tabs-bordered">
 
+<!--									<li class="nav-item">-->
+<!--										<button class="nav-link " data-bs-toggle="tab" data-bs-target="#product-all">Tất cả</button>-->
+<!--									</li>-->
+
 									<li class="nav-item">
-										<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#product-all">Tất cả</button>
+										<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#product-online" ng-click="renderProductIsActive()">Đang hoạt động</button>
 									</li>
 
 									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-online">Đang hoạt động</button>
+										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-soldout" ng-click="renderProductIsSoldOut()">Hết hàng</button>
 									</li>
 
 									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-soldout">Hết hàng</button>
-									</li>
-
-									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-wait">Chờ duyệt</button>
-									</li>
-
-									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-band">Vi phạm</button>
-									</li>
-
-									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-hidden">Bị ẩn</button>
+										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-hidden" ng-click="renderProductIsHidden()">Bị ẩn</button>
 									</li>
 
 								</ul>
 								<div class="tab-content">
-									<div class="tab-pane fade show active profile-overview pt-3" id="product-all">
+									<div class="tab-pane fade profile-overview pt-3" id="product-all">
 										<div class="card">
 											<div class="card-body">
 
@@ -151,17 +130,24 @@
 													</thead>
 													<tbody>
 													<tr ng-repeat="item in pager.items">
-														<td>{{item.productId}}</td>
-														<td>{{item.productName}}</td>
-														<td>{{item.productRating}}</td>
-														<td>{{item.createDate}}</td>
-														<td>{{item.isRemoved}}</td>
-														<td>{{item.productDescription}}</td>
-														<td>{{item.price}}</td>
+														<td style="height: 130px">{{item.productId}}</td>
+														<td style="height: 130px">{{item.productName}}</td>
+														<td style="height: 130px">{{item.productRating}}</td>
+														<td style="height: 130px">{{item.createDate}}</td>
+														<td style="height: 130px">{{item.isRemoved}}</td>
+														<td style="height: 130px">{{item.productDescription}}</td>
+														<td style="height: 130px">{{item.price}}</td>
 														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
+															<button style="width: 55px; font-size: 11px; " type="button" class="btn btn-outline-secondary">Edit</button>
+															<div class="dropdown">
+																<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
+																<div class="dropdown-options">
+																	<a href="#">Xem thêm</a>
+																	<a href="#">Ẩn</a>
+																	<a href="#">Xóa</a>
+																</div>
+															</div>
+															<button style="font-size: 11px; width: 55px; margin-top: 5px" type="button" class="btn btn-outline-secondary">Copy</button>
 														</td>
 													</tr>
 
@@ -186,579 +172,34 @@
 
 									</div>
 
-									<div class="tab-pane fade profile-edit pt-3" id="product-online">
+									<div class="tab-pane fade show active profile-edit pt-3" id="product-online">
 										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Table with hoverable rows</h5>
-
-												<!-- Table with hoverable rows -->
-												<table class="table datatable">
-													<thead>
-													<tr>
-														<th scope="col">Tên sản phẩm</th>
-														<th scope="col">SKU phân loại</th>
-														<th scope="col">Phân loại hàng</th>
-														<th scope="col">Price</th>
-														<th scope="col">Kho hàng</th>
-														<th scope="col">Doanh số</th>
-														<th scope="col">Quảng cáo</th>
-														<th scope="col">Thao tác</th>
-
-													</tr>
-													</thead>
-													<tbody>
-													<tr>
-														<td>Frandon Jacob</td>
-														<td>28</td>
-														<td>Đen</td>
-														<td>13.000</td>
-														<td>10</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Vrandon Jacob</td>
-														<td>32</td>
-														<td>Trắng</td>
-														<td>17.000</td>
-														<td>14</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Brandon Jacob</td>
-														<td>66</td>
-														<td>Đỏ</td>
-														<td>42.000</td>
-														<td>10</td>
-														<td>190.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Jrandon Jacob</td>
-														<td>55</td>
-														<td>Xám</td>
-														<td>73.000</td>
-														<td>33</td>
-														<td>110.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Zrandon Jacob</td>
-														<td>11</td>
-														<td>Hồng</td>
-														<td>130.000</td>
-														<td>10</td>
-														<td>103.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													</tbody>
-												</table>
-												<!-- End Table with hoverable rows -->
-												<nav aria-label="Page navigation example">
-													<ul class="pagination justify-content-center">
-														<li class="page-item disabled">
-															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-														</li>
-														<li class="page-item"><a class="page-link" href="#">1</a></li>
-														<li class="page-item"><a class="page-link" href="#">2</a></li>
-														<li class="page-item"><a class="page-link" href="#">3</a></li>
-														<li class="page-item">
-															<a class="page-link" href="#">Next</a>
-														</li>
-													</ul>
-												</nav><!-- End Centered Pagination -->
-											</div>
+	                                    <div ng-include="'/admin/product_online.html'"></div>
 										</div>
 									</div>
 
 									<div class="tab-pane fade pt-3" id="product-soldout">
-
 										<!-- Settings Form -->
 										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Table with hoverable rows</h5>
-
-												<!-- Table with hoverable rows -->
-												<table class="table datatable">
-													<thead>
-													<tr>
-														<th scope="col">Tên sản phẩm</th>
-														<th scope="col">SKU phân loại</th>
-														<th scope="col">Phân loại hàng</th>
-														<th scope="col">Price</th>
-														<th scope="col">Kho hàng</th>
-														<th scope="col">Doanh số</th>
-														<th scope="col">Quảng cáo</th>
-														<th scope="col">Thao tác</th>
-
-													</tr>
-													</thead>
-													<tbody>
-													<tr>
-														<td>Frandon Jacob</td>
-														<td>28</td>
-														<td>Đen</td>
-														<td>13.000</td>
-														<td>10</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Vrandon Jacob</td>
-														<td>32</td>
-														<td>Trắng</td>
-														<td>17.000</td>
-														<td>14</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Brandon Jacob</td>
-														<td>66</td>
-														<td>Đỏ</td>
-														<td>42.000</td>
-														<td>10</td>
-														<td>190.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Jrandon Jacob</td>
-														<td>55</td>
-														<td>Xám</td>
-														<td>73.000</td>
-														<td>33</td>
-														<td>110.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Zrandon Jacob</td>
-														<td>11</td>
-														<td>Hồng</td>
-														<td>130.000</td>
-														<td>10</td>
-														<td>103.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													</tbody>
-												</table>
-												<!-- End Table with hoverable rows -->
-												<nav aria-label="Page navigation example">
-													<ul class="pagination justify-content-center">
-														<li class="page-item disabled">
-															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-														</li>
-														<li class="page-item"><a class="page-link" href="#">1</a></li>
-														<li class="page-item"><a class="page-link" href="#">2</a></li>
-														<li class="page-item"><a class="page-link" href="#">3</a></li>
-														<li class="page-item">
-															<a class="page-link" href="#">Next</a>
-														</li>
-													</ul>
-												</nav><!-- End Centered Pagination -->
-											</div>
+											<div ng-include="'/admin/product_soldout.html'"></div>
 										</div>
-
-									</div>
-
-									<div class="tab-pane fade pt-3" id="product-wait">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Table with hoverable rows</h5>
-
-												<!-- Table with hoverable rows -->
-												<table class="table datatable">
-													<thead>
-													<tr>
-														<th scope="col">Tên sản phẩm</th>
-														<th scope="col">SKU phân loại</th>
-														<th scope="col">Phân loại hàng</th>
-														<th scope="col">Price</th>
-														<th scope="col">Kho hàng</th>
-														<th scope="col">Doanh số</th>
-														<th scope="col">Quảng cáo</th>
-														<th scope="col">Thao tác</th>
-
-													</tr>
-													</thead>
-													<tbody>
-													<tr>
-														<td>Frandon Jacob</td>
-														<td>28</td>
-														<td>Đen</td>
-														<td>13.000</td>
-														<td>10</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Vrandon Jacob</td>
-														<td>32</td>
-														<td>Trắng</td>
-														<td>17.000</td>
-														<td>14</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Brandon Jacob</td>
-														<td>66</td>
-														<td>Đỏ</td>
-														<td>42.000</td>
-														<td>10</td>
-														<td>190.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Jrandon Jacob</td>
-														<td>55</td>
-														<td>Xám</td>
-														<td>73.000</td>
-														<td>33</td>
-														<td>110.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Zrandon Jacob</td>
-														<td>11</td>
-														<td>Hồng</td>
-														<td>130.000</td>
-														<td>10</td>
-														<td>103.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													</tbody>
-												</table>
-												<!-- End Table with hoverable rows -->
-												<nav aria-label="Page navigation example">
-													<ul class="pagination justify-content-center">
-														<li class="page-item disabled">
-															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-														</li>
-														<li class="page-item"><a class="page-link" href="#">1</a></li>
-														<li class="page-item"><a class="page-link" href="#">2</a></li>
-														<li class="page-item"><a class="page-link" href="#">3</a></li>
-														<li class="page-item">
-															<a class="page-link" href="#">Next</a>
-														</li>
-													</ul>
-												</nav><!-- End Centered Pagination -->
-											</div>
-										</div>
-
-									</div>
-
-									<div class="tab-pane fade pt-3" id="product-band">
-										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Sản phẩm vi phạm</h5>
-												<table class="table table-hover">
-													<thead>
-													<tr>
-														<th scope="col">Tên sản phẩm</th>
-														<th scope="col">Thời gian cập nhật</th>
-														<th scope="col">Hạn sửa lỗi</th>
-														<th scope="col">Loại vi phạm</th>
-														<th scope="col">Lý do vi phạm</th>
-														<th scope="col">Gợi ý</th>
-														<th scope="col">Thao tác</th>
-
-													</tr>
-													</thead>
-													<tbody>
-													<tr>
-														<td>Frandon Jacob</td>
-														<td>28</td>
-														<td>Đen</td>
-														<td>13.000</td>
-														<td>10</td>
-														<td>100.000</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Vrandon Jacob</td>
-														<td>32</td>
-														<td>Trắng</td>
-														<td>17.000</td>
-														<td>14</td>
-														<td>100.000</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Brandon Jacob</td>
-														<td>66</td>
-														<td>Đỏ</td>
-														<td>42.000</td>
-														<td>10</td>
-														<td>190.000</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Jrandon Jacob</td>
-														<td>55</td>
-														<td>Xám</td>
-														<td>73.000</td>
-														<td>33</td>
-														<td>110.000</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Zrandon Jacob</td>
-														<td>11</td>
-														<td>Hồng</td>
-														<td>130.000</td>
-														<td>10</td>
-														<td>103.000</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													</tbody>
-												</table>
-												<!-- End Table with hoverable rows -->
-												<nav aria-label="Page navigation example">
-													<ul class="pagination justify-content-center">
-														<li class="page-item disabled">
-															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-														</li>
-														<li class="page-item"><a class="page-link" href="#">1</a></li>
-														<li class="page-item"><a class="page-link" href="#">2</a></li>
-														<li class="page-item"><a class="page-link" href="#">3</a></li>
-														<li class="page-item">
-															<a class="page-link" href="#">Next</a>
-														</li>
-													</ul>
-												</nav><!-- End Centered Pagination -->
-											</div>
-										</div>
-
 									</div>
 
 									<div class="tab-pane fade pt-3" id="product-hidden">
 										<div class="card">
-											<div class="card-body">
-												<h5 class="card-title">Table with hoverable rows</h5>
-
-												<!-- Table with hoverable rows -->
-												<table class="table datatable">
-													<thead>
-													<tr>
-														<th scope="col">Tên sản phẩm</th>
-														<th scope="col">SKU phân loại</th>
-														<th scope="col">Phân loại hàng</th>
-														<th scope="col">Price</th>
-														<th scope="col">Kho hàng</th>
-														<th scope="col">Doanh số</th>
-														<th scope="col">Quảng cáo</th>
-														<th scope="col">Thao tác</th>
-
-													</tr>
-													</thead>
-													<tbody>
-													<tr>
-														<td>Frandon Jacob</td>
-														<td>28</td>
-														<td>Đen</td>
-														<td>13.000</td>
-														<td>10</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Vrandon Jacob</td>
-														<td>32</td>
-														<td>Trắng</td>
-														<td>17.000</td>
-														<td>14</td>
-														<td>100.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Brandon Jacob</td>
-														<td>66</td>
-														<td>Đỏ</td>
-														<td>42.000</td>
-														<td>10</td>
-														<td>190.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Jrandon Jacob</td>
-														<td>55</td>
-														<td>Xám</td>
-														<td>73.000</td>
-														<td>33</td>
-														<td>110.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													<tr>
-														<td>Zrandon Jacob</td>
-														<td>11</td>
-														<td>Hồng</td>
-														<td>130.000</td>
-														<td>10</td>
-														<td>103.000</td>
-														<td>a</td>
-														<td>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
-															<button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-														</td>
-													</tr>
-													</tbody>
-												</table>
-												<!-- End Table with hoverable rows -->
-												<nav aria-label="Page navigation example">
-													<ul class="pagination justify-content-center">
-														<li class="page-item disabled">
-															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-														</li>
-														<li class="page-item"><a class="page-link" href="#">1</a></li>
-														<li class="page-item"><a class="page-link" href="#">2</a></li>
-														<li class="page-item"><a class="page-link" href="#">3</a></li>
-														<li class="page-item">
-															<a class="page-link" href="#">Next</a>
-														</li>
-													</ul>
-												</nav><!-- End Centered Pagination -->
-											</div>
+											<div ng-include="'/admin/product_hidden.html'"></div>
 										</div>
 
 									</div>
 
 								</div><!-- End Bordered Tabs -->
-
 							</div>
 						</div>
 
 					</div>
 				</div>
 			</section>
-
 		</main><!-- End #main -->
-
-		<!-- ======= Footer ======= -->
-		<footer id="footer" class="footer">
-			<div class="copyright">
-				&copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</footer><!-- End Footer -->
 	</main><!-- End #main -->
-
 </body>
 </html>

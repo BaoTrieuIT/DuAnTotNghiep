@@ -1,0 +1,50 @@
+<div class="card-body">
+
+
+  <!-- Table with hoverable rows -->
+  <table class="table datatable">
+    <thead>
+    <tr>
+      <th scope="col">Mã sản phẩm</th>
+      <th scope="col">Tên sản phẩm</th>
+      <th scope="col">Đánh giá</th>
+      <th scope="col">Ngày tạo</th>
+      <th scope="col">Trạng thái</th>
+      <th scope="col">Thông tin thêm</th>
+      <th scope="col">Giá</th>
+      <th scope="col">Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in items">
+      <td>{{item.productId}}</td>
+      <td>{{item.productName}}</td>
+      <td>{{item.productRating}}</td>
+      <td>{{item.createDate}}</td>
+      <td>{{item.isRemoved}}</td>
+      <td>{{item.productDescription}}</td>
+      <td>{{item.price}}</td>
+      <td>
+        <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
+        <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
+        <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+  <!-- End Table with hoverable rows -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav><!-- End Centered Pagination -->
+</div>

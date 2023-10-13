@@ -27,6 +27,42 @@ public class ProductController {
         public List<Product> SearchByName(@RequestParam String productName){
             return productService.SearchByName(productName);
     }
+
+    @GetMapping("/isHidden")
+    public List<Product> isHidden(){
+        return productService.isHidden();
+    }
+
+    @GetMapping("/isActive")
+    public List<Product> isActive(){
+        return productService.isActive();
+    }
+
+    @GetMapping("/isSoldOut")
+    public List<Product> isSoldOut(){
+        return productService.isSoldOut();
+    }
+
+
+    @GetMapping("/hiddenProduct")
+    public List<Product> HiddenProduct(@RequestParam String productId){
+        Integer id = Integer.parseInt(productId);
+        Product product = productService.getProductById(id);
+        product.setIsRemoved(true);
+        productService.saveProduct(product);
+        return productService.isActive();
+    }
+
+    @GetMapping("/activeProduct")
+    public List<Product> ActiveProduct(@RequestParam String productId){
+        Integer id = Integer.parseInt(productId);
+        Product product = productService.getProductById(id);
+        product.setIsRemoved(false);
+        productService.saveProduct(product);
+        return productService.isHidden();
+    }
+
+
 //    @RequestMapping("product_all")
 //    public static String product_all(){
 //        return "admin/product_all";
