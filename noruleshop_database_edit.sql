@@ -67,10 +67,15 @@ create table `address`(
     foreign key (account_id) references `account`(account_id)
 );
 
-
+create table `gender`(
+	gender_id int auto_increment primary key,
+    gender_name nvarchar(255) not null
+);
 create table `directory`(
 	directory_id int auto_increment primary key,
-    directory_name nvarchar(255) not null
+    directory_name nvarchar(255) not null,
+	gender_id int,
+	foreign key (gender_id) references `gender`(gender_id)
 );
 
 create table `directory_lv1`(
