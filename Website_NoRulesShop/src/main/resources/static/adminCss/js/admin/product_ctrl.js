@@ -1,7 +1,7 @@
 app.controller("product_ctrl", function($scope, $http){
     $scope.initialize = function () {
-        $http.get("/rest/manage_brand").then(resp => {
-            $scope.brands = resp.data
+        $http.get("/rest/product_all").then(resp => {
+            $scope.items = resp.data
         })
     }
     $scope.pager = {
@@ -17,6 +17,13 @@ app.controller("product_ctrl", function($scope, $http){
             var start = this.page * this.size;
             return $scope.items.slice(start, start + this.size)
         }
+    }
+
+    $scope.SearchByName = function (productName){
+        $http.get("/rest/product_all/searchByName?productName="+productName ).then(resp => {
+            $scope.items = resp.data
+            console.log(items);
+        })
     }
     $scope.initialize();
 })

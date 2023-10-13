@@ -5,6 +5,7 @@ import com.poly.website_norulesshop.model.Product;
 import com.poly.website_norulesshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,5 +37,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> SearchByName(String productName) {
+        productName = "%"+ productName+ "%";
+        return productRepository.findByProductNameLike(productName);
     }
 }
