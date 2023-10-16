@@ -10,6 +10,8 @@ public interface BrandService {
 
     Brand getBrandById(int id);
 
+    Brand update(Brand brand);
+
     List<Brand> getAllBrands();
     void deleteBrand(int id);
 }
