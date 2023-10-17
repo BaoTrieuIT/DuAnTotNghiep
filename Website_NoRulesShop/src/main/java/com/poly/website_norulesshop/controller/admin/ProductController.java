@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @CrossOrigin("*")
 @RestController
@@ -17,15 +17,27 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    Map<String, Boolean> softMap =  new HashMap<>();
 
+    List<Product> listProduct = new ArrayList<>();
     @GetMapping
     public List<Product> getAll() {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/searchByName")
+    @GetMapping("/searchByNameProductOnline")
         public List<Product> SearchByName(@RequestParam String productName){
-            return productService.SearchByName(productName);
+            return productService.SearchProductActiveByName(productName);
+    }
+
+    @GetMapping("/searchByNameProductHidden")
+    public List<Product> searchProductSoldoutByName(@RequestParam String productName){
+        return productService.SearchProductHiddenByName(productName);
+    }
+
+    @GetMapping("/searchByNameProductSoldout")
+    public List<Product> SearchProductIsHiddenByName(@RequestParam String productName){
+        return productService.SearchProductSoldoutByName(productName);
     }
 
     @GetMapping("/isHidden")

@@ -42,10 +42,39 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> SearchByName(String productName) {
+    public List<Product> SearchProductActiveByName(String productName) {
         productName = "%"+ productName+ "%";
-        return productRepository.findByProductNameLike(productName);
+        return productRepository.findByProductNameLikeAndAndIsRemoved(productName, false);
     }
+
+    @Override
+    public List<Product> SearchProductHiddenByName(String productName) {
+        productName = "%"+ productName+ "%";
+        return productRepository.findByProductNameLikeAndAndIsRemoved(productName, true);
+    }
+
+    @Override
+    public List<Product> SearchProductSoldoutByName(String productName) {
+        List<Product> listProduct  = productRepository.findAll();
+        List<Product> listProductIsSoldOut = new ArrayList<>();
+        for (Product product: listProduct) {
+            Integer checkSoldOut = 0;
+            for (CategoryQuantity categoryQuantity : product.getCategoryQuantityList()) {
+                checkSoldOut += categoryQuantity.getQuantity();
+            }
+            if(checkSoldOut == 0){
+                listProductIsSoldOut.add(product);
+            }
+        }
+        List<Product> listProductIsSoldOutAndNameBy = new ArrayList<>();
+        for (Product product: listProductIsSoldOut) {
+                if(product.getProductName().contains(productName)) {
+                    listProductIsSoldOutAndNameBy.add(product);
+                }
+        }
+        return listProductIsSoldOutAndNameBy;
+    }
+
 
     @Override
     public List<Product> isHidden() {

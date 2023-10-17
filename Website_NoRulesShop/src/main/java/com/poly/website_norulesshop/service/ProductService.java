@@ -14,7 +14,11 @@ public interface ProductService {
 
     void deleteProduct(Integer id);
 
-    List<Product> SearchByName(String productName);
+    List<Product> SearchProductActiveByName(String productName);
+    List<Product> SearchProductHiddenByName(String productName);
+    List<Product> SearchProductSoldoutByName(String productName);
+
+
 
     List<Product> isHidden();
     List<Product> isActive();
