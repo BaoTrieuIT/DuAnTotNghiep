@@ -26,18 +26,30 @@ public class ProductController {
     }
 
     @GetMapping("/searchByNameProductOnline")
-        public List<Product> SearchByName(@RequestParam String productName){
-            return productService.SearchProductActiveByName(productName);
+    private List<Product> SearchByName(@RequestParam String productName,@RequestParam Integer min,@RequestParam Integer max){
+        if(!productName.isEmpty()){
+            return filterByPrice(productService.SearchProductActiveByName(productName),min,max);
+        }else{
+            return filterByPrice(productService.isActive(),min,max);
+        }
     }
 
     @GetMapping("/searchByNameProductHidden")
-    public List<Product> searchProductSoldoutByName(@RequestParam String productName){
-        return productService.SearchProductHiddenByName(productName);
+    public List<Product> searchProductSoldoutByName(@RequestParam String productName,@RequestParam Integer min,@RequestParam Integer max){
+        if(!productName.isEmpty()){
+            return filterByPrice(productService.SearchProductHiddenByName(productName),min,max);
+        }else{
+            return filterByPrice(productService.isHidden(),min,max);
+        }
     }
 
     @GetMapping("/searchByNameProductSoldout")
-    public List<Product> SearchProductIsHiddenByName(@RequestParam String productName){
-        return productService.SearchProductSoldoutByName(productName);
+    public List<Product> SearchProductIsHiddenByName(@RequestParam String productName,@RequestParam Integer min,@RequestParam Integer max){
+        if(!productName.isEmpty()){
+            return filterByPrice(productService.SearchProductSoldoutByName(productName),min,max);
+        }else{
+            return filterByPrice(productService.isSoldOut(),min,max);
+        }
     }
 
     @GetMapping("/isHidden")
@@ -74,6 +86,21 @@ public class ProductController {
         return productService.isHidden();
     }
 
+
+    public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max){
+
+        List<Product> listToReturn = new ArrayList<>();
+        for (Product product: listProduct) {
+            if(min <= product.getPrice() && product.getPrice() <= max){
+                listToReturn.add(product);
+            }
+        }
+        if(listToReturn.isEmpty()){
+            System.out.println("empty list");
+        }
+        System.out.println(min + " " + max );
+        return listToReturn;
+    }
 
 //    @RequestMapping("product_all")
 //    public static String product_all(){

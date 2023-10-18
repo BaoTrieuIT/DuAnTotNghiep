@@ -33,29 +33,25 @@
 								<h5 class="card-title">TÌM KIẾM</h5>
 								<!-- No Labels Form -->
 								<form class="row g-3">
-									<div class="col-md-6">
-										<div class="col-md-12">
-											<select id="inputState" class="form-select">
-												<option value="product-name">Tên sản phẩm</option>
-												<option value="product-sku">SKU sản phẩm</option>
-												<option value="sku-classify">SKU phân loại</option>
-												<option value="classify">Phân loại hàng</option>
-												<option value="product-id">Mã sản phẩm</option>
-											</select>
-										</div>
-									</div>
+<div class="col-md-6">
+	<div class="wrapper">
+		<header>
+			<h4>Price Range</h4>
+		</header>
+		<div class="price-input">
+			<div class="field">
+				<span>Min</span>
+				<input type="number" class="input-min" ng-value="minValue" ng-model="minValue">
+			</div>
+			<div class="separator">-</div>
+			<div class="field">
+				<span>Max</span>
+				<input type="number" class="input-max" ng-value="maxValue" ng-model="maxValue">
+			</div>
+		</div>
+	</div>
+</div>
 
-									<div class="col-md-6">
-										<div class="col-md-12">
-											<select id="inputState" class="form-select" >
-												<option value="product-name">Áo</option>
-												<option value="product-name">Quần</option>
-												<option value="product-name">Túi sách</option>
-												<option value="product-name">Balo</option>
-												<option value="product-name">Giay</option>
-											</select>
-										</div>
-									</div>
 									<div class="col-md-12">
 										<input type="text" class="form-control" placeholder="Search..." ng-model="search_product_name">
 									</div>
@@ -115,9 +111,7 @@
 										<div class="card">
 											<div ng-include="'/admin/product_hidden.html'"></div>
 										</div>
-
 									</div>
-
 								</div><!-- End Bordered Tabs -->
 							</div>
 						</div>
