@@ -38,13 +38,15 @@ app.controller("brand_ctrl", function ($scope, $http) {
                 // Tạo thương hiệu sau khi đã cập nhật logo_url
                 $http.post('/rest/manage_brand', item).then(function(resp) {
                     $scope.items.push(resp.data);
-                    alert("Them moi san pham thanh cong!");
+                    $scope.reset();
+                    alert("Thêm mới thành công!");
+
                 }).catch(function(error) {
-                    alert("Loi them moi!");
+                    alert("Lỗi thêm mới!");
                     console.log("Error", error);
                 });
             }).catch(function(error) {
-                alert("Loi tai len anh!");
+                alert("Lỗi tải lên ảnh!");
                 console.log("Error", error);
             });
         }else{
@@ -89,7 +91,7 @@ app.controller("brand_ctrl", function ($scope, $http) {
                 alert("Loi tai len anh!");
                 console.log("Error", error);
             });
-        }
+        }else {
             // Tạo thương hiệu sau khi đã cập nhật logo_url
             $http.put(`/rest/manage_brand/${item.brand_id}`, item).then(resp => {
                 var index = $scope.items.findIndex(p => p.brand_id === item.brand_id);
@@ -102,7 +104,7 @@ app.controller("brand_ctrl", function ($scope, $http) {
                     alert("Lỗi cập nhật sản phẩm!");
                     console.log("Error", error);
                 });
-
+        }
 
     }
     $scope.reset = function(){
@@ -110,13 +112,13 @@ app.controller("brand_ctrl", function ($scope, $http) {
         $scope.disabled= false;
     }
     $scope.delete = function(item){
-        if(confirm("Ban co muon ngung hoat dong sp nay?")){
+        if(confirm("Bạn có muốn ngừng hoạt động sản phẩm này?")){
             $http.delete(`/rest/manage_brand/${item.brand_id}`).then(resp => {
                 item.is_excepted=false;
-                alert("Ngung hoat dong sp thanh cong!");
+                alert("Ngừng hoạt động sản phẩm thành công!");
 
             }).catch(error => {
-                alert("Loi!");
+                alert("Lỗi!");
                 console.log("Error", error);
             })
         }
