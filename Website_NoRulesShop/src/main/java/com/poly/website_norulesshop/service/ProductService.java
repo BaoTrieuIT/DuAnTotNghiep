@@ -6,11 +6,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface ProductService {
-    Product saveProduct(Product product);
+    void saveProduct(Product product);
 
-    Product getProductById(Long id);
+    Product getProductById(Integer id);
 
     List<Product> getAllProducts();
 
-    void deleteProduct(Long id);
+    void deleteProduct(Integer id);
+
+    List<Product> SearchProductActiveByName(String productName);
+    List<Product> SearchProductHiddenByName(String productName);
+    List<Product> SearchProductSoldoutByName(String productName);
+
+
+
+    List<Product> isHidden();
+    List<Product> isActive();
+    List<Product> isSoldOut();
 }
