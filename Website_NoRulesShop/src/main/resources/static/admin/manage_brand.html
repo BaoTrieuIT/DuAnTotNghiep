@@ -20,14 +20,14 @@
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#manager-brand">Tất
+                                <a class="nav-link active" data-bs-toggle="tab"  href="#manager-brand" data-bs-target="#manager-brand">Tất
                                     cả
-                                </button>
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#add-brand">Thêm thương
+                                <a class="nav-link" data-bs-toggle="tab" href="#add-brand" data-bs-target="#add-brand">Thêm thương
                                     hiệu
-                                </button>
+                                </a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -39,37 +39,51 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col">Tên thương hiệu</th>
-<!--                                                <th scope="col">Ngành hàng</th>-->
-<!--                                                <th scope="col">Ngày đăng ký</th>-->
-<!--                                                <th scope="col">Trạng thái</th>-->
+                                                <th scope="col">Loại hàng</th>
+                                                <th scope="col">Website url</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Thông tin thêm</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="item in pager.items">
                                                     <td>{{item.brand_name}}</td>
-<!--                                                <td>Thời trang nam</td>-->
-<!--                                                <td>11-11-2020</td>-->
-<!--                                                <td>a</td>-->
+                                                    <td>{{item.directoryLv1.directory_lv1_name}}</td>
+                                                    <td>{{item.website_url}}</td>
+                                                    <td>{{item.is_excepted ? 'Đang hoạt động' : 'Ngừng hoạt động'}}</td>
+                                                    <td>{{item.another_information}}</td>
+                                                    <td><a  type="button" class="btn btn-info" ng-click="edit(item)">Edit</a></td>
+                                                    <td><a  type="button" class="btn btn-danger" ng-click="delete (item)">Stop</a></td>
                                                  </tr>
                                             </tbody>
                                         </table>
-                                        <nav aria-label="Page navigation example" style="margin-left: 40%;">
-                                            <ul class="pagination">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                        <div class="text-center">
+                                            <div class="panel-footer text-center">
+                                                <button ng-click="pager.first()" class="btn btn-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button ng-click="pager.prev()" class="btn btn-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-success">
+                                                    {{pager.page + 1}} of {{pager.count}}
+                                                </button>
+                                                <button ng-click="pager.next()"	class="btn btn-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button ng-click="pager.last()" class="btn btn-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -77,22 +91,22 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">THÊM THƯƠNG HIỆU MỚI</h5>
-                                        <form>
+                                        <form method="post"  enctype="multipart/form-data">
                                             <div class="row mb-3">
+                                                <input ng-model="form.brand_id" type="text" hidden="hidden" class="form-control">
                                                 <label for="inputText" class="col-sm-2 col-form-label">Tên thương
                                                     hiệu</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control">
+                                                    <input ng-model="form.brand_name" type="text" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Ngành hàng</label>
                                                 <div class="col-sm-10">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>Thời trang</option>
-                                                        <option value="1">Thời trang nam</option>
-                                                        <option value="2">Thời trang nữ</option>
-                                                        <option value="3">Túi ví nữ</option>
+                                                    <select class="form-control" ng-model="form.directoryLv1"
+                                                            ng-options=" directoryLv1.directory_lv1_name for directoryLv1 in directoryLv1_all track by directoryLv1.directory_lv1_id">
+                                                        <option value="">Select Option</option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -101,67 +115,60 @@
                                                     mẫu</label>
                                                 <div class="col-md-2 form-group inputDnD">
                                                     <input type="file"
+                                                           name="fileName"
+                                                           ng-model="form.logo_url"
                                                            class="form-control-file text-primary font-weight-bold"
                                                            id="inputFile" accept="image/*" onchange="readUrl(this)"
-                                                           data-title="+">
-                                                    <p class="add-img">Hình ảnh 1</p>
-                                                </div>
-                                                <div class="col-md-2 form-group inputDnD">
-                                                    <input type="file"
-                                                           class="form-control-file text-primary font-weight-bold"
-                                                           id="inputFile" accept="image/*" onchange="readUrl(this)"
-                                                           data-title="+">
-                                                    <p class="add-img">Hình ảnh 2</p>
-                                                </div>
-                                                <!-- <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('inputFile').click()">Add Image</button> -->
-                                                <div class="col-md-2 form-group inputDnD">
-                                                    <input type="file"
-                                                           class="form-control-file text-primary font-weight-bold"
-                                                           id="inputFile" accept="image/*" onchange="readUrl(this)"
-                                                           data-title="+">
-                                                    <p class="add-img">Hình ảnh 3</p>
+                                                           data-title="+"
+                                                           style="display: none;">
+                                                        <img id="previewImage" src="{{form.logo_url}}" alt="Image" style="max-width: 100px; max-height: 100px;border: 1px solid #dee2e6;padding: 17px;border-radius: 5px;}">
+                                                    <p class="add-img">Hình ảnh</p>
                                                 </div>
 
-                                                <!-- <button type="button" class="btn btn-primary btn-block" onclick="document.getElementById('inputFile').click()">Add Image</button> -->
-                                                <div class="col-md-2 form-group inputDnD">
-                                                    <input type="file"
-                                                           class="form-control-file text-primary font-weight-bold"
-                                                           id="inputFile" accept="image/*" onchange="readUrl(this)"
-                                                           data-title="+">
-                                                    <p class="add-img">Hình ảnh 4</p>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label class="col-sm-2 col-form-label">Logo thương hiệu</label>
-                                                <div class="col-lg-2 form-group inputDnD">
-
-                                                    <input type="file"
-                                                           class="form-control-file text-primary font-weight-bold"
-                                                           id="inputFile" accept="image/*" onchange="readUrl(this)"
-                                                           data-title="+">
-                                                </div>
                                             </div>
 
+
                                             <div class="row mb-3">
-                                                <label for="inputText" class="col-sm-2 col-form-label">Website thương
+                                                <label  class="col-sm-2 col-form-label">Website thương
                                                     hiệu
                                                 </label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" ng-model="form.website_url" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <label for="inputPassword" class="col-sm-2 col-form-label">Thông tin
+                                                <label class="col-sm-2 col-form-label">Thông tin
                                                     thêm</label>
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control" style="height: 100px"></textarea>
+                                                    <textarea class="form-control" ng-model="form.another_information" style="height: 100px"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label  class="col-sm-2 col-form-label">Trạng thái
+                                                </label>
+                                                <div class="col-sm-10" style="display: flex">
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" ng-model="form.is_excepted" ng-value="true " id="radio1" name="optradio" value="option1">Đang hoạt động
+                                                        <label class="form-check-label" for="radio1"></label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" ng-model="form.is_excepted" ng-value="false" id="radio2" name="optradio" value="option2">Ngừng hoạt động
+                                                        <label class="form-check-label" for="radio2"></label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <button style="margin-left: 17%;" type="submit"
-                                                            class="btn btn-primary">Thêm
+                                                    <button style="margin-left: 47%;"  ng-click="create()" ng-disabled="disabled"
+                                                            class="btn btn-success">Thêm
                                                     </button>
+                                                    <button style="margin-left: 1%;"  ng-click="update()"
+                                                            class="btn btn-warning">Sửa
+                                                    </button>
+                                                    <button style="margin-left: 1%;"  ng-click="reset()"
+                                                            class="btn btn-secondary">Reset
+                                                    </button>
+
                                                 </div>
                                             </div>
                                         </form><!-- End General Form Elements -->
@@ -179,4 +186,24 @@
 
 
 </main><!-- End #main -->
+<script>
+    function readUrl(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var imageElement = document.getElementById("previewImage");
+                imageElement.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Khi người dùng nhấp vào hình ảnh, kích hoạt sự kiện click trên trường input tạm thời
+    document.getElementById("previewImage").addEventListener("click", function () {
+        document.getElementById("inputFile").click();
+    });
+
+</script>
 
