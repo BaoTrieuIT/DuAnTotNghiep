@@ -22,18 +22,8 @@ public class Brand implements Serializable {
     @Column(name = "logo_url")
     private String logoUrl;
 
-    @Column(name = "website_url")
-    private String websiteUrl;
-
     @Column(name = "another_information")
     private String anotherInformation;
-
-    @Column(name = "is_excepted")
-    private Boolean isExcepted;
-
-    @ManyToOne
-    @JoinColumn(name = "directory_lv1_id")
-    private DirectoryLv1 directoryLv1;
 
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
@@ -42,10 +32,6 @@ public class Brand implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<Product> productList;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "brand")
-    List<DirectoryLv1Brand> directoryLv1ImageList;
 
     // Getters and setters
 }

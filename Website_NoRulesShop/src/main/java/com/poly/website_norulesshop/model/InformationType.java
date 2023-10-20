@@ -24,9 +24,15 @@ public class InformationType {
     @Column(name = "information_type_name")
     private String informationTypeName;
 
+
+
     @ManyToOne
-    @JoinColumn(name = "directory_id")
-    private Directory directory;
+    @JoinColumn(name = "type_id")
+    Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "directory_lv1_id")
+    DirectoryLv1 directoryLv1;
 
     @JsonIgnore
     @OneToMany(mappedBy = "informationType")

@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "directory_lv1_brand")
 public class DirectoryLv1Brand {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "directory_lv1_brand_id")

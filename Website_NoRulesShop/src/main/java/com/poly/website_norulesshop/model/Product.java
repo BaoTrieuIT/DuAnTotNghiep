@@ -41,6 +41,10 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
+    @ManyToOne
+    @JoinColumn(name = "directory_lv1_id")
+    private DirectoryLv1 directoryLv1;
+
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<CategoryQuantity> categoryQuantityList;

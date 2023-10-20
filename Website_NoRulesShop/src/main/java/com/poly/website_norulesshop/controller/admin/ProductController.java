@@ -4,6 +4,7 @@ import com.poly.website_norulesshop.model.Brand;
 import com.poly.website_norulesshop.model.Product;
 import com.poly.website_norulesshop.service.BrandService;
 import com.poly.website_norulesshop.service.ProductService;
+import com.poly.website_norulesshop.test.FindAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,9 @@ import java.util.*;
 @RestController
 @RequestMapping("/rest/product_all")
 public class ProductController {
+
+    @Autowired
+    FindAllService findAllService;
     @Autowired
     ProductService productService;
 
@@ -114,5 +118,6 @@ public class ProductController {
 //    public static String product_report(){
 //        return "admin/product_report";
 //    }
+
 
 }

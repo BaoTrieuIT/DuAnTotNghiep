@@ -24,13 +24,13 @@ public class Directory {
     @Column(name = "directory_name")
     private String directoryName;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "directory")
-    private List<DirectoryLv1> directoryLv1List;
+    @ManyToOne
+    @JoinColumn(name = "gender_id")
+    Gender gender;
 
     @JsonIgnore
     @OneToMany(mappedBy = "directory")
-    private List<InformationType> informationTypes;
+    private List<DirectoryLv1> directoryLv1List;
 
     // Getters and setters
 }

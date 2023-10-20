@@ -30,11 +30,13 @@ public class DirectoryLv1 {
 
     @JsonIgnore
     @OneToMany(mappedBy = "directoryLv1")
-    private List<Brand> brandList;
+    private List<DirectoryLv1Brand> directoryLv1ImageList;
 
     @JsonIgnore
     @OneToMany(mappedBy = "directoryLv1")
-    private List<DirectoryLv1Brand> directoryLv1ImageList;
+    private List<InformationType> informationTypeList;
 
-    // Getters and setters
+    @JsonIgnore
+    @OneToMany(mappedBy = "directoryLv1")
+    private List<Product> productList;
 }
