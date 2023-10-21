@@ -8,4 +8,11 @@ app.controller("directory_ctrl", function($scope, $http){
         })
     }
     $scope.initialize();
+    $scope.genderSelected = null;
+
+    $scope.onChangeGender = function (){
+        $http.get("../rest/manage_directory?genderId="+ $scope.genderSelected.genderId).then(resp => {
+            $scope.directoryList = resp.data
+        })
+    }
 })
