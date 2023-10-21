@@ -11,7 +11,13 @@ app.controller("directory_ctrl", function($scope, $http){
     $scope.genderSelected = null;
 
     $scope.onChangeGender = function (){
-        $http.get("../rest/manage_directory?genderId="+ $scope.genderSelected.genderId).then(resp => {
+        $http.get("../rest/manage_directory/getByGender?genderId="+ $scope.genderSelected.genderId).then(resp => {
+            $scope.directoryList = resp.data
+        })
+    }
+
+    $scope.ClickDirectory = function (DirectoryId){
+        $http.get("../rest/manage_directory/getByGender?genderId="+ $scope.genderSelected.genderId).then(resp => {
             $scope.directoryList = resp.data
         })
     }

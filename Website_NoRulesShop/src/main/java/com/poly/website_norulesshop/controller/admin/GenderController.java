@@ -18,7 +18,6 @@ public class GenderController {
     GenderService genderService;
     @GetMapping
     public List<Gender> getAll(){
-        System.out.println(genderService.getAllGenders().get(0).getDirectoryList().get(0).getDirectoryName());
         return genderService.getAllGenders();
     }
 }

@@ -39,4 +39,9 @@ public class DirectoryServiceImpl implements DirectoryService {
     public void deleteDirectory(Long id) {
         directoryRepository.deleteById(id);
     }
+
+    @Override
+    public List<Directory> getByGender(Gender gender) {
+        return directoryRepository.findByGender(gender);
+    }
 }
