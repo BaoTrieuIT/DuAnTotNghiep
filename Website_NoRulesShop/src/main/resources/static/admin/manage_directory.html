@@ -119,22 +119,33 @@
 											<label class="col-sm-2 col-form-label">GIỚI TÍNH</label>
 											<div class="col-sm-10">
 												<select class="form-select" aria-label="Default select example">
-													<option selected="">UNISEX</option>
-													<option value="1">NAM</option>
-													<option value="2">NỮ</option>
+													<option ng-repeat="gender in genders">{{gender.genderName}}</option>
 												</select>
 											</div>
 										</div>
-<!--										<div class="col-2">-->
-<!--											<button class=" btn btn-danger d-flex align-items-center disabled" type="button">-->
-<!--												<i class="bx bxs-hide"></i><b>Ẩn danh mục</b>-->
-<!--											</button>-->
-<!--										</div>-->
 
 										<div class="col-3 ">
-											<button class=" btn btn-primary d-flex align-items-center" type="button">
+
+											<button class=" btn btn-primary d-flex align-items-center" type="button"
+													data-bs-toggle="modal" data-bs-target="#create_directory">
 												<i class="bx bx-plus"></i><b>Thêm danh mục</b>
 											</button>
+											<div class="modal fade" id="create_directory" tabindex="-1">
+												<div class="modal-dialog modal-dialog-centered">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title">Thêm danh mục</h5>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<div class="modal-body">
+															<input type="text" class="form-control" id="inputText" placeholder="Tên danh mục....">														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+															<button type="button" class="btn btn-primary">Thêm mới</button>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 
 
@@ -154,7 +165,8 @@
 												</button>
 											</div>
 
-											<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+											<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+												 data-bs-parent="#accordionExample">
 												<div class="accordion-body">
 													<ul>
 														<li class="row d-flex flex-row align-items-center p-3">
@@ -165,11 +177,29 @@
 
 															<div class="col-10 name_directory_lv1 ">
 																<a class="mb-3" href="#">Quần tây</a>
-																<button class="btn" type="button"><i class="bx  bx-edit-alt"></i></button>
+																<button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#edit_name_directory_lv1">
+																	<i class="bx  bx-edit-alt"></i>
+																</button>
+																<div class="modal fade" id="edit_name_directory_lv1" tabindex="-1">
+																	<div class="modal-dialog modal-dialog-centered">
+																		<div class="modal-content">
+																			<div class="modal-header">
+																				<h5 class="modal-title">Tên danh mục con</h5>
+																				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																			</div>
+																			<div class="modal-body">
+																				<input type="text" class="form-control" placeholder="Tên danh mục con....">														</div>
+																			<div class="modal-footer">
+																				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+																				<button type="button" class="btn btn-primary">Thay đổi</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
 															</div>
 
 															<div class="col-1 form-check form-switch">
-																<input class="form-check-input " type="checkbox" checked>
+																<input class="form-check-input" type="checkbox" checked>
 															</div>
 
 														</li>
@@ -177,7 +207,7 @@
 														<li class="row d-flex flex-row align-items-center p-3">
 
 															<div class="col-1 form-check ">
-																<input class="form-check-input " type="checkbox" checked>
+																<input class="form-check-input" type="checkbox" checked>
 															</div>
 
 															<div class="col-10 name_directory_lv1 ">
@@ -231,10 +261,26 @@
 															<i class="bx bx-minus"></i>
 															<b>Xóa danh mục</b>
 														</button>
-														<button class="btn btn-primary d-flex align-items-center m-2" type="button" style="font-size: 14px;">
+														<button class="btn btn-primary d-flex align-items-center m-2" data-bs-toggle="modal" data-bs-target="#create_directory_lv1"  type="button" style="font-size: 14px;">
 															<i class="bx bx-plus"></i>
 															<b>Thêm danh mục con</b>
 														</button>
+														<div class="modal fade" id="create_directory_lv1" tabindex="-1" >
+															<div class="modal-dialog modal-dialog-centered">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title">Danh mục con</h5>
+																		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																	</div>
+																	<div class="modal-body">
+																		<input type="text" class="form-control" placeholder="Tên danh mục con....">														</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+																		<button type="button" class="btn btn-primary">Thêm mới</button>
+																	</div>
+																</div>
+															</div>
+														</div>
 													</div>
 
 												</div>
