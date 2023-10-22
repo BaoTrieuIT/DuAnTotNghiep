@@ -26,7 +26,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public Directory getDirectoryById(Long id) {
+    public Directory getDirectoryById(Integer id) {
         return directoryRepository.findById(id).orElse(null);
     }
 
@@ -36,7 +36,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public void deleteDirectory(Long id) {
+    public void deleteDirectory(Integer id) {
         directoryRepository.deleteById(id);
     }
 

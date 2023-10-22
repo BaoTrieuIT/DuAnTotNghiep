@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.DirectoryLv1Repository;
+import com.poly.website_norulesshop.model.Directory;
 import com.poly.website_norulesshop.model.DirectoryLv1;
 import com.poly.website_norulesshop.service.DirectoryLv1Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class DirectoryLv1ServiceImpl implements DirectoryLv1Service {
     }
 
     @Override
-    public DirectoryLv1 getDirectoryLv1ById(Long id) {
+    public DirectoryLv1 getDirectoryLv1ById(Integer id) {
         return directoryLv1Repository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,13 @@ public class DirectoryLv1ServiceImpl implements DirectoryLv1Service {
     }
 
     @Override
-    public void deleteDirectoryLv1(Long id) {
+    public void deleteDirectoryLv1(Integer id) {
         directoryLv1Repository.deleteById(id);
     }
+
+    @Override
+    public List<DirectoryLv1> getByDirectory(Directory directory){
+        return directoryLv1Repository.findByDirectory(directory);
+    }
+
 }

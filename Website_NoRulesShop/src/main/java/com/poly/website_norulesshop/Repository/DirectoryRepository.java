@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DirectoryRepository extends JpaRepository<Directory, Long> {
+public interface DirectoryRepository extends JpaRepository<Directory, Integer> {
     // Các phương thức đặc thù cho bảng Directory (nếu cần)
     List<Directory> findByGender(Gender gender);
 }

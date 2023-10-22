@@ -8,10 +8,10 @@ import java.util.List;
 public interface DirectoryService {
     Directory saveDirectory(Directory directory);
 
-    Directory getDirectoryById(Long id);
+    Directory getDirectoryById(Integer id);
 
     List<Directory> getAllDirectories();
 
-    void deleteDirectory(Long id);
+    void deleteDirectory(Integer id);
     List<Directory> getByGender(Gender gender);
 }

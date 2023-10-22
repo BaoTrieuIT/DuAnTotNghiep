@@ -17,8 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/manage_directory")
 public class DirectoryController {
-//    @Autowired
-//    DirectoryLv1Service directoryLv1Service;
+    @Autowired
+    DirectoryLv1Service directoryLv1Service;
 //    @GetMapping
 //    public List<DirectoryLv1> getAll() {
 //        return directoryLv1Service.getAllDirectoryLv1s();
@@ -34,9 +34,14 @@ public class DirectoryController {
     }
 
 
-    @GetMapping("/getByGender")
+    @GetMapping("/Gender")
     public List<Directory> findByGender(@RequestParam String genderId ){
         Gender genderSelected  = genderService.getGenderById(Integer.parseInt(genderId));
         return directoryService.getByGender(genderSelected);
+    }
+    @GetMapping("/Directory")
+    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId ){
+        Directory diId  = directoryService.getDirectoryById(Integer.parseInt(directoryId));
+        return directoryLv1Service.getByDirectory(diId);
     }
 }

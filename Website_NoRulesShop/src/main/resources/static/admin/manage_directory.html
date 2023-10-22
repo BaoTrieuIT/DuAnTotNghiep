@@ -152,14 +152,14 @@
 									</div>
 
 									<!-- Default Accordion -->
-									<div class="accordion" id="accordionExample"  ng-repeat="directory in directoryList">
+									<div class="accordion" id="accordionExample" ng-repeat="directory in directoryList">
 										<div class="header">
 
 										</div>
-										<div class="accordion-item">
+										<div class="accordion-item" >
 											<div class="accordion-header" id="headingOne">
 												<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-														aria-expanded="true" aria-controls="collapseOne" ng-click="ClickDirectory(directory.directoryId)">
+														aria-expanded="true" aria-controls="collapseOne" ng-value="directory" ng-click="ClickDirectory(directory.directoryId)">
 													<h5>{{directory.directoryName}}</h5>
 												</button>
 											</div>
@@ -167,7 +167,7 @@
 												 data-bs-parent="#accordionExample">
 												<div class="accordion-body">
 													<ul>
-														<li class="row d-flex flex-row align-items-center p-3">
+														<li class="row d-flex flex-row align-items-center p-3" ng-repeat="directoryLv1 in ListdirectoryLv1">
 
 															<div class="col-1 form-check ">
 																<input class="form-check-input " type="checkbox" checked>
