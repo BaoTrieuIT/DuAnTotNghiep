@@ -122,7 +122,7 @@
 													<option ng-repeat="gender in genders" ng-value="gender">{{gender.genderName}}</option>
 												</select>
 											</div>
-											<h3>{{genderSelected.directoryList}}</h3>
+											<h3>{{genderSelected.items}}</h3>
 										</div>
 										<form class="col-3 " method="post" >
 											<button class="btn btn-primary d-flex align-items-center" type="button"
@@ -137,6 +137,7 @@
 															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
 														<div class="modal-body">
+															<input type="hidden" ng-model="form.genderId">
 															<input type="text" ng-model="form.directoryName" class="form-control" id="inputText" placeholder="Tên danh mục....">														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -153,7 +154,7 @@
 									<!-- Default Accordion -->
 									<div class="accordion" id="accordionExample" >
 
-										<div class="accordion-item" ng-repeat="directory in directoryList">
+										<div class="accordion-item" ng-repeat="directory in items">
 											<div class="accordion-header" id="headingOne">
 												<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}"
 														aria-expanded="true" aria-controls="collapse{{ $index }}" ng-value="directory" ng-click="ClickDirectory(directory.directoryId)">

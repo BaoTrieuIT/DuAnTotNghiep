@@ -39,9 +39,13 @@ public class DirectoryController {
         return directoryLv1Service.getByDirectory(diId);
     }
 
-    @PostMapping
-    public Directory create(@RequestBody Directory directory){
+    @PostMapping("{id}")
+    public Directory create(@RequestBody Directory directory,@PathVariable("id") String id){
+        Gender gender = genderService.getGenderById(Integer.parseInt(id));
+        directory.setGender(gender);
         directoryService.saveDirectory(directory);
         return directory;
     }
+
+
 }

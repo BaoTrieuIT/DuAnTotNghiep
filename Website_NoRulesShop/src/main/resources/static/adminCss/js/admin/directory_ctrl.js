@@ -1,6 +1,6 @@
 app.controller("directory_ctrl", function($scope, $http){
     $scope.initialize = function(){
-        $http.get("../rest/manage_gender").then(resp => {
+        $http.get("/rest/manage_gender").then(resp => {
             $scope.genders = resp.data
         })
         $http.get("/rest/manage_directory").then(resp => {
@@ -12,11 +12,13 @@ app.controller("directory_ctrl", function($scope, $http){
     $scope.genderSelected = null;
 
     $scope.onChangeGender = function (){
-        $http.get("../rest/manage_directory/Gender?genderId="+ $scope.genderSelected.genderId).then(resp => {
-            $scope.directoryList = resp.data
-            console.log($scope.directoryList)
+        $http.get("/rest/manage_directory/Gender?genderId="+ $scope.genderSelected.genderId).then(resp => {
+            $scope.items = resp.data
+            console.log($scope.items)
         })
     }
+
+
 
     $scope.ClickDirectory = function (DirectoryId){
         $http.get("../rest/manage_directory/Directory?directoryId="+ DirectoryId).then(resp => {
@@ -25,12 +27,11 @@ app.controller("directory_ctrl", function($scope, $http){
     }
 
     $scope.createDir = function(genderID){
+        $scope.form.genderId = genderID
         var item = angular.copy($scope.form);
-        console.log($scope.form.directoryName)
-        console.log(genderID)
-        $http.post('/rest/manage_directory',item).then(resp => {
-            $scope.directoryList.push(resp.data);
-            console.log($scope.directoryList)
+        console.log(item)
+        $http.post("/rest/manage_directory/"+genderID ,item).then(resp => {
+            $scope.items.push(resp.data);
             $scope.form= {};
             alert("Thêm mới thành công!");
         }).catch(error => {
