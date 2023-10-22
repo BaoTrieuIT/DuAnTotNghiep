@@ -17,6 +17,19 @@ app.controller("directory_ctrl", function($scope, $http){
 
         })
     }
+    $scope.createDir = function(genderID){
+
+            var item = angular.copy($scope.form);
+            $http.post(`/rest/categories`, item).then(resp => {
+                $scope.items.push(resp.data);
+                $scope.reset();
+                alert("Thêm mới sản phẩm thành công!");
+            }).catch(error => {
+                alert("Lỗi thêm mới sản phẩm!");
+                console.log("Error", error);
+            });
+    }
+
 
 
 

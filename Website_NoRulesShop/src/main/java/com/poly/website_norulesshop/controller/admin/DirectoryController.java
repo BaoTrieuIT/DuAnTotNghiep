@@ -1,6 +1,5 @@
 package com.poly.website_norulesshop.controller.admin;
 
-import com.poly.website_norulesshop.model.Brand;
 import com.poly.website_norulesshop.model.Directory;
 import com.poly.website_norulesshop.model.DirectoryLv1;
 import com.poly.website_norulesshop.model.Gender;
@@ -8,7 +7,6 @@ import com.poly.website_norulesshop.service.DirectoryLv1Service;
 import com.poly.website_norulesshop.service.DirectoryService;
 import com.poly.website_norulesshop.service.GenderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,5 +41,11 @@ public class DirectoryController {
     public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId ){
         Directory diId  = directoryService.getDirectoryById(Integer.parseInt(directoryId));
         return directoryLv1Service.getByDirectory(diId);
+    }
+    @PostMapping("")
+    public Directory create(@RequestParam String genderId,@RequestBody Directory directory){
+        Gender genderSelected  = genderService.getGenderById(Integer.parseInt(genderId));
+        directoryService.saveDirectory(directory);
+        return directory;
     }
 }
