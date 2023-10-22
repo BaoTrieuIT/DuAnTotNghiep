@@ -15,17 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/manage_directory")
 public class DirectoryController {
-    @Autowired
-    DirectoryLv1Service directoryLv1Service;
-//    @GetMapping
-//    public List<DirectoryLv1> getAll() {
-//        return directoryLv1Service.getAllDirectoryLv1s();
-//    }
 
     @Autowired
     GenderService genderService;
     @Autowired
     DirectoryService directoryService;
+    @Autowired
+    DirectoryLv1Service directoryLv1Service;
     @GetMapping
     public List<Directory> getAllD() {
         return directoryService.getAllDirectories();
@@ -42,9 +38,9 @@ public class DirectoryController {
         Directory diId  = directoryService.getDirectoryById(Integer.parseInt(directoryId));
         return directoryLv1Service.getByDirectory(diId);
     }
-    @PostMapping("")
-    public Directory create(@RequestParam String genderId,@RequestBody Directory directory){
-        Gender genderSelected  = genderService.getGenderById(Integer.parseInt(genderId));
+
+    @PostMapping
+    public Directory create(@RequestBody Directory directory){
         directoryService.saveDirectory(directory);
         return directory;
     }

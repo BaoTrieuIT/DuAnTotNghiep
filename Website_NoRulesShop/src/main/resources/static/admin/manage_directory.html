@@ -124,9 +124,9 @@
 											</div>
 											<h3>{{genderSelected.directoryList}}</h3>
 										</div>
-										<div class="col-3 ">
+										<form class="col-3 " method="post" >
 											<button class="btn btn-primary d-flex align-items-center" type="button"
-													data-bs-toggle="modal" data-bs-target="#create_directory" ng-click="createDir(genderSelected.genderId)">
+													data-bs-toggle="modal" data-bs-target="#create_directory">
 												<i class="bx bx-plus"></i><b>Thêm danh mục</b>
 											</button>
 											<div class="modal fade" id="create_directory" tabindex="-1">
@@ -137,32 +137,30 @@
 															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
 														<div class="modal-body">
-															<input type="text" class="form-control" id="inputText" placeholder="Tên danh mục....">														</div>
+															<input type="text" ng-model="form.directoryName" class="form-control" id="inputText" placeholder="Tên danh mục....">														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-															<button type="button" class="btn btn-primary">Thêm mới</button>
+															<button type="button" class="btn btn-primary" ng-click="createDir(genderSelected.genderId)">Thêm mới</button>
 														</div>
 													</div>
 												</div>
 											</div>
-										</div>
+										</form>
 
 
 									</div>
 
 									<!-- Default Accordion -->
-									<div class="accordion" id="accordionExample" ng-repeat="directory in directoryList">
-										<div class="header">
+									<div class="accordion" id="accordionExample" >
 
-										</div>
-										<div class="accordion-item" >
+										<div class="accordion-item" ng-repeat="directory in directoryList">
 											<div class="accordion-header" id="headingOne">
-												<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-														aria-expanded="true" aria-controls="collapseOne" ng-value="directory" ng-click="ClickDirectory(directory.directoryId)">
+												<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}"
+														aria-expanded="true" aria-controls="collapse{{ $index }}" ng-value="directory" ng-click="ClickDirectory(directory.directoryId)">
 													<h5>{{directory.directoryName}}</h5>
 												</button>
 											</div>
-											<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+											<div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="headingOne"
 												 data-bs-parent="#accordionExample">
 												<div class="accordion-body">
 													<ul>
@@ -185,10 +183,10 @@
 																				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 																			</div>
 																			<div class="modal-body">
-																				<input type="text" class="form-control" placeholder="Tên danh mục con....">														</div>
+																				<input type="text" class="form-control" ng-model="drLv1.directoryLv1Name" placeholder="Tên danh mục con....">														</div>
 																			<div class="modal-footer">
 																				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-																				<button type="button" class="btn btn-primary">Thay đổi</button>
+<!--																				<button type="button" class="btn btn-primary" ng-change="updateDirLV1(directoryLv1.directoryLv1Id)">Thay đổi</button>-->
 																			</div>
 																		</div>
 																	</div>
@@ -205,7 +203,8 @@
 															<i class="bx bx-minus"></i>
 															<b>Xóa danh mục</b>
 														</button>
-														<button class="btn btn-primary d-flex align-items-center m-2" data-bs-toggle="modal" data-bs-target="#create_directory_lv1"  type="button" style="font-size: 14px;">
+														<button class="btn btn-primary d-flex align-items-center m-2" data-bs-toggle="modal"
+																data-bs-target="#create_directory_lv1"  type="button" style="font-size: 14px;">
 															<i class="bx bx-plus"></i>
 															<b>Thêm danh mục con</b>
 														</button>
@@ -220,7 +219,7 @@
 																		<input type="text" class="form-control" placeholder="Tên danh mục con....">														</div>
 																	<div class="modal-footer">
 																		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-																		<button type="button" class="btn btn-primary">Thêm mới</button>
+<!--																		<button type="button" class="btn btn-primary" ng-click="creatDirLv1(directory.directoryId)">Thêm mới</button>-->
 																	</div>
 																</div>
 															</div>
