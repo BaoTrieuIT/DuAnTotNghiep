@@ -30,7 +30,15 @@
 						<label class="col-sm-2 col-form-label">Thương Hiệu</label>
 						<div class="col-sm-10">
 							<select class="form-select" aria-label="Default select example">
-								<option ng-repeat="brand in brands">{{brand.brand_name}}</option>
+								<option ng-repeat="brand in brands">{{brand.brandName}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">Loại Sản Phẩm</label>
+						<div class="col-sm-10">
+							<select class="form-select" aria-label="Default select example">
+								<option ng-repeat="directoryLv1 in directoryLv1s">{{directoryLv1.directoryLv1Name}}</option>
 							</select>
 						</div>
 					</div>
@@ -48,27 +56,27 @@
 				<h5 class="card-title">Thông Tin Chi Tiết</h5>
 				<form class="row">
 					<div class="row mb-3 col-6">
-						<label for="" class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
+						<label class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
 						<div class="col-sm-9">
-							<input class="form-control" type="file" id="formFile">
+							<input class="form-control" type="file" >
 						</div>
 					</div>
 					<div class="row mb-3 col-6">
-						<label for="" class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
+						<label class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
 						<div class="col-sm-9">
-							<input class="form-control" type="file" id="formFile">
+							<input class="form-control" type="file" >
 						</div>
 					</div>
 					<div class="row mb-3 col-6">
-						<label for="" class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
+						<label class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
 						<div class="col-sm-9">
-							<input class="form-control" type="file" id="formFile">
+							<input class="form-control" type="file" >
 						</div>
 					</div>
 					<div class="row mb-3 col-6">
-						<label for="" class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
+						<label class="col-sm-3 col-form-label">Hình Ảnh Sản Phẩm</label>
 						<div class="col-sm-9">
-							<input class="form-control" type="file" id="formFile">
+							<input class="form-control" type="file" >
 						</div>
 					</div>
 				</form><!-- End General Form Elements -->
