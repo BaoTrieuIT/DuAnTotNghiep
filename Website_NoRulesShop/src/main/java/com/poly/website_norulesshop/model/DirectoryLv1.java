@@ -23,9 +23,7 @@ public class DirectoryLv1 {
     private Directory directory;
 
     // Getters and setters
-    @JsonIgnore
-    @OneToMany(mappedBy = "directoryLv1")
-    List<Brand> brandList;
+
     @JsonIgnore
     @OneToMany(mappedBy = "directoryLv1")
     List<DirectoryLv1Brand> directoryLv1ImageList;

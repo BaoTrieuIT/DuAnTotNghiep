@@ -501,3 +501,31 @@ create table `directory_lv1_brand`(
     foreign key (brand_id) references brand(brand_id)
 );
 
+INSERT INTO account_status (account_status_name) VALUES ('Active');
+INSERT INTO account_status (account_status_name) VALUES ('Inactive');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+INSERT INTO role (role_name) VALUES ('Admin');
+INSERT INTO role (role_name) VALUES ('User');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+INSERT INTO ranked (rank_name, minimum_point) VALUES ('Silver', 100);
+INSERT INTO ranked (rank_name, minimum_point) VALUES ('Gold', 500);
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+
+INSERT INTO gender (gender_name) VALUES ('Male');
+INSERT INTO gender (gender_name) VALUES ('Female');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+
+INSERT INTO type (type_name) VALUES ('Type A');
+INSERT INTO type (type_name) VALUES ('Type B');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+
+
+
+alter table brand
+add website_url nvarchar(50);
+

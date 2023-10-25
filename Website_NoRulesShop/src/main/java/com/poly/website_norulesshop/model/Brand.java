@@ -14,27 +14,22 @@ public class Brand implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "brand_id")
-    private Integer brand_id;
+    private Integer brandId;
+    @Column(name = "brand_name")
+    private String brandName;
+    @Column(name = "logo_url")
+    private String logoUrl;
 
-    private String brand_name;
-    private String logo_url;
-    private String website_url;
-    private String another_information;
-    private Boolean is_excepted;
+    @Column(name = "website_url")
+    private String websiteUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "directory_lv1_id")
-    private DirectoryLv1 directoryLv1;
-
+    @Column(name = "another_information")
+    private String anotherInformation;
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<BrandImage> brandImageList;
-    // Getters and setters
-
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<Product> productList;
-    @JsonIgnore
-    @OneToMany(mappedBy = "brand")
-    List<DirectoryLv1Brand> directoryLv1ImageList;
+
 }

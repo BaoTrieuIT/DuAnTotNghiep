@@ -34,7 +34,6 @@ public class BrandController {
     }
     @PostMapping
     public Brand post(@RequestBody Brand brand) {
-        brand.setIs_excepted(true);
         brandService.saveBrand(brand);
         return brand;
     }
@@ -42,7 +41,7 @@ public class BrandController {
     public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {
-                String directoryPath = "src/main/resources/static/admin/images/"; // Thay đổi thành đường dẫn của thư mục lưu trữ ảnh
+                String directoryPath = "src/main/resources/static/admin/images/";
                 Path path = Paths.get(directoryPath);
 
                 if (!Files.exists(path)) {
@@ -57,7 +56,7 @@ public class BrandController {
                 String imagePath = "images/" + fileName;
                 // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
                 Brand brand = new Brand();
-                brand.setLogo_url(imagePath);
+                brand.setLogoUrl(imagePath);
                 return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
             }else {
                     // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
@@ -68,14 +67,9 @@ public class BrandController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tải ảnh lên.");
         }
     }
-    @PutMapping("{brand_id}")
-    public Brand put(@PathVariable("brand_id") Integer id, @RequestBody Brand brand) {
+    @PutMapping("{brandId}")
+    public Brand put(@PathVariable("brandId") Integer id, @RequestBody Brand brand) {
         return brandService.update(brand);
     }
-    @DeleteMapping("{brand_id}")
-    public void delete(@PathVariable("brand_id") Integer id) {
-        Brand brand =  brandService.getBrandById(id);
-        brand.setIs_excepted(false);
-        brandService.saveBrand(brand);
-    }
+
 }
