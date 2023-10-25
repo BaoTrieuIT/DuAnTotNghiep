@@ -28,6 +28,7 @@ public class DirectoryLv1 {
     @JoinColumn(name = "directory_id")
     private Directory directory;
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "directoryLv1")
     private List<DirectoryLv1Brand> directoryLv1ImageList;

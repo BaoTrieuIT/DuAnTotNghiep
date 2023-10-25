@@ -1,4 +1,4 @@
-app.controller("brand_ctrl", function ($scope, $http) {
+app.controller("brand_ctrl", function ($scope, $http,$timeout) {
     $scope.initialize = function () {
         $http.get("/rest/manage_directory").then(resp => {
             $scope.directoryLv1_all = resp.data;
@@ -7,11 +7,11 @@ app.controller("brand_ctrl", function ($scope, $http) {
             $scope.items = resp.data
         })
     }
+    $scope.showAlert = false;
     $scope.edit = function(item){
         $scope.form = angular.copy(item);
-        $scope.form.imagePath = item.logo_url;
+        $scope.form.imagePath = item.logoUrl;
         $scope.disabled = true;
-        console.log($scope.form.is_excepted);
         $('a[href="#add-brand"]').tab('show');
     }
     $scope.create = function() {
@@ -33,29 +33,39 @@ app.controller("brand_ctrl", function ($scope, $http) {
                 console.log(successMessage);
                 console.log("Image path: " + imagePath);
                 // Cập nhật thuộc tính logo_url của thương hiệu
-                item.logo_url = imagePath;
+                item.logoUrl = imagePath;
 
                 // Tạo thương hiệu sau khi đã cập nhật logo_url
                 $http.post('/rest/manage_brand', item).then(function(resp) {
                     $scope.items.push(resp.data);
-                    $scope.reset();
-                    alert("Thêm mới thành công!");
+                    $scope.succes = "Thêm thành công";
+                    $scope.showAlert = true;
+                    $('a[href="#manager-brand"]').tab('show');
+                    $timeout(function() {
+                        $scope.showAlert = false;
+                        $scope.succes = "";
+                    }, 5000);
+                    $scope.form = {};
 
                 }).catch(function(error) {
-                    alert("Lỗi thêm mới!");
+                    $scope.succes = "Lỗi thêm!";
                     console.log("Error", error);
                 });
             }).catch(function(error) {
-                alert("Lỗi tải lên ảnh!");
+                $scope.succes = "Lỗi tải lên ảnh!";
                 console.log("Error", error);
             });
         }else{
-            alert("Bắt buộc thêm ảnh")
+            $scope.succes = "Bắt buộc thêm ảnh";
+            $timeout(function() {
+                $scope.succes = "";
+            }, 3000);
         }
 
         // Tải lên tệp ảnh (nếu có)
 
     }
+
     $scope.update = function(){
         var item = angular.copy($scope.form);
         var inputFile = document.getElementById("inputFile");
@@ -73,35 +83,50 @@ app.controller("brand_ctrl", function ($scope, $http) {
                 console.log(successMessage);
                 console.log("Image path: " + imagePath);
                 // Cập nhật thuộc tính logo_url của thương hiệu
-                item.logo_url = imagePath;
+                item.logoUrl = imagePath;
 
                 // Tạo thương hiệu sau khi đã cập nhật logo_url
-                $http.put(`/rest/manage_brand/${item.brand_id}`, item).then(resp => {
-                    var index = $scope.items.findIndex(p => p.brand_id === item.brand_id);
+                $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
+                    var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                     $scope.items[index] = item;
-                    $scope.reset();
-                    alert("Cập nhật sản phẩm thành công!");
+                    $scope.succes = "Cập nhật sản phẩm thành công!";
+
+                    $scope.showAlert = true;
                     $('a[href="#manager-brand"]').tab('show');
+                    $timeout(function() {
+                        $scope.showAlert = false;
+                        $scope.succes = "";
+                    }, 5000);
+                    $scope.disabled= false;
+                    $scope.form = {};
+
                 })
                     .catch(error => {
-                        alert("Lỗi cập nhật sản phẩm!");
+                        $scope.succes = "Lỗi cập nhật sản phẩm!";
                         console.log("Error", error);
                     });
             }).catch(function(error) {
-                alert("Loi tai len anh!");
+                $scope.succes = "Loi tai len anh!";
                 console.log("Error", error);
             });
         }else {
             // Tạo thương hiệu sau khi đã cập nhật logo_url
-            $http.put(`/rest/manage_brand/${item.brand_id}`, item).then(resp => {
-                var index = $scope.items.findIndex(p => p.brand_id === item.brand_id);
+            $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
+                var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                 $scope.items[index] = item;
-                $scope.reset();
-                alert("Cập nhật sản phẩm thành công!");
+                $scope.succes = "Cập nhật sản phẩm thành công!";
+                $scope.disabled= false;
+                $scope.showAlert = true;
                 $('a[href="#manager-brand"]').tab('show');
+                $timeout(function() {
+                    $scope.showAlert = false;
+                    $scope.succes = "";
+                }, 5000);
+                $scope.form = {};
+
             })
                 .catch(error => {
-                    alert("Lỗi cập nhật sản phẩm!");
+                    $scope.succes = "Lỗi cập nhật sản phẩm!";
                     console.log("Error", error);
                 });
         }
@@ -109,12 +134,13 @@ app.controller("brand_ctrl", function ($scope, $http) {
     }
     $scope.reset = function(){
         $scope.form = {}
+        $scope.succes="";
         $scope.disabled= false;
     }
     $scope.delete = function(item){
         if(confirm("Bạn có muốn ngừng hoạt động sản phẩm này?")){
-            $http.delete(`/rest/manage_brand/${item.brand_id}`).then(resp => {
-                item.is_excepted=false;
+            $http.delete(`/rest/manage_brand/${item.brandId}`).then(resp => {
+
                 alert("Ngừng hoạt động sản phẩm thành công!");
 
             }).catch(error => {

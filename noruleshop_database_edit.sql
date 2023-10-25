@@ -346,3 +346,7 @@ INSERT INTO type (type_name) VALUES ('Type B');
 
 
 
+alter table brand
+add website_url nvarchar(50);
+
+
