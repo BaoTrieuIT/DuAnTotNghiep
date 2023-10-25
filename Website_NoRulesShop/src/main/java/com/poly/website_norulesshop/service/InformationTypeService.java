@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.service;
 
+import com.poly.website_norulesshop.model.DirectoryLv1;
 import com.poly.website_norulesshop.model.InformationType;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface InformationTypeService {
     List<InformationType> getAllInformationTypes();
 
     void deleteInformationType(Long id);
+
+    List<InformationType> getByDirectoryLv1(DirectoryLv1 directoryLv1);
 }
