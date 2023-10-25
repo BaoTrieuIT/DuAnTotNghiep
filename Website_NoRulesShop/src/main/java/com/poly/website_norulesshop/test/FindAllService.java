@@ -103,7 +103,14 @@ public class FindAllService {
     @Autowired
     private DirectoryLv1BrandService directoryLv1BrandService;
 
+
+    @Autowired TypeService typeService;
+
+    @Autowired GenderService genderService;
+
     public void findAllDataFromServices() {
+        List<Type> typeList = typeService.getAllTypes();
+        List<Gender> genderList = genderService.getAllGenders();
         List<DirectoryLv1Brand> directoryLv1Brands = directoryLv1BrandService.getAllDirectoryLv1Brands();
         List<Account> accounts = accountService.getAllAccounts();
         List<AccountStatus> accountStatuses = accountStatusService.getAllAccountStatuses();
@@ -165,6 +172,8 @@ public class FindAllService {
         printAllValuesInList(roles);
         printAllValuesInList(rankeds);
         printAllValuesInList(vouchers);
+        printAllValuesInList(genderList);
+        printAllValuesInList(typeList);
     }
 
     public void printAllValuesInList(List<?> list) {
