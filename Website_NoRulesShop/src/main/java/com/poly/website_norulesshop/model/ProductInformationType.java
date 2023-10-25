@@ -7,15 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "product_information_type")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "product_infromation_type")
+@Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class ProductInformationType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_information_type_id")
+    @Column(name = "product_infromation_type_id")
     private Integer productInformationTypeId;
 
     @ManyToOne
@@ -24,10 +21,11 @@ public class ProductInformationType {
 
     @ManyToOne
     @JoinColumn(name = "information_type_id")
-    private InformationType informationType;
+    private InformationType information_type;
 
-    @Column(name = "information_type_value", length = 10000)
+    @Column(name = "infromation_type_value", length = 10000)
     private String informationTypeValue;
 
     // Getters and setters
+
 }

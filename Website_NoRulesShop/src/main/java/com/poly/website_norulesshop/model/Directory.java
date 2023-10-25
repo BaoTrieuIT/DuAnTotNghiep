@@ -1,5 +1,4 @@
 package com.poly.website_norulesshop.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,30 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "directory")
 public class Directory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "directory_id")
-    private Integer directoryId;
+    private Integer directory_id;
 
-    @Column(name = "directory_name")
-    private String directoryName;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "directory")
-    private List<DirectoryLv1> directoryLv1List;
+    private String directory_name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "directory")
-    private List<InformationType> informationTypes;
-
+    List<DirectoryLv1> directoryLv1List;
+    @JsonIgnore
+    @OneToMany(mappedBy = "directory")
+    List<InformationType> informationTypes;
     // Getters and setters
 }

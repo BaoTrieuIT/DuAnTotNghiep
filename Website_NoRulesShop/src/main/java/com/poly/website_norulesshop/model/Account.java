@@ -1,39 +1,42 @@
 package com.poly.website_norulesshop.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.repository.cdi.Eager;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Table(name = "account")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
-    private Integer accountId;
+    private Integer account_id;
 
     private String password;
-    private String fullName;
-    private String phoneNumber;
+    private String fullname;
+    private String phone_number;
     private String email;
     private String username;
-    private Date createDate;
+    private Date create_date;
     private Date birthday;
-    private String avatarUrl;
+    private String avatar_url;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "accounts_roles",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "ranked_id")
@@ -42,20 +45,29 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     private AccountStatus accountStatus;
-
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Address> addressList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Order> orderList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     List<Points> pointsList;
+
+    public boolean hasRole(String roleName){
+        Iterator<Role> iterator  = roles.iterator();
+        while  (iterator.hasNext()){
+            Role role = iterator.next();
+            if(role.getRole_name().equals(roleName)){
+                return true;
+            }
+
+        }
+        return false;
+    }
+
 }

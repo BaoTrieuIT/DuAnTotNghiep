@@ -1,6 +1,6 @@
-drop database norule_shop;
-create database norule_shop;
-use norule_shop;
+-- drop database norule_shop;
+-- create database norule_shop;
+-- use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
@@ -28,16 +28,11 @@ create table `account`(
     create_date date not null ,
     birthday date,
     avatar_url varchar(50) not null,
-    role_id int not null ,
     ranked_id int,
     account_status_id int,
-    foreign key (role_id) references `role`(role_id),
     foreign key (account_status_id) references `account_status`(account_status_id),
     foreign key (ranked_id) references `ranked`(ranked_id)
 );
-
-
-
 
 create table `points`(
 	points_id int  auto_increment primary key,
@@ -334,9 +329,9 @@ INSERT INTO `ranked` (rank_name, minimum_point) VALUES
     ('Gold', 5000);
 
 -- Insert data into `account` table
-INSERT INTO `account` (password, fullname, phone_number, email, username, create_date, birthday, avatar_url, role_id, ranked_id, account_status_id) VALUES
-    ('password1', 'John Doe', '1234567890', 'john@example.com', 'johndoe', '2023-09-11', '1990-01-15', 'avatar1.jpg', 2, 1, 1),
-    ('password2', 'Jane Smith', '9876543210', 'jane@example.com', 'janesmith', '2023-09-11', '1985-03-20', 'avatar2.jpg', 2, 2, 1);
+INSERT INTO `account` (password, fullname, phone_number, email, username, create_date, birthday, avatar_url, ranked_id, account_status_id) VALUES
+    ('password1', 'John Doe', '1234567890', 'john@example.com', 'johndoe', '2023-09-11', '1990-01-15', 'avatar1.jpg', 1, 1),
+    ('password2', 'Jane Smith', '9876543210', 'jane@example.com', 'janesmith', '2023-09-11', '1985-03-20', 'avatar2.jpg', 2, 1);
 
 -- delete this data
 -- Insert data into `address_type` table
@@ -501,3 +496,14 @@ create table `directory_lv1_brand`(
     foreign key (brand_id) references brand(brand_id)
 );
 
+create table `accounts_roles`(
+	account_id int,
+    role_id int,
+    FOREIGN KEY (account_id) REFERENCES account(account_id),
+    FOREIGN KEY (role_id) REFERENCES role(role_id)
+);
+
+INSERT INTO `accounts_roles` VALUES 
+(1,1),
+(2,2);
+SELECt * from accounts_roles

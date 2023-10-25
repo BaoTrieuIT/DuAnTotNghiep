@@ -7,6 +7,7 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 @Getter
 @Setter
@@ -17,46 +18,30 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Integer productId;
-
-    @Column(name = "product_name")
-    private String productName;
-
-    @Column(name = "product_rating")
-    private Float productRating;
-
-    @Column(name = "create_date")
-    private Date createDate;
-
-    @Column(name = "is_remove")
-    private Boolean isRemoved;
-
-    @Column(name = "product_description")
-    private String productDescription;
-
-    @Column(name = "price")
+    private Integer product_id;
+    private String product_name;
+    private Float product_rating;
+    private Date create_date;
+    private Boolean is_remove;
+    private String product_description;
     private Double price;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
-
     @JsonIgnore
+    // Getters and setters
     @OneToMany(mappedBy = "product")
     List<CategoryQuantity> categoryQuantityList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<OrderDetail> orderDetailList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductDiscount> productDiscounts;
-
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductImage> productImageList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
