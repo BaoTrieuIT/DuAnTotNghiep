@@ -1,5 +1,4 @@
 package com.poly.website_norulesshop.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,39 +9,21 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "voucher")
 public class Voucher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "voucher_id")
-    private Integer voucherId;
+    private Integer voucher_id;
 
-    @Column(name = "voucher_value")
-    private Float voucherValue;
-
-    @Column(name = "voucher_code")
-    private String voucherCode;
-
-    @Column(name = "valid_from")
-    private Date validFrom;
-
-    @Column(name = "valid_to")
-    private Date validTo;
-
-    @Column(name = "minimize_order_amount")
-    private Long minimizeOrderAmount;
-
-    @Column(name = "quantity_available")
-    private Integer quantityAvailable;
-
+    private Float voucher_value;
+    private String voucher_code;
+    private Date valid_from;
+    private Date valid_to;
+    private Long minimize_order_amount;
+    private Integer quantity_available;
     @JsonIgnore
     @OneToMany(mappedBy = "voucher")
-    private List<Order> orderList;
-
-    // Getters and setters
+    List<Order> orderList;
 }

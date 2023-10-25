@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("home")
 public class AboutUsController {
 
-    @Autowired
-    FindAllService findAllService;
+//    @Autowired
+//    FindAllService findAllService;
     @RequestMapping("about-us")
     public String index (){
-        findAllService.findAllDataFromServices();
         return "user/about_us";
     }
 }

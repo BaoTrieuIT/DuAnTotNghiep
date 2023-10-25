@@ -1,5 +1,4 @@
 package com.poly.website_norulesshop.model;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,29 +7,20 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id")
     private Long addressId;
 
-    @Column(name = "recipient_name")
-    private String recipientName;
+    private String recipient_name;
 
-    @Column(name = "recipient_phone_number")
-    private String recipientPhoneNumber;
+    private String recipient_phone_number;
 
-    @Column(name = "general_address")
-    private String generalAddress;
+    private String general_address;
+    private String specific_address;
 
-    @Column(name = "specific_address")
-    private String specificAddress;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

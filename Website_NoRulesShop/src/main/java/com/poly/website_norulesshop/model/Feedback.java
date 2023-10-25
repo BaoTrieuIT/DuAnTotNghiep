@@ -1,5 +1,4 @@
 package com.poly.website_norulesshop.model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,26 +9,16 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "feedback")
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "feedback_id")
-    private Integer feedbackId;
+    private Integer feedback_id;
 
-    @Column(name = "feedback_rating")
-    private Integer feedbackRating;
-
-    @Column(name = "comment")
+    private Integer feedback_rating;
     private String comment;
-
-    @Column(name = "feedback_time")
-    private Date feedbackTime;
+    private Date feedback_time;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -39,9 +28,8 @@ public class Feedback {
     @JoinColumn(name = "order_detail_id")
     private OrderDetail orderDetail;
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "feedback")
-    private List<FeedbackImage> feedbackImageList;
-
-    // Getters and setters
+    List<FeedbackImage> feedbackImageList;
 }

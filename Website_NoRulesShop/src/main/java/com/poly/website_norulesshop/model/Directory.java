@@ -1,28 +1,23 @@
 package com.poly.website_norulesshop.model;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
-@Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "directory")
 public class Directory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "directory_id")
-    private Integer directoryId;
+    private Integer directory_id;
 
-    @Column(name = "directory_name")
-    private String directoryName;
+    private String directory_name;
 
     @ManyToOne
     @JoinColumn(name = "gender_id")

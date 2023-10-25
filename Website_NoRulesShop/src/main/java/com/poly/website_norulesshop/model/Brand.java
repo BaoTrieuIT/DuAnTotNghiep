@@ -1,11 +1,12 @@
 package com.poly.website_norulesshop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.io.Serializable;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @Entity
@@ -14,7 +15,7 @@ public class Brand implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "brand_id")
-    private Integer brandId;
+    private Integer brand_id;
 
     @Column(name = "brand_name")
     private String brandName;
@@ -28,6 +29,7 @@ public class Brand implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<BrandImage> brandImageList;
+    // Getters and setters
 
     @JsonIgnore
     @OneToMany(mappedBy = "brand")

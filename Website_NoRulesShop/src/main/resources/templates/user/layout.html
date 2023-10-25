@@ -1,68 +1,76 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      th:fragment="user(view)">
+      xmlns:th="http://www.thymeleaf.org" th:fragment="user(view)"
+
+>
+
 <head>
 
-	<meta charset="utf-8"/>
-	<meta name="viewport"
-	      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-	<meta name="description"
-	      content=""/>
-	<meta name="author"
-	      content=""/>
-	<link rel="shortcut icon"
-	      type="image/x-icon"
-	      href="/user/img/favicon.ico"/>
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900"
-	      rel="stylesheet"/>
-	<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,900"
-	      rel="stylesheet"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description"
+          content=""/>
+    <meta name="author"
+          content=""/>
+    <link rel="shortcut icon"
+          type="image/x-icon"
+          href="/user/img/favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900"
+          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,900"
+          rel="stylesheet"/>
 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	      rel="stylesheet"/>
-	<!-- Bootstrap core CSS -->
-	<link href="/user/vendor/bootstrap/css/bootstrap.css"
-	      rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="/user/vendor/bootstrap/css/bootstrap.css"
+          rel="stylesheet"/>
 
-	<!-- Bootstrap core CSS -->
-	<link href="/user/css/styles.css"
-	      rel="stylesheet"/>
-	<link href="/user/css/animate.css"
-	      rel="stylesheet"/>
-	<link href="/user/css/owl-carousel.css"
-	      rel="stylesheet"/>
-	<link href="/user/css/lightbox.css"
-	      rel="stylesheet"/>
+    <!-- Bootstrap core CSS -->
+    <link href="/user/css/styles.css"
+          rel="stylesheet"/>
+    <link href="/user/css/animate.css"
+          rel="stylesheet"/>
+    <link href="/user/css/owl-carousel.css"
+          rel="stylesheet"/>
+    <link href="/user/css/lightbox.css"
+          rel="stylesheet"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+
 </head>
-<body>
-	<header th:insert="~{/user/menu/header.html :: header}"></header>
+<body ng-app="app">
+<header th:insert="~{/user/menu/header.html :: header}"></header>
 
-	<main th:replace="${view}"></main>
+<main th:replace="${view}"></main>
 
-	<footer th:insert="~{/user/menu/footer.html :: footer}"></footer>
+<footer th:insert="~{/user/menu/footer.html :: footer}"></footer>
 
-	<div th:insert="~{/user/modals/login_modal.html :: login_modal}"></div>
-	<div th:insert="~{/user/modals/register_modal.html :: register_modal}"></div>
-	<div th:insert="~{/user/modals/product-view_modal.html :: product-view}"></div>
-	<div th:insert="~{/user/modals/cart-pop_modal.html :: cart-pop}"></div>
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="/user/js/jquery.min.js"></script>
-	<script src="/user/js/bootstrap.min.js"></script>
-	<script src="/user/js/owl.carousel.min.js"></script>
-	<script src="/user/js/custom.js"></script>
-	<script src="/user/js/parallax.js"></script>
-	<script src="/user/js/lightbox-2.6.min.js"></script>
-	<script src="/user/js/ResizeSensor.min.js"></script>
-	<script src="/user/js/theia-sticky-sidebar.min.js"></script>
-	<script src="/user/js/inview.js"></script>
-	<script src="/user/js/cookiealert.js"></script>
-	<script src="/user/js/jquery.countdown.min.js"></script>
-	<script src="/user/js/masonry.pkgd.min.js"></script>
-	<script src="/user/js/imagesloaded.pkgd.min.js"></script>
-	<script src="/user/js/jquery.zoom.min.js"></script>
-	<script src="/user/js/jquery.lazy.min.js"></script>
+<div th:insert="~{/user/modals/login_modal.html :: login_modal}"></div>
+<div th:insert="~{/user/modals/register_modal.html :: register_modal}"></div>
+<div th:insert="~{/user/modals/product-view_modal.html :: product-view}"></div>
+<div th:insert="~{/user/modals/cart-pop_modal.html :: cart-pop}"></div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/angular-1.8.2/angular.js"></script>
+<script src="/angular-1.8.2/angular-route.js"></script>
+<script src="/user/js/jquery.min.js"></script>
+<script src="/user/js/bootstrap.min.js"></script>
+<script src="/user/js/owl.carousel.min.js"></script>
+<script src="/user/js/custom.js"></script>
+<script src="/user/js/parallax.js"></script>
+<script src="/user/js/lightbox-2.6.min.js"></script>
+<script src="/user/js/ResizeSensor.min.js"></script>
+<script src="/user/js/theia-sticky-sidebar.min.js"></script>
+<script src="/user/js/inview.js"></script>
+<script src="/user/js/cookiealert.js"></script>
+<script src="/user/js/jquery.countdown.min.js"></script>
+<script src="/user/js/masonry.pkgd.min.js"></script>
+<script src="/user/js/imagesloaded.pkgd.min.js"></script>
+<script src="/user/js/jquery.zoom.min.js"></script>
+<script src="/user/js/jquery.lazy.min.js"></script>
+<script src="/user/js/app.js"></script>
 </body>
 </html>
