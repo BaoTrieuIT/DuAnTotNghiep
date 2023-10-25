@@ -74,10 +74,7 @@ public class BrandController {
 
     @DeleteMapping("{brand_id}")
     public void delete(@PathVariable("brand_id") Integer id) {
-        Brand brand =  brandService.getBrandById(id);
-//        fix this line
-//        brand.setIs_excepted(false);
-        brandService.saveBrand(brand);
+
     }
 
 }

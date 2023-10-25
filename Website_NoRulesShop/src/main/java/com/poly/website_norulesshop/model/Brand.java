@@ -18,23 +18,16 @@ public class Brand implements Serializable {
 
     @Column(name = "brand_name")
     private String brandName;
+
     @Column(name = "logo_url")
     private String logoUrl;
 
     @Column(name = "website_url")
     private String websiteUrl;
 
-    @Column(name = "brand_name")
-    private String brandName;
-
-    @Column(name = "logo_url")
-    private String logoUrl;
-
     @Column(name = "another_information")
     private String anotherInformation;
 
-    @Column(name = "another_information")
-    private String anotherInformation;
     @JsonIgnore
     @OneToMany(mappedBy = "brand")
     List<BrandImage> brandImageList;

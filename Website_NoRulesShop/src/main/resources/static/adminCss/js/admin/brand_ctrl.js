@@ -44,7 +44,7 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout) {
                     $timeout(function() {
                         $scope.showAlert = false;
                         $scope.succes = "";
-                    }, 5000);
+                    }, 2000);
                     $scope.form = {};
 
                 }).catch(function(error) {
@@ -96,7 +96,7 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout) {
                     $timeout(function() {
                         $scope.showAlert = false;
                         $scope.succes = "";
-                    }, 5000);
+                    }, 2000);
                     $scope.disabled= false;
                     $scope.form = {};
 
@@ -121,7 +121,7 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout) {
                 $timeout(function() {
                     $scope.showAlert = false;
                     $scope.succes = "";
-                }, 5000);
+                }, 2000);
                 $scope.form = {};
 
             })
