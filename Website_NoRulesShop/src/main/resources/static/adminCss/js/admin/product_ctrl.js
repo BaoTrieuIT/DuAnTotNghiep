@@ -98,25 +98,19 @@ app.controller("product_ctrl", function($scope, $http){
         })
     }
     $scope.HiddenProDuct = function (productId){
-        if(confirm("Do you want to hidden this product ?")){
+
             $http.get("/rest/product_all/hiddenProduct?productId="+productId).then(resp => {
                 $scope.items = resp.data
-                alert("Successfully !");
             }).catch(error => {
-
             })
-        }
+
     }
     $scope.ActiveProduct = function (productId){
-        if(confirm("Do you want to display this product ?")){
             $http.get("/rest/product_all/activeProduct?productId="+productId).then(resp => {
                 $scope.items = resp.data
-                alert("Successfully !");
             }).catch(error => {
-
             })
         }
-    }
 
 
     $scope.initialize();

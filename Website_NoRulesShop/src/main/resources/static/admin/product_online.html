@@ -12,6 +12,7 @@
             <th scope="col">Ngày tạo</th>
             <th scope="col">Trạng thái</th>
             <th scope="col">Thông tin thêm</th>
+            <th scope="col">Brand</th>
             <th scope="col">Giá</th>
             <th scope="col">Thao tác</th>
         </tr>
@@ -24,17 +25,36 @@
             <td style="height: 130px">{{item.createDate}}</td>
             <td style="height: 130px">{{item.isRemoved}}</td>
             <td style="height: 130px">{{item.productDescription}}</td>
+            <td style="height: 130px">{{item.brand.brandId}}</td>
             <td style="height: 130px">{{item.price}}</td>
             <td>
                 <button style="width: 55px; font-size: 11px; " type="button" class="btn btn-outline-secondary">Edit</button>
-                <div class="dropdown">
-                    <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>
-                    <div class="dropdown-options">
-                        <a href="#">Xem thêm</a>
-                        <a href="" ng-click="HiddenProDuct(item.productId)">Ẩn</a>
+
+<!--                <div class="dropdown">-->
+<!--                   <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>-->
+<!--                   <div class="dropdown-options">-->
+<!--                       <a href="#">Xem thêm</a>-->
+<!--                       <a href="" ng-click="HiddenProDuct(item.productId)">Ẩn</a>-->
+<!--                    </div>-->
+<!--               </div>-->
+                <button style="font-size: 11px; width: 55px; margin-top: 5px" type="button" class="btn btn-outline-secondary">Copy</button>
+                <button type="button" class="btn btn-secondary" style="margin-top: 8px; width: 55px" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                    Ẩn
+                </button>
+                <div class="modal fade" id="verticalycentered" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"> Bạn có chắc muốn ẩn sản phẩm này ?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  ng-click="HiddenProDuct(item.productId)">Xác nhận</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button style="font-size: 11px; width: 55px; margin-top: 5px" type="button" class="btn btn-outline-secondary">Copy</button>
             </td>
         </tr>
 

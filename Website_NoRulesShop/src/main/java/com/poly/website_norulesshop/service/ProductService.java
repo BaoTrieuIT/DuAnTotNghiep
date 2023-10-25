@@ -20,6 +20,7 @@ public interface ProductService {
 
 
 
+
     List<Product> isHidden();
     List<Product> isActive();
     List<Product> isSoldOut();
