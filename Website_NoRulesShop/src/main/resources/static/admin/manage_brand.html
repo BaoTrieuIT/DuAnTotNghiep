@@ -1,5 +1,4 @@
 <main id="main" class="main">
-
     <div class="pagetitle">
         <h1>Quản lý thương hiệu</h1>
         <nav>
@@ -92,21 +91,25 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">THÊM THƯƠNG HIỆU MỚI</h5>
-
-
-                                        <form method="post"  enctype="multipart/form-data">
+                                        <div class="alert alert-danger alert-dismissible fade show" ng-show="showAlert1" role="alert" style="position: fixed; top: 148px; right: 10px;">
+                                            <i class="bi bi-exclamation-octagon me-1"></i>
+                                            {{succes1}}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        <form method="post" name="myForm"  enctype="multipart/form-data">
                                             <div class="row mb-3">
                                                 <input ng-model="form.brandId" type="text" hidden="hidden" class="form-control">
-                                                <label class="col-sm-2 col-form-label">Tên thương
-                                                    hiệu</label>
+                                                <label class="col-sm-2 col-form-label">Tên thương hiệu</label>
                                                 <div class="col-sm-10">
-                                                    <input ng-model="form.brandName" type="text" class="form-control">
+                                                    <input  name="brandName" ng-model="form.brandName" type="text" class="form-control"  required>
+                                                    <span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.brandName.$touched && myForm.brandName.$invalid">Tên thương hiệu không được để trống.</span>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Website thương hiệu</label>
                                                 <div class="col-sm-10">
-                                                    <input ng-model="form.websiteUrl" type="text" class="form-control">
+                                                    <input name = "websiteUrl" ng-model="form.websiteUrl" type="text" class="form-control" required>
+                                                    <span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.websiteUrl.$touched  && myForm.websiteUrl.$invalid">Website thương hiệu không được để trống.</span>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -119,7 +122,7 @@
                                                            class="form-control-file text-primary font-weight-bold"
                                                            id="inputFile" accept="image/*" onchange="readUrl(this)"
                                                            data-title="+"
-                                                           style="display: none;">
+                                                           style="display: none;" required>
                                                         <img id="previewImage" src="{{form.logoUrl}}" alt="Image" style=" max-height: 100px;border: 1px solid #dee2e6;padding: 17px;border-radius: 5px;">
                                                     <p class="add-img">Hình ảnh</p>
                                                 </div>
@@ -129,7 +132,8 @@
                                                 <label class="col-sm-2 col-form-label">Thông tin
                                                     thêm</label>
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control" ng-model="form.anotherInformation" style="height: 100px"></textarea>
+                                                    <textarea class="form-control" name="anotherInformation" ng-model="form.anotherInformation" style="height: 100px" required></textarea>
+                                                    <span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.anotherInformation.$touched  && myForm.anotherInformation.$invalid">Thông tin thương hiệu không được để trống.</span>
                                                 </div>
                                             </div>
 
