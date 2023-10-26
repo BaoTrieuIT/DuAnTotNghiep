@@ -1,6 +1,6 @@
--- drop database norule_shop;
--- create database norule_shop;
--- use norule_shop;
+--  drop database norule_shop;
+--  create database norule_shop;
+--  use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
@@ -322,20 +322,21 @@ INSERT INTO `ranked` (rank_name, minimum_point) VALUES
 
 -- Insert data into `account` table
 INSERT INTO `account` (password, fullname, phone_number, email, username, create_date, birthday, avatar_url, ranked_id, account_status_id) VALUES
-    ('password1', 'John Doe', '1234567890', 'john@example.com', 'johndoe', '2023-09-11', '1990-01-15', 'avatar1.jpg', 1, 1),
-    ('password2', 'Jane Smith', '9876543210', 'jane@example.com', 'janesmith', '2023-09-11', '1985-03-20', 'avatar2.jpg', 2, 1);
+    ('$2a$10$G0oBI5UCm4KeAvVI6/BEQ.lZhmBzbf4D.PeURGaLP3rFVbtwPfzLK', 'John Doe', '1234567890', 'john@example.com', 'johndoe', '2023-09-11', '1990-01-15', 'avatar1.jpg', 1, 1),
+    ('$2a$10$S9FZWpmWtF2hrpHpCNPz8eQ8xDxPth/LFpbk.aYVB/.HwZyb.49yy', 'Jane Smith', '9876543210', 'jane@example.com', 'janesmith', '2023-09-11', '1985-03-20', 'avatar2.jpg', 2, 1);
 
 -- delete this data
 -- Insert data into `address_type` table
 -- INSERT INTO `address_type` (Address_type_name) VALUES
 --     ('Home'),
 --     ('Work');
-
+INSERT INTO gender (gender_name) VALUES ('Male');
+INSERT INTO gender (gender_name) VALUES ('Female');
 -- Insert data into `directory` table
-INSERT INTO `directory` (directory_name) VALUES
-    ('Main Directory'),
-    ('Sub Directory 1'),
-    ('Sub Directory 2');
+INSERT INTO `directory` (directory_name, gender_id) VALUES
+    ('Main Directory',1),
+    ('Sub Directory 1',1),
+    ('Sub Directory 2',1);
 
 -- Insert data into `directory_lv1` table
 INSERT INTO `directory_lv1` (directory_lv1_name, directory_id) VALUES
@@ -367,8 +368,7 @@ INSERT INTO role (role_name) VALUES ('User');
 
 
 
-INSERT INTO gender (gender_name) VALUES ('Male');
-INSERT INTO gender (gender_name) VALUES ('Female');
+
 -- Thêm các dòng dữ liệu khác nếu cần thiết
 
 
@@ -390,4 +390,4 @@ create table `accounts_roles`(
 INSERT INTO `accounts_roles` VALUES 
 (1,1),
 (2,2);
-SELECt * from accounts_roles
+SELECt * from account

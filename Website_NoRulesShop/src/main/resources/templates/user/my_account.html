@@ -26,10 +26,10 @@
                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group required-field">
-                          <label for="username">Username<span
+                          <label for="username">Your username<span
                                   class="required">*</span></label>
                           <input type="text" class="form-control" id="username"
-                                 name="username" required="">
+                                 name="username" th:value="${acc.username}" required="">
                         </div>
                         <!-- End .form-group -->
                       </div>
@@ -40,7 +40,7 @@
                           <label for="fullname">Your Name<span
                                   class="required">*</span></label>
                           <input type="text" class="form-control" id="fullname"
-                                 name="fullname">
+                                 name="fullname" th:value="${acc.fullname}">
                         </div>
                         <!-- End .form-group -->
                       </div>
@@ -57,17 +57,17 @@
                 <div class="form-group required-field">
                   <label for="acc-email">Your Email</label>
                   <input type="email" class="form-control" id="acc-email" name="acc-email"
-                         required="">
+                         required="" th:value="${acc.email}">
                 </div>
                 <div class="form-group required-field">
                   <label for="phone_number">Your Phonenumber</label>
                   <input type="text" class="form-control" id="phone_number" name="phone_number"
-                         required="">
+                         required="" th:value="${acc.phone_number}">
                 </div>
                 <div class="form-group required-field">
                   <label for="birthday">Your Birthday</label>
                   <input type="date" class="form-control" id="birthday" name="birthday"
-                         required="">
+                         required="" th:value="${#dates.format(acc.birthday, 'yyyy-MM-dd')}">
                 </div>
                 <!-- End .form-group -->
                 <div class="custom-control custom-checkbox">
@@ -129,9 +129,9 @@
                 <h3 class="widget-title">Your Avatar</h3>
                 <div class="personal-image d-flex justify-content-center">
                   <label class="label">
-                    <input type="file" />
+                    <input type="file" name="avatar_url"/>
                     <figure class="personal-figure">
-                      <img src="https://avatars1.githubusercontent.com/u/11435231?s=460&v=4" class="personal-avatar" alt="avatar">
+                      <img th:src="${imagePath}" class="personal-avatar" alt="avatar">
                       <figcaption class="personal-figcaption">
                         <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
                       </figcaption>

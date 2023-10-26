@@ -80,7 +80,10 @@ public class SecurityConfig {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .successHandler((request, response, authentication) -> {
-
+                            String username = authentication.getName();
+                            Account acc = accountService.getAccountByUsername(username);
+                            session.setAttribute("acc", acc);
+                            System.out.println(acc.getFullname());
                             response.sendRedirect("/home/index");
                         })
 
