@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.RankedRepository;
-import com.poly.website_norulesshop.model.Ranked;
+import com.poly.website_norulesshop.entity.Ranked;
 import com.poly.website_norulesshop.service.RankedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

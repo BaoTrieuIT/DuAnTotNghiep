@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.CategoryQuantity;
+import com.poly.website_norulesshop.entity.CategoryQuantity;
 
 import java.util.List;
 

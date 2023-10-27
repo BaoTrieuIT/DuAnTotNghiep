@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.ProductDiscount;
+import com.poly.website_norulesshop.entity.ProductDiscount;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

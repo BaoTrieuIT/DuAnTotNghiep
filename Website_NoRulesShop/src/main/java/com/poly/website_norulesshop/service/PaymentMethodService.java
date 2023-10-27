@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.PaymentMethod;
+import com.poly.website_norulesshop.entity.PaymentMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.collection;
 
-import com.poly.website_norulesshop.model.Account;
-import com.poly.website_norulesshop.model.Role;
+import com.poly.website_norulesshop.entity.Account;
+import com.poly.website_norulesshop.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

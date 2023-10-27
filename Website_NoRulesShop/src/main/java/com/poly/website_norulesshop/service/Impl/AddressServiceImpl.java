@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.AddressRepository;
-import com.poly.website_norulesshop.model.Address;
+import com.poly.website_norulesshop.entity.Address;
 import com.poly.website_norulesshop.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

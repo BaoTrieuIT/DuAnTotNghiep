@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.Ranked;
+import com.poly.website_norulesshop.entity.Ranked;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

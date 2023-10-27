@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.VoucherRepository;
-import com.poly.website_norulesshop.model.Voucher;
+import com.poly.website_norulesshop.entity.Voucher;
 import com.poly.website_norulesshop.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

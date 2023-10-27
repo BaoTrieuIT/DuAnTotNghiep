@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.CategoryLevel2;
+import com.poly.website_norulesshop.entity.CategoryLevel2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

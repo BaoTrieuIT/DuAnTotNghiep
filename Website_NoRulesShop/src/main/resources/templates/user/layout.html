@@ -36,8 +36,10 @@
           rel="stylesheet"/>
     <link href="/user/css/lightbox.css"
           rel="stylesheet"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link href="/user/css/otp_verification.css"
+          rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          rel="stylesheet"/>
 
 </head>
 <body ng-app="app">
@@ -47,8 +49,7 @@
 
 <footer th:insert="~{/user/menu/footer.html :: footer}"></footer>
 
-<div th:insert="~{/user/modals/login_modal.html :: login_modal}"></div>
-<div th:insert="~{/user/modals/register_modal.html :: register_modal}"></div>
+<div th:insert="~{/user/modals/otp-verification_modal.html :: otp-verification}"></div>
 <div th:insert="~{/user/modals/product-view_modal.html :: product-view}"></div>
 <div th:insert="~{/user/modals/cart-pop_modal.html :: cart-pop}"></div>
 <!-- Bootstrap core JavaScript
@@ -72,5 +73,6 @@
 <script src="/user/js/jquery.zoom.min.js"></script>
 <script src="/user/js/jquery.lazy.min.js"></script>
 <script src="/user/js/app.js"></script>
+<script src="/user/js/otp_verification.js"></script>
 </body>
 </html>

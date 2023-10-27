@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.ProductImageRepository;
-import com.poly.website_norulesshop.model.ProductImage;
+import com.poly.website_norulesshop.entity.ProductImage;
 import com.poly.website_norulesshop.service.ProductImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

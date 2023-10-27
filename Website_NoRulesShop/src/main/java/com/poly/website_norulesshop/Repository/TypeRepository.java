@@ -1,7 +1,7 @@
 
 package com.poly.website_norulesshop.Repository;
 
-import com.poly.website_norulesshop.model.Type;
+import com.poly.website_norulesshop.entity.Type;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

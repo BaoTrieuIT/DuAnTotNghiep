@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.PaymentMethodRepository;
-import com.poly.website_norulesshop.model.PaymentMethod;
+import com.poly.website_norulesshop.entity.PaymentMethod;
 import com.poly.website_norulesshop.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

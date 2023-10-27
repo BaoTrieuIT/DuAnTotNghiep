@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="otp-verification">
+    <div class="modal fade" id="modalOTPVerification" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-medium text-left">OTP Verification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="">
+                    <div class="modal-body mx-3">
+                        <div><span>A code has been sent to</span> <small>*******9897</small></div>
+                        <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+                            <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1"/>
+                            <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1"/>
+                            <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1"/>
+                            <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1"/>
+                            <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1"/>
+                            <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1"/>
+                        </div>
+                        <div class="text-center mt-2">
+                            <span class="d-block" id="countdown"></span>
+                            <span class="d-block" id="resend"></span>
+                        </div>
+                        <div class="checkbox-link d-flex justify-content-between">
+                            <div class="right-col"><a href="#">Update Email</a></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@
                     <div class="nav-left float-left">
                         <div class="ttheader-service">Wants to explore Upcoming Deals on Weekends?</div>
                     </div>
-                    <div class="nav-right float-right d-flex">aspetur autodit autfugit
+                    <div class="nav-right float-right d-flex">
                         <div class="ttheader-mail">
                             <a href="mailto:demo.store@gmail.com">demo.store@gmail.com</a>
                         </div>
@@ -106,7 +106,6 @@
                                     <ul sec:authorize="isAuthenticated()">
                                         <li>
                                             <a th:href="@{/admin/index}">Admin</a>
-                                            <a th:href="@{/admin/index}">{{$auth.user.fullname}}</a>
                                         </li>
                                         <li>
                                             <a href="my-account"
@@ -123,10 +122,9 @@
                                     </ul>
                                     <ul sec:authorize="!isAuthenticated()">
                                         <li>
-                                            <a href="#"
-                                               class="modal-view button"
-                                               data-toggle="modal"
-                                               data-target="#modalRegisterForm">Register
+                                            <a href="sign-up"
+                                               class="text-capitalize">
+                                                Register
                                             </a>
                                         </li>
                                         <li>

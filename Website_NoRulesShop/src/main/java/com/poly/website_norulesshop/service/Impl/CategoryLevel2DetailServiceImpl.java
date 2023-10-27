@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.CategoryLevel2DetailRepository;
-import com.poly.website_norulesshop.model.CategoryLevel2Detail;
+import com.poly.website_norulesshop.entity.CategoryLevel2Detail;
 import com.poly.website_norulesshop.service.CategoryLevel2DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

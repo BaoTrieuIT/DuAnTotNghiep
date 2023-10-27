@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">>
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+</head>
+<body>
+<nav aria-label="breadcrumb" class="w-100 float-left">
+    <ol class="breadcrumb parallax justify-content-center"
+        data-source-url="/user/img/banner/parallax.jpg"
+        style="background-image: url('/user/img/banner/parallax.jpg');
+        background-position: 50% 0.809717%;">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Register</li>
+    </ol>
+</nav>
+<div class="main-content w-100 float-left blog-list">
+    <div class="container ">
+        <div class="row">
+            <div class="products-grid col-xl-9 col-lg-8 order-lg-2 ">
+                <div class="row">
+                    <div class="col-lg-12 order-lg-last account-content">
+                        <h4>Sign up</h4>
+                        <form th:action="@{/home/sign-up}" class="myacoount-form" th:object="${item}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group required-field">
+                                                <label for="username">Your username <span
+                                                        class="required">*</span></label>
+                                                <input type="text" class="form-control" id="username"
+                                                       name="username" th:field="*{username}" required="">
+                                            </div>
+                                            <!-- End .form-group -->
+                                        </div>
+                                        <!-- End .col-md-4 -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group required-field">
+                                                <label for="email">Your email <span
+                                                        class="required">*</span></label>
+                                                <input type="text" class="form-control" id="email"
+                                                       name="email" th:field="*{email}" required="">
+                                            </div>
+                                            <!-- End .form-group -->
+                                        </div>
+                                        <!-- End .col-md-4 -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group required-field">
+                                                <label for="phone_number">Your number <span
+                                                        class="required">*</span></label>
+                                                <input type="text" class="form-control" id="phone_number"
+                                                       name="phone_number" th:field="*{phone_number}" required="">
+                                            </div>
+                                            <!-- End .form-group -->
+                                        </div>
+                                        <!-- End .col-md-4 -->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group required-field">
+                                                <label for="password">Your password <span
+                                                        class="required">*</span></label>
+                                                <input type="password" class="form-control" id="password"
+                                                       name="password" th:field="*{password}" required="">
+                                            </div>
+                                            <!-- End .form-group -->
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group required-field">
+                                                <label for="re_password">Repeat password <span
+                                                        class="required">*</span></label>
+                                                <input type="password" class="form-control" id="re_password"
+                                                       name="re_password" required="">
+                                            </div>
+                                            <!-- End .form-group -->
+                                        </div>
+                                        <!-- End .col-md-4 -->
+                                    </div>
+                                    <!-- End .row -->
+                                </div>
+                                <!-- End .col-sm-11 -->
+                            </div>
+                            <!-- End .form-group -->
+                            <div class="col-sm-5">
+                                <div class="checkbox-link d-flex justify-content-between">
+
+                                    <div class="right-col">
+                                        Already have an account ?
+                                        <a class="text-primary" href="sign-in">Sign in</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- End .custom-checkbox -->
+
+                            <div class="form-footer ">
+
+                                <div class="form-footer-center">
+                                    <button type="submit" formaction="/home/sign-up/create" class="btn btn-primary btn-primary">Sign up</button>
+
+                                </div>
+                                <!-- <div class="col"> -->
+
+                                <div class="d-flex pt-2">
+                                    <div class="d-flex flex-column align-items-center justify-content-center">
+                                        <div>or Sign up using: </div></div>
+                                    <a href="#" class="login100-social-item bg1">
+                                        <i class="fa-brands fa-facebook"></i>
+                                    </a>
+                                    </a>
+                                    <a href="#" class="login100-social-item bg3">
+                                        <i class="fa-brands fa-google"></i>
+                                    </a>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

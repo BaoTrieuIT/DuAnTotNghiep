@@ -1,12 +1,6 @@
 package com.poly.website_norulesshop.test;
 
-import com.poly.website_norulesshop.model.Account;
-import com.poly.website_norulesshop.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.poly.website_norulesshop.model.*;
-
-import java.util.List;
 
 @Service
 public class FindAllService {
