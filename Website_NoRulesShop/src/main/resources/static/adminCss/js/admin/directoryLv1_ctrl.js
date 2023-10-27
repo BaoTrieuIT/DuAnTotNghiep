@@ -1,31 +1,51 @@
-app.controller("directoryLv1_ctrl", function($scope, $http, DataSharingService){
+app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService) {
     var direcId = null
     // $scope.directoryId = DataSharingService.getDirectoryId()
-    $scope.$watch(function (){
+    $scope.$watch(function () {
         return DataSharingService.getDirectoryId()
-    }, function(newDirectoryId, oldDirectoryId){
+    }, function (newDirectoryId, oldDirectoryId) {
         if (newDirectoryId !== oldDirectoryId) {
-            console.log(newDirectoryId)
             // Gọi lại API khi directoryId thay đổi
             direcId = newDirectoryId
         }
     });
 
 
-    $scope.initialize = function(direcId){
-        $http.get("/rest/manage_directory/Directory?directoryId="+ direcId).then(resp => {
-            $scope.ListdirectoryLv1 = resp.data;
-        })
+    $scope.initialize = function (direcId) {
+        var directoryID = direcId;
+        if (directoryID == undefined) {
+            $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
+                $scope.ListdirectoryLv1 = resp.data;
+            })
+        } else {
+            $http.get("/rest/manage_directory/Directory?directoryId=" + directoryID).then(resp => {
+                $scope.ListdirectoryLv1 = resp.data;
+            })
+        }
+
+    }
+    $scope.select = function (direcId) {
+        console.log(direcId)
+
+        // var dlv1 = angular.copy($scope.form)
+        // $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
+        //     $scope.ListdirectoryLv1.push(resp.data);
+        //     $scope.form = {};
+        //     alert("Thêm mới thành công!");
+        // }).catch(error => {
+        //     alert("Lỗi thêm mới!");
+        //     console.log("Error", error);
+        // });
     }
 
-    $scope.creatDirLv1 = function(direcId){
+    $scope.creatDirLv1 = function (direcId) {
         console.log($scope.ListdirectoryLv1)
         console.log(direcId)
         console.log($scope.directoryLv1Name)
         var dlv1 = angular.copy($scope.form)
-        $http.post('/rest/directoryLv1/'+ direcId,dlv1).then(resp => {
+        $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
             $scope.ListdirectoryLv1.push(resp.data);
-            $scope.form= {};
+            $scope.form = {};
             alert("Thêm mới thành công!");
         }).catch(error => {
             alert("Lỗi thêm mới!");

@@ -22,25 +22,39 @@ public class DirectoryController {
     DirectoryService directoryService;
     @Autowired
     DirectoryLv1Service directoryLv1Service;
+
     @GetMapping
     public List<Directory> getAllD() {
         return directoryService.getAllDirectories();
     }
 
+    @GetMapping("/DirectoryLv1")
+    public List<DirectoryLv1> getAllDlv1() {
+        return directoryLv1Service.getAllDirectoryLv1s();
+    }
 
     @GetMapping("/Gender")
-    public List<Directory> findByGender(@RequestParam String genderId ){
-        Gender genderSelected  = genderService.getGenderById(Integer.parseInt(genderId));
-        return directoryService.getByGender(genderSelected);
+    public List<Directory> findByGender(@RequestParam String genderId) {
+        if (genderId == null) {
+            return directoryService.getAllDirectories();
+        } else {
+            Gender genderSelected = genderService.getGenderById(Integer.parseInt(genderId));
+            return directoryService.getByGender(genderSelected);
+        }
+
     }
+
     @GetMapping("/Directory")
-    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId ){
-        Directory diId  = directoryService.getDirectoryById(Integer.parseInt(directoryId));
+    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId) {
+        if (directoryId == null) {
+            return directoryLv1Service.getAllDirectoryLv1s();
+        }
+        Directory diId = directoryService.getDirectoryById(Integer.parseInt(directoryId));
         return directoryLv1Service.getByDirectory(diId);
     }
 
     @PostMapping("{id}")
-    public Directory create(@RequestBody Directory directory,@PathVariable("id") String id){
+    public Directory create(@RequestBody Directory directory, @PathVariable("id") String id) {
         Gender gender = genderService.getGenderById(Integer.parseInt(id));
         directory.setGender(gender);
         directoryService.saveDirectory(directory);
