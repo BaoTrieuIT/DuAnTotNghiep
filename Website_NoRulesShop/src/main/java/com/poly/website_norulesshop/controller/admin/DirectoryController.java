@@ -45,13 +45,9 @@ public class DirectoryController {
     }
 
     @GetMapping("/Directory")
-    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId) {
-        if (directoryId == null) {
-            return directoryLv1Service.getAllDirectoryLv1s();
-        }
-        Directory diId = directoryService.getDirectoryById(Integer.parseInt(directoryId));
-        return directoryLv1Service.getByDirectory(diId);
-    }
+    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId ){
+        Directory diId  = directoryService.getDirectoryById(Integer.parseInt(directoryId));
+    return directoryLv1Service.getByDirectory(diId);}
 
     @PostMapping("{id}")
     public Directory create(@RequestBody Directory directory, @PathVariable("id") String id) {

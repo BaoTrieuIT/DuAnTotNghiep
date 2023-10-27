@@ -9,20 +9,22 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             direcId = newDirectoryId
         }
     });
-
-
-    $scope.initialize = function (direcId) {
-        var directoryID = direcId;
-        if (directoryID == undefined) {
-            $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
-                $scope.ListdirectoryLv1 = resp.data;
-            })
-        } else {
-            $http.get("/rest/manage_directory/Directory?directoryId=" + directoryID).then(resp => {
-                $scope.ListdirectoryLv1 = resp.data;
-            })
-        }
-
+    // $scope.initialize = function (direcId) {
+    //     var iD = direcId;
+    //     if (iD === undefined) {
+    //         $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
+    //             $scope.ListdirectoryLv1 = resp.data;
+    //         })
+    //     } else {
+    //         $http.get("/rest/manage_directory/Directory?directoryId=" + iD).then(resp => {
+    //             $scope.ListdirectoryLv1 = resp.data;
+    //         })
+    //     }
+    //
+    $scope.initialize = function(direcId){
+        $http.get("/rest/manage_directory/Directory?directoryId="+ direcId).then(resp => {
+            $scope.ListdirectoryLv1 = resp.data;
+        })
     }
     $scope.select = function (direcId) {
         console.log(direcId)
