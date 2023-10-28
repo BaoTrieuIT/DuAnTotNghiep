@@ -20,7 +20,7 @@ create table `ranked`(
 
 create table `account`(
 	account_id int auto_increment primary key,
-    password varchar(50),
+    password varchar(100),
     fullname nvarchar(50),
     phone_number varchar(10),
 	email varchar(50), 
@@ -392,7 +392,7 @@ create table `accounts_roles`(
 INSERT INTO `accounts_roles` VALUES 
 (1,1),
 (2,2);
-SELECt * from account
+SELECt * from account;
 
 INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`,`is_active`) VALUES ('Louis Vuitton','images/cac-thuong-hieu-thoi-trang-noi-tieng.png','Các dòng sản phẩm đang kinh doanh: Quần áo, giày dép, trang sức, đồng hồ đeo tay, đồ da,…','louisvuitton.com',b'1');
 INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`,`is_active`) VALUES ('Gucci','images/cac-thuong-hieu-thoi-trang-noi-tieng-1.png','Gucci có sự phát triển vô cùng mạnh mẽ, trở thành biểu tượng thời trang hàng đầu thế giới với những dòng sản phẩm độc đáo, đẳng cấp và đại diện cho thương hiệu xa xỉ bậc nhất hiện nay.','gucci.com',b'1');
