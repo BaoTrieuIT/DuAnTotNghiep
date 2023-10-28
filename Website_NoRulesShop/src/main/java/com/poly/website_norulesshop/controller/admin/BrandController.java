@@ -1,18 +1,19 @@
 package com.poly.website_norulesshop.controller.admin;
 
-import com.poly.website_norulesshop.entity.Brand;
-import com.poly.website_norulesshop.service.BrandService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import com.poly.website_norulesshop.entity.Brand;
+import com.poly.website_norulesshop.service.BrandService;
 
 @CrossOrigin("*")
 @RestController
@@ -28,8 +29,7 @@ public class BrandController {
     }
     @PostMapping
     public Brand post(@RequestBody Brand brand) {
-//        fix this line
-//        brand.setIs_excepted(true);
+        brand.setIsActive(true);
         brandService.saveBrand(brand);
         return brand;
     }
@@ -69,9 +69,8 @@ public class BrandController {
     }
     @DeleteMapping("{brand_id}")
     public void delete(@PathVariable("brand_id") Integer id) {
-        Brand brand =  brandService.getBrandById(id);
-//        fix this line
-//        brand.setIs_excepted(false);
+        Brand brand = brandService.getBrandById(id);
+        brand.setIsActive(false);
         brandService.saveBrand(brand);
     }
 }
