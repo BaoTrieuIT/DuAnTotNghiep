@@ -34,6 +34,7 @@ public class BrandController {
     }
     @PostMapping
     public Brand post(@RequestBody Brand brand) {
+        brand.setIsActive(true);
         brandService.saveBrand(brand);
         return brand;
     }
@@ -74,7 +75,9 @@ public class BrandController {
 
     @DeleteMapping("{brand_id}")
     public void delete(@PathVariable("brand_id") Integer id) {
-
+        Brand brand = brandService.getBrandById(id);
+        brand.setIsActive(false);
+        brandService.saveBrand(brand);
     }
 
 }

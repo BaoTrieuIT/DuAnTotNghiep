@@ -19,22 +19,24 @@
                         <!-- Bordered Tabs -->
                         <ul class="nav nav-tabs nav-tabs-bordered">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab"  href="#manager-brand" data-bs-target="#manager-brand">Tất
-                                    cả
-                                </a>
+                                <a class="nav-link active" data-bs-toggle="tab"  href="#manager-brand" data-bs-target="#manager-brand">Đang hoạt động </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#add-brand" data-bs-target="#add-brand">Thêm thương
-                                    hiệu
-                                </a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#add-brand" data-bs-target="#add-brand">Quản lí thương hiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#hidden-brand" data-bs-target="#hidden-brand">Đã Ẩn</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active profile-overview pt-3" id="manager-brand">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">QUẢN LÝ THƯƠNG HIỆU</h5>
-                                        <div class="alert alert-success alert-dismissible fade show" ng-show="showAlert" role="alert" style="position: fixed; top: 148px; right: 10px;">
+                                       <div class="title" style="display: flex;justify-content: space-between">
+                                           <h5 class="card-title">THƯƠNG HIỆU ĐANG HOẠT ĐỘNG</h5>
+                                           <button style="padding-left: 70px;padding-right: 70px;padding-bottom: 0px;padding-top: 0px" class="btn btn-info" ng-click="them()">Thêm </button>
+                                       </div>
+                                        <div class="alert alert-success alert-dismissible fade show" ng-show="showAlert" role="alert" style="position: fixed; top: 68px; right: 10px;">
                                             <i class="bi bi-check-circle me-1"></i>
                                             {{succes}}
                                         </div>
@@ -43,8 +45,10 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col" style="width: 14%">Tên thương hiệu</th>
-                                                <th scope="col" style="width: 15%">Website thương hiệu</th>
+                                                <th scope="col" style="width: 18%">Website thương hiệu</th>
                                                 <th scope="col">Thông tin thêm</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -52,8 +56,26 @@
                                                     <td>{{item.brandName}}</td>
                                                     <td>{{item.websiteUrl}}</td>
                                                     <td>{{item.anotherInformation}}</td>
-                                                    <td><a  type="button" class="btn btn-info" ng-click="edit(item)">Edit</a></td>
-
+                                                    <td ><a  type="button" class="btn btn-info" ng-click="edit(item)">Edit</a></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#verticalycentered" ng-click="setItemToHide(item)">
+                                                            Ẩn
+                                                        </button>
+                                                        <div class="modal fade" id="verticalycentered" tabindex="-1">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"> Bạn có chắc muốn ẩn tài khoản này</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                                                        <a type="button" class="btn btn-primary" data-bs-dismiss="modal" ng-click="hidden(itemToHide)">Xác nhận</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- End Vertically centered Modal-->
+                                                    </td>
                                                  </tr>
                                             </tbody>
                                         </table>
@@ -91,7 +113,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">THÊM THƯƠNG HIỆU MỚI</h5>
-                                        <div class="alert alert-danger alert-dismissible fade show" ng-show="showAlert1" role="alert" style="position: fixed; top: 148px; right: 10px;">
+                                        <div class="alert alert-danger alert-dismissible fade show" ng-show="showAlert1" role="alert" style="position: fixed; top: 68px; right: 10px;">
                                             <i class="bi bi-exclamation-octagon me-1"></i>
                                             {{succes1}}
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -138,9 +160,9 @@
                                             </div>
 
                                             <div class="row mb-3">
-                                                <div class="col-md-12">
-                                                    <button style="margin-left: 47%;"  ng-click="create()" ng-disabled="disabled"
-                                                            class="btn btn-success">Thêm
+                                                <div class="col-md-12" style="display: flex;justify-content: center">
+                                                    <button style="margin-left: 1%;"  ng-click="create()" ng-disabled="disabled"
+                                                            ng-show="!isHidden"  class="btn btn-success">Thêm
                                                     </button>
                                                     <button style="margin-left: 1%;"  ng-click="update()"
                                                             class="btn btn-warning">Sửa
@@ -152,6 +174,83 @@
                                                 </div>
                                             </div>
                                         </form><!-- End General Form Elements -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade profile-edit pt-3" id="hidden-brand">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="title" style="display: flex;justify-content: space-between">
+                                            <h5 class="card-title">THƯƠNG HIỆU ĐÃ ẨN</h5>
+                                        </div>
+                                        <div class="alert alert-success alert-dismissible fade show" ng-show="showAlert" role="alert" style="position: fixed; top: 68px; right: 10px;">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            {{succes1}}
+                                        </div>
+
+                                        <table class="table datatable">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col" style="width: 14%">Tên thương hiệu</th>
+                                                <th scope="col" style="width: 18%">Website thương hiệu</th>
+                                                <th scope="col">Thông tin thêm</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in pagerHidden.items">
+                                                <td>{{item.brandName}}</td>
+                                                <td>{{item.websiteUrl}}</td>
+                                                <td>{{item.anotherInformation}}</td>
+                                                <td><a  type="button" class="btn btn-info" ng-click="edit(item)">Edit</a></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#verticalycentered1"  ng-click="setItemToHide(item)">
+                                                        Hiện
+                                                    </button>
+                                                    <div class="modal fade" id="verticalycentered1" tabindex="-1">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"> Bạn có chắc muốn hiển thị tài khoản này</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" ng-click="show(itemToHide)">Xác nhận</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- End Vertically centered Modal-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center">
+                                            <div class="panel-footer text-center">
+                                                <button ng-click="pagerHidden.first()" class="btn btn-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button ng-click="pagerHidden.prev()" class="btn btn-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="btn btn-success">
+                                                    {{pagerHidden.page + 1}} of {{pagerHidden.count}}
+                                                </button>
+                                                <button ng-click="pagerHidden.next()"	class="btn btn-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button ng-click="pagerHidden.last()" class="btn btn-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

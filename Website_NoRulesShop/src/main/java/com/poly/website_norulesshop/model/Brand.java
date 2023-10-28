@@ -25,6 +25,9 @@ public class Brand implements Serializable {
     @Column(name = "website_url")
     private String websiteUrl;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     @Column(name = "another_information")
     private String anotherInformation;
 
