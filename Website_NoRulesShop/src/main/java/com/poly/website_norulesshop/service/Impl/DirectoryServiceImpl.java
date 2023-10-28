@@ -1,12 +1,14 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.DirectoryRepository;
-import com.poly.website_norulesshop.entity.Directory;
-import com.poly.website_norulesshop.service.DirectoryService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.DirectoryRepository;
+import com.poly.website_norulesshop.entity.Directory;
+import com.poly.website_norulesshop.entity.Gender;
+import com.poly.website_norulesshop.service.DirectoryService;
 
 @Service
 public class DirectoryServiceImpl implements DirectoryService {
@@ -24,7 +26,7 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public Directory getDirectoryById(Long id) {
+    public Directory getDirectoryById(Integer id) {
         return directoryRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +36,12 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     @Override
-    public void deleteDirectory(Long id) {
+    public void deleteDirectory(Integer id) {
         directoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Directory> getByGender(Gender gender) {
+        return directoryRepository.findByGender(gender);
     }
 }

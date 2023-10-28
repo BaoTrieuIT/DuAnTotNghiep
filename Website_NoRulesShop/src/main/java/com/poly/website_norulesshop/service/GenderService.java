@@ -13,4 +13,5 @@ public interface GenderService {
     List<Gender> getAllGenders();
 
     void deleteGender(Integer id);
+
 }

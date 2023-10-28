@@ -10,15 +10,20 @@ import lombok.Setter;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
     private Long addressId;
 
-    private String recipient_name;
+    @Column(name = "recipient_name")
+    private String recipientName;
 
-    private String recipient_phone_number;
+    @Column(name = "recipient_phone_number")
+    private String recipientPhoneNumber;
 
-    private String general_address;
-    private String specific_address;
+    @Column(name = "general_address")
+    private String generalAddress;
 
+    @Column(name = "specific_address")
+    private String specificAddress;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

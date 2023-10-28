@@ -38,4 +38,5 @@ public class GenderServiceImpl implements GenderService {
     public void deleteGender(Integer id) {
         genderRepository.deleteById(id);
     }
+
 }

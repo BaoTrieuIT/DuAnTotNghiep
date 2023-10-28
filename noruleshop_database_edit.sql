@@ -306,4 +306,45 @@ create table `accounts_roles`(
     FOREIGN KEY (account_id) REFERENCES account(account_id),
     FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
+INSERT INTO account_status (account_status_name) VALUES ('Active');
+INSERT INTO account_status (account_status_name) VALUES ('Inactive');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+INSERT INTO role (role_name) VALUES ('Admin');
+INSERT INTO role (role_name) VALUES ('User');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+INSERT INTO ranked (rank_name, minimum_point) VALUES ('Silver', 100);
+INSERT INTO ranked (rank_name, minimum_point) VALUES ('Gold', 500);
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+
+INSERT INTO gender (gender_name) VALUES ('Male');
+INSERT INTO gender (gender_name) VALUES ('Female');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+
+INSERT INTO type (type_name) VALUES ('Type A');
+INSERT INTO type (type_name) VALUES ('Type B');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+INSERT INTO type (directory) VALUES ('Quần','1');
+INSERT INTO type (directory) VALUES ('Áo','1');
+INSERT INTO type (directory) VALUES ('Phụ kiện','2');
+INSERT INTO type (directory) VALUES ('Váy','2');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
+
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Quần tây', '1');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Quần jean', '1');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Áo Sơ mi', '2');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Áo thun ', '2');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Áo tay dài', '2');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Quần ngắn', '1');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('KÍnh', '3');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Mũ vành', '3');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Mũ phớt', '3');
+INSERT INTO `norule_shop`.`directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES ('Nón sơn', '3');
+-- Thêm các dòng dữ liệu khác nếu cần thiết
+
 
