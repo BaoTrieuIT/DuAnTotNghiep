@@ -1,8 +1,8 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.DirectoryLv1Repository;
-import com.poly.website_norulesshop.model.Directory;
-import com.poly.website_norulesshop.model.DirectoryLv1;
+import com.poly.website_norulesshop.entity.Directory;
+import com.poly.website_norulesshop.entity.DirectoryLv1;
 import com.poly.website_norulesshop.service.DirectoryLv1Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

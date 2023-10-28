@@ -1,8 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.Directory;
-import com.poly.website_norulesshop.model.Gender;
-import org.springframework.stereotype.Repository;
+import com.poly.website_norulesshop.entity.Gender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

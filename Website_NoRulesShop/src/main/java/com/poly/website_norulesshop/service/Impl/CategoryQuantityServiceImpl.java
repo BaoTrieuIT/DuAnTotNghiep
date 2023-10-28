@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.CategoryQuantityRepository;
-import com.poly.website_norulesshop.model.CategoryQuantity;
+import com.poly.website_norulesshop.entity.CategoryQuantity;
 import com.poly.website_norulesshop.service.CategoryQuantityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

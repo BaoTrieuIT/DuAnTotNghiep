@@ -1,10 +1,9 @@
 package com.poly.website_norulesshop.Repository;
 
-import com.poly.website_norulesshop.model.Product;
+import com.poly.website_norulesshop.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.ListView;
 import java.util.List;
 
 @Repository

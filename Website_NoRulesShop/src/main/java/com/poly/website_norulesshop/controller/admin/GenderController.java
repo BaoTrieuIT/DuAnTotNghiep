@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.controller.admin;
 
-import com.poly.website_norulesshop.model.Gender;
+import com.poly.website_norulesshop.entity.Gender;
 import com.poly.website_norulesshop.service.GenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

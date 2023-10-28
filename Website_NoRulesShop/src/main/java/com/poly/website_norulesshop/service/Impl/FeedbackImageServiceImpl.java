@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.FeedbackImageRepository;
-import com.poly.website_norulesshop.model.FeedbackImage;
+import com.poly.website_norulesshop.entity.FeedbackImage;
 import com.poly.website_norulesshop.service.FeedbackImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

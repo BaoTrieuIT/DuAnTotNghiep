@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.Account;
+import com.poly.website_norulesshop.entity.Account;
 
 import java.util.List;
 

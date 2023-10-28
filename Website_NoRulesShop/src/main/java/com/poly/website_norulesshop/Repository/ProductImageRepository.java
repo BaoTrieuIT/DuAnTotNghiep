@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.Repository;
 
-import com.poly.website_norulesshop.model.ProductImage;
+import com.poly.website_norulesshop.entity.ProductImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
