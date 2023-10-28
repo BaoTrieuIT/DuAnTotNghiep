@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.OrderStatusRepository;
-import com.poly.website_norulesshop.model.OrderStatus;
+import com.poly.website_norulesshop.entity.OrderStatus;
 import com.poly.website_norulesshop.service.OrderStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

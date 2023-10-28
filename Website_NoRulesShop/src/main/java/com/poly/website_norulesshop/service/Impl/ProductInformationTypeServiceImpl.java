@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.model.ProductInformationType;
+import com.poly.website_norulesshop.entity.ProductInformationType;
 import com.poly.website_norulesshop.Repository.ProductInformationTypeRepository;
 import com.poly.website_norulesshop.service.ProductInformationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

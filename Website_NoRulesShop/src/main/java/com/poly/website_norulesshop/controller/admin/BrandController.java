@@ -1,18 +1,12 @@
 package com.poly.website_norulesshop.controller.admin;
 
-import com.poly.website_norulesshop.model.Brand;
-import com.poly.website_norulesshop.model.DirectoryLv1;
+import com.poly.website_norulesshop.entity.Brand;
 import com.poly.website_norulesshop.service.BrandService;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
 import java.nio.file.Files;

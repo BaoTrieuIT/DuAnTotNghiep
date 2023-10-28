@@ -129,11 +129,9 @@ create table `product`(
     product_name nvarchar(255),
     product_rating float null,
     create_date date not null,
-    is_accepted bit not null,
 	is_remove bit not null,
     product_description nvarchar(1000) not null,
     brand_id  int  not null,
-    price int not null,
     directory_lv1_id int,
 	foreign key (brand_id) references `brand`(brand_id),
     foreign key (directory_lv1_id) references `directory_lv1`(directory_lv1_id)

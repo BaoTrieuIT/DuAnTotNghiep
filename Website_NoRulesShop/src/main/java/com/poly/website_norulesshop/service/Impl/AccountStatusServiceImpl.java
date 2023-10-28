@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.AccountStatusRepository;
-import com.poly.website_norulesshop.model.AccountStatus;
+import com.poly.website_norulesshop.entity.AccountStatus;
 import com.poly.website_norulesshop.service.AccountStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

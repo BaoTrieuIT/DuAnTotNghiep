@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.PointsRepository;
-import com.poly.website_norulesshop.model.Points;
+import com.poly.website_norulesshop.entity.Points;
 import com.poly.website_norulesshop.service.PointsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

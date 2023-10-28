@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.OrderDetailRepository;
-import com.poly.website_norulesshop.model.OrderDetail;
+import com.poly.website_norulesshop.entity.OrderDetail;
 import com.poly.website_norulesshop.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

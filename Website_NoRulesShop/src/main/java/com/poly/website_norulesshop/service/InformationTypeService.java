@@ -1,6 +1,6 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.model.InformationType;
+import com.poly.website_norulesshop.entity.InformationType;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.RoleRepository;
-import com.poly.website_norulesshop.model.Role;
+import com.poly.website_norulesshop.entity.Role;
 import com.poly.website_norulesshop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
