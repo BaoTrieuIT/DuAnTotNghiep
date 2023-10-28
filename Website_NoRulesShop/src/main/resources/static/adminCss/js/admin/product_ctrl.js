@@ -98,11 +98,10 @@ app.controller("product_ctrl", function($scope, $http){
         })
     }
     $scope.HiddenProDuct = function (productId){
-            console.log(productId)
-            // $http.get("/rest/product_all/hiddenProduct?productId="+productId).then(resp => {
-            //     $scope.items = resp.data
-            // }).catch(error => {
-            // })
+            $http.get("/rest/product_all/hiddenProduct?productId="+productId).then(resp => {
+                $scope.items = resp.data
+            }).catch(error => {
+            })
 
     }
     $scope.ActiveProduct = function (productId){
