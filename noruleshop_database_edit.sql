@@ -126,11 +126,9 @@ create table `product`(
     product_name nvarchar(255),
     product_rating float null,
     create_date date not null,
-    is_accepted bit not null,
 	is_remove bit not null,
     product_description nvarchar(1000) not null,
     brand_id  int  not null,
-    price int not null,
     directory_lv1_id int,
 	foreign key (brand_id) references `brand`(brand_id),
     foreign key (directory_lv1_id) references `directory_lv1`(directory_lv1_id)
@@ -378,23 +376,6 @@ INSERT INTO type (type_name) VALUES ('Type A');
 INSERT INTO type (type_name) VALUES ('Type B');
 -- Thêm các dòng dữ liệu khác nếu cần thiết
 
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (1,'Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000','0','1','Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,1490000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (2,'Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000','1','0','Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,1999000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (3,'Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000','0','1','Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,1999000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (4,'Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000','1','0','Màu Sắc DARK BLUE Chất liệu 99% Cotton, 01% Elastane',1,1699000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (5,'Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000','0','1','Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',1,999000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (6,'Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000','0','1','Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,2599000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (7,'Áo Lạnh Nữ',4.5,'2023-09-11 00:00:00.000000','0','1','Màu Sắc CK BLACK Chất liệu 62% Organic Cotton, 35% Polyester, 3% Elastane',1,1999000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (8,'Áo Khoác Nữ Micro Cardigan',4.2,'2023-09-11 00:00:00.000000','0','1','Màu Sắc IVORY Chất liệu 100% Cotton',1,1599000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (9,'Quần Jeans Nam Body Fit',4.5,'2023-09-11 00:00:00.000000','0','1','Màu Sắc DENIM BLACK Chất liệu 70% Cotton 28% Polyester 2% Elastane',1,999000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (10,'Áo Khoác Nam',4.2,'2023-09-11 00:00:00.000000','0','1','Màu Sắc ASPHALT Chất liệu 100% Polyester',1,1799000,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (11,'Product 11',4.8,'2023-09-11 00:00:00.000000','1','0','Description of Product 3',1,45,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (12,'Product 15',4.5,'2023-10-12 00:00:00.000000','1','0','Product 1 Description',1,100,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (13,'Product 16',3.8,'2023-10-12 00:00:00.000000','0','1','Product 2 Description',2,150,NULL);
-INSERT INTO product (product_id,product_name,product_rating,create_date,is_accepted,is_remove,product_description,brand_id,price,directory_lv1_id) VALUES (14,'Product 17',4.2,'2023-10-12 00:00:00.000000','0','1','Product 3 Description',1,120,NULL);
-
-
-
 
 create table `accounts_roles`(
 	account_id int,
@@ -432,3 +413,21 @@ INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`
 INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`,`is_active`) VALUES ('JUNO','images/brand-viet-nam-1_72.jpg','Là một trong những thương hiệu thời trang Việt Nam nổi tiếng với hệ thống chi nhánh khắp cả nước, JUNO đã chinh phục những người yêu thích thời trang bằng những sản phẩm thời trang, hiện đại được thiết kế từ chính người Việt.','juno.vn',b'1');
 INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`,`is_active`) VALUES ('OWEN','images/brand-viet-nam-3_51.webp','Đối với các quý ông, OWEN chính là thương hiệu thời trang nổi tiếng dành riêng cho nam giới. Tuy ra nhập thị trường Việt Nam khá muộn, nhưng OWEN đã nhanh chóng khẳng định vị thế của mình bằng chất lượng cực tốt.','owen.vn',b'1');
 INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`,`is_active`) VALUES ('NOVELTY','images/brand-viet-nam-7_1.webp','NOVELTY là thương hiệu thời trang chuẩn mực, lịch lãm nhưng cũng rất cá tính và năng động.','www.novelty.com.vn',b'1');
+
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc DARK BLUE Chất liệu 99% Cotton', '01% Elastane',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Áo Lạnh Nữ',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc CK BLACK Chất liệu 62% Organic Cotton, 35% Polyester, 3% Elastane',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Áo Khoác Nữ Micro Cardigan',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc IVORY Chất liệu 100% Cotton',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Quần Jeans Nam Body Fit',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc DENIM BLACK Chất liệu 70% Cotton 28% Polyester 2% Elastane',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Áo Khoác Nam',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc ASPHALT Chất liệu 100% Polyester',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Product 11',4.8,'2023-09-11 00:00:00.000000',1,'Description of Product 3',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Product 15',4.5,'2023-10-12 00:00:00.000000',1,'Product 1 Description',1,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Product 16',3.8,'2023-10-12 00:00:00.000000',1,'Product 2 Description',2,NULL);
+INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES ('Product 17',4.2,'2023-10-12 00:00:00.000000',1,'Product 3 Description',1,NULL);
+
+
+
