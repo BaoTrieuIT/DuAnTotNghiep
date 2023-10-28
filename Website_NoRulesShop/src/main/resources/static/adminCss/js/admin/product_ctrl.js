@@ -1,7 +1,7 @@
 app.controller("product_ctrl", function($scope, $http){
 
     $scope.minValue = 0;
-    $scope.maxValue = 250;
+    $scope.maxValue = 10000000;
 
     $scope.initialize = function () {
         $scope.renderProductIsActive();
@@ -29,7 +29,7 @@ app.controller("product_ctrl", function($scope, $http){
     const rangeInput = document.querySelectorAll(".range-input input"),
         priceInput = document.querySelectorAll(".price-input input"),
         range = document.querySelector(".slider .progress");
-    let priceGap = 10;
+    let priceGap = 1000;
 
     priceInput.forEach(input =>{
         input.addEventListener("input", e =>{
@@ -39,10 +39,10 @@ app.controller("product_ctrl", function($scope, $http){
             if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
                 if(e.target.className === "input-min"){
                     rangeInput[0].value = minPrice;
-                    range.style.left = ((minPrice / rangeInput[0].max) * 10) + "%";
+                    range.style.left = ((minPrice / rangeInput[0].max) * 1000) + "%";
                 }else{
                     rangeInput[1].value = maxPrice;
-                    range.style.right = 10 - (maxPrice / rangeInput[1].max) * 10 + "%";
+                    range.style.right = 1000 - (maxPrice / rangeInput[1].max) * 1000 + "%";
                 }
             }
         });
@@ -62,8 +62,8 @@ app.controller("product_ctrl", function($scope, $http){
             }else{
                 priceInput[0].value = minVal;
                 priceInput[1].value = maxVal;
-                range.style.left = ((minVal / rangeInput[0].max) * 10) + "%";
-                range.style.right = 10 - (maxVal / rangeInput[1].max) * 10 + "%";
+                range.style.left = ((minVal / rangeInput[0].max) * 1000) + "%";
+                range.style.right = 1000 - (maxVal / rangeInput[1].max) * 1000 + "%";
             }
         });
     });
@@ -98,11 +98,11 @@ app.controller("product_ctrl", function($scope, $http){
         })
     }
     $scope.HiddenProDuct = function (productId){
-
-            $http.get("/rest/product_all/hiddenProduct?productId="+productId).then(resp => {
-                $scope.items = resp.data
-            }).catch(error => {
-            })
+            console.log(productId)
+            // $http.get("/rest/product_all/hiddenProduct?productId="+productId).then(resp => {
+            //     $scope.items = resp.data
+            // }).catch(error => {
+            // })
 
     }
     $scope.ActiveProduct = function (productId){

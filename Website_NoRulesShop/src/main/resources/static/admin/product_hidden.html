@@ -37,10 +37,10 @@
 <!--                    </div>-->
 <!--                </div>-->
                 <button style="font-size: 11px; width: 55px;" type="button" class="btn btn-outline-secondary">Copy</button>
-                <button type="button" class="btn btn-secondary" style="margin-top: 8px; width: 60px" data-bs-toggle="modal" data-bs-target="#verticalycentered-a">
+                <button type="button" class="btn btn-secondary" style="margin-top: 8px; width: 60px" data-bs-toggle="modal" data-bs-target="{{'#modal_hidden_' + item.productId}}">
                     Hiện
                 </button>
-                <div class="modal fade" id="verticalycentered-a" tabindex="-1">
+                <div class="modal fade" id="{{'modal_hidden_' + item.productId}}" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">

@@ -38,19 +38,19 @@
 <!--                    </div>-->
 <!--               </div>-->
                 <button style="font-size: 11px; width: 55px; margin-top: 5px" type="button" class="btn btn-outline-secondary">Copy</button>
-                <button type="button" class="btn btn-secondary" style="margin-top: 8px; width: 55px" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                <button type="button" class="btn btn-secondary" style="margin-top: 8px; width: 55px" data-bs-toggle="modal" data-bs-target="{{'#modal_' + item.productId}}">
                     Ẩn
                 </button>
-                <div class="modal fade" id="verticalycentered" tabindex="-1">
+                <div class="modal fade" id="{{'modal_' + item.productId}}">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title"> Bạn có chắc muốn ẩn sản phẩm này ?</h5>
+                                <h5 class="modal-title"> Bạn có chắc muốn ẩn sản phẩm {{item.productName}} này ?</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  ng-click="HiddenProDuct(item.productId)">Xác nhận</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  ng-click="HiddenProDuct(item.productId)">Xác nhận Ẩn Sản Phẩm Có id là : {{item.productId}}</button>
                             </div>
                         </div>
                     </div>
