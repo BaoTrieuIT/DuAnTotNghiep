@@ -21,7 +21,6 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
     //         })
     //     }
     //
-
     $scope.initialize = function (direcId) {
         $http.get("/rest/manage_directory/Directory?directoryId=" + direcId).then(resp => {
             $scope.ListdirectoryLv1 = resp.data;
@@ -42,6 +41,9 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
     }
 
     $scope.creatDirLv1 = function (direcId) {
+        console.log($scope.ListdirectoryLv1)
+        console.log(direcId)
+        console.log($scope.directoryLv1Name)
         var dlv1 = angular.copy($scope.form)
         $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
             $scope.ListdirectoryLv1.push(resp.data);

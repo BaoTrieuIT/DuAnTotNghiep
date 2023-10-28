@@ -25,7 +25,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
 
     $scope.onChangeGender = function () {
         var genderId = $scope.genderSelected.genderId;
-        if (genderId == undefined) {
+        if (genderId === undefined) {
             $http.get("/rest/manage_directory").then(resp => {
                 $scope.items = resp.data;
             })
@@ -39,7 +39,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
 
     $scope.ClickDirectory = function (directoryId) {
         var direct = directoryId
-        if (direct == undefined) {
+        if (direct === undefined) {
             console.log("error");
         } else {
             $http.get("/rest/manage_directory/Directory?directoryId=" + direct).then(resp => {

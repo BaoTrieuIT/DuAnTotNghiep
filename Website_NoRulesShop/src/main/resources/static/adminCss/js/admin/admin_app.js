@@ -15,6 +15,7 @@ app.config(function ($routeProvider) {
         })
         .when("/manage_directory", {
             templateUrl: "/admin/manage_directory.html",
+            controller: "directoryLv1_ctrl",
             controller: "directory_ctrl"
         })
         .when("/manage_directory", {
