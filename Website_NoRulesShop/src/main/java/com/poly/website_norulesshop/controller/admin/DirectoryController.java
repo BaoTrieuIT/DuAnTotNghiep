@@ -2,6 +2,8 @@ package com.poly.website_norulesshop.controller.admin;
 
 import java.util.List;
 
+import com.poly.website_norulesshop.entity.Directory;
+import com.poly.website_norulesshop.entity.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,9 +50,10 @@ public class DirectoryController {
     }
 
     @GetMapping("/Directory")
-    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId ){
-        Directory diId  = directoryService.getDirectoryById(Integer.parseInt(directoryId));
-    return directoryLv1Service.getByDirectory(diId);}
+    public List<DirectoryLv1> loadDirectoryLv1(@RequestParam String directoryId) {
+        Directory diId = directoryService.getDirectoryById(Integer.parseInt(directoryId));
+        return directoryLv1Service.getByDirectory(diId);
+    }
 
     @PostMapping("{id}")
     public Directory create(@RequestBody Directory directory, @PathVariable("id") String id) {
