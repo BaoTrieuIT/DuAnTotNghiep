@@ -11,19 +11,21 @@
       <th scope="col">Ngày tạo</th>
       <th scope="col">Trạng thái</th>
       <th scope="col">Thông tin thêm</th>
+      <th scope="col">Brand</th>
       <th scope="col">Giá</th>
       <th scope="col">Thao tác</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="item in pager.items">
-      <td>{{item.productId}}</td>
-      <td>{{item.productName}}</td>
-      <td>{{item.productRating}}</td>
-      <td>{{item.createDate}}</td>
-      <td>{{item.isRemoved}}</td>
-      <td>{{item.productDescription}}</td>
-      <td>{{item.price}}</td>
+      <td style="height: 130px">{{item.productId}}</td>
+      <td style="height: 130px">{{item.productName}}</td>
+      <td style="height: 130px">{{item.productRating}}</td>
+      <td style="height: 130px">{{item.createDate}}</td>
+      <td style="height: 130px">{{item.isRemoved}}</td>
+      <td style="height: 130px">{{item.productDescription}}</td>
+      <td style="height: 130px">{{item.brand.brandId}}</td>
+      <td style="height: 130px">{{item.price}}</td>
       <td>
         <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Edit</button>
         <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">Copy</button>
