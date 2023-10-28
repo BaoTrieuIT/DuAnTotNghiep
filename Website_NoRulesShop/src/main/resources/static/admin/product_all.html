@@ -3,126 +3,138 @@
       xmlns:th="http://www.thymeleaf.org"
       th:replace="~{/admin/layout.html :: admin(~{::body})}">
 <head>
-	<meta charset="UTF-8">
-	<title>Admin</title>
+    <meta charset="UTF-8">
+    <title>Admin</title>
 </head>
 <body>
-	<main id="main" class="main">
-		<div class="pagetitle">
-			<h1>Tất cả sản phẩm</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-					<li class="breadcrumb-item">Quản lý sản phẩm</li>
-					<li class="breadcrumb-item active">Tất cả sản phẩm</li>
-				</ol>
-			</nav>
-		</div><!-- End Page Title -->
-		<!-- ======= Sidebar ======= -->
-			<section class="section profile">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">TÌM KIẾM</h5>
-								<!-- No Labels Form -->
-								<form class="row g-3">
-<div class="col-md-6">
-	<div class="wrapper">
-		<header>
-			<h4>Price Range</h4>
-		</header>
-		<div class="price-input">
-			<div class="field">
-				<span>Min</span>
-				<input type="number" class="input-min"  ng-value="minValue" ng-model="minValue">
-			</div>
-			<div class="separator">-</div>
-			<div class="field">
-				<span>Max</span>
-				<input type="number" class="input-max" ng-value="maxValue" ng-model="maxValue">
-			</div>
-		</div>
-	</div>
-</div>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Tất cả sản phẩm</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                <li class="breadcrumb-item">Quản lý sản phẩm</li>
+                <li class="breadcrumb-item active">Tất cả sản phẩm</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <!-- ======= Sidebar ======= -->
+    <section class="section profile">
+        <div class="row">
+            <div class="col-lg">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">TÌM KIẾM</h5>
+                        <!-- No Labels Form -->
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <div class="wrapper">
+                                    <header>
+                                        <h4>Price Range</h4>
+                                    </header>
+                                    <div class="price-input">
+                                        <div class="field">
+                                            <span>Min</span>
+                                            <input type="number" class="input-min" ng-value="minValue"
+                                                   ng-model="minValue">
+                                        </div>
+                                        <div class="separator">-</div>
+                                        <div class="field">
+                                            <span>Max</span>
+                                            <input type="number" class="input-max" ng-value="maxValue"
+                                                   ng-model="maxValue">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-									<div class="col-md-12">
-										<input type="text" class="form-control" placeholder="Search..." ng-model="search_product_name">
-									</div>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="Search..."
+                                       ng-model="search_product_name">
+                            </div>
 
-									<div class="text-center">
-										<button type="submit" class="btn btn-primary" ng-click="SearchByName(search_product_name)">Search</button>
-										<button type="reset" class="btn btn-secondary">Reset</button>
-									</div>
-								</form><!-- End No Labels Form -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"
+                                        ng-click="SearchByName(search_product_name)">Search
+                                </button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form><!-- End No Labels Form -->
 
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-			<section class="section profile">
-				<div class="row">
-					<div class="col-lg">
-						<div class="card">
-							<div class="card-body pt-3">
-								<!-- Bordered Tabs -->
-								<ul class="nav nav-tabs nav-tabs-bordered">
+    <section class="section profile">
+        <div class="row">
+            <div class="col-lg">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
 
-<!--									<li class="nav-item">-->
-<!--										<button class="nav-link " data-bs-toggle="tab" data-bs-target="#product-all">Tất cả</button>-->
-<!--									</li>-->
+                            <!--									<li class="nav-item">-->
+                            <!--										<button class="nav-link " data-bs-toggle="tab" data-bs-target="#product-all">Tất cả</button>-->
+                            <!--									</li>-->
 
-									<li class="nav-item">
-										<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#product-online" ng-click="renderProductIsActive()">Đang hoạt động</button>
-									</li>
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#product-online"
+                                        ng-click="renderProductIsActive()">Đang hoạt động
+                                </button>
+                            </li>
 
-									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-soldout" ng-click="renderProductIsSoldOut()">Hết hàng</button>
-									</li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-soldout"
+                                        ng-click="renderProductIsSoldOut()">Hết hàng
+                                </button>
+                            </li>
 
-									<li class="nav-item">
-										<button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-hidden" ng-click="renderProductIsHidden()">Bị ẩn</button>
-									</li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-hidden"
+                                        ng-click="renderProductIsHidden()">Bị ẩn
+                                </button>
+                            </li>
 
-								</ul>
+                        </ul>
 
-								<div class="tab-content">
-									<div class="tab-pane fade show active profile-edit pt-3" id="product-online">
-										<div class="card">
-	                                    <div ng-include="'/admin/product_online.html'"></div>
-										</div>
-									</div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active profile-edit pt-3" id="product-online">
+                                <div class="card">
+                                    <div ng-include="'/admin/product_online.html'"></div>
+                                </div>
+                            </div>
 
-									<div class="tab-pane fade pt-3" id="product-soldout">
-										<!-- Settings Form -->
-										<div class="card">
-											<div ng-include="'/admin/product_soldout.html'"></div>
-										</div>
-									</div>
+                            <div class="tab-pane fade pt-3" id="product-soldout">
+                                <!-- Settings Form -->
+                                <div class="card">
+                                    <div ng-include="'/admin/product_soldout.html'"></div>
+                                </div>
+                            </div>
 
-									<div class="tab-pane fade pt-3" id="product-hidden">
-										<div class="card">
-											<div ng-include="'/admin/product_hidden.html'"></div>
-										</div>
-									</div>
-								</div><!-- End Bordered Tabs -->
-							</div>
-						</div>
+                            <div class="tab-pane fade pt-3" id="product-hidden">
+                                <div class="card">
+                                    <div ng-include="'/admin/product_hidden.html'"></div>
+                                </div>
+                            </div>
+                        </div><!-- End Bordered Tabs -->
+                    </div>
+                </div>
 
-					</div>
-				</div>
-			</section>
-		</main><!-- End #main -->
-	<style>
-.wrapper{
-	width: 500px;
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
+<style>
+    .wrapper {
+        width: 500px;
 
-}
-.field{
-	width: 200px;
-}
-	</style>
+    }
+
+    .field {
+        width: 200px;
+    }
+</style>
 </body>
 </html>
