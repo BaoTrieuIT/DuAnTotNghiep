@@ -86,20 +86,20 @@ INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`
 
 -- Insert data into `product` table
 INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`,`product_description`,`brand_id`,`directory_lv1_id`) VALUES 
- ('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,NULL),
- ('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,NULL),
- ('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,NULL),
- ('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc DARK BLUE Chất liệu 99% Cotton', '01% Elastane',1,NULL),
- ('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',1,NULL),
- ('Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,NULL),
- ('Áo Lạnh Nữ',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc CK BLACK Chất liệu 62% Organic Cotton, 35% Polyester, 3% Elastane',1,NULL),
- ('Áo Khoác Nữ Micro Cardigan',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc IVORY Chất liệu 100% Cotton',1,NULL),
- ('Quần Jeans Nam Body Fit',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc DENIM BLACK Chất liệu 70% Cotton 28% Polyester 2% Elastane',1,NULL),
- ('Áo Khoác Nam',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc ASPHALT Chất liệu 100% Polyester',1,NULL),
- ('Product 11',4.8,'2023-09-11 00:00:00.000000',1,'Description of Product 3',1,NULL),
- ('Product 15',4.5,'2023-10-12 00:00:00.000000',1,'Product 1 Description',1,NULL),
- ('Product 16',3.8,'2023-10-12 00:00:00.000000',1,'Product 2 Description',2,NULL),
- ('Product 17',4.2,'2023-10-12 00:00:00.000000',1,'Product 3 Description',1,NULL);
+ ('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,NULL),
+ ('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,NULL),
+ ('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,NULL),
+ ('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc DARK BLUE Chất liệu 99% Cotton 01% Elastane',1,NULL),
+ ('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',1,NULL),
+ ('Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,NULL),
+ ('Áo Lạnh Nữ',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc CK BLACK Chất liệu 62% Organic Cotton, 35% Polyester, 3% Elastane',1,NULL),
+ ('Áo Khoác Nữ Micro Cardigan',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc IVORY Chất liệu 100% Cotton',1,NULL),
+ ('Quần Jeans Nam Body Fit',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc DENIM BLACK Chất liệu 70% Cotton 28% Polyester 2% Elastane',1,NULL),
+ ('Áo Khoác Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc ASPHALT Chất liệu 100% Polyester',1,NULL),
+ ('Product 11',4.8,'2023-09-11 00:00:00.000000',0,'Description of Product 3',1,NULL),
+ ('Product 15',4.5,'2023-10-12 00:00:00.000000',0,'Product 1 Description',1,NULL),
+ ('Product 16',3.8,'2023-10-12 00:00:00.000000',0,'Product 2 Description',2,NULL),
+ ('Product 17',4.2,'2023-10-12 00:00:00.000000',0,'Product 3 Description',1,NULL);
 
 
 
