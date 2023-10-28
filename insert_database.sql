@@ -85,7 +85,7 @@ INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`
  ('NOVELTY','images/brand-viet-nam-7_1.webp','NOVELTY là thương hiệu thời trang chuẩn mực, lịch lãm nhưng cũng rất cá tính và năng động.','www.novelty.com.vn',b'1');
 
 -- Insert data into `product` table
-INSERT INTO product (product_name,product_rating,create_date,is_remove,product_description,brand_id,directory_lv1_id) VALUES 
+INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`,`product_description`,`brand_id`,`directory_lv1_id`) VALUES 
  ('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,NULL),
  ('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',1,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,NULL),
  ('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',1,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,NULL),

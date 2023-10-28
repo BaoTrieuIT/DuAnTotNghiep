@@ -1,6 +1,6 @@
 --  drop database norule_shop;
 --  create database norule_shop;
---  use norule_shop;
+ use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
@@ -48,9 +48,7 @@ create table `address`(
     recipient_phone_number varchar(10),
     general_address nvarchar(255),
     specific_address nvarchar(255),
- --    Address_type_id int,
     account_id int,
---    foreign key (Address_type_id) references `Address_type`(Address_type_id),
     foreign key (account_id) references `account`(account_id)
 );
 
