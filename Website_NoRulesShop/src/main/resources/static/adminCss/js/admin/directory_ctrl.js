@@ -58,6 +58,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
             $scope.items.push(resp.data);
             $scope.form = {};
             alert("Thêm mới thành công!");
+            $('#create_directory').modal('hide')
         }).catch(error => {
             alert("Lỗi thêm mới");
             console.log("Error", error);

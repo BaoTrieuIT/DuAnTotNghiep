@@ -16,8 +16,8 @@ public class DirectoryLv1 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "directory_lv1_id")
     private Integer directory_lv1_id;
-
-    private String directory_lv1_name;
+    @Column(name = "directory_lv1_name")
+    private String directoryLv1Name;
 
     @ManyToOne
     @JoinColumn(name = "directory_id")
