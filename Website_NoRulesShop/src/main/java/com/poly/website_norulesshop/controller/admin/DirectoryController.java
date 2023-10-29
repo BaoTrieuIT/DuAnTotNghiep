@@ -28,20 +28,16 @@ public class DirectoryController {
         return directoryService.getAllDirectories();
     }
 
-    @GetMapping("/DirectoryLv1")
-    public List<DirectoryLv1> getAllDlv1() {
-        return directoryLv1Service.getAllDirectoryLv1s();
-    }
 
     @GetMapping("/Gender")
     public List<Directory> findByGender(@RequestParam String genderId) {
-        if (genderId == null) {
-            return directoryService.getAllDirectories();
-        } else {
-            Gender genderSelected = genderService.getGenderById(Integer.parseInt(genderId));
-            return directoryService.getByGender(genderSelected);
-        }
+        Gender genderSelected = genderService.getGenderById(Integer.parseInt(genderId));
+        return directoryService.getByGender(genderSelected);
+    }
 
+    @GetMapping("/DirectoryLv1")
+    public List<DirectoryLv1> getAllDlv1() {
+        return directoryLv1Service.getAllDirectoryLv1s();
     }
 
     @GetMapping("/Directory")
