@@ -28,17 +28,15 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
     }
     $scope.select = function (direcId) {
         console.log(direcId)
-
-        // var dlv1 = angular.copy($scope.form)
-        // $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
-        //     $scope.ListdirectoryLv1.push(resp.data);
-        //     $scope.form = {};
-        //     alert("Thêm mới thành công!");
-        // }).catch(error => {
-        //     alert("Lỗi thêm mới!");
-        //     console.log("Error", error);
-        // });
     }
+    // Ban đầu ẩn form
+    $scope.isCreateDirectoryLv1ModalOpen = false;
+
+    $scope.select = function (direcId) {
+        console.log(direcId);
+        $scope.isCreateDirectoryLv1ModalOpen = true;
+    }
+
 
     $scope.creatDirLv1 = function (direcId) {
         console.log($scope.ListdirectoryLv1)
@@ -55,19 +53,55 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
         });
     }
 
-    // $scope.update = function(item){
-    //     var item = angular.copy($scope.form);
-    //     $http.put(`/rest/directoryLv1/${item.id}`, item).then(resp => {
-    //         var index = $scope.ListdirectoryLv1.findIndex(p => p.id == item.id);
-    //         $scope.ListdirectoryLv1[index] = item;
-    //         alert("Cập nhật sản phẩm thành công!");
-    //     })
-    //         .catch(error => {
-    //             alert("Lỗi cập nhật sản phẩm!");
-    //             console.log("Error", error);
-    //         });
-    // }
+    // CẬP NHẬT DIRECTORY LEVEL 1
+    $scope.selectedDirectoryLv1 = null
 
+    $scope.selectDirectoryLv1 = function (directoryLv1){
+        $scope.selectedDirectoryLv1 = angular.copy(directoryLv1)
+        console.log(directoryLv1.directoryLv1Id)
+    }
+
+    $scope.updateDirLV1 = function() {
+        var item = angular.copy($scope.selectedDirectoryLv1);
+        // Sử dụng biến selectedDirectoryLv1
+        console.log(item)
+        if (!item.directoryLv1Id) {
+            alert("ID không hợp lệ.");
+            return;
+        }
+        $http.put(`/rest/directoryLv1/update/${item.directoryLv1Id}`, item).then(resp => {
+            var index = $scope.ListdirectoryLv1.findIndex(p => p.directoryLv1Id === item.directoryLv1Id);
+            if (index === -1) {
+                alert("Không tìm thấy item với ID tương ứng.");
+                return;
+            }
+            $scope.ListdirectoryLv1[index] = item;
+            // $scope.showForm = false
+            alert("Cập nhật sản phẩm thành công!");
+            $scope.selectedDirectoryLv1 = {};
+        }).catch(error => {
+            alert("Lỗi cập nhật sản phẩm!");
+            console.log("Error", error);
+        });
+    };
+
+
+    $scope.deleteSelectedItems = function() {
+        var selectedItems = $scope.ListdirectoryLv1.filter(function(directoryLv1) {
+            return directoryLv1.checked;
+            console.log(directoryLv1.directoryLv1Name)
+        });
+
+        // Biến đổi danh sách các mục đã đánh dấu thành một mảng của các ID hoặc đối tượng Directory
+        var selectedIds = selectedItems.map(function(directoryLv1) {
+            return directoryLv1.directoryLv1Id;
+            console.log(directoryLv1.directoryLv1Name)
+        });
+
+        $http.delete('/rest/directoryLv1/delete', { data: selectedIds }).then(function(response) {
+            // Xử lý phản hồi từ máy chủ (nếu cần)
+        });
+    };
     // $scope.delete = function(item){
     //     if(confirm("Bạn muốn xóa sản phẩm này?")){
     //         $http.delete(`/rest/directoryLv1/${item.id}`).then(resp => {
@@ -80,20 +114,5 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
     //         })
     //     }
     // }
-    // $scope.deleteSelectedItems = function() {
-    //     var selectedItems = $scope.ListdirectoryLv1.filter(function(item) {
-    //         return item.checked;
-    //     });
-    //
-    //     // Biến đổi danh sách các mục đã đánh dấu thành một mảng của các ID hoặc đối tượng Directory
-    //     var selectedIds = selectedItems.map(function(item) {
-    //         return item.directoryId;
-    //     });
-    //
-    //     $http.delete('/api/directories/delete', { data: selectedIds }).then(function(response) {
-    //         // Xử lý phản hồi từ máy chủ (nếu cần)
-    //     });
-    // };
-
     $scope.initialize();
 })
