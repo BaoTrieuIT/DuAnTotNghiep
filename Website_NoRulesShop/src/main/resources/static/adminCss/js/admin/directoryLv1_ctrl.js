@@ -9,29 +9,11 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             direcId = newDirectoryId
         }
     });
-    // $scope.initialize = function (direcId) {
-    //     var iD = direcId;
-    //     if (iD === undefined) {
-    //         $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
-    //             $scope.ListdirectoryLv1 = resp.data;
-    //         })
-    //     } else {
-    //         $http.get("/rest/manage_directory/Directory?directoryId=" + iD).then(resp => {
-    //             $scope.ListdirectoryLv1 = resp.data;
-    //         })
-    //     }
-    //
+
     $scope.initialize = function(direcId){
         $http.get("/rest/manage_directory/Directory?directoryId="+ direcId).then(resp => {
             $scope.ListdirectoryLv1 = resp.data;
         })
-    }
-    // Ban đầu ẩn form
-    $scope.isCreateDirectoryLv1ModalOpen = false;
-
-    $scope.select = function (direcId) {
-        console.log(direcId);
-        $scope.isCreateDirectoryLv1ModalOpen = true;
     }
 
 // THÊM MỚI DIRECTORY LEVEL 1
@@ -44,7 +26,7 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             $scope.ListdirectoryLv1.push(resp.data);
             alert("Thêm mới thành công!");
             $scope.form = {};
-            $scope.isCreateDirectoryLv1ModalOpen = false;
+            $('#create_directory_lv1_' + direcId).modal('hide')
         }).catch(error => {
             alert("Lỗi thêm mới!");
             console.log("Error", error);

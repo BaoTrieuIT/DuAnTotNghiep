@@ -243,16 +243,14 @@
                                                     </button>
                                                     <button class="btn btn-primary d-flex align-items-center m-2"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#create_directory_lv1_{{$index}}"
+                                                            data-bs-target="{{'#create_directory_lv1_'+ directory.directoryId}}"
                                                             type="button"
                                                             style="font-size: 14px;"
-                                                            ng-click="select(directory.directoryId)">
                                                         <i class="bx bx-plus"></i>
                                                         <b>Thêm danh mục con</b>
                                                     </button>
-                                                    <div class="" ng-show="isCreateDirectoryLv1ModalOpen">
                                                         <form method="post" class="modal fade"
-                                                              id="create_directory_lv1_{{$index}}"
+                                                              id="{{'create_directory_lv1_'+ directory.directoryId}}"
                                                               tabindex="-1" ng-submit="creatDirLv1(directory.directoryId)">
                                                             <div class="modal-dialog modal-dialog-centered">
                                                                 <div class="modal-content">
@@ -278,7 +276,6 @@
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

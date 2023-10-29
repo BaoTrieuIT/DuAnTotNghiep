@@ -34,10 +34,6 @@ public class DirectoryLv1Controller {
         return directoryLv1Service.saveDirectoryLv1(lv1);
     }
 
-    //    @DeleteMapping("{drlv1_id}")
-//    public void delete(@PathVariable("drlv1_id") Integer id) {
-//         directoryLv1Service.deleteDirectoryLv1(id);
-//    }
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteDirectories(@RequestBody List<Integer> directoryIds) {
         try {
