@@ -1,13 +1,28 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1>Quản lý danh mục</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                <li class="breadcrumb-item">Quản lý sản phẩm</li>
-                <li class="breadcrumb-item active">Quản lý danh mục</li>
-            </ol>
-        </nav>
+    <div class="pagetitle row">
+        <div class="col-lg-6">
+            <h1>Quản lý danh mục</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item">Quản lý sản phẩm</li>
+                    <li class="breadcrumb-item active">Quản lý danh mục</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-lg-6">
+<!--            <div class="alert alert-success alert-dismissible fade show" role="alert">-->
+<!--                <i class="bi bi-check-circle me-1"></i>-->
+<!--                A simple success alert with icon—check it out!-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>-->
+<!--            </div>-->
+            <div class="alert alert-dismissible fade show" ng-class="{'alert-success': Messsuccess, 'alert-danger': Messerror,'alert-warning': Messwarning}">
+                <i class="bi me-1" ng-class="{'bi-check-circle': Messsuccess, 'bi-exclamation-octagon': Messerror,'bi-exclamation-triangle': Messwarning}"></i>
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ng-click="closeAlert()"></button>
+            </div>
+
+        </div>
     </div><!-- End Page Title -->
     <div class="col-xl-12">
         <div class="card">

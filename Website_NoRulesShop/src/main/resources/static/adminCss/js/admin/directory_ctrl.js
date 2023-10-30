@@ -21,6 +21,40 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
         })
     }
 
+    /// PHẦN THÔNG BÁO
+    $scope.Messsuccess = false;  // Đặt thành true khi hành động thành công
+    $scope.Messerror = false;    // Đặt thành true khi hành động không thành công
+    $scope.message = '';     // Thông điệp thành công hoặc không thành công của bạn
+
+    $scope.closeAlert = function() {
+        $scope.Messsuccess = false;
+        $scope.Messerror = false;
+        $scope.message = '';
+    }
+    var closeTimeout;
+
+    function setAutoCloseTime() {
+        // Đóng thông báo tự động
+        closeTimeout = $timeout(function() {
+            $scope.closeAlert();
+        }, 15000); // 15000 là 15s
+    }
+    var isSusccess = function(number,mess){
+        if(number == 1){
+            $scope.Messsuccess = true;
+            $scope.Messerror = false;
+            $scope.message = mess
+            setAutoCloseTime()
+        }else{
+            if (number== 2){
+                $scope.Messsuccess = false;
+                $scope.Messerror = true;
+                $scope.message = mess
+            }
+        }
+    }
+
+    // Chọn gender
     $scope.genderSelected = null;
 
     $scope.onChangeGender = function () {
@@ -52,7 +86,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
         }
 
     }
-
+    /// TẠO MỚI DANH MỤC CHA NÈ
     $scope.createDir = function (genderID) {
         // $scope.form.genderId = genderID
         var item = angular.copy($scope.form);
@@ -60,11 +94,12 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
         $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
             $scope.items.push(resp.data);
             $scope.form = {};
-            alert("Thêm mới thành công!");
-            $('#create_directory').modal('hide')
+            $('#create_directory_lv1_' + direcId).modal('hide');
+            isSusccess(1,"Thêm danh mục thành công")
         }).catch(error => {
-            alert("Lỗi thêm mới");
             console.log("Error", error);
+            isSusccess(2,"Lỗi thêm danh mục")
+            $('#create_directory').modal('hide')
         });
     }
 
