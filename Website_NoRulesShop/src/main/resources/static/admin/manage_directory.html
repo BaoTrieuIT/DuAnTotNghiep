@@ -11,11 +11,6 @@
             </nav>
         </div>
         <div class="col-lg-6">
-<!--            <div class="alert alert-success alert-dismissible fade show" role="alert">-->
-<!--                <i class="bi bi-check-circle me-1"></i>-->
-<!--                A simple success alert with icon—check it out!-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>-->
-<!--            </div>-->
             <div class="alert alert-dismissible fade show" ng-class="{'alert-success': Messsuccess, 'alert-danger': Messerror,'alert-warning': Messwarning}">
                 <i class="bi me-1" ng-class="{'bi-check-circle': Messsuccess, 'bi-exclamation-octagon': Messerror,'bi-exclamation-triangle': Messwarning}"></i>
                 {{ message }}

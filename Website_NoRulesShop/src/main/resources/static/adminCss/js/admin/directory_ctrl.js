@@ -39,18 +39,25 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
             $scope.closeAlert();
         }, 15000); // 15000 là 15s
     }
-    var isSusccess = function(number,mess){
-        if(number == 1){
-            $scope.Messsuccess = true;
-            $scope.Messerror = false;
-            $scope.message = mess
-            setAutoCloseTime()
-        }else{
-            if (number== 2){
+    function isSusccess(number,mess){
+        if (number != 1) {
+            if (number == 2) {
                 $scope.Messsuccess = false;
                 $scope.Messerror = true;
+                $scope.Messwarning = false;
+                $scope.message = mess
+            } else (number == 3)
+            {
+                $scope.Messsuccess = false;
+                $scope.Messerror = false;
+                $scope.Messwarning = true;
                 $scope.message = mess
             }
+        } else {
+            $scope.Messsuccess = true;
+            $scope.Messerror = false;
+            $scope.Messwarning = false;
+            $scope.message = mess
         }
     }
 
@@ -87,21 +94,50 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
 
     }
     /// TẠO MỚI DANH MỤC CHA NÈ
-    $scope.createDir = function (genderID) {
-        // $scope.form.genderId = genderID
+    // $scope.createDir = function (genderID) {
+    //     var item = angular.copy($scope.form);
+    //     console.log(item)
+    //     $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
+    //         $scope.items.push(resp.data);
+    //         $scope.form = {};
+    //         $('#create_directory_lv1_' + direcId).modal('hide');
+    //         isSusccess(1,"Thêm danh mục thành công")
+    //     }).catch(error => {
+    //         console.log("Error", error);
+    //         isSusccess(2,"Lỗi thêm danh mục")
+    //         $('#create_directory').modal('hide')
+    //     });
+    // }
+    $scope.createDir = function(genderID) {
         var item = angular.copy($scope.form);
-        console.log(item)
-        $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
-            $scope.items.push(resp.data);
-            $scope.form = {};
-            $('#create_directory_lv1_' + direcId).modal('hide');
-            isSusccess(1,"Thêm danh mục thành công")
-        }).catch(error => {
-            console.log("Error", error);
-            isSusccess(2,"Lỗi thêm danh mục")
-            $('#create_directory').modal('hide')
+
+        // Kiểm tra xem item.directoryName đã tồn tại trong danh sách items hay chưa
+        var isDuplicate = $scope.items.some(function(existingItem) {
+            return existingItem.directoryName === item.directoryName;
         });
+
+        if (isDuplicate) {
+            // Nếu tên danh mục đã tồn tại, hiển thị thông báo và không tạo mới
+            isSusccess(3,"Danh mục đã tồn tại")
+            console.log($scope.message)
+            $('#create_directory').modal('hide');
+        } else {
+            // Nếu tên danh mục chưa tồn tại, tiến hành tạo mới
+            $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
+                $scope.items.push(resp.data);
+                $scope.form = {};
+                isSusccess(1,"Thêm danh mục thành công")
+                console.log($scope.message)
+                $('#create_directory').modal('hide');
+            }).catch(error => {
+                console.log("Error", error);
+                isSusccess(2,"Lỗi thêm mới danh mục")
+                console.log($scope.message)
+                $('#create_directory').modal('hide');
+            });
+        }
     }
+
 
     $scope.initialize();
 
