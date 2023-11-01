@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
@@ -33,7 +34,7 @@ public class Product {
 
     @Column(name = "product_description")
     private String productDescription;
-    
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
@@ -61,4 +62,7 @@ public class Product {
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
+
+
+
 }

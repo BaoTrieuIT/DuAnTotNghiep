@@ -5,6 +5,7 @@ import com.poly.website_norulesshop.service.ProductService;
 import com.poly.website_norulesshop.test.FindAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.poly.website_norulesshop.utils.ProductUtils;
 
 import java.util.*;
 
@@ -27,32 +28,32 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-//    @GetMapping("/searchByNameProductOnline")
-//    private List<Product> SearchByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
-//        if (!productName.isEmpty()) {
-//            return filterByPrice(productService.SearchProductActiveByName(productName), min, max);
-//        } else {
-//            return filterByPrice(productService.isActive(), min, max);
-//        }
-//    }
+    @GetMapping("/searchByNameProductOnline")
+    private List<Product> SearchByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
+        if (!productName.isEmpty()) {
+            return filterByPrice(productService.SearchProductActiveByName(productName), min, max);
+        } else {
+            return filterByPrice(productService.isActive(), min, max);
+        }
+    }
 
-//    @GetMapping("/searchByNameProductHidden")
-//    public List<Product> searchProductSoldoutByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
-//        if (!productName.isEmpty()) {
-//            return filterByPrice(productService.SearchProductHiddenByName(productName), min, max);
-//        } else {
-//            return filterByPrice(productService.isHidden(), min, max);
-//        }
-//    }
+    @GetMapping("/searchByNameProductHidden")
+    public List<Product> searchProductSoldoutByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
+        if (!productName.isEmpty()) {
+            return filterByPrice(productService.SearchProductHiddenByName(productName), min, max);
+        } else {
+            return filterByPrice(productService.isHidden(), min, max);
+        }
+    }
 
-//    @GetMapping("/searchByNameProductSoldout")
-//    public List<Product> SearchProductIsHiddenByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
-//        if (!productName.isEmpty()) {
-//            return filterByPrice(productService.SearchProductSoldoutByName(productName), min, max);
-//        } else {
-//            return filterByPrice(productService.isSoldOut(), min, max);
-//        }
-//    }
+    @GetMapping("/searchByNameProductSoldout")
+    public List<Product> SearchProductIsHiddenByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
+        if (!productName.isEmpty()) {
+            return filterByPrice(productService.SearchProductSoldoutByName(productName), min, max);
+        } else {
+            return filterByPrice(productService.isSoldOut(), min, max);
+        }
+    }
 
     @GetMapping("/isHidden")
     public List<Product> isHidden() {
@@ -89,20 +90,22 @@ public class ProductController {
     }
 
 
-//    public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max){
-//
-//        List<Product> listToReturn = new ArrayList<>();
-//        for (Product product: listProduct) {
-//            if(min <= product.getPrice() && product.getPrice() <= max){
-//                listToReturn.add(product);
-//            }
-//        }
-//        if(listToReturn.isEmpty()){
-//            System.out.println("empty list");
-//        }
-//        System.out.println(min + " " + max );
-//        return listToReturn;
-//    }
+    public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max){
+
+        List<Product> listToReturn = new ArrayList<>();
+        for (Product product: listProduct) {
+            Integer maxProductPrice =   ProductUtils.findMaxPriceInCategoryQuantityList(product);
+            Integer minProductPrice =   ProductUtils.findMinPriceInCategoryQuantityList(product);
+            if ((minProductPrice < max  && minProductPrice >min) || (maxProductPrice < max && maxProductPrice> min) ) {
+                listToReturn.add(product);
+            }
+        }
+        if(listToReturn.isEmpty()){
+            System.out.println("empty list");
+        }
+        System.out.println(min + " " + max );
+        return listToReturn;
+    }
 
 //    @RequestMapping("product_all")
 //    public static String product_all(){

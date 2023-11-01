@@ -1,5 +1,9 @@
 app.controller("product_ctrl", function($scope, $http){
 
+
+    $scope.filterByPrice = function (){
+        $http.get("rest/product_all/")
+    }
     $scope.minValue = 0;
     $scope.maxValue = 10000000;
 
