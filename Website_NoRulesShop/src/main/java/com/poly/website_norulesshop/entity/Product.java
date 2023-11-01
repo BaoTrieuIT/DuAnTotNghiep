@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.poly.website_norulesshop.utils.ProductUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -62,6 +63,7 @@ public class Product {
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
+
 
 
 
