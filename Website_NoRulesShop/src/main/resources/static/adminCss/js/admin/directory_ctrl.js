@@ -1,17 +1,60 @@
-app.service('DataSharingService', function () {
+// app.service('DataSharingService', function () {
+//     var directoryId = null;
+//
+//     return {
+//         getDirectoryId: function () {
+//             return directoryId;
+//         },
+//         setDirectoryId: function (newDirectoryId) {
+//             directoryId = newDirectoryId;
+//         }
+//     };
+// });
+app.service('DataSharingService', function ($timeout) {
     var directoryId = null;
+
+    var data = {
+        messsuccess: false,
+        messerror: false,
+        messwarning: false,
+        message: ''
+    };
 
     return {
         getDirectoryId: function () {
             return directoryId;
-        },
-        setDirectoryId: function (newDirectoryId) {
+        }, setDirectoryId: function (newDirectoryId) {
             directoryId = newDirectoryId;
-        }
+        },
+
+        getData: function () {
+            return data;
+        }, setData: function (newData) {
+            data = newData;
+        },
     };
 });
 
+
 app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
+
+    console.log(DataSharingService.getData())
+    $scope.$watch(function () {
+        return DataSharingService.getData()
+
+    }, function (newDirectoryId, oldDirectoryId) {
+        if (newDirectoryId !== oldDirectoryId) {
+            $scope.Messsuccess = newDirectoryId.messsuccess;
+            $scope.Messerror = newDirectoryId.messerror;
+            $scope.Messwarning = newDirectoryId.messwarning;
+            $scope.message = newDirectoryId.message;
+        }
+        console.log($scope.Messsuccess)
+        console.log($scope.Messerror)
+        console.log($scope.Messwarning)
+        console.log($scope.message)
+    });
+
     $scope.initialize = function () {
         $http.get("/rest/manage_gender").then(resp => {
             $scope.genders = resp.data
@@ -19,47 +62,21 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
         $http.get("/rest/manage_directory").then(resp => {
             $scope.items = resp.data;
         })
+        $scope.Messsuccess = false
+        $scope.Messerror = false
+        $scope.Messwarning = false
+        $scope.message = ""
+        // Thông điệp thành công hoặc không thành công của bạn
     }
 
-    /// PHẦN THÔNG BÁO
-    $scope.Messsuccess = false;  // Đặt thành true khi hành động thành công
-    $scope.Messerror = false;    // Đặt thành true khi hành động không thành công
-    $scope.message = '';     // Thông điệp thành công hoặc không thành công của bạn
 
-    $scope.closeAlert = function() {
+    $scope.closeAlert = function () {
         $scope.Messsuccess = false;
         $scope.Messerror = false;
+        $scope.Messwarning = false;
         $scope.message = '';
     }
-    var closeTimeout;
 
-    function setAutoCloseTime() {
-        // Đóng thông báo tự động
-        closeTimeout = $timeout(function() {
-            $scope.closeAlert();
-        }, 15000); // 15000 là 15s
-    }
-    function isSusccess(number,mess){
-        if (number != 1) {
-            if (number == 2) {
-                $scope.Messsuccess = false;
-                $scope.Messerror = true;
-                $scope.Messwarning = false;
-                $scope.message = mess
-            } else (number == 3)
-            {
-                $scope.Messsuccess = false;
-                $scope.Messerror = false;
-                $scope.Messwarning = true;
-                $scope.message = mess
-            }
-        } else {
-            $scope.Messsuccess = true;
-            $scope.Messerror = false;
-            $scope.Messwarning = false;
-            $scope.message = mess
-        }
-    }
 
     // Chọn gender
     $scope.genderSelected = null;
@@ -94,31 +111,20 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
 
     }
     /// TẠO MỚI DANH MỤC CHA NÈ
-    // $scope.createDir = function (genderID) {
-    //     var item = angular.copy($scope.form);
-    //     console.log(item)
-    //     $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
-    //         $scope.items.push(resp.data);
-    //         $scope.form = {};
-    //         $('#create_directory_lv1_' + direcId).modal('hide');
-    //         isSusccess(1,"Thêm danh mục thành công")
-    //     }).catch(error => {
-    //         console.log("Error", error);
-    //         isSusccess(2,"Lỗi thêm danh mục")
-    //         $('#create_directory').modal('hide')
-    //     });
-    // }
-    $scope.createDir = function(genderID) {
+    $scope.createDir = function (genderID) {
         var item = angular.copy($scope.form);
 
         // Kiểm tra xem item.directoryName đã tồn tại trong danh sách items hay chưa
-        var isDuplicate = $scope.items.some(function(existingItem) {
+        var isDuplicate = $scope.items.some(function (existingItem) {
             return existingItem.directoryName === item.directoryName;
         });
 
         if (isDuplicate) {
             // Nếu tên danh mục đã tồn tại, hiển thị thông báo và không tạo mới
-            isSusccess(3,"Danh mục đã tồn tại")
+            $scope.Messwarning = true;
+            $scope.Messsuccess = false
+            $scope.Messerror = false
+            $scope.message = "Danh mục " +`${item.directoryName} đã tồn tại`
             console.log($scope.message)
             $('#create_directory').modal('hide');
         } else {
@@ -126,12 +132,19 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
             $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
                 $scope.items.push(resp.data);
                 $scope.form = {};
-                isSusccess(1,"Thêm danh mục thành công")
+                $scope.Messerror = false
+                $scope.Messwarning = false;
+                $scope.Messsuccess = true
+                $scope.message = "Thêm danh mục thành công"
                 console.log($scope.message)
                 $('#create_directory').modal('hide');
             }).catch(error => {
+                $scope.form = {};
                 console.log("Error", error);
-                isSusccess(2,"Lỗi thêm mới danh mục")
+                $scope.Messsuccess = false
+                $scope.Messwarning = false
+                $scope.Messerror = true
+                $scope.message = "Lỗi thêm mới danh mục"
                 console.log($scope.message)
                 $('#create_directory').modal('hide');
             });

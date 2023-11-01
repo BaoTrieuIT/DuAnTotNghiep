@@ -18,11 +18,6 @@ app.config(function ($routeProvider) {
             controller: "directoryLv1_ctrl",
             controller: "directory_ctrl"
         })
-        .when("/manage_directory", {
-            templateUrl: "/admin/manage_directory.html",
-            controller: "directoryLv1_ctrl",
-            controller: "directory_ctrl"
-        })
         .when("/manage_shipping", {
             templateUrl: "/admin/manage_shipping.html",
             controller: "shipping_ctrl"
