@@ -38,21 +38,17 @@ app.service('DataSharingService', function ($timeout) {
 
 app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
 
-    console.log(DataSharingService.getData())
+    console.log("Before :",DataSharingService.getData())
     $scope.$watch(function () {
         return DataSharingService.getData()
-
     }, function (newDirectoryId, oldDirectoryId) {
+        console.log("After: ",DataSharingService.getData())
         if (newDirectoryId !== oldDirectoryId) {
             $scope.Messsuccess = newDirectoryId.messsuccess;
             $scope.Messerror = newDirectoryId.messerror;
             $scope.Messwarning = newDirectoryId.messwarning;
             $scope.message = newDirectoryId.message;
         }
-        console.log($scope.Messsuccess)
-        console.log($scope.Messerror)
-        console.log($scope.Messwarning)
-        console.log($scope.message)
     });
 
     $scope.initialize = function () {

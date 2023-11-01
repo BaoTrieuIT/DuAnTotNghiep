@@ -10,7 +10,6 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
         }
         // console.log(direcId)
     });
-
     $scope.initialize = function (direcId) {
         if (direcId === undefined) {
             $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
@@ -51,13 +50,13 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             data.messsuccess = true;
             data.message = "Tạo danh mục " +`${dlv1.directoryLv1Name} thành công`;
             DataSharingService.setData(data)
-            console.log(DataSharingService.getData())
+            console.log("data ngay tạo thành công: ",DataSharingService.getData())
         }).catch(error => {
             var data = DataSharingService.getData();
             data.messwarning = false;
             data.messsuccess = false;
             data.messerror = true;
-            data.message = "Tạo danh mục " +`${dlv1.drictoryLv1Name} thất bại`;
+            data.message = "Tạo danh mục thất bại";
             DataSharingService.setData(data)
             console.log(DataSharingService.getData().message)
         });
