@@ -39,7 +39,7 @@ app.service('DataSharingService', function ($timeout) {
 });
 
 
-app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
+app.controller("directory_ctrl", function ($scope, $http, DataSharingService,$timeout) {
 
     console.log("Before :",DataSharingService.getData())
     $scope.$watch(function () {
@@ -54,7 +54,15 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
             console.log(newDirectory)
         }
     });
-
+    function setAutoCloseTime() {
+        // Đóng thông báo tự động
+        var closeTimeout = $timeout(function() {
+            $scope.Messsuccess = false
+            $scope.Messerror = false
+            $scope.Messwarning = false
+            $scope.message = ""
+        }, 10000); // 10000 là 10s
+    }
     $scope.initialize = function () {
         $http.get("/rest/manage_gender").then(resp => {
             $scope.genders = resp.data
@@ -68,8 +76,6 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
         $scope.message = ""
         // Thông điệp thành công hoặc không thành công của bạn
     }
-
-
 
     // Chọn gender
     $scope.genderSelected = null;
@@ -120,6 +126,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
             $scope.message = "Danh mục " +`${item.directoryName} đã tồn tại`
             console.log($scope.message)
             $('#create_directory').modal('hide');
+            setAutoCloseTime()
         } else {
             // Nếu tên danh mục chưa tồn tại, tiến hành tạo mới
             $http.post("/rest/manage_directory/" + genderID, item).then(resp => {
@@ -131,6 +138,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
                 $scope.message = "Thêm danh mục thành công"
                 console.log($scope.message)
                 $('#create_directory').modal('hide');
+                setAutoCloseTime()
             }).catch(error => {
                 $scope.form = {};
                 console.log("Error", error);

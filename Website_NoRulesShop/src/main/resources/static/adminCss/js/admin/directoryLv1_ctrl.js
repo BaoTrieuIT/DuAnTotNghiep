@@ -160,6 +160,7 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
                 data.messwarning = false;
                 data.messsuccess = true;
                 data.message = "Xóa danh mục đã chọn thành công";
+                console.log(DataSharingService.getData().message);
                 DataSharingService.setData(data)
             }else {
                 console.error("Lỗi", response);
