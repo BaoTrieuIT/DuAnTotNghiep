@@ -30,7 +30,10 @@ app.service('DataSharingService', function ($timeout) {
         getData: function () {
             return data;
         }, setData: function (newData) {
-            data = newData;
+            data.messsuccess = newData.messsuccess;
+            data.messerror = newData.messerror;
+            data.messwarning = newData.messwarning;
+            data.message = newData.message;
         },
     };
 });
@@ -41,13 +44,14 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
     console.log("Before :",DataSharingService.getData())
     $scope.$watch(function () {
         return DataSharingService.getData()
-    }, function (newDirectoryId, oldDirectoryId) {
+    }, function (newDirectory, oldDirectory) {
         console.log("After: ",DataSharingService.getData())
-        if (newDirectoryId !== oldDirectoryId) {
-            $scope.Messsuccess = newDirectoryId.messsuccess;
-            $scope.Messerror = newDirectoryId.messerror;
-            $scope.Messwarning = newDirectoryId.messwarning;
-            $scope.message = newDirectoryId.message;
+        if (newDirectory !== oldDirectory) {
+            $scope.Messsuccess = newDirectory.messsuccess;
+            $scope.Messerror = newDirectory.messerror;
+            $scope.Messwarning = newDirectory.messwarning;
+            $scope.message = newDirectory.message;
+            console.log(newDirectory)
         }
     });
 
@@ -65,13 +69,6 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService) {
         // Thông điệp thành công hoặc không thành công của bạn
     }
 
-
-    $scope.closeAlert = function () {
-        $scope.Messsuccess = false;
-        $scope.Messerror = false;
-        $scope.Messwarning = false;
-        $scope.message = '';
-    }
 
 
     // Chọn gender

@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.controller.admin;
 
 
+import com.poly.website_norulesshop.config.ResponseMessage;
 import com.poly.website_norulesshop.entity.Directory;
 import com.poly.website_norulesshop.entity.DirectoryLv1;
 import com.poly.website_norulesshop.service.DirectoryLv1Service;
@@ -35,13 +36,21 @@ public class DirectoryLv1Controller {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteDirectories(@RequestBody List<Integer> directoryIds) {
+    public ResponseEntity<Object> deleteDirectories(@RequestBody List<Integer> directoryIds) {
         try {
             directoryLv1Service.deleteDirectories(directoryIds);
-            return ResponseEntity.ok("Deleted successfully");
+            return ResponseEntity.ok(new ResponseMessage("Deleted successfully"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete directories");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage("Failed to delete directories"));
         }
     }
-
+//    @DeleteMapping("/delete")
+//    public ResponseEntity<String> deleteDirectories(@RequestBody List<Integer> directoryIds) {
+//        try {
+//            directoryLv1Service.deleteDirectories(directoryIds);
+//            return ResponseEntity.ok("Deleted successfully");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete directories");
+//        }
+//    }
 }
