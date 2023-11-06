@@ -3,6 +3,7 @@ package com.poly.website_norulesshop.service.Impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import com.poly.website_norulesshop.Repository.DirectoryLv1Repository;
@@ -45,4 +46,10 @@ public class DirectoryLv1ServiceImpl implements DirectoryLv1Service {
         return directoryLv1Repository.findByDirectory(directory);
     }
 
+    @Override
+    public void deleteDirectories(List<Integer> directoryLv1Ids) {
+        for (Integer directoryId : directoryLv1Ids) {
+            directoryLv1Repository.deleteById(directoryId);
+        }
+    }
 }

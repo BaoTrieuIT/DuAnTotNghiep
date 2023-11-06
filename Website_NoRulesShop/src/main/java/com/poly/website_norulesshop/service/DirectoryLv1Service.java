@@ -17,4 +17,7 @@ public interface DirectoryLv1Service {
     void deleteDirectoryLv1(Integer id);
 
     List<DirectoryLv1> getByDirectory(Directory directory);
+
+    default void deleteDirectories(List<Integer> directoryLv1Ids){
+    };
 }

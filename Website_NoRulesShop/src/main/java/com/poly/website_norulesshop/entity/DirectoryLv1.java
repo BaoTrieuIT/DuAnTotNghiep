@@ -15,7 +15,7 @@ public class DirectoryLv1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "directory_lv1_id")
-    private Integer directory_lv1_id;
+    private Integer directoryLv1Id;
     @Column(name = "directory_lv1_name")
     private String directoryLv1Name;
 

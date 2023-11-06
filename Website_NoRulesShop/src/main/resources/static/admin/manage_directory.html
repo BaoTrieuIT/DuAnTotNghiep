@@ -1,13 +1,23 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-        <h1>Quản lý danh mục</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                <li class="breadcrumb-item">Quản lý sản phẩm</li>
-                <li class="breadcrumb-item active">Quản lý danh mục</li>
-            </ol>
-        </nav>
+    <div class="pagetitle row">
+        <div class="col-lg-6">
+            <h1>Quản lý danh mục</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                    <li class="breadcrumb-item">Quản lý sản phẩm</li>
+                    <li class="breadcrumb-item active">Quản lý danh mục</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-lg-6">
+            <div class="alert alert-dismissible fade show" ng-class="{'alert-success': Messsuccess, 'alert-danger': Messerror,'alert-warning': Messwarning}">
+                <i class="bi me-1" ng-class="{'bi-check-circle': Messsuccess, 'bi-exclamation-octagon': Messerror,'bi-exclamation-triangle': Messwarning}"></i>
+                {{ message }}
+<!--                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ng-click="closeAlert()"></button>-->
+            </div>
+
+        </div>
     </div><!-- End Page Title -->
     <div class="col-xl-12">
         <div class="card">
@@ -16,13 +26,13 @@
                 <ul class="nav nav-tabs nav-tabs-bordered">
 
                     <li class="nav-item">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#list-directory">Danh sách
+                        <button class="nav-link " data-bs-toggle="tab" data-bs-target="#list-directory">Danh sách
                             danh mục
                         </button>
                     </li>
 
                     <li class="nav-item">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#manage-directory">Quản lý danh
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#manage-directory">Quản lý danh
                             mục
                         </button>
                     </li>
@@ -30,7 +40,7 @@
                 </ul>
                 <div class="tab-content pt-2">
 
-                    <div class="tab-pane fade show active profile-overview" id="list-directory">
+                    <div class="tab-pane fade profile-overview" id="list-directory">
                         <div class="card-body">
                             <h3 class="card-title">
 
@@ -114,7 +124,7 @@
                         </div>
                     </div>
 
-                    <div class=" tab-pane fade profile-edit chanel-container pt-3" id="manage-directory">
+                    <div class=" tab-pane fade show active profile-edit chanel-container pt-3" id="manage-directory">
                         <!--						<div class="col-lg-6">-->
 
                         <div class="card">
@@ -135,12 +145,13 @@
                                         </div>
                                         <h3>{{genderSelected.items}}</h3>
                                     </div>
-                                    <form class="col-3 " method="post">
+                                    <!--                                    Thêm danh mục cha-->
+                                    <div class="col-3 ">
                                         <button class="btn btn-primary d-flex align-items-center" type="button"
                                                 data-bs-toggle="modal" data-bs-target="#create_directory">
                                             <i class="bx bx-plus"></i><b>Thêm danh mục</b>
                                         </button>
-                                        <div class="modal fade" id="create_directory" tabindex="-2">
+                                        <form method="post" class="modal fade" id="create_directory" tabindex="-2">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -162,9 +173,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </form>
-
+                                        </form>
+                                    </div>
 
                                 </div>
 
@@ -184,36 +194,34 @@
                                         <div id="collapse{{ $index }}" class="accordion-collapse collapse"
                                              aria-labelledby="headingOne"
                                              data-bs-parent="#accordionExample">
-                                            <div class="accordion-body" ng-controller="directoryLv1_ctrl">
+                                            <div class="accordion-body" ng-controller="directoryLv1_ctrl" >
                                                 <ul>
                                                     <li class="row d-flex flex-row align-items-center p-3"
-                                                        ng-repeat="directoryLv1 in ListdirectoryLv1">
+                                                        ng-repeat="directoryLv1 in ListdirectoryLv1 | filter: filterByDirectoryId ">
 
                                                         <div class="col-1 form-check ">
-                                                            <input class="form-check-input " type="checkbox" checked>
+                                                            <input class="form-check-input" type="checkbox" ng-model="directoryLv1.checked">
                                                         </div>
-
-                                                        <div class="col-10 name_directory_lv1 ">
-                                                            <a class="mb-3"
-                                                               href="#">{{directoryLv1.directoryLv1Name}}</a>
+                                                        <!-- SỬA DANH MỤC CON-->
+                                                        <div  class="col-10 name_directory_lv1" >
+                                                            <a class="mb-3" href="#">{{directoryLv1.directoryLv1Name}}</a>
                                                             <button class="btn" type="button" data-bs-toggle="modal"
-                                                                    data-bs-target="#edit_name_directory_lv1">
-                                                                <i class="bx  bx-edit-alt"></i>
+                                                                    data-bs-target="{{'#edit_name_directory_lv1_' + directory.directoryId + directoryLv1.directoryLv1Id }}" ng-click="selectDirectoryLv1(directoryLv1)">
+                                                                <i class="bx bx-edit-alt"></i>
                                                             </button>
-                                                            <div class="modal fade" id="edit_name_directory_lv1"
-                                                                 tabindex="-1">
+                                                            <div class="modal fade" id="{{'edit_name_directory_lv1_'+ + directory.directoryId + directoryLv1.directoryLv1Id}}" tabindex="-3">
                                                                 <div class="modal-dialog modal-dialog-centered">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title">Tên danh mục
-                                                                                con</h5>
+                                                                            <h5 class="modal-title">Tên danh mục con</h5>
                                                                             <button type="button" class="btn-close"
                                                                                     data-bs-dismiss="modal"
-                                                                                    aria-label="Close"></button>
+                                                                                    aria-label="Close">
+                                                                            </button>
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <input type="text" class="form-control"
-                                                                                   ng-model="drLv1.directoryLv1Name"
+                                                                                   ng-model="selectedDirectoryLv1.directoryLv1Name"
                                                                                    placeholder="Tên danh mục con....">
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -221,20 +229,21 @@
                                                                                     class="btn btn-secondary"
                                                                                     data-bs-dismiss="modal">Cancel
                                                                             </button>
-                                                                            <!--																				<button type="button" class="btn btn-primary" ng-change="updateDirLV1(directoryLv1.directoryLv1Id)">Thay đổi</button>-->
+                                                                            <button type="submit" class="btn btn-primary" ng-click="updateDirLV1()">
+                                                                                Thay đổi
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-1 form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   ng-model="directoryLv1.checked">
+                                                            <input class="form-check-input" type="checkbox">
                                                         </div>
                                                     </li>
                                                 </ul>
                                                 <div class="d-flex flex-row-reverse justify-content-end">
+                                                    <!-- XÓA NHỮNG DANH MỤC CON ĐƯỢC CHECK-->
                                                     <button class="btn btn-danger d-flex align-items-center m-2"
                                                             type="button" style="font-size: 14px;"
                                                             ng-click="deleteSelectedItems()">
@@ -243,44 +252,40 @@
                                                     </button>
                                                     <button class="btn btn-primary d-flex align-items-center m-2"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#create_directory_lv1{{$index}}"
+                                                            data-bs-target="{{'#create_directory_lv1_'+ directory.directoryId}}"
                                                             type="button"
                                                             style="font-size: 14px;"
-                                                            ng-click="select(directory.directoryId)">
                                                         <i class="bx bx-plus"></i>
                                                         <b>Thêm danh mục con</b>
                                                     </button>
-
-                                                    <form method="post" class="modal fade"
-                                                          id="create_directory_lv1{{$index}}"
-                                                          tabindex="-1">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Danh mục con</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <input type="text" class="form-control"
-                                                                           ng-model="form.directoryLv1Name"
-                                                                           placeholder="Tên danh mục con....">
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Cancel
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-primary"
-                                                                            ng-click="creatDirLv1(directory.directoryId)">
-                                                                        Thêm mới
-                                                                    </button>
+                                                        <form method="post" class="modal fade"
+                                                              id="{{'create_directory_lv1_'+ directory.directoryId}}"
+                                                              tabindex="-1" ng-submit="creatDirLv1(directory.directoryId)">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Danh mục con</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                                data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <input type="text" class="form-control"
+                                                                               ng-model="form.directoryLv1Name"
+                                                                               placeholder="Tên danh mục con....">
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                                data-bs-dismiss="modal">Cancel
+                                                                        </button>
+                                                                        <button type="submit" class="btn btn-primary">
+                                                                            Thêm mới
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -299,5 +304,6 @@
 
             </div>
         </div>
+
     </div>
 </main><!-- End #main -->

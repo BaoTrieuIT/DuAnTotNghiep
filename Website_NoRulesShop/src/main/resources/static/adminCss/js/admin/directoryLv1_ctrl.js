@@ -8,92 +8,176 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             // Gọi lại API khi directoryId thay đổi
             direcId = newDirectoryId
         }
+        // console.log(direcId)
     });
-    // $scope.initialize = function (direcId) {
-    //     var iD = direcId;
-    //     if (iD === undefined) {
-    //         $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
-    //             $scope.ListdirectoryLv1 = resp.data;
-    //         })
-    //     } else {
-    //         $http.get("/rest/manage_directory/Directory?directoryId=" + iD).then(resp => {
-    //             $scope.ListdirectoryLv1 = resp.data;
-    //         })
-    //     }
-    //
     $scope.initialize = function (direcId) {
-        $http.get("/rest/manage_directory/Directory?directoryId=" + direcId).then(resp => {
-            $scope.ListdirectoryLv1 = resp.data;
-        })
-    }
-    $scope.select = function (direcId) {
-        console.log(direcId)
+        if (direcId === undefined) {
+            $http.get("/rest/manage_directory/DirectoryLv1").then(resp => {
+                $scope.ListdirectoryLv1 = resp.data;
+            })
+        } else {
+            $http.get("/rest/manage_directory/Directory?directoryId=" + direcId).then(resp => {
+                $scope.ListdirectoryLv1 = resp.data;
+            })
+        }
 
-        // var dlv1 = angular.copy($scope.form)
-        // $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
-        //     $scope.ListdirectoryLv1.push(resp.data);
-        //     $scope.form = {};
-        //     alert("Thêm mới thành công!");
-        // }).catch(error => {
-        //     alert("Lỗi thêm mới!");
-        //     console.log("Error", error);
-        // });
     }
 
+
+// THÊM MỚI DIRECTORY LEVEL 1
+//     $scope.creatDirLv1 = function (direcId) {
+//         var dlv1 = angular.copy($scope.form)
+//         $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
+//             $scope.ListdirectoryLv1.push(resp.data);
+//             $scope.form = {};
+//             $('#create_directory_lv1_' + direcId).modal('hide');
+//             isSusccess(1,`Thêm danh mục ` +`${dlv1.directoryLv1Name} thành công`)
+//             console.log(`Thêm danh mục ` +`${dlv1.directoryLv1Name} thành công`)
+//         }).catch(error => {
+//             isSusccess(2," Lỗi thêm mới danh mục")
+//             console.log(Error,error + " Lỗi thêm mới danh mục")
+//         });
+//     }
     $scope.creatDirLv1 = function (direcId) {
-        console.log($scope.ListdirectoryLv1)
-        console.log(direcId)
-        console.log($scope.directoryLv1Name)
         var dlv1 = angular.copy($scope.form)
         $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
             $scope.ListdirectoryLv1.push(resp.data);
             $scope.form = {};
-            alert("Thêm mới thành công!");
+            $('#create_directory_lv1_' + direcId).modal('hide');
+            var data = DataSharingService.getData();
+            data.messerror = false;
+            data.messwarning = false;
+            data.messsuccess = true;
+            data.message = "Tạo danh mục " +`${dlv1.directoryLv1Name} thành công`;
+            DataSharingService.setData(data)
+            console.log("data ngay tạo thành công: ",DataSharingService.getData())
         }).catch(error => {
-            alert("Lỗi thêm mới!");
-            console.log("Error", error);
+            var data = DataSharingService.getData();
+            data.messwarning = false;
+            data.messsuccess = false;
+            data.messerror = true;
+            data.message = "Tạo danh mục thất bại";
+            DataSharingService.setData(data)
+            console.log(DataSharingService.getData().message)
         });
     }
 
-    // $scope.update = function(item){
-    //     var item = angular.copy($scope.form);
-    //     $http.put(`/rest/directoryLv1/${item.id}`, item).then(resp => {
-    //         var index = $scope.ListdirectoryLv1.findIndex(p => p.id == item.id);
-    //         $scope.ListdirectoryLv1[index] = item;
-    //         alert("Cập nhật sản phẩm thành công!");
-    //     })
-    //         .catch(error => {
-    //             alert("Lỗi cập nhật sản phẩm!");
-    //             console.log("Error", error);
-    //         });
-    // }
 
-    // $scope.delete = function(item){
-    //     if(confirm("Bạn muốn xóa sản phẩm này?")){
-    //         $http.delete(`/rest/directoryLv1/${item.id}`).then(resp => {
-    //             var index = $scope.ListdirectoryLv1.findIndex(p => p.id == item.id);
-    //             $scope.ListdirectoryLv1.splice(index, 1);
-    //             alert("Xóa sản phẩm thành công!");
-    //         }).catch(error => {
-    //             alert("Lỗi xóa sản phẩm!");
-    //             console.log("Error", error);
-    //         })
-    //     }
-    // }
-    // $scope.deleteSelectedItems = function() {
-    //     var selectedItems = $scope.ListdirectoryLv1.filter(function(item) {
-    //         return item.checked;
-    //     });
-    //
-    //     // Biến đổi danh sách các mục đã đánh dấu thành một mảng của các ID hoặc đối tượng Directory
-    //     var selectedIds = selectedItems.map(function(item) {
-    //         return item.directoryId;
-    //     });
-    //
-    //     $http.delete('/api/directories/delete', { data: selectedIds }).then(function(response) {
-    //         // Xử lý phản hồi từ máy chủ (nếu cần)
-    //     });
-    // };
+// CẬP NHẬT DIRECTORY LEVEL 1
+    $scope.selectedDirectoryLv1 = null
+
+    $scope.selectDirectoryLv1 = function (directoryLv1) {
+        $scope.selectedDirectoryLv1 = angular.copy(directoryLv1)
+        console.log(directoryLv1.directoryLv1Id)
+    }
+
+    $scope.updateDirLV1 = function () {
+        var item = angular.copy($scope.selectedDirectoryLv1);
+        // Sử dụng biến selectedDirectoryLv1
+        console.log(item)
+        if (!item.directoryLv1Id) {
+            alert("ID không hợp lệ.");
+            return;
+        }
+        $http.put(`/rest/directoryLv1/update/${item.directoryLv1Id}`, item).then(resp => {
+            var index = $scope.ListdirectoryLv1.findIndex(p => p.directoryLv1Id === item.directoryLv1Id);
+            if (index === -1) {
+                var data = DataSharingService.getData();
+                data.messerror = false;
+                data.messsuccess = false;
+                data.messwarning = true;
+                data.message = "Không tìm thấy danh mục con này tương ứng trong danh mục";
+                DataSharingService.setData(data)
+                return;
+            }
+            $scope.ListdirectoryLv1[index] = item;
+            $('#edit_name_directory_lv1_' + direcId + item.directoryLv1Id).modal('hide')
+            var data = DataSharingService.getData();
+            data.messerror = false;
+            data.messwarning = false;
+            data.messsuccess = true;
+            data.message = "Cập nhật danh mục thành công";
+            DataSharingService.setData(data)
+            console.log("data ngay tạo thành công: ",DataSharingService.getData())
+            $scope.selectedDirectoryLv1 = {};
+        }).catch(error => {
+            var data = DataSharingService.getData();
+            data.messwarning = false;
+            data.messsuccess = false;
+            data.messerror = true;
+            data.message = "Tạo danh mục thất bại";
+            DataSharingService.setData(data)
+            console.log(DataSharingService.getData().message)
+            console.log("Error", error);
+        });
+    };
+
+// XÓA DANH MỤC CON ĐƯỢC CHỌN
+    $scope.reloadDirectoryList = function() {
+        $http.get("/rest/manage_directory/Directory?directoryId=" + direcId).then(resp => {
+            $scope.ListdirectoryLv1 = resp.data;
+        }).catch(function(error) {
+            console.error("Error loading directory list", error);
+        });
+    };
+
+        var selectedIds = [];
+    $scope.deleteSelectedItems = function () {
+
+        // Lặp qua danh sách các mục đã đánh dấu
+        for (var i = 0; i < $scope.ListdirectoryLv1.length; i++) {
+            if ($scope.ListdirectoryLv1[i].checked) {
+                selectedIds.push($scope.ListdirectoryLv1[i].directoryLv1Id);
+                console.log($scope.ListdirectoryLv1[i].directoryLv1Name);
+            }
+        }
+        console.log(selectedIds)
+        if (selectedIds.length === 0) {
+            // alert("Vui lòng chọn ít nhất một mục để xóa.");
+            DataSharingService.isSuccess(3,"Vui lòng chọn ít nhất một mục để xóa.")
+            return;
+        }
+
+        // Gửi các ID đã chọn lên máy chủ để xóa
+        $http({
+            method: 'DELETE',
+            url: '/rest/directoryLv1/delete',
+            data: selectedIds, // Gửi mảng các ID cần xóa
+            headers: {'Content-Type': 'application/json;charset=utf-8'}
+        }).then(function (response) {
+            var message = response.data.message;
+            if (message === "Deleted successfully"){
+                for (var i = $scope.ListdirectoryLv1.length - 1; i >= 0; i--) {
+                    if (selectedIds.indexOf($scope.ListdirectoryLv1[i].directoryLv1Id) !== -1) {
+                        // Xóa mục đã chọn khỏi danh sách
+                        $scope.ListdirectoryLv1.splice(i, 1);
+                    }
+                }
+                $scope.reloadDirectoryList()
+                console.log($scope.reloadDirectoryList())
+                var data = DataSharingService.getData();
+                data.messerror = false;
+                data.messwarning = false;
+                data.messsuccess = true;
+                data.message = "Xóa danh mục đã chọn thành công";
+                console.log(DataSharingService.getData().message);
+                DataSharingService.setData(data)
+            }else {
+                console.error("Lỗi", response);
+            }
+        }).catch(function (error) {
+            // alert("Lỗi xóa mục đã chọn.");
+            var data = DataSharingService.getData();
+            data.messwarning = false;
+            data.messsuccess = false;
+            data.messerror = true;
+            data.message = "Lỗi xóa danh mục";
+            DataSharingService.setData(data)
+            console.log(DataSharingService.getData().message)
+            console.error("Error", error);
+        });
+    };
+
 
     $scope.initialize();
 })
