@@ -36,6 +36,15 @@ public class Product {
     @Column(name = "product_description")
     private String productDescription;
 
+    @Column(name = "price_min")
+    private Float priceMin;
+
+    @Column(name = "priceMax")
+    private Float priceMax;
+
+    @Column(name = "total_quantity")
+    private Integer totalQuantity;
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
@@ -63,6 +72,7 @@ public class Product {
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
+
 
 
 

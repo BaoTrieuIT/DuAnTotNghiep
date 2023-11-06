@@ -93,17 +93,19 @@ public class ProductController {
     public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max){
 
         List<Product> listToReturn = new ArrayList<>();
-        for (Product product: listProduct) {
-            Integer maxProductPrice =   ProductUtils.findMaxPriceInCategoryQuantityList(product);
-            Integer minProductPrice =   ProductUtils.findMinPriceInCategoryQuantityList(product);
-            if ((minProductPrice < max  && minProductPrice >min) || (maxProductPrice < max && maxProductPrice> min) ) {
-                listToReturn.add(product);
+        if(listProduct.isEmpty()){
+            System.out.println("List trong");
+        }else{
+            System.out.println("filtering...");
+            for (Product product: listProduct) {
+                if((product.getPriceMin() <= max && product.getPriceMin() > min )|| (product.getPriceMax() <= max && product.getPriceMax() > min)){
+                    listToReturn.add(product);
+                }
             }
         }
         if(listToReturn.isEmpty()){
             System.out.println("empty list");
         }
-        System.out.println(min + " " + max );
         return listToReturn;
     }
 

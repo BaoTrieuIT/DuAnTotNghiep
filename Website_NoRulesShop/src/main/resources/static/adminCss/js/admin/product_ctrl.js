@@ -1,11 +1,13 @@
 app.controller("product_ctrl", function($scope, $http){
 
+    $scope.search_product_name = "";
+    $scope.minValue = 0;
+    $scope.maxValue = 1000;
 
     $scope.filterByPrice = function (){
         $http.get("rest/product_all/")
     }
-    $scope.minValue = 0;
-    $scope.maxValue = 10000000;
+
 
     $scope.initialize = function () {
         $scope.renderProductIsActive();

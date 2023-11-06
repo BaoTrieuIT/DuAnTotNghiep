@@ -43,35 +43,26 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> SearchProductActiveByName(String productName) {
         productName = "%"+ productName+ "%";
-        return productRepository.findByProductNameLikeAndAndIsRemoved(productName, false);
+        return productRepository.findProductByProductNameLikeAndIsRemoved(productName, false);
     }
 
     @Override
     public List<Product> SearchProductHiddenByName(String productName) {
         productName = "%"+ productName+ "%";
-        return productRepository.findByProductNameLikeAndAndIsRemoved(productName, true);
+        return productRepository.findProductByProductNameLikeAndIsRemoved(productName, true);
     }
 
     @Override
     public List<Product> SearchProductSoldoutByName(String productName) {
-        List<Product> listProduct  = productRepository.findAll();
-        List<Product> listProductIsSoldOut = new ArrayList<>();
-        for (Product product: listProduct) {
-            Integer checkSoldOut = 0;
-            for (CategoryQuantity categoryQuantity : product.getCategoryQuantityList()) {
-                checkSoldOut += categoryQuantity.getQuantity();
-            }
-            if(checkSoldOut == 0){
-                listProductIsSoldOut.add(product);
+        productName = "%"+ productName+ "%";
+        List<Product> listProductIsSoldOutAndNameBy =  productRepository.findProductByProductNameLike(productName);
+        List<Product> productListToReturn = new ArrayList<>();
+        for (Product product: listProductIsSoldOutAndNameBy) {
+            if(product.getTotalQuantity() == 0){
+                productListToReturn.add(product);
             }
         }
-        List<Product> listProductIsSoldOutAndNameBy = new ArrayList<>();
-        for (Product product: listProductIsSoldOut) {
-                if(product.getProductName().contains(productName)) {
-                    listProductIsSoldOutAndNameBy.add(product);
-                }
-        }
-        return listProductIsSoldOutAndNameBy;
+        return productListToReturn;
     }
 
 
@@ -90,11 +81,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> listProduct  = productRepository.findAll();
         List<Product> listProductIsSoldOut = new ArrayList<>();
         for (Product product: listProduct) {
-            Integer checkSoldOut = 0;
-            for (CategoryQuantity categoryQuantity : product.getCategoryQuantityList()) {
-                checkSoldOut += categoryQuantity.getQuantity();
-            }
-            if(checkSoldOut == 0){
+            if(product.getTotalQuantity() == 0){
                 listProductIsSoldOut.add(product);
             }
         }
