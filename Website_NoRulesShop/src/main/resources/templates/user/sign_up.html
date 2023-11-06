@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Sign in</title>
 </head>
 <body>
 <nav aria-label="breadcrumb" class="w-100 float-left">
@@ -10,8 +8,8 @@
         data-source-url="/user/img/banner/parallax.jpg"
         style="background-image: url('/user/img/banner/parallax.jpg');
         background-position: 50% 0.809717%;">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Register</li>
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Đăng ký tài khoản</li>
     </ol>
 </nav>
 <div class="main-content w-100 float-left blog-list">
@@ -20,17 +18,20 @@
             <div class="products-grid col-xl-9 col-lg-8 order-lg-2 ">
                 <div class="row">
                     <div class="col-lg-12 order-lg-last account-content">
-                        <h4>Sign up</h4>
-                        <form th:action="@{/home/sign-up}" class="myacoount-form" th:object="${item}">
+                        <h4>Đăng ký tài khoản</h4>
+                        <form th:action="@{/sign-up}" class="myacoount-form" th:object="${item}" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group required-field">
-                                                <label for="username">Your username <span
+                                                <label for="username">Tên tài khoản <span
                                                         class="required">*</span></label>
                                                 <input type="text" class="form-control" id="username"
-                                                       name="username" th:field="*{username}" required="">
+                                                       name="username" th:field="*{username}" required>
+                                                <p class="text-danger" th:errors="*{username}"
+                                                   th:if="${#fields.hasErrors('username')}">
+                                                </p>
                                             </div>
                                             <!-- End .form-group -->
                                         </div>
@@ -39,43 +40,54 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group required-field">
-                                                <label for="email">Your email <span
+                                                <label for="email">Email của bạn <span
                                                         class="required">*</span></label>
-                                                <input type="text" class="form-control" id="email"
-                                                       name="email" th:field="*{email}" required="">
+                                                <input type="email" class="form-control" id="email"
+                                                       name="email" th:field="*{email}" required>
+                                                <p class="text-danger" th:errors="*{email}"
+                                                   th:if="${#fields.hasErrors('email')}">
+                                                </p>
                                             </div>
                                             <!-- End .form-group -->
                                         </div>
                                         <!-- End .col-md-4 -->
                                     </div>
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-5">-->
+<!--                                            <div class="form-group required-field">-->
+<!--                                                <label for="phone_number">Your number <span-->
+<!--                                                        class="required">*</span></label>-->
+<!--                                                <input type="text" class="form-control" id="phone_number"-->
+<!--                                                       name="phone_number" th:field="*{phone_number}" required>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; End .form-group &ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash; End .col-md-4 &ndash;&gt;-->
+<!--                                    </div>-->
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group required-field">
-                                                <label for="phone_number">Your number <span
-                                                        class="required">*</span></label>
-                                                <input type="text" class="form-control" id="phone_number"
-                                                       name="phone_number" th:field="*{phone_number}" required="">
-                                            </div>
-                                            <!-- End .form-group -->
-                                        </div>
-                                        <!-- End .col-md-4 -->
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group required-field">
-                                                <label for="password">Your password <span
+                                                <label for="password">Mật khẩu <span
                                                         class="required">*</span></label>
                                                 <input type="password" class="form-control" id="password"
-                                                       name="password" th:field="*{password}" required="">
+                                                       name="password" th:field="*{password}" required>
+                                                <p class="text-danger" th:errors="*{password}"
+                                                   th:if="${#fields.hasErrors('password')}">
+                                                </p>
                                             </div>
                                             <!-- End .form-group -->
                                         </div>
                                         <div class="col-md-5">
                                             <div class="form-group required-field">
-                                                <label for="re_password">Repeat password <span
+                                                <label for="re_password">Nhập lại mật khẩu <span
                                                         class="required">*</span></label>
                                                 <input type="password" class="form-control" id="re_password"
-                                                       name="re_password" required="">
+                                                       name="confirmPassword" required>
+                                                <div  th:if="${#fields.hasErrors('confirmPassword')}">
+                                                    <p class="text-danger" th:errors="*{confirmPassword}">
+                                                    </p>
+                                                </div>
+
                                             </div>
                                             <!-- End .form-group -->
                                         </div>
@@ -90,8 +102,8 @@
                                 <div class="checkbox-link d-flex justify-content-between">
 
                                     <div class="right-col">
-                                        Already have an account ?
-                                        <a class="text-primary" href="sign-in">Sign in</a>
+                                        Bạn đã có tài khoản ?
+                                        <a class="text-primary" th:href="@{/sign-in}">Đăng nhập ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -103,14 +115,16 @@
                             <div class="form-footer ">
 
                                 <div class="form-footer-center">
-                                    <button type="submit" formaction="/home/sign-up/create" class="btn btn-primary btn-primary">Sign up</button>
+                                    <button type="submit" formaction="/home/sign-up" class="btn btn-primary btn-primary">
+                                        Đăng ký
+                                    </button>
 
                                 </div>
                                 <!-- <div class="col"> -->
 
                                 <div class="d-flex pt-2">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
-                                        <div>or Sign up using: </div></div>
+                                        <div>Hay đăng nhập qua: </div></div>
                                     <a href="#" class="login100-social-item bg1">
                                         <i class="fa-brands fa-facebook"></i>
                                     </a>

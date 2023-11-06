@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -24,10 +25,15 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
-    //    @Autowired
-//    private DataSource dataSource;
-    BCryptPasswordEncoder pe;
+    private static final String[] USER_RESOURCES = {
+            "/home/checkout-page/**", "/home/my-account/**"
+    };
+    private static final String[] ADMIN_RESOURCES = {
+            "/admin/**"
+    };
+
     @Autowired
     AccountService accountService;
 
@@ -41,7 +47,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -62,18 +68,17 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/home/checkout-page/**", "/home/my-account/**")
+                        .requestMatchers(USER_RESOURCES)
                         .authenticated()
-                        .requestMatchers("/admin/**").hasAuthority("Admin")
+                        .requestMatchers(ADMIN_RESOURCES).hasAuthority("Admin")
                         .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/home/sign-in")
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .successHandler((request, response, authentication) -> {
                             String username = authentication.getName();
-                            Account acc = accountService.getAccountByUsername(username);
+                            Account acc = accountService.findByUsername(username);
                             session.setAttribute("acc", acc);
-                            System.out.println(acc.getFullname());
                             response.sendRedirect("/home/index");
                         })
 

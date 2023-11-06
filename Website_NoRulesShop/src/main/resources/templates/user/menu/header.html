@@ -12,11 +12,11 @@
             <div class="header-nav">
                 <div class="container">
                     <div class="nav-left float-left">
-                        <div class="ttheader-service">Wants to explore Upcoming Deals on Weekends?</div>
+                        <div class="ttheader-service">Bạn muốn khám phá Ưu đãi sắp tới vào cuối tuần?</div>
                     </div>
                     <div class="nav-right float-right d-flex">
                         <div class="ttheader-mail">
-                            <a href="mailto:demo.store@gmail.com">demo.store@gmail.com</a>
+                            <a href="mailto:noruleshop2023@gmail.com">noruleshop2023@gmail.com</a>
                         </div>
                     </div>
                 </div>
@@ -105,32 +105,32 @@
 
                                     <ul sec:authorize="isAuthenticated()">
                                         <li>
-                                            <a th:href="@{/admin/index}">Admin</a>
+                                            <a th:href="@{/admin/index}">Trang quản trị</a>
                                         </li>
                                         <li>
-                                            <a href="my-account"
-                                               class="text-capitalize">My account
+                                            <a th:href="@{my-account}"
+                                               class="text-capitalize">Tài khoản của tôi
                                             </a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/home/sign-out}"
+                                            <a th:href="@{sign-out}"
                                                class="text-capitalize">
-                                                Logout
+                                                Đăng xuất
                                             </a>
 
                                         </li>
                                     </ul>
                                     <ul sec:authorize="!isAuthenticated()">
                                         <li>
-                                            <a href="sign-up"
+                                            <a th:href="@{sign-up}"
                                                class="text-capitalize">
-                                                Register
+                                                Đăng ký
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="sign-in"
+                                            <a th:href="@{sign-in}"
                                                class="text-capitalize">
-                                                Login
+                                                Đăng nhập
                                             </a>
 
                                         </li>
@@ -176,7 +176,7 @@
                                             <table class="table price mb-30">
                                                 <tbody>
                                                 <tr>
-                                                    <td class="text-left"><strong>Total</strong></td>
+                                                    <td class="text-left"><strong>Tổng tiền</strong></td>
                                                     <td class="text-right"><strong>$2,122.00</strong></td>
                                                 </tr>
                                                 </tbody>
@@ -185,11 +185,11 @@
                                         <li class="buttons w-100 float-left">
                                             <form action="">
                                                 <a class="btn pull-left mt_10 pt-2 pb-2 btn-primary btn-rounded w-100"
-                                                   href="cart-page">View cart</a>
+                                                   href="cart-page">Giỏ hàng</a>
                                             </form>
                                             <form action="">
                                                 <a class="btn pull-left mt_10  pt-2 pb-2  btn-primary btn-rounded w-100"
-                                                   href="checkout-page">Checkout</a>
+                                                   href="checkout-page">Thanh toán</a>
                                             </form>
                                         </li>
                                     </ul>
@@ -224,56 +224,25 @@
 
                                 <!-- Links -->
                                 <ul class="navbar-nav m-auto justify-content-center">
-                                    <li class="nav-item dropdown active">
-                                        <a class="nav-link dropdown-toggle text-uppercase"
+                                    <li class="nav-item active">
+                                        <a class="nav-link text-uppercase"
                                            href="index">
-                                            Home
-                                            <span class="sr-only">(current)</span></a>
-                                        <div class="dropdown-menu mega-menu v-2 z-depth-1 special-color py-3 px-3">
-                                            <div class="sub-menu mb-xl-0 mb-4">
-                                                <ul class="list-unstyled">
-                                                    <li>
-                                                        <a class="menu-item pl-0"
-                                                           href="index">
-                                                            Home
-                                                        </a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item dropdown mega-dropdown">
-                                        <a class="nav-link dropdown-toggle text-uppercase"
-                                           href="category">Category
+                                            Trang chủ
                                         </a>
                                     </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle text-uppercase"
-                                           href="category">Pages
+                                    <li class="nav-item ">
+                                        <a class="nav-link text-uppercase"
+                                           href="category">Sản phẩm
                                         </a>
-                                        <div class="dropdown-menu mega-menu v-2 z-depth-1 special-color py-3 px-3">
-                                            <div class="sub-menu">
-                                                <ul class="list-unstyled">
-                                                    <li>
-                                                        <a class="menu-item pl-0"
-                                                           href="about-us">
-                                                            About us
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="menu-item pl-0"
-                                                           href="accordions">
-                                                            Accordions
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link text-uppercase"
+                                           href="about-us"> Giới thiệu về chúng tôi
+                                        </a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link text-uppercase"
-                                           href="contact-us">contact us
+                                           href="contact-us">Liên hệ với chúng tôi
                                         </a>
                                     </li>
                                 </ul>
@@ -326,7 +295,7 @@
                                                     <li>
                                                         <a class="menu-item pl-0"
                                                            href="index">
-                                                            Home
+                                                            Trang chủ
                                                         </a>
                                                     </li>
 

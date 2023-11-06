@@ -40,6 +40,7 @@
           rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
           rel="stylesheet"/>
+    <title th:text="${title}"></title>
 
 </head>
 <body ng-app="app">
@@ -49,7 +50,6 @@
 
 <footer th:insert="~{/user/menu/footer.html :: footer}"></footer>
 
-<div th:insert="~{/user/modals/otp-verification_modal.html :: otp-verification}"></div>
 <div th:insert="~{/user/modals/product-view_modal.html :: product-view}"></div>
 <div th:insert="~{/user/modals/cart-pop_modal.html :: cart-pop}"></div>
 <!-- Bootstrap core JavaScript

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">
+<head>
+</head>
+<body>
+<nav aria-label="breadcrumb" class="w-100 float-left">
+    <ol class="breadcrumb parallax justify-content-center"
+        data-source-url="/user/img/banner/parallax.jpg"
+        style="background-image: url('/user/img/banner/parallax.jpg');
+        background-position: 50% 0.809717%;">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">OTP Verification</li>
+    </ol>
+</nav>
+<div class="main-content w-100 float-left blog-list">
+    <div class="container ">
+        <div class="row">
+            <div class="products-grid col-xl-9 col-lg-8 order-lg-2 ">
+                <div class="row">
+                    <div class="col-lg-12 order-lg-last account-content">
+                        <h4>OTP Verification</h4>
+                        <form th:action="@{/send-otp}" class="myacoount-form" method="post">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div><span>A code has been sent to</span> <span th:text="${email}"></span>
+                                    </div>
+                                    <div th:if="${param.error != null}">
+                                        <div class="alert alert-danger mb-3">
+                                            <span>Code Không Đúng</span>
+                                        </div>
+                                    </div>
+                                    <div id="otp" class="inputs d-flex flex-row  mt-2">
+                                        <input class="m-2 text-center form-control rounded otp-input" type="text"
+                                               id="input-0"
+                                               maxlength="1"/>
+                                        <input class="m-2 text-center form-control rounded otp-input" type="text"
+                                               id="input-1"
+                                               maxlength="1"/>
+                                        <input class="m-2 text-center form-control rounded otp-input" type="text"
+                                               id="input-2"
+                                               maxlength="1"/>
+                                        <input class="m-2 text-center form-control rounded otp-input" type="text"
+                                               id="input-3"
+                                               maxlength="1"/>
+                                        <input class="m-2 text-center form-control rounded otp-input" type="text"
+                                               id="input-4"
+                                               maxlength="1"/>
+                                        <input class="m-2 text-center form-control rounded otp-input" type="text"
+                                               id="input-5"
+                                               maxlength="1"/>
+                                    </div>
+                                    <div class=" mt-2">
+                                        <span class="d-block" id="countdown"></span>
+                                        <span class="d-block" id="resend"></span>
+                                    </div>
+                                    <div class="checkbox-link d-flex justify-content-between">
+                                        <div class="right-col"><a href="/home/update-email">Update Email</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End .col-sm-11 -->
+                            </div>
+                            <!-- End .form-group -->
+
+                            <div class="form-footer ">
+
+                                <div class="form-footer-center">
+                                    <input type="hidden" id="hiddenInputField" name="fullCode"/>
+                                    <button type="submit" class="btn btn-primary btn-primary"
+                                            formaction="/home/check-code">Submit
+                                    </button>
+
+                                </div>
+                                <!-- <div class="col"> -->
+
+                            </div>
+
+                            <!-- End .form-footer -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+        function OTPInput() {
+            const inputs = document.querySelectorAll('#otp > *[id]');
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('keyup', function (event) {
+
+                    if (event.key === "Backspace") {
+                        for (let j = i; j >= 0; j--) {
+                            inputs[j].value = '';
+
+                        }
+                        // inputs[0].focus();
+                        inputs[0].focus();
+                    } else {
+                        if (i === inputs.length - 1 && inputs[i].value !== '') {
+                            return true;
+                        } else if (event.keyCode > 47 && event.keyCode < 58) {
+                            inputs[i].value = event.key;
+                            if (i !== inputs.length - 1) inputs[i + 1].focus();
+                            event.preventDefault();
+                        } else if (event.keyCode > 95 && event.keyCode < 106) {
+                            inputs[i].value = event.key;
+                            if (i !== inputs.length - 1) inputs[i + 1].focus();
+                            event.preventDefault();
+                        } else if (event.keyCode > 64 && event.keyCode < 91) {
+                            inputs[i].value = '';
+                            event.preventDefault();
+                        }
+                    }
+                });
+            }
+        }
+
+        OTPInput();
+    });
+    let timerOn = true;
+
+    function timer(remaining) {
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+        document.getElementById("countdown").innerHTML = `Time left: ${m} : ${s}`;
+        remaining -= 1;
+        if (remaining >= 0 && timerOn) {
+            setTimeout(function () {
+                timer(remaining);
+            }, 1000);
+            document.getElementById("resend").innerHTML = `
+    `;
+            return;
+        }
+        if (!timerOn) {
+            return;
+        }
+        document.getElementById("resend").innerHTML = `Don't receive the code?
+  			<a class="font-weight-bold text-primary cursor" onclick="timer(60)">Resend </a>`;
+    }
+
+    timer(60);
+
+    // Create an array to store the numbers from the input cells.
+    let numbers = [];
+    // const inputs = document.querySelectorAll('#otp > *[id]');
+    // Iterate over the input cells and add event listeners for the blur event.
+    for (let i = 0; i <= 5; i++) {
+        const inputCell = document.getElementById(`input-${i}`);
+        inputCell.addEventListener("keyup", () => {
+            if (event.key === "Backspace") {
+                // Set the numbers array to empty.
+                numbers = [];
+            }
+            if (event.keyCode > 64 && event.keyCode < 91) {
+                numbers = [];
+            }
+            if (event.keyCode > 47 && event.keyCode < 58) {
+                // Add the number from the input cell to the array.
+                numbers.push(inputCell.value);
+                console.log(numbers.length)
+                // If the array contains 6 numbers, join them into a string.
+                if (numbers.length === 6) {
+                    const string = numbers.join("");
+                    const hiddenInputField = document.getElementById("hiddenInputField");
+                    hiddenInputField.value = string;
+                }
+            }
+
+        });
+        // inputCell.addEventListener("change", () => {
+        //     // Update the number at the corresponding position in the numbers array.
+        //     numbers[i - 1] = inputCell.value;
+        //     // If the array contains 6 numbers, join them into a string.
+        //     if (numbers.length === 6) {
+        //         const string = numbers.join("");
+        //
+        //         // Update the summary element.
+        //         document.getElementById("summary").textContent = string;
+        //     }
+        // });
+        inputCell.addEventListener("input", () => {
+            // Check if the user has deleted all the numbers from the input cell.
+            if (inputCell.value === "") {
+                // Empty the numbers array.
+                numbers = [];
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>

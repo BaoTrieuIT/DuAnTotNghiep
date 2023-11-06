@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
     // Các phương thức đặc thù cho bảng Account (nếu cần)
-    @Query("SELECT a FROM Account a where a.username = :username")
-    public Account findByUsername(@Param("username") String username);
+    @Query("SELECT o FROM Account o WHERE o.username = :username")
+    Account findByUsername(String username);
 
+    @Query("SELECT o FROM Account o WHERE o.email = :email")
+    Account findByEmail(String email);
 }

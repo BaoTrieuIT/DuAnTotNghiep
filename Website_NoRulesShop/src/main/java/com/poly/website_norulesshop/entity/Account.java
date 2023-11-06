@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -20,27 +21,17 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Table(name = "account")
-public class Account {
+public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_id")
     private Integer account_id;
-    @NotBlank(message = "Vui lòng nhập mật khẩu")
     private String password;
-    @NotBlank(message = "Vui lòng nhập họ tên")
     private String fullname;
-    @NotBlank(message = "Vui lòng nhập số điên thoại")
     private String phone_number;
-    @NotBlank(message = "Vui lòng nhập email")
-    @Email(message = "Vui lòng nhập đúng định dạng")
     private String email;
-    @NotBlank(message = "Vui lòng nhập tên tài khoản")
     private String username;
-
     private Date create_date;
-
     private Date birthday;
-
     private String avatar_url;
 
 
