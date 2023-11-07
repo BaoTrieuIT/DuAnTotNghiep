@@ -123,6 +123,13 @@ create table `product`(
 	foreign key (brand_id) references `brand`(brand_id),
     foreign key (directory_lv1_id) references `directory_lv1`(directory_lv1_id)
 );
+use norule_shop;
+alter table product 
+add column price_min float;
+alter table product 
+add column price_max float;
+alter table product 
+add column total_quantity integer;
 
 
 create table `product_discount`(

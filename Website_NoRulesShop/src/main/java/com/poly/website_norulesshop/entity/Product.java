@@ -16,16 +16,35 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Integer product_id;
-    private String product_name;
-    private Float product_rating;
-    private Date create_date;
-    private Boolean is_remove;
-    private String product_description;
-    private Double price;
+    private Integer productId;
+
+    @Column(name = "product_name")
+    private String productName;
+
+    @Column(name = "product_rating")
+    private Float productRating;
+
+    @Column(name = "create_date")
+    private Date createDate;
+
+    @Column(name = "is_remove")
+    private Boolean isRemoved;
+
+    @Column(name = "product_description")
+    private String productDescription;
+
+    @Column(name = "price_min")
+    private Float priceMin;
+
+    @Column(name = "priceMax")
+    private Float priceMax;
+
+    @Column(name = "total_quantity")
+    private Integer totalQuantity;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -51,4 +70,9 @@ public class Product {
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
+
+
+
+
+
 }

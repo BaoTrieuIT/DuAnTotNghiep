@@ -7,12 +7,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.relation.Role;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity

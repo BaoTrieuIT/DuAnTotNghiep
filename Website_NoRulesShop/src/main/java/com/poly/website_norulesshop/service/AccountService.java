@@ -1,9 +1,9 @@
 package com.poly.website_norulesshop.service;
 
+import java.util.List;
+
 import com.poly.website_norulesshop.dto.AccountDTO;
 import com.poly.website_norulesshop.entity.Account;
-
-import java.util.List;
 
 public interface AccountService {
     Account saveAccount(Account account);

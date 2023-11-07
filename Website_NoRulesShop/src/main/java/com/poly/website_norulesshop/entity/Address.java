@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "address")
 public class Address {
     @Id
