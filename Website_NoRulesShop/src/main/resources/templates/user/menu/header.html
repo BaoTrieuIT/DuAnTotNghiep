@@ -108,12 +108,12 @@
                                             <a th:href="@{/admin/index}">Trang quản trị</a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/my-account}"
+                                            <a th:href="@{my-account}"
                                                class="text-capitalize">Tài khoản của tôi
                                             </a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/sign-out}"
+                                            <a th:href="@{sign-out}"
                                                class="text-capitalize">
                                                 Đăng xuất
                                             </a>
@@ -122,13 +122,13 @@
                                     </ul>
                                     <ul sec:authorize="!isAuthenticated()">
                                         <li>
-                                            <a th:href="@{/sign-up}"
+                                            <a th:href="@{sign-up}"
                                                class="text-capitalize">
                                                 Đăng ký
                                             </a>
                                         </li>
                                         <li>
-                                            <a th:href="@{/sign-in}"
+                                            <a th:href="@{sign-in}"
                                                class="text-capitalize">
                                                 Đăng nhập
                                             </a>

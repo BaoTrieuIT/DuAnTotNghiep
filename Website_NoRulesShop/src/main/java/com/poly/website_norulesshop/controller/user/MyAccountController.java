@@ -5,6 +5,7 @@ import com.poly.website_norulesshop.utils.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,7 +14,7 @@ public class MyAccountController {
     @Autowired
     SessionService session;
 
-    @RequestMapping("my-account")
+    @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
         model.addAttribute("title", "Tài khoản của tôi");
         Account acc = session.get("acc");

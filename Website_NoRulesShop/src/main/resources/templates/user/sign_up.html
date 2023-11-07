@@ -22,7 +22,7 @@
                         <form th:action="@{/sign-up}" class="myacoount-form" th:object="${item}" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="row">
+                                    <div class="row">@
                                         <div class="col-md-5">
                                             <div class="form-group required-field">
                                                 <label for="username">Tên tài khoản <span
@@ -103,7 +103,7 @@
 
                                     <div class="right-col">
                                         Bạn đã có tài khoản ?
-                                        <a class="text-primary" th:href="@{/sign-in}">Đăng nhập ngay</a>
+                                        <a class="text-primary" th:href="@{sign-in}">Đăng nhập ngay</a>
                                     </div>
                                 </div>
                             </div>
