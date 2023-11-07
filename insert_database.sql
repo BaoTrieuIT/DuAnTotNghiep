@@ -668,3 +668,13 @@ INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES
 INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (8,'product8.png',8);
 INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (9,'product9.png',9);
 INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (10,'product10.png',10);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (11,'product11.png',11);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (12,'product12.png',12);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (13,'product13.png',13);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (14,'product14.png',14);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (15,'product15.png',15);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (16,'product16.png',16);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (17,'product17.png',17);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (18,'product18.png',18);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (19,'product19.png',19);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (20,'product20.png',20);
