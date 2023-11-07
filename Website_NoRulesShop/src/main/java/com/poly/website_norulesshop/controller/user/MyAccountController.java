@@ -15,6 +15,7 @@ public class MyAccountController {
 
     @RequestMapping("my-account")
     public String index(Model model) throws InterruptedException {
+        model.addAttribute("title", "Tài khoản của tôi");
         Account acc = session.get("acc");
         String path = "/user/img/avatar/" + acc.getAvatar_url();
         model.addAttribute("imagePath", path);

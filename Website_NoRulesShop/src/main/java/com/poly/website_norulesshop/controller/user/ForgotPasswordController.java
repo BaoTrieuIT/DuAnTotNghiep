@@ -6,13 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("home")
-public class PageErrorController {
-    @RequestMapping("403Page")
-    public String login_form(Model model) {
-        model.addAttribute("title", "403 Error");
-        return "user/403";
+public class ForgotPasswordController {
 
+    @RequestMapping("forgot-password")
+    public String index(Model model) {
+        model.addAttribute("title", "Quên mật khẩu");
+        return "user/forgot_password";
     }
-
-
 }
