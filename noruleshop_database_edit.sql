@@ -1,6 +1,6 @@
 --  drop database norule_shop;
 --  create database norule_shop;
- use norule_shop;
+--  use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
@@ -115,6 +115,9 @@ create table `product`(
 	product_id int auto_increment primary key,
     product_name nvarchar(255),
     product_rating float null,
+    price_min float,
+    price_max float,
+    total_quantity integer,
     create_date date not null,
 	is_remove bit not null,
     product_description nvarchar(1000) not null,
@@ -123,14 +126,6 @@ create table `product`(
 	foreign key (brand_id) references `brand`(brand_id),
     foreign key (directory_lv1_id) references `directory_lv1`(directory_lv1_id)
 );
-use norule_shop;
-alter table product 
-add column price_min float;
-alter table product 
-add column price_max float;
-alter table product 
-add column total_quantity integer;
-
 
 create table `product_discount`(
 	product_discount_id int auto_increment primary key,
