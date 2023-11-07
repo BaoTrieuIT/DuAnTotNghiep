@@ -2,7 +2,7 @@ app.controller("product_ctrl", function($scope, $http){
 
     $scope.search_product_name = "";
     $scope.minValue = 0;
-    $scope.maxValue = 1000;
+    $scope.maxValue = 10000000;
 
     $scope.filterByPrice = function (){
         $http.get("rest/product_all/")
@@ -35,7 +35,7 @@ app.controller("product_ctrl", function($scope, $http){
     const rangeInput = document.querySelectorAll(".range-input input"),
         priceInput = document.querySelectorAll(".price-input input"),
         range = document.querySelector(".slider .progress");
-    let priceGap = 1000;
+    let priceGap = 1000000;
 
     priceInput.forEach(input =>{
         input.addEventListener("input", e =>{
