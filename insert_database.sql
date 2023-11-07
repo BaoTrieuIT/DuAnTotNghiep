@@ -86,16 +86,26 @@ INSERT INTO `brand` (`brand_name`,`logo_url`,`another_information`,`website_url`
 
 -- Insert data into `product` table
 INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`,`product_description`,`brand_id`,`directory_lv1_id`,`price_min`,`price_max`,`total_quantity`) VALUES 
- ('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,1,800000,1000000,100),
- ('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,1,300000,500000,0),
- ('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,1,2000000,2500000,100),
- ('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc DARK BLUE Chất liệu 99% Cotton 01% Elastane',1,1,800000,1000000,100),
- ('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',1,1,600000,800000,100),
- ('Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,1,1500000,1800000,100),
- ('Áo Lạnh Nữ',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc CK BLACK Chất liệu 62% Organic Cotton, 35% Polyester, 3% Elastane',1,1,990000,1200000,100),
- ('Áo Khoác Nữ Micro Cardigan',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc IVORY Chất liệu 100% Cotton',1,1,3900000,4200000,0),
- ('Quần Jeans Nam Body Fit',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc DENIM BLACK Chất liệu 70% Cotton 28% Polyester 2% Elastane',1,1,799000,999000,100),
- ('Áo Khoác Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc ASPHALT Chất liệu 100% Polyester',1,1,690000,890000,100);
+('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',1,1,800000,1000000,100),
+('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,1,300000,500000,0),
+('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,1,2000000,2500000,100),
+('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc DARK BLUE Chất liệu 99% Cotton 01% Elastane',1,1,800000,1000000,100),
+('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',1,1,600000,800000,100),
+('Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,1,1500000,1800000,100),
+('Áo Lạnh Nữ',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc CK BLACK Chất liệu 62% Organic Cotton, 35% Polyester, 3% Elastane',1,1,990000,1200000,100),
+('Áo Khoác Nữ Micro Cardigan',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc IVORY Chất liệu 100% Cotton',1,1,3900000,4200000,0),
+('Quần Jeans Nam Body Fit',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc DENIM BLACK Chất liệu 70% Cotton 28% Polyester 2% Elastane',1,1,799000,999000,100),
+('Áo Khoác Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc ASPHALT Chất liệu 100% Polyester',1,1,690000,890000,100),
+('Quần Vải Dài Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc	TRUE BLACK',1,1,1000000,1200000,1000),
+('Áo Sơ Mi Tay Dài Nam',4.7,'2023-09-11 00:00:00.000000',0,'Màu Sắc	GREEN STRIPE',1,2,690000,890000,100),
+('Quần Vải Dài Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc	BLACK MOSS',1,2,1690000,1890000,1000),
+('Quần Vải Dài Nam - Essential Khaki Slim Fit',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc ICONIC KHAKI',1,1,2690000,2890000,100), 
+('Nón Nam - Logo',4.7,'2023-09-11 00:00:00.000000',0,'Màu Sắc DEEP GARNET RED 501',1,3,290000,490000,1000),
+('Áo Sơ Mi Tay Ngắn Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc NAVY GINGHAM',1,1,890000,1890000,100), 
+('Quần Short Vải Nam - 8 Inch Vintage Short',4.9,'2023-09-11 00:00:00.000000',0,'Màu Sắc PILOT GREY',1,2,1690000,1890000,1000),
+('Đầm Vải Nữ',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BURGUNDY PINK FLORAL',1,1,3890000,4290000,100),
+('Đầm Vải Nữ Deep',4.3,'2023-09-11 00:00:00.000000',0,'Màu Sắc DEEP DEPTHS GRN 190413',1,2,490000,690000,1000),
+('Đầm Thun Nữ - Logo',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc DEEP GARNET RED 501',1,1,899000,990000,100);
 
 
 INSERT INTO `category_level_1` (`category_level_1_id`,`category_level_1_name`) VALUES
@@ -108,7 +118,17 @@ INSERT INTO `category_level_1` (`category_level_1_id`,`category_level_1_name`) V
 ('7','Size'),
 ('8','Size'),
 ('9','Size'),
-('10','Size');
+('10','Size'),
+('11','Size'),
+('12','Size'),
+('13','Size'),
+('14','Size'),
+('15','Size'),
+('16','Size'),
+('17','Size'),
+('18','Size'),
+('19','Size'),
+('20','Size');
 
 INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (1,'S',1);
 INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (2,'M',1);
@@ -150,6 +170,46 @@ INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_le
 INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (38,'M',10);
 INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (39,'L',10);
 INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (40,'XL',10);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (41,'S',11);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (42,'M',11);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (43,'L',11);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (44,'XL',11);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (45,'S',12);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (46,'M',12);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (47,'L',12);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (48,'XL',12);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (49,'S',13);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (50,'M',13);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (51,'L',13);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (52,'XL',13);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (53,'S',14);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (54,'M',14);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (55,'L',14);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (56,'XL',14);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (57,'S',15);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (58,'M',15);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (59,'L',15);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (60,'XL',15);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (61,'S',16);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (62,'M',16);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (63,'L',16);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (64,'XL',16);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (65,'S',17);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (66,'M',17);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (67,'L',17);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (68,'XL',17);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (69,'S',18);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (70,'M',18);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (71,'L',18);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (72,'XL',18);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (73,'S',19);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (74,'M',19);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (75,'L',19);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (76,'XL',19);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (77,'S',20);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (78,'M',20);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (79,'L',20);
+INSERT INTO `category_level_1_detail` (`category_level_1_detail_id`,`category_level_1_detail_name`,`category_level_1_id`) VALUES (80,'XL',20);
 
 
 
@@ -163,6 +223,16 @@ INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) V
 INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (8,'Color');
 INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (9,'Color');
 INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (10,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (11,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (12,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (13,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (14,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (15,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (16,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (17,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (18,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (19,'Color');
+INSERT INTO `category_level_2` (`category_level_2_id`,`category_level_2_name`) VALUES (20,'Color');
 
 
 INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (1,'Cam',1);
@@ -205,7 +275,46 @@ INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_le
 INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (38,'Vang',10);
 INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (39,'Trang',10);
 INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (40,'Do',10);
-
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (41,'Cam',11);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (42,'Vang',11);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (43,'Trang',11);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (44,'Do',11);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (45,'Cam',12);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (46,'Vang',12);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (47,'Trang',12);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (48,'Do',12);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (49,'Cam',13);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (50,'Vang',13);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (51,'Trang',13);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (52,'Do',13);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (53,'Cam',14);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (54,'Vang',14);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (55,'Trang',14);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (56,'Do',14);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (57,'Cam',15);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (58,'Vang',15);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (59,'Trang',15);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (60,'Do',15);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (61,'Cam',16);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (62,'Vang',16);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (63,'Trang',16);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (64,'Do',16);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (65,'Cam',17);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (66,'Vang',17);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (67,'Trang',17);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (68,'Do',17);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (69,'Cam',18);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (70,'Vang',18);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (71,'Trang',18);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (72,'Do',18);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (73,'Cam',19);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (74,'Vang',19);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (75,'Trang',19);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (76,'Do',19);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (77,'Cam',20);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (78,'Vang',20);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (79,'Trang',20);
+INSERT INTO `category_level_2_detail` (`category_level_2_detail_id`,`category_level_2_detail_name`,`category_level_2_id`) VALUES (80,'Do',20);
 
 -- Insert data into `directory` table
 INSERT INTO `directory` (`directory_name`,`gender_id`) VALUES 
@@ -213,7 +322,6 @@ INSERT INTO `directory` (`directory_name`,`gender_id`) VALUES
 ('Áo','1'),
 ('Phụ kiện','2'),
 ('Váy','2');
-
 
 
 
@@ -261,7 +369,7 @@ INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (30,8,6,2,0,500000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (31,8,7,2,0,500000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (32,8,8,2,0,500000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (33,9,9,2,0,500000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (33,9,9,3,100,2500000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (34,9,10,3,100,2500000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (35,9,11,3,100,2500000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (36,9,12,3,100,2500000);
@@ -337,10 +445,10 @@ INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (106,27,26,7,100,1200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (107,27,27,7,100,1200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (108,27,28,7,100,1200000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (109,28,25,8,0,4200000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (110,28,26,8,0,4200000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (111,28,27,8,0,4200000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (112,28,28,8,0,4200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (109,28,25,7,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (110,28,26,7,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (111,28,27,7,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (112,28,28,7,100,1200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (113,29,29,8,0,4200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (114,29,30,8,0,4200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (115,29,31,8,0,4200000);
@@ -353,10 +461,10 @@ INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (122,31,30,8,0,4200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (123,31,31,8,0,4200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (124,31,32,8,0,4200000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (125,32,29,9,100,999000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (126,32,30,9,100,999000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (127,32,31,9,100,999000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (128,32,32,9,100,999000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (125,32,29,8,0,4200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (126,32,30,8,0,4200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (127,32,31,8,0,4200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (128,32,32,8,0,4200000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (129,33,33,9,100,999000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (130,33,34,9,100,999000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (131,33,35,9,100,999000);
@@ -369,10 +477,10 @@ INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (138,35,34,9,100,999000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (139,35,35,9,100,999000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (140,35,36,9,100,999000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (141,36,33,10,100,890000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (142,36,34,10,100,890000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (143,36,35,10,100,890000);
-INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (144,36,36,10,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (141,36,33,9,100,999000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (142,36,34,9,100,999000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (143,36,35,9,100,999000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (144,36,36,9,100,999000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (145,37,37,10,100,890000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (146,37,38,10,100,890000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (147,37,39,10,100,890000);
@@ -389,3 +497,184 @@ INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (158,40,38,10,100,890000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (159,40,39,10,100,890000);
 INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (160,40,40,10,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (161,41,41,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (162,41,42,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (163,41,43,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (164,41,44,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (165,42,41,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (166,42,42,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (167,42,43,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (168,42,44,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (169,43,41,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (170,43,42,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (171,43,43,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (172,43,44,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (173,44,41,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (174,44,42,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (175,44,43,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (176,44,44,11,100,1200000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (177,45,45,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (178,45,46,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (179,45,47,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (180,45,48,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (181,46,45,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (182,46,46,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (183,46,47,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (184,46,48,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (185,47,45,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (186,47,46,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (187,47,47,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (188,47,48,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (189,48,45,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (190,48,46,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (191,48,47,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (192,48,48,12,100,890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (193,49,49,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (194,49,50,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (195,49,51,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (196,49,52,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (197,50,49,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (198,50,50,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (199,50,51,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (200,50,52,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (201,51,49,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (202,51,50,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (203,51,51,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (204,51,52,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (205,52,49,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (206,52,50,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (207,52,51,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (208,52,52,13,1000,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (209,53,53,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (210,53,54,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (211,53,55,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (212,53,56,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (213,54,53,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (214,54,54,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (215,54,55,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (216,54,56,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (217,55,53,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (218,55,54,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (219,55,55,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (220,55,56,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (221,56,53,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (222,56,54,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (223,56,55,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (224,56,56,14,100,2890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (225,57,57,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (226,57,58,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (227,57,59,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (228,57,60,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (229,58,57,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (230,58,58,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (231,58,59,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (232,58,60,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (233,59,57,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (234,59,58,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (235,59,59,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (236,59,60,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (237,60,57,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (238,60,58,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (239,60,59,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (240,60,60,15,1000,490000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (241,61,61,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (242,61,62,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (243,61,63,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (244,61,64,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (245,62,61,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (246,62,62,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (247,62,63,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (248,62,64,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (249,63,61,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (250,63,62,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (251,63,63,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (252,63,64,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (253,64,61,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (254,64,62,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (255,64,63,16,100,1890000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (256,64,64,16,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (257,65,65,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (258,65,66,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (259,65,67,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (260,65,68,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (261,66,65,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (262,66,66,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (263,66,67,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (264,66,68,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (265,67,65,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (266,67,66,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (267,67,67,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (268,67,68,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (269,68,65,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (270,68,66,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (271,68,67,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (272,68,68,17,1000,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (273,69,69,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (274,69,70,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (275,69,71,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (276,69,72,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (277,70,69,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (278,70,70,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (279,70,71,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (280,70,72,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (281,71,69,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (282,71,70,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (283,71,71,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (284,71,72,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (285,72,69,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (286,72,70,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (287,72,71,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (288,72,72,18,100,4290000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (289,73,73,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (290,73,74,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (291,73,75,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (292,73,76,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (293,74,73,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (294,74,74,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (295,74,75,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (296,74,76,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (297,75,73,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (298,75,74,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (299,75,75,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (300,75,76,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (301,76,73,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (302,76,74,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (303,76,75,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (304,76,76,19,1000,690000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (305,77,77,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (306,77,78,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (307,77,79,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (308,77,80,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (309,78,77,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (310,78,78,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (311,78,79,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (312,78,80,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (313,79,77,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (314,79,78,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (315,79,79,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (316,79,80,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (317,80,77,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (318,80,78,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (319,80,79,20,100,990000);
+INSERT INTO `category_quantity` (`category_quantity_id`,`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES (320,80,80,20,100,990000);
+
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (1,'product1.png',1);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (2,'product2.png',2);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (3,'product3.png',3);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (4,'product4.png',4);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (5,'product5.png',5);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (6,'product6.png',6);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (7,'product7.png',7);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (8,'product8.png',8);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (9,'product9.png',9);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (10,'product10.png',10);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (11,'product11.png',11);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (12,'product12.png',12);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (13,'product13.png',13);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (14,'product14.png',14);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (15,'product15.png',15);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (16,'product16.png',16);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (17,'product17.png',17);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (18,'product18.png',18);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (19,'product19.png',19);
+INSERT INTO `product_image` (`product_image_id`,`image_url`,`product_id`) VALUES (20,'product20.png',20);
