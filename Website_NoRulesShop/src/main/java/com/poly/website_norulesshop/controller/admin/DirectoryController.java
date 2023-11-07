@@ -2,11 +2,10 @@ package com.poly.website_norulesshop.controller.admin;
 
 import java.util.List;
 
+import com.poly.website_norulesshop.entity.Directory;
+import com.poly.website_norulesshop.entity.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.poly.website_norulesshop.entity.DirectoryLv1;
 import com.poly.website_norulesshop.service.DirectoryLv1Service;

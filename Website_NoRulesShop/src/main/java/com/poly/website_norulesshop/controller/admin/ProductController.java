@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.poly.website_norulesshop.test.FindAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,6 @@ import com.poly.website_norulesshop.service.ProductService;
 @RequestMapping("/rest/product_all")
 public class ProductController {
 
-    @Autowired
-    FindAllService findAllService;
     @Autowired
     ProductService productService;
 
@@ -92,20 +91,20 @@ public class ProductController {
     }
 
 
-    public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max){
+    public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max) {
 
         List<Product> listToReturn = new ArrayList<>();
-        if(listProduct.isEmpty()){
+        if (listProduct.isEmpty()) {
             System.out.println("List trong");
-        }else{
+        } else {
             System.out.println("filtering...");
-            for (Product product: listProduct) {
-                if((product.getPriceMin() <= max && product.getPriceMin() > min )|| (product.getPriceMax() <= max && product.getPriceMax() > min)){
+            for (Product product : listProduct) {
+                if ((product.getPriceMin() <= max && product.getPriceMin() > min) || (product.getPriceMax() <= max && product.getPriceMax() > min)) {
                     listToReturn.add(product);
                 }
             }
         }
-        if(listToReturn.isEmpty()){
+        if (listToReturn.isEmpty()) {
             System.out.println("empty list");
         }
         return listToReturn;
