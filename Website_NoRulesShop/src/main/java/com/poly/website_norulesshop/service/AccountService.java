@@ -23,4 +23,5 @@ public interface AccountService {
 
     Account resetPassword(String email, String newPassword);
 
+    void updateAccount_frUser(Account account);
 }

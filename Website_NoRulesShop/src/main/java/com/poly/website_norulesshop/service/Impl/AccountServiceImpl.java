@@ -103,4 +103,33 @@ public class AccountServiceImpl implements AccountService {
                     return accountRepository.save(users);
                 }).orElse(null);
     }
+
+    @Override
+    public void updateAccount_frUser(Account updatedAccount) {
+        // Lấy tài khoản từ session
+        Optional<Account> existingAccountOptional = accountRepository.findById(updatedAccount.getAccount_id().longValue());
+
+        // Kiểm tra xem tài khoản trong session có phù hợp với account_id hay không
+        if (existingAccountOptional.isPresent()) {
+            Account existingAccount = existingAccountOptional.get();
+
+            // Check if the existing account's account_id matches the updatedAccount's account_id
+            if (existingAccount.getAccount_id().equals(updatedAccount.getAccount_id())) {
+                // Cập nhật thông tin tài khoản
+                existingAccount.setUsername(updatedAccount.getUsername());
+                existingAccount.setFullname(updatedAccount.getFullname());
+                existingAccount.setEmail(updatedAccount.getEmail());
+                existingAccount.setPhone_number(updatedAccount.getPhone_number());
+                existingAccount.setBirthday(updatedAccount.getBirthday());
+
+                // Lưu tài khoản đã cập nhật vào cơ sở dữ liệu (nếu cần)
+                accountRepository.save(existingAccount);
+            } else {
+                // Handle the case where account_id does not match
+            }
+        } else {
+            // Handle the case where no account with the provided account_id is found
+        }
+    }
+
 }
