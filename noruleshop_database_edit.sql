@@ -1,6 +1,6 @@
---  drop database norule_shop;
---  create database norule_shop;
---  use norule_shop;
+-- drop database norule_shop;
+-- create database norule_shop;
+-- use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
