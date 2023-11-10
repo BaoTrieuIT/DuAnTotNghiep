@@ -30,9 +30,13 @@ public class MyAccountController {
         acc_id = account.getAccount_id();
         return "user/my_account";
     }
-    @PutMapping("")
-    public String update(@Valid @ModelAttribute("acc") Account account){
-        accountService.updateAccount_frUser(account);
+    @PostMapping("/my-account/update")
+    public String update(@Valid @ModelAttribute Account acc, Model model){
+        System.out.println("bd:"+acc.getBirthday());
+//        System.out.println("Account: " + acc.toString());
+        accountService.updateAccount_frUser(acc);
+        model.addAttribute("acc", acc);
+        session.set("acc",acc);
         return "redirect:/home/my-account";
     }
 

@@ -20,16 +20,17 @@
           <div class="row">
             <div class="col-lg-12 order-lg-last account-content">
               <h4>Account Information</h4>
-              <form method="post" class="myacoount-form" th:action="@{/my-account}" th:object="${acc}">
+              <form method="post" class="myacoount-form" action="/home/my-account/update" th:object="${acc}">
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="row">
                       <div class="col-md-4">
+                        <input type="hidden" name="account_id" th:value="${acc.account_id}" th:field="*{account_id}">
                         <div class="form-group has-validation">
-                          <label for="username">Your username<span
+                          <label for="username">Tên đăng nhập<span
                                   class="required">*</span></label>
                           <input type="text" class="form-control" id="username"
-                                 name="username" th:value="${acc.username}" required>
+                                 name="username" th:field="*{username}" th:value="${acc.username}" required>
                           <div class="valid-tooltip">Look good</div>
                           <div class="invalid-tooltip">Không để trống tên đăng nhập</div>
                         </div>
@@ -39,10 +40,10 @@
 
                       <div class="col-md-8">
                         <div class="form-group required-field has-validation">
-                          <label for="fullname">Your Name<span
+                          <label for="fullname">Họ và tên<span
                                   class="required">*</span></label>
                           <input type="text" class="form-control" id="fullname"
-                                 name="fullname" th:value="${acc.fullname}" required>
+                                 name="fullname" th:field="*{fullname}" th:value="${acc.fullname}" required>
                           <div class="valid-tooltip">Look good</div>
                           <div class="invalid-tooltip">Không để trống họ tên </div>
                         </div>
@@ -59,23 +60,25 @@
                 <!-- End .row -->
 
                 <div class="form-group  has-validation">
-                  <label for="acc-email">Your Email</label>
+                  <label for="acc-email">Email</label>
                   <input type="email" class="form-control" id="acc-email" name="email"
-                         required th:value="${acc.email}">
+                         required th:field="*{email}" th:value="${acc.email}">
                   <div class="valid-tooltip">Look good</div>
                   <div class="invalid-tooltip">Không để trống email </div>
                 </div>
+
                 <div class="form-group required-field">
-                  <label for="phone_number">Your Phonenumber</label>
-                  <input type="text" class="form-control" id="phone_number" name="phone_number"
-                         required th:value="${acc.phone_number}">
+                  <label for="phone_number">Số điện thoại</label>
+                  <input type="number" class="form-control" id="phone_number" name="phone_number"
+                         required th:field="*{phone_number}" th:value="${acc.phone_number}">
                   <div class="valid-tooltip">Look good</div>
                   <div class="invalid-tooltip">Không để trống số điện thoại </div>
                 </div>
+
                 <div class="form-group required-field">
-                  <label for="birthday">Your Birthday</label>
+                  <label for="birthday">Ngày sinh</label>
                   <input type="date" class="form-control" id="birthday" name="birthday"
-                         required th:value="${#dates.format(acc.birthday, 'yyyy-MM-dd')}">
+                         required th:field="*{birthday}" th:value="${#dates.format(acc.birthday, 'yyyy-MM-dd')}">
                   <div class="valid-tooltip">Look good</div>
                   <div class="invalid-tooltip">Không để trống ngày sinh </div>
                 </div>
@@ -115,16 +118,22 @@
                 </div>
                 <!-- End #account-chage-pass -->
 
-                <div class="required text-right">* Required Field</div>
+                <div class="required text-right">* Thông tin bắt buộc</div>
                 <div class="form-footer d-flex justify-content-between align-items-center">
-                  <a th:href="@{/home/index}"><i class="material-icons">navigate_before</i>Back</a>
+                  <a th:href="@{/home/index}"><i class="material-icons">navigate_before</i>Trở lại trang chủ</a>
 
                   <div class="form-footer-right">
-                    <button type="submit" class="btn btn-primary btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary btn-primary"
+                            th:href="@{/home/my-account/update}">Lưu thông tin
+                    </button>
                   </div>
                 </div>
                 <!-- End .form-footer -->
               </form>
+<!--              <form action="/home/my-account/update" method="post" th:object="${acc}">-->
+<!--                <input type="text" th:field="*{account_id}">-->
+<!--                <button type="submit" class="btn">save</button>-->
+<!--              </form>-->
             </div>
           </div>
         </div>

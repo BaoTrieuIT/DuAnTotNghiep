@@ -20,7 +20,6 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
         $scope.form.imagePath = item.logoUrl;
         $scope.isHidden = true;
         $scope.disabled = true;
-        console.log($scope.form.is_excepted);
         $('a[href="#add-brand"]').tab('show');
     }
     $scope.them = function (){
@@ -122,11 +121,11 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                 console.log(successMessage);
                 console.log("Image path: " + imagePath);
                 // Cập nhật thuộc tính logo_url của thương hiệu
-                item.logo_url = imagePath;
+                item.logoUrl = imagePath;
 
                 // Tạo thương hiệu sau khi đã cập nhật logo_url
-                $http.put(`/rest/manage_brand/${item.brand_id}`, item).then(resp => {
-                    var index = $scope.items.findIndex(p => p.brand_id === item.brand_id);
+                $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
+                    var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                     $scope.items[index] = item;
                     $scope.reset();
                     alert("Cập nhật sản phẩm thành công!");
@@ -149,8 +148,8 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
             });
         }else {
             // Tạo thương hiệu sau khi đã cập nhật logo_url
-            $http.put(`/rest/manage_brand/${item.brand_id}`, item).then(resp => {
-                var index = $scope.items.findIndex(p => p.brand_id === item.brand_id);
+            $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
+                var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                 $scope.items[index] = item;
                 $scope.reset();
                 alert("Cập nhật sản phẩm thành công!");
