@@ -346,8 +346,12 @@ INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`
 -- Insert data into `product_image` table
 INSERT INTO `product_image` (`image_url`,`product_id`) VALUES 
 ('product1.png',1),
+('product1_1.png',1),
+('product1_2.png',1),
 ('product2.png',2),
 ('product3.png',3),
+('product3_1.png',3),
+('product3_2.png',3),
 ('product4.png',4),
 ('product5.png',5),
 ('product6.png',6),
