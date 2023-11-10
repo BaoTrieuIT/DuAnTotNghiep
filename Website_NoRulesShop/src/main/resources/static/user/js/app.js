@@ -8,3 +8,14 @@ app.run(function ($http, $rootScope) {
         }
     });
 })
+app.filter('vndFormat', function () {
+    return function (input) {
+        // Assuming 'input' is the price in the default format
+        // You may need to handle different formats based on your application
+
+        // Format the price to VND
+        var formattedPrice = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(input);
+
+        return formattedPrice;
+    };
+});
