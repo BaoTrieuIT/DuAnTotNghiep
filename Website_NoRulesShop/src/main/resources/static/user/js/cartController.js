@@ -2,7 +2,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
     var $cart = $scope.cart = {
         items: [],
         add(id) { // thêm sản phẩm vào giỏ hàng
-            var item = this.items.find(item => item.id == id);
+            var item = this.items.find(item => item.typeId === id);
             if (item) {
                 item.qty++;
                 this.saveToLocalStorage();
@@ -15,7 +15,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
             }
         },
         remove(id) { // xóa sản phẩm khỏi giỏ hàng
-            var index = this.items.findIndex(item => item.id == id);
+            var index = this.items.findIndex(item => item.typeId === id);
             this.items.splice(index, 1);
             this.saveToLocalStorage();
         },
