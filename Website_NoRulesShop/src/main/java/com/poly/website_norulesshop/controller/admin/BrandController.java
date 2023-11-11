@@ -1,19 +1,24 @@
 package com.poly.website_norulesshop.controller.admin;
 
+import com.poly.website_norulesshop.entity.Brand;
+import com.poly.website_norulesshop.entity.DirectoryLv1;
+import com.poly.website_norulesshop.service.BrandService;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.RepositoryDefinition;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.poly.website_norulesshop.entity.Brand;
-import com.poly.website_norulesshop.service.BrandService;
 
 @CrossOrigin("*")
 @RestController
@@ -37,7 +42,7 @@ public class BrandController {
     public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {
-                String directoryPath = "src/main/resources/static/admin/images/"; // Thay đổi thành đường dẫn của thư mục lưu trữ ảnh
+                String directoryPath = "src/main/resources/static/admin/images/";
                 Path path = Paths.get(directoryPath);
 
                 if (!Files.exists(path)) {
@@ -55,22 +60,24 @@ public class BrandController {
                 brand.setLogoUrl(imagePath);
                 return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
             }else {
-                    // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
-                    return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
-                }
+                // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
+                return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tải ảnh lên.");
         }
     }
-    @PutMapping("{brand_id}")
-    public Brand put(@PathVariable("brand_id") Integer id, @RequestBody Brand brand) {
+    @PutMapping("{brandId}")
+    public Brand put(@PathVariable("brandId") Integer id, @RequestBody Brand brand) {
         return brandService.update(brand);
     }
+
     @DeleteMapping("{brand_id}")
     public void delete(@PathVariable("brand_id") Integer id) {
         Brand brand = brandService.getBrandById(id);
         brand.setIsActive(false);
         brandService.saveBrand(brand);
     }
+
 }

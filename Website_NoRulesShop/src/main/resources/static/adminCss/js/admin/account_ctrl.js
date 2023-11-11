@@ -4,5 +4,5 @@ app.controller("account_ctrl", function($scope, $http){
             $scope.items = resp.data;
         })
     }
-    $scope.initialize ();
+    $scope.initialize();
 })

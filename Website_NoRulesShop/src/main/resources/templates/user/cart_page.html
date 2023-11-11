@@ -42,6 +42,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="item in cart.items">
+                            <!--                            <input type="hidden" name="productId" ng-model="item.productId" value="{{item.productId}}" />-->
                             <td class="table-remove">
                                 <button ng-click="cart.remove(item.productId)"><i class="material-icons">delete</i>
                                 </button>
@@ -54,11 +55,11 @@
                             <td class="table-p-name text-capitalize">
                                 <a href="product-details">{{item.productName}}</a>
                             </td>
-                            <td class="table-p-price"><p>$100.00</p></td>
+                            <td class="table-p-price"><p>{{item.priceMin | vndFormat }}</p></td>
                             <td class="table-p-qty">
-                                <input value="1" name="cart-qty" type="number" />
+                                <input ng-model="item.qty" name="qty" type="number" />
                             </td>
-                            <td class="table-total"><p>$100.00</p></td>
+                            <td class="table-total"><p>{{item.priceMin * item.qty | vndFormat }}</p></td>
                         </tr>
                         </tbody>
                     </table>
