@@ -17,9 +17,6 @@ public class MyAccountController {
     SessionService session;
     @Autowired
     AccountService accountService;
-    //Biến tạm để lưu acc_id
-    private long acc_id = 0 ;
-
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
         model.addAttribute("title", "Tài khoản của tôi");
@@ -27,12 +24,11 @@ public class MyAccountController {
         String path = "/user/img/avatar/" + account.getAvatar_url();
         model.addAttribute("imagePath", path);
         model.addAttribute("acc", account);
-        acc_id = account.getAccount_id();
         return "user/my_account";
     }
     @PostMapping("/my-account/update")
     public String update(@Valid @ModelAttribute Account acc, Model model){
-        System.out.println("bd:"+acc.getBirthday());
+//        System.out.println("bd:"+acc.getBirthday());
 //        System.out.println("Account: " + acc.toString());
         accountService.updateAccount_frUser(acc);
         model.addAttribute("acc", acc);

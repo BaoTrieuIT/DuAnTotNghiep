@@ -8,19 +8,18 @@
   <nav aria-label="breadcrumb" class="w-100 float-left">
     <ol class="breadcrumb parallax justify-content-center" data-source-url="/user/img/banner/parallax.jpg"
         style="background-image: url(&quot;/user/img/banner/parallax.jpg&quot;); background-position: 50% 0.809717%;">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">my-account</li>
+      <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Tài khoản</li>
     </ol>
   </nav>
   <div class="main-content w-100 float-left blog-list">
     <div class="container">
+      <form method="post" class="myacoount-form" action="/home/my-account/update" th:object="${acc}">
       <div class="row">
-
         <div class="products-grid col-xl-9 col-lg-6 order-lg-2">
           <div class="row">
             <div class="col-lg-12 order-lg-last account-content">
-              <h4>Account Information</h4>
-              <form method="post" class="myacoount-form" action="/home/my-account/update" th:object="${acc}">
+              <h4>Thông tin tài khoản</h4>
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="row">
@@ -37,7 +36,6 @@
                         <!-- End .form-group -->
                       </div>
                       <!-- End .col-md-4 -->
-
                       <div class="col-md-8">
                         <div class="form-group required-field has-validation">
                           <label for="fullname">Họ và tên<span
@@ -50,8 +48,6 @@
                         <!-- End .form-group -->
                       </div>
                       <!-- End .col-md-4 -->
-
-
                     </div>
                     <!-- End .row -->
                   </div>
@@ -86,17 +82,16 @@
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="change-password-checkbox"
                          value="1">
-                  <label class="custom-control-label" for="change-password-checkbox">Change
-                    Password</label>
+                  <label class="custom-control-label" for="change-password-checkbox">Thay đổi mật khẩu</label>
                 </div>
                 <!-- End .custom-checkbox -->
 
                 <div id="account-change-password" class="">
-                  <h4>Change Password</h4>
+                  <h4>Thay đổi mật khẩu</h4>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group required-field">
-                        <label for="account-pass2">Password</label>
+                        <label for="account-pass2">Mật khẩu mới</label>
                         <input type="password" class="form-control" id="account-pass2"
                                name="account-pass2">
                       </div>
@@ -106,7 +101,7 @@
 
                     <div class="col-md-6">
                       <div class="form-group required-field">
-                        <label for="account-pass3">Confirm Password</label>
+                        <label for="account-pass3">Xác minh mật khẩu</label>
                         <input type="password" class="form-control" id="account-pass3"
                                name="account-pass3">
                       </div>
@@ -129,28 +124,24 @@
                   </div>
                 </div>
                 <!-- End .form-footer -->
-              </form>
-<!--              <form action="/home/my-account/update" method="post" th:object="${acc}">-->
-<!--                <input type="text" th:field="*{account_id}">-->
-<!--                <button type="submit" class="btn">save</button>-->
-<!--              </form>-->
+
             </div>
           </div>
         </div>
         <div class="sidebar col-xl-3 col-lg-4 order-lg-1">
-          <div class="sidebar-product left-sidebar w-100 float-left">
+          <div class="sidebar-product left-sidebar w-100 float-right">
             <div class="title">
               <a data-toggle="collapse" href="#sidebar-product" aria-expanded="false"
                  aria-controls="sidebar-product" class="d-lg-none block-toggler">Your Avatar</a>
             </div>
-            <div id="sidebar-product" class="collapse w-100 float-left">
+            <div id="sidebar-product" class="collapse w-100 float-right">
               <div class="sidebar-block sale products">
-                <h3 class="widget-title">Your Avatar</h3>
+                <h3 class="widget-title">Ảnh đại diện</h3>
                 <div class="personal-image d-flex justify-content-center">
                   <label class="label">
                     <input type="file" name="avatar_url"/>
                     <figure class="personal-figure">
-                      <img th:src="${imagePath}" class="personal-avatar" alt="avatar">
+                      <img th:src="${imagePath}" class="personal-avatar" th:field="*{avatar_url}" th:value="${acc.avatar_url}" alt="avatar">
                       <figcaption class="personal-figcaption">
                         <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
                       </figcaption>
@@ -162,8 +153,8 @@
           </div>
         </div>
       </div>
+      </form>
     </div>
-  </div>
   </div>
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">

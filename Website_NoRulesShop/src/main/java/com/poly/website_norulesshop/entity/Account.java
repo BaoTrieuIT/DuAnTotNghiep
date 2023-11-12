@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Data
@@ -29,6 +30,7 @@ public class Account implements Serializable {
     private String email;
     private String username;
     private Date create_date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday;
     private String avatar_url;
 
