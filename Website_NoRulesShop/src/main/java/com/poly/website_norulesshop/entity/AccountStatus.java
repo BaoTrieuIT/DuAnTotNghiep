@@ -2,6 +2,7 @@ package com.poly.website_norulesshop.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class AccountStatus {
     @Column(name = "account_status_name", nullable = false, length = 50)
     private String accountStatusName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "accountStatus")
     public List<Account> accountList;
 

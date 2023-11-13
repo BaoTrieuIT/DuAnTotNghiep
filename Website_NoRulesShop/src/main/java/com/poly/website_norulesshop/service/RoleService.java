@@ -8,9 +8,9 @@ import java.util.List;
 public interface RoleService {
     Role saveRole(Role role);
 
-    Role getRoleById(Long id);
+    Role getRoleById(Integer id);
 
     List<Role> getAllRoles();
 
-    void deleteRole(Long id);
+    void deleteRole(Integer id);
 }
