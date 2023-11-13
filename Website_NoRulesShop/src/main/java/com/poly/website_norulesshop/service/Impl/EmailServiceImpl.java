@@ -56,7 +56,14 @@ public class EmailServiceImpl implements EmailService {
 
         mailSender.send(message);
     }
+    public void sendEmailContactUs(String to, String content,String subject, String firstName, String lastName) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText("First Name: " + firstName + "\nLast Name: " + lastName + "\n\n" + content);
 
+        mailSender.send(message);
+    }
     @Override
     public void sendCode(String email) {
 //        Optional.ofNullable(accountService.findByEmail(email))
