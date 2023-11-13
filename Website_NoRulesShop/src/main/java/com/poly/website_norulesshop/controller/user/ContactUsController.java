@@ -18,7 +18,6 @@ public class ContactUsController {
 
     @Autowired
     private JavaMailSender emailSender;
-    HttpServletRequest request;
     @Autowired
     EmailService emailService;
     @GetMapping("/contact-us")
@@ -37,7 +36,8 @@ public class ContactUsController {
     }
 
     private void sendEmail(ContactUsForm contactUsForm) {
-        contactUsForm.setEmail("vietnhqps22017@fpt.edu.vn");
-        emailService.sendEmailContactUs(contactUsForm.getEmail(),contactUsForm.getMessage(),contactUsForm.getSubject(),contactUsForm.getFirstname(),contactUsForm.getLastname());
+        //String to = "vietnhqps22017@fpt.edu.vn";
+        String to = "canhdang341@gmail.com";
+        emailService.sendEmailContactUs(to,contactUsForm.getEmail(),contactUsForm.getMessage(),contactUsForm.getSubject(),contactUsForm.getFirstname(),contactUsForm.getLastname());
     }
 }
