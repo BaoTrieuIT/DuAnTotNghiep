@@ -82,7 +82,8 @@
                 <!-- End .form-group -->
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="change-password-checkbox"
-                         value="1">
+                         value="1" onchange="togglePasswordFields()" >
+                  <input type="hidden" name="changePassword" id="changePassword" value="">
                   <label class="custom-control-label" for="change-password-checkbox">Thay đổi mật khẩu</label>
                 </div>
                 <!-- End .custom-checkbox -->
@@ -168,7 +169,20 @@
   </script>
 <!--  kiểm tra password-->
   <script>
-    document.getElementById('comfirmPassword').addEventListener('input', function () {
+      function togglePasswordFields() {
+      var checkbox = document.getElementById('change-password-checkbox');
+      var hiddenField = document.getElementById('changePassword');
+      var passwordFields = document.getElementById('account-change-password');
+
+      if (checkbox.checked) {
+      hiddenField.value = 'on';
+      passwordFields.style.display = 'block';
+    } else {
+      hiddenField.value = '';
+      passwordFields.style.display = 'none';
+    }
+    }
+  document.getElementById('comfirmPassword').addEventListener('input', function () {
       var newPassword = document.getElementById('password').value;
       var confirmPassword = document.getElementById('comfirmPassword').value;
       var errorDiv = document.getElementById('password-mismatch-error');

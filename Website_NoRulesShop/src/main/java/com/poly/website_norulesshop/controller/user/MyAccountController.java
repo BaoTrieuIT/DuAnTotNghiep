@@ -18,6 +18,7 @@ public class MyAccountController {
     SessionService session;
     @Autowired
     AccountService accountService;
+
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
         model.addAttribute("title", "Tài khoản của tôi");
@@ -27,27 +28,62 @@ public class MyAccountController {
         model.addAttribute("acc", account);
         return "user/my_account";
     }
+
+    //    @PostMapping("/my-account/update")
+//    public String update(@Valid @ModelAttribute Account acc, Model model,
+//                         @RequestParam("password") String newPassword,
+//                         @RequestParam("comfirmPassword") String comfirmPassword){
+//        System.out.println("newPassword: "+newPassword);
+//        System.out.println("comfirmPassword: "+comfirmPassword);
+//        if(newPassword !=null && newPassword.length() >6){
+//            if(newPassword.equals(comfirmPassword)){
+//                acc.setPassword(newPassword);
+//                System.out.println(acc.getPassword());
+//                accountService.updateAccount_frUser(acc);
+//                model.addAttribute("acc", acc);
+//                session.set("acc",acc);
+//                System.out.println(acc);
+//                return "redirect:/home/my-account";
+//            }else{
+//                return "user/forgot_password";
+//            }
+//        }else{
+//            model.addAttribute("errorDiv","Mật khẩu mới không để trống và phải có ít nhất 6 ký tự.");
+//        }
+//        return "redirect:/home/my-account";
+//    }
     @PostMapping("/my-account/update")
     public String update(@Valid @ModelAttribute Account acc, Model model,
                          @RequestParam("password") String newPassword,
-                         @RequestParam("comfirmPassword") String comfirmPassword){
-        System.out.println("newPassword: "+newPassword);
-        System.out.println("comfirmPassword: "+comfirmPassword);
-        if(newPassword !=null && newPassword.length() >6){
-            if(newPassword.equals(comfirmPassword)){
+                         @RequestParam("comfirmPassword") String comfirmPassword,
+                         @RequestParam(value = "changePassword", required = false) String changePassword) {
+        System.out.println("newPassword: " + newPassword);
+        System.out.println("comfirmPassword: " + comfirmPassword);
+
+        if (comfirmPassword != null && changePassword.equals("on") && newPassword != null && newPassword.length() > 6) {
+            if (newPassword.equals(comfirmPassword)) {
                 acc.setPassword(newPassword);
                 System.out.println(acc.getPassword());
                 accountService.updateAccount_frUser(acc);
                 model.addAttribute("acc", acc);
-                session.set("acc",acc);
+                session.set("acc", acc);
                 System.out.println(acc);
                 return "redirect:/home/my-account";
-            }else{
-                return "user/forgot_password";
+            } else {
+                model.addAttribute("errorDiv", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
             }
-        }else{
-            model.addAttribute("errorDiv","Mật khẩu mới không để trống và phải có ít nhất 6 ký tự.");
+        } else {
+            // Người dùng không chọn checkbox, giữ nguyên mật khẩu cũ
+            acc.setPassword(acc.getPassword());
+            accountService.updateAccount_frUser(acc);
+            model.addAttribute("acc", acc);
+            session.set("acc", acc);
+            System.out.println(acc);
+            return "redirect:/home/my-account";
         }
-        return "redirect:/home/my-account";
+
+        return "user/forgot_password";
     }
+
+
 }
