@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout :: user(~{::body})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout :: user(~{::body})}"
+      xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta charset="UTF-8">
 	<title>My Account</title>
@@ -87,27 +88,24 @@
                 <!-- End .custom-checkbox -->
 
                 <div id="account-change-password" class="">
-                  <h4>Thay đổi mật khẩu</h4>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group required-field">
-                        <label for="account-pass2">Mật khẩu mới</label>
-                        <input type="password" class="form-control" id="account-pass2"
-                               name="account-pass2">
+                        <label for="password">Mật khẩu mới</label>
+                        <input type="password" class="form-control" id="password"
+                               name="password" th:value="${acc.password}" th:field="*{password}">
                       </div>
-                      <!-- End .form-group -->
                     </div>
-                    <!-- End .col-md-6 -->
-
                     <div class="col-md-6">
                       <div class="form-group required-field">
-                        <label for="account-pass3">Xác minh mật khẩu</label>
-                        <input type="password" class="form-control" id="account-pass3"
-                               name="account-pass3">
+                        <label for="comfirmPassword">Xác minh mật khẩu</label>
+                        <input type="password" class="form-control" id="comfirmPassword"
+                               name="comfirmPassword">
                       </div>
-                      <!-- End .form-group -->
                     </div>
-                    <!-- End .col-md-6 -->
+                  </div>
+                  <div class="col-md-12 " id="password-mismatch-error" style="color: red; margin-top: 7px; display: none;">
+<!--                    Mật khẩu không khớp. Vui lòng kiểm tra lại.-->
                   </div>
                   <!-- End .row -->
                 </div>
@@ -139,9 +137,9 @@
                 <h3 class="widget-title">Ảnh đại diện</h3>
                 <div class="personal-image d-flex justify-content-center">
                   <label class="label">
-                    <input type="file" name="avatar_url"/>
+                    <input type="file" name="avatar_url" th:field="*{avatar_url}"/>
                     <figure class="personal-figure">
-                      <img th:src="${imagePath}" class="personal-avatar" th:field="*{avatar_url}" th:value="${acc.avatar_url}" alt="avatar">
+                      <img th:src="${imagePath}" class="personal-avatar"  th:value="${acc.avatar_url}" alt="avatar">
                       <figcaption class="personal-figcaption">
                         <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
                       </figcaption>
@@ -168,6 +166,28 @@
       s0.parentNode.insertBefore(s1, s0);
     })();
   </script>
-  <!--End of Tawk.to Script-->
+<!--  kiểm tra password-->
+  <script>
+    document.getElementById('comfirmPassword').addEventListener('input', function () {
+      var newPassword = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('comfirmPassword').value;
+      var errorDiv = document.getElementById('password-mismatch-error');
+
+      if (newPassword.length < 6) {
+        errorDiv.innerHTML = "Mật khẩu mới phải có ít nhất 6 ký tự.";
+        errorDiv.style.display = 'block';
+      } else {
+        if (newPassword === confirmPassword) {
+          errorDiv.style.display = 'none';
+        } else {
+          errorDiv.innerHTML = "Mật khẩu không khớp. Vui lòng kiểm tra lại.";
+          errorDiv.style.display = 'block';
+        }
+      }
+      console.log("newPassword: "+ newPassword);
+      console.log("confirmPassword: "+ confirmPassword);
+    });
+  </script>
+
 </body>
 </html>

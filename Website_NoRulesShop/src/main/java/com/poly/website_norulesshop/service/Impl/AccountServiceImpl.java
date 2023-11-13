@@ -118,10 +118,10 @@ public class AccountServiceImpl implements AccountService {
                 // Cập nhật thông tin tài khoản
                 existingAccount.setUsername(updatedAccount.getUsername());
                 existingAccount.setFullname(updatedAccount.getFullname());
+                existingAccount.setPassword(passwordEncoder.encode(updatedAccount.getPassword()));
                 existingAccount.setEmail(updatedAccount.getEmail());
                 existingAccount.setPhone_number(updatedAccount.getPhone_number());
                 existingAccount.setBirthday(updatedAccount.getBirthday());
-
                 // Lưu tài khoản đã cập nhật vào cơ sở dữ liệu (nếu cần)
                 accountRepository.save(existingAccount);
             } else {

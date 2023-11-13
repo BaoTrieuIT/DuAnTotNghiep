@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("home")
@@ -27,13 +28,26 @@ public class MyAccountController {
         return "user/my_account";
     }
     @PostMapping("/my-account/update")
-    public String update(@Valid @ModelAttribute Account acc, Model model){
-//        System.out.println("bd:"+acc.getBirthday());
-//        System.out.println("Account: " + acc.toString());
-        accountService.updateAccount_frUser(acc);
-        model.addAttribute("acc", acc);
-        session.set("acc",acc);
+    public String update(@Valid @ModelAttribute Account acc, Model model,
+                         @RequestParam("password") String newPassword,
+                         @RequestParam("comfirmPassword") String comfirmPassword){
+        System.out.println("newPassword: "+newPassword);
+        System.out.println("comfirmPassword: "+comfirmPassword);
+        if(newPassword !=null && newPassword.length() >6){
+            if(newPassword.equals(comfirmPassword)){
+                acc.setPassword(newPassword);
+                System.out.println(acc.getPassword());
+                accountService.updateAccount_frUser(acc);
+                model.addAttribute("acc", acc);
+                session.set("acc",acc);
+                System.out.println(acc);
+                return "redirect:/home/my-account";
+            }else{
+                return "user/forgot_password";
+            }
+        }else{
+            model.addAttribute("errorDiv","Mật khẩu mới không để trống và phải có ít nhất 6 ký tự.");
+        }
         return "redirect:/home/my-account";
     }
-
 }
