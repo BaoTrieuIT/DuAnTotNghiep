@@ -65,14 +65,11 @@ public class Product {
     @OneToMany(mappedBy = "product")
     List<ProductDiscount> productDiscounts;
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     List<ProductImage> productImageList;
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
-
-
-
 
 
 }

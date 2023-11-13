@@ -12,4 +12,7 @@ public interface ProductImageRepository extends JpaRepository<ProductImage, Inte
     // Các phương thức đặc thù cho bảng ProductImage (nếu cần)
     @Query("SELECT image FROM ProductImage image INNER JOIN image.product where image.product.productId = ?1")
     List<ProductImage> findByProduct_id(Integer productId);
+
+    @Query("SELECT pi FROM ProductImage pi  where pi.product.productId = :productId")
+    List<ProductImage> findImageByProduct_id(Integer productId);
 }

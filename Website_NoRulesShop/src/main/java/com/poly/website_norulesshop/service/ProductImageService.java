@@ -13,6 +13,8 @@ public interface ProductImageService {
 
     List<ProductImage> findByProductId(Integer id);
 
+    List<ProductImage> findImageUrlByProductId(Integer id);
+
     List<ProductImage> getAllProductImages();
 
     void deleteProductImage(Integer id);

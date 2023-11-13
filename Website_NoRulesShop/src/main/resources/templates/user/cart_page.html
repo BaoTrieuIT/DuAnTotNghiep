@@ -49,7 +49,9 @@
                             </td>
                             <td class="table-image">
                                 <a href="product-details">
-                                    <img ng-src="/user/img/products/{{item.productImageList.image_url}}" alt="" />
+                                    <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
+                                         alt="{{item.productImageList[0].image_url}}"
+                                         title="{{item.productImageList[0].image_url}}" />
                                 </a>
                             </td>
                             <td class="table-p-name text-capitalize">
@@ -57,7 +59,7 @@
                             </td>
                             <td class="table-p-price"><p>{{item.priceMin | vndFormat }}</p></td>
                             <td class="table-p-qty">
-                                <input ng-model="item.qty" name="qty" type="number" />
+                                <input ng-model="item.qty" name="qty" type="number" min="1" />
                             </td>
                             <td class="table-total"><p>{{item.priceMin * item.qty | vndFormat }}</p></td>
                         </tr>
@@ -85,14 +87,14 @@
             <div
                     class="table-total-wrapper d-flex justify-content-end pt-60 col-md-12 col-sm-12 col-lg-4 float-left align-items-center"
             >
-                <div class="table-total-content">
+                <div class="table-total-content" ng-if="cart.items.length">
                     <h2 class="pb-20">Tổng giỏ hàng</h2>
                     <div class="table-total-amount">
                         <div
                                 class="single-total-content d-flex justify-content-between float-left w-100"
                         >
                             <strong>Tổng phụ</strong>
-                            <span class="c-total-price">$160.00</span>
+                            <span class="c-total-price">{{cart.amount | vndFormat}}</span>
                         </div>
                         <div
                                 class="single-total-content d-flex justify-content-between float-left w-100"
@@ -125,19 +127,19 @@
     </div>
 </div>
 <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"),
-            s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = "https://embed.tawk.to/5ac1aabb4b401e45400e4197/default";
-        s1.charset = "UTF-8";
-        s1.setAttribute("crossorigin", "*");
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>
+<!--<script type="text/javascript">-->
+<!--    var Tawk_API = Tawk_API || {},-->
+<!--        Tawk_LoadStart = new Date();-->
+<!--    (function () {-->
+<!--        var s1 = document.createElement("script"),-->
+<!--            s0 = document.getElementsByTagName("script")[0];-->
+<!--        s1.async = true;-->
+<!--        s1.src = "https://embed.tawk.to/5ac1aabb4b401e45400e4197/default";-->
+<!--        s1.charset = "UTF-8";-->
+<!--        s1.setAttribute("crossorigin", "*");-->
+<!--        s0.parentNode.insertBefore(s1, s0);-->
+<!--    })();-->
+<!--</script>-->
 <!--End of Tawk.to Script-->
 </body>
 </html>

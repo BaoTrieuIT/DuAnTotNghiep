@@ -20,18 +20,6 @@ INSERT INTO `account` (password, fullname, phone_number, email, username, create
 INSERT INTO gender (gender_name) VALUES 
 	('Male'),
 	('Female');
-    
--- Insert data into `directory` table
-INSERT INTO `directory` (directory_name, gender_id) VALUES
-    ('Main Directory',1),
-    ('Sub Directory 1',1),
-    ('Sub Directory 2',1);
-    
--- Insert data into `directory_lv1` table
-INSERT INTO `directory_lv1` (directory_lv1_name, directory_id) VALUES
-    ('Category 1', 1),
-    ('Category 2', 1);
-    
 -- Insert data into `address` table
 INSERT INTO `address` (recipient_name, recipient_phone_number, general_address, specific_address, account_id) VALUES
 	('John Home', '1234567890', '123 Main St', 'Apt 4B', 1),
@@ -220,7 +208,7 @@ INSERT INTO `category_level_2_detail` (`category_level_2_detail_name`,`category_
 ('Trang',1),
 ('Do',1),
 ('Cam',2),
-('Vang',2),
+('Vang',2), 
 ('Trang',2),
 ('Do',2),
 ('Cam',3),
@@ -297,27 +285,108 @@ INSERT INTO `category_level_2_detail` (`category_level_2_detail_name`,`category_
 ('Do',20);
 
 -- Insert data into `directory` table
-INSERT INTO `directory` (`directory_name`,`gender_id`) VALUES 
-('Quần','1'),
-('Áo','1'),
-('Phụ kiện','2'),
-('Váy','2');
-
+INSERT INTO `directory` (`directory_name`,`gender_id`) VALUES
+    ('TRANG PHỤC NAM',1),
+    ('TÚI VÍ NAM',1),
+    ('GIÀY DÉP NAM',1),
+    ('PHỤ KIỆN NAM',1),
+    ('PHỤ KIỆN NỮ',2),
+    ('GIÀY DÉP NỮ',2),
+    ('TRANG SỨC NỮ',2),
+    ('TÚI VÍ NỮ',2),
+    ('MẮT KÍNH NỮ',2),
+    ('TRANG PHỤC NỮ',2);
 
 -- Insert data into `directory_lv1` table
-INSERT INTO `directory_lv1` (`directory_lv1_name`, `directory_id`) VALUES 
-('Quần tây', '1'),
-('Quần jean', '1'),
-('Áo Sơ mi', '2'),
-('Áo thun ', '2'),
-('Áo tay dài', '2'),
-('Quần ngắn', '1'),
-('KÍnh', '3'),
-('Mũ vành', '3'),
-('Mũ phớt', '3'),
-('Nón sơn', '3');
-
-
+INSERT INTO `directory_lv1` (`directory_lv1_name`,`directory_id`) VALUES
+	('Mũ Nón', 4),
+    ('Khăn Choàng', 4),
+    ('Thắt Lưng', 4),
+    ('Vớ', 4),
+    ('Phụ kiện Vest', 4),
+    ('Phụ kiện khác', 4),
+    ('Ba Lô', 2),
+    ('Túi Đeo Chéo/ Đeo Hông', 2),
+    ('Ví Nam', 2),
+    ('Túi Xách', 2),
+    ('Túi Tote', 2),
+    ('Túi - Ví Da', 2),
+    ('Túi Cầm tay', 2),
+    ('Giày Tây', 3),
+    ('Sandel', 3),
+    ('Giày Bốt', 3),
+    ('Giày Thể Thao', 3),
+    ('Dép Quai Ngang', 3),
+    ('Giày Sneaker', 3),
+    ('Giày Lười', 3),
+    ('Dép Xỏ Ngón', 3),
+    ('Thắt Lưng nữ', 6),
+    ('Mũ Nón nữ', 6),
+    ('Khăn & Khăn Choàng', 6),
+    ('Găng Tay nữ', 6),
+    ('Vớ nữ & Quần Tất', 6),
+    ('Đồng Hồ', 6),
+    ('Phụ kiện khác', 6),
+    ('Giày Hở Gót', 7),
+    ('Giày Búp Bê', 7),
+    ('Giày Thể Thao', 7),
+    ('Giày Cao Gót', 7),
+    ('Giày Bốt nữ', 7),
+    ('Sandal', 7),
+    ('Giày Sneaker', 7),
+    ('Giày Lười', 7),
+    ('Dép Quai Ngang', 7),
+    ('Dép Xỏ Ngón', 7),
+    ('Hoa Tai', 8),
+    ('Nhẫn', 8),
+    ('Vòng Tay', 8),
+    ('Dây Chuyền', 8),
+    ('Trang sức khác', 8),
+    ('Ba Lô nữ', 9),
+    ('Túi Xách nữ', 9),
+    ('Túi Đeo Chéo nữ', 9),
+    ('Ví - Ví Đựng Thẻ nữ', 9),
+    ('Ví Cầm Tay nữ', 9),
+    ('Túi Tote', 9),
+    ('Túi Ví Đi Tiệc', 9),
+    ('Túi Đựng Mỹ Phẩm', 9),
+    ('Kính Mát', 10),
+    ('Gọng Kính Cận', 10),
+    ('Kính Chống Ánh Sáng Xanh', 10),
+    ('Phụ Kiện Mắt Kính', 10),
+    ('Hộp Đựng Kính', 10),
+    ('Đầm', 5),
+    ('Váy', 5),
+    ('Áo Sơ mi nữ', 5),
+    ('Áo dây - Áo Ba Lỗ', 5),
+    ('Áo Polo nữ', 5),
+    ('Đồ Vest', 5),
+    ('Áo Kiểu', 5),
+    ('Áo Khoác nữ', 5),
+    ('Áo Sweater nữ', 5),
+    ('Áo Sweatshirt nữ', 5),
+    ('Áo Hoodie & Sweater nữ', 5),
+    ('Áo Thun nữ', 5),
+    ('Quần Dài nữ', 5),
+    ('Quần Jean nữ', 5),
+    ('Quần Short', 5),
+    ('Jumpsuit & Playsuit', 5),
+    ('Quần Yếm', 5),
+    ('Đồ Ngủ', 5),
+    ('Đồ Lót nữ', 5),
+    ('Áo Sơ mi', 1),
+    ('Áo Thun', 1),
+    ('Áo Hoodie & Sweater', 1),
+    ('Áo dệt kim- Cardigan', 1),
+    ('Áo Blazer', 1),
+    ('Áo Jacket', 1),
+    ('Quần Dài', 1),
+    ('Quần Jean', 1),
+    ('Quần Short', 1),
+    ('Đồ Vest', 1),
+    ('Đồ Thể Thao', 1),
+    ('Đồ Lót', 1),
+    ('Áo Polo', 1);
 
 -- Insert data into `product` table
 INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`,`product_description`,`brand_id`,`directory_lv1_id`,`price_min`,`price_max`,`total_quantity`) VALUES 

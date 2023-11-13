@@ -1,21 +1,25 @@
 app.controller("cart_ctrl", function ($scope, $http) {
     var $cart = $scope.cart = {
         items: [],
-        add(id) { // thêm sản phẩm vào giỏ hàng
-            var item = this.items.find(item => item.typeId === id);
+        add(productId) { // thêm sản phẩm vào giỏ hàng
+            var item = this.items.find(item => item.productId === productId);
             if (item) {
                 item.qty++;
                 this.saveToLocalStorage();
             } else {
-                $http.get(`/rest/products/${id}`).then(resp => {
-                    resp.data.qty = 1;
-                    this.items.push(resp.data);
-                    this.saveToLocalStorage();
+                $http.get(`/rest/products/${productId}`).then(resp => {
+                    $http.get(`/rest/productImages/${productId}`).then(respImage => {
+                        resp.data.qty = 1;
+                        resp.data.productImageList = respImage.data;
+                        this.items.push(resp.data);
+                        console.log(this.items);
+                        this.saveToLocalStorage();
+                    })
                 });
             }
         },
-        remove(id) { // xóa sản phẩm khỏi giỏ hàng
-            var index = this.items.findIndex(item => item.typeId === id);
+        remove(productId) { // xóa sản phẩm khỏi giỏ hàng
+            var index = this.items.findIndex(item => item.productId === productId);
             this.items.splice(index, 1);
             this.saveToLocalStorage();
         },
@@ -25,7 +29,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
         },
         amt_of(item) { // tính thành tiền của 1 sản phẩm
 
-            return item.price * item.qty;
+            return item.priceMin * item.qty;
         },
         get count() { // tính tổng số lượng các mặt hàng trong giỏ
             return this.items

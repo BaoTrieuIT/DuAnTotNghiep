@@ -12,8 +12,8 @@ public class ApiProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("{id}")
-    public Product getOne(@PathVariable("id") Integer id) {
+    @GetMapping("{productId}")
+    public Product getOne(@PathVariable("productId") Integer id) {
         return productService.getProductById(id);
     }
 }

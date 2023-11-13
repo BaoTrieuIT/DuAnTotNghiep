@@ -74,6 +74,11 @@ public class ProductServiceImpl implements ProductService {
         return productListToReturn;
     }
 
+    @Override
+    public Product findProductWithImagesById(Integer id) {
+        return productRepository.findProductWithImagesById(id);
+    }
+
 
     @Override
     public List<Product> isHidden() {

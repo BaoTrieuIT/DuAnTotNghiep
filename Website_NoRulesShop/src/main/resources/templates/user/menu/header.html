@@ -154,9 +154,9 @@
                                                 <tr ng-repeat="item in cart.items">
                                                     <td class="text-center">
                                                         <a href="#">
-                                                            <img src="/user/img/products/01.jpg"
-                                                                 alt="01"
-                                                                 title="01"
+                                                            <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
+                                                                 alt="{{item.productImageList[0].image_url}}"
+                                                                 title="{{item.productImageList[0].image_url}}"
                                                                  height="104"
                                                                  width="80">
                                                         </a>
@@ -164,7 +164,7 @@
                                                     <td class="text-left product-name">
                                                         <a href="#">{{item.productName}}</a>
                                                         <div class="quantity float-left w-100">
-                                                            <span class="cart-qty">1 × </span>
+                                                            <span class="cart-qty">{{item.qty}} x</span>
                                                             <span class="text-left price">{{item.priceMin | vndFormat }}</span>
                                                         </div>
 
@@ -183,7 +183,9 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="text-left"><strong>Tổng tiền</strong></td>
-                                                    <td class="text-right"><strong>$2,122.00</strong></td>
+                                                    <td class="text-right">
+                                                        <strong>{{cart.amount | vndFormat}}</strong>
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>

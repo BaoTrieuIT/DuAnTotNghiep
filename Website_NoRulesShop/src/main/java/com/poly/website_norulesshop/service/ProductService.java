@@ -24,6 +24,7 @@ public interface ProductService {
 
     List<Product> SearchProductSoldoutByName(String productName);
 
+    Product findProductWithImagesById(Integer id);
 
     List<Product> isHidden();
 
