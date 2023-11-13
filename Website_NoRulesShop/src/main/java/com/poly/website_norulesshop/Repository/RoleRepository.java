@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
     // Các phương thức đặc thù cho bảng Role (nếu cần)
 
     @Query("SELECT o FROM Role o where o.role_name = :role_name")

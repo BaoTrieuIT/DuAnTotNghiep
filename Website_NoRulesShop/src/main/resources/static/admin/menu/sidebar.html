@@ -12,6 +12,24 @@
 		<!--          </li>&lt;!&ndash; End Dashboard Nav &ndash;&gt;-->
 		<li class="nav-item">
 			<a class="nav-link collapsed"
+			   data-bs-target="#overview-nav"
+			   data-bs-toggle="collapse"
+			   href="#">
+				<i class="bi bi-menu-button-wide"></i><span>Dữ liệu</span><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul id="overview-nav"
+				class="nav-content collapse "
+				data-bs-parent="#sidebar-nav">
+				<li>
+					<a href="#!overview">
+						<i class="bi bi-circle"></i><span>Tổng quan</span>
+					</a>
+				</li>
+
+			</ul>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link collapsed"
 			   data-bs-target="#shipping-nav"
 			   data-bs-toggle="collapse"
 			   href="#">
@@ -119,29 +137,12 @@
 				</li>
 				<li>
 					<a href="#!account_add">
-						<i class="bi bi-circle"></i><span>Thêm tài khoản</span>
+						<i class="bi bi-circle"></i><span>Cập nhật tài khoản</span>
 					</a>
 				</li>
 			</ul>
 		</li><!-- End Manage Account Nav -->
-		<li class="nav-item">
-			<a class="nav-link collapsed"
-			   data-bs-target="#overview-nav"
-			   data-bs-toggle="collapse"
-			   href="#">
-				<i class="bi bi-menu-button-wide"></i><span>Dữ liệu</span><i class="bi bi-chevron-down ms-auto"></i>
-			</a>
-			<ul id="overview-nav"
-				class="nav-content collapse "
-				data-bs-parent="#sidebar-nav">
-				<li>
-					<a href="#!overview">
-						<i class="bi bi-circle"></i><span>Tổng quan</span>
-					</a>
-				</li>
 
-			</ul>
-		</li>
 		<li class="nav-item">
 			<a class="nav-link collapsed"
 			   data-bs-target="#discount-nav"

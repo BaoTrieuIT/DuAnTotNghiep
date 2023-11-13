@@ -1,6 +1,6 @@
 --  drop database norule_shop;
 --  create database norule_shop;
---  use norule_shop;
+ use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
@@ -115,9 +115,6 @@ create table `product`(
 	product_id int auto_increment primary key,
     product_name nvarchar(255),
     product_rating float null,
-    price_min float,
-    price_max float,
-    total_quantity integer,
     create_date date not null,
 	is_remove bit not null,
     product_description nvarchar(1000) not null,
@@ -126,6 +123,7 @@ create table `product`(
 	foreign key (brand_id) references `brand`(brand_id),
     foreign key (directory_lv1_id) references `directory_lv1`(directory_lv1_id)
 );
+
 
 create table `product_discount`(
 	product_discount_id int auto_increment primary key,
@@ -303,7 +301,8 @@ create table `directory_lv1_brand`(
 create table `accounts_roles`(
 	account_id int,
     role_id int,
-    FOREIGN KEY (account_id) REFERENCES account(account_id),
+    FOREIGN KEY (account_id) REFERENCES account(account_id)
+    ON DELETE CASCADE,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
 );
 

@@ -107,12 +107,12 @@
                                             <a th:href="@{/admin/index}">Trang quản trị</a>
                                         </li>
                                         <li>
-                                            <a th:href="@{my-account}"
+                                            <a th:href="@{/home/my-account}"
                                                class="text-capitalize">Tài khoản của tôi
                                             </a>
                                         </li>
                                         <li>
-                                            <a th:href="@{sign-out}"
+                                            <a th:href="@{/home/sign-out}"
                                                class="text-capitalize">
                                                 Đăng xuất
                                             </a>
@@ -121,13 +121,13 @@
                                     </ul>
                                     <ul sec:authorize="!isAuthenticated()">
                                         <li>
-                                            <a th:href="@{sign-up}"
+                                            <a th:href="@{/home/sign-up}"
                                                class="text-capitalize">
                                                 Đăng ký
                                             </a>
                                         </li>
                                         <li>
-                                            <a th:href="@{sign-in}"
+                                            <a th:href="@{/home/sign-in}"
                                                class="text-capitalize">
                                                 Đăng nhập
                                             </a>
@@ -140,31 +140,37 @@
                                 <button type="button"
                                         class="btn">
                                     <i class="material-icons">shopping_cart</i>
-                                    <span class="ttcount">2</span></button>
+                                    <span class="ttcount">{{cart.count}}</span></button>
                                 <div id="cart-dropdown"
                                      class="cart-menu">
-                                    <ul class="w-100 float-left">
+                                    <ul class="w-100 float-left" ng-if="!cart.items.length">
+                                        <p>Chưa có sản phẩm</p>
+                                    </ul>
+                                    <ul class="w-100 float-left" ng-if="cart.items.length">
                                         <li>
                                             <table class="table table-striped">
                                                 <tbody>
-                                                <tr>
+                                                <tr ng-repeat="item in cart.items">
                                                     <td class="text-center">
                                                         <a href="#">
-                                                            <img src="/user/img/products/01.jpg"
-                                                                 alt="01"
-                                                                 title="01"
+                                                            <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
+                                                                 alt="{{item.productImageList[0].image_url}}"
+                                                                 title="{{item.productImageList[0].image_url}}"
                                                                  height="104"
                                                                  width="80">
                                                         </a>
                                                     </td>
                                                     <td class="text-left product-name">
-                                                        <a href="#">aliquam quaerat voluptatem</a>
+                                                        <a href="#">{{item.productName}}</a>
                                                         <div class="quantity float-left w-100">
-                                                            <span class="cart-qty">1 × </span>
-                                                            <span class="text-left price"> $20.00</span></div>
+                                                            <span class="cart-qty">{{item.qty}} x</span>
+                                                            <span class="text-left price">{{item.priceMin | vndFormat }}</span>
+                                                        </div>
+
                                                     </td>
                                                     <td class="text-center close">
-                                                        <a class="close-cart"><i class="material-icons">close</i>
+                                                        <a class="close-cart" ng-click="cart.remove(item.productId)"><i
+                                                                class="material-icons">close</i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -176,7 +182,9 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="text-left"><strong>Tổng tiền</strong></td>
-                                                    <td class="text-right"><strong>$2,122.00</strong></td>
+                                                    <td class="text-right">
+                                                        <strong>{{cart.amount | vndFormat}}</strong>
+                                                    </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -225,23 +233,23 @@
                                 <ul class="navbar-nav m-auto justify-content-center">
                                     <li class="nav-item active">
                                         <a class="nav-link text-uppercase"
-                                           href="index">
+                                           th:href="@{/home/index}">
                                             Trang chủ
                                         </a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="nav-link text-uppercase"
-                                           href="category">Sản phẩm
+                                           th:href="@{/home/product}">Sản phẩm
                                         </a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="nav-link text-uppercase"
-                                           href="about-us"> Giới thiệu về chúng tôi
+                                           th:href="@{/home/about-us}"> Giới thiệu về chúng tôi
                                         </a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link text-uppercase"
-                                           href="contact-us">Liên hệ với chúng tôi
+                                           th:href="@{/home/contact-us}">Liên hệ với chúng tôi
                                         </a>
                                     </li>
                                 </ul>
@@ -293,7 +301,7 @@
                                                 <ul class="list-unstyled">
                                                     <li>
                                                         <a class="menu-item pl-0"
-                                                           href="index">
+                                                           th:href="@{/home/index}">
                                                             Trang chủ
                                                         </a>
                                                     </li>

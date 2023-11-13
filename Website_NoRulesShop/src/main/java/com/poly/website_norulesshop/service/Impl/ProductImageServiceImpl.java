@@ -24,8 +24,18 @@ public class ProductImageServiceImpl implements ProductImageService {
     }
 
     @Override
-    public ProductImage getProductImageById(Long id) {
+    public ProductImage getProductImageById(Integer id) {
         return productImageRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<ProductImage> findByProductId(Integer id) {
+        return productImageRepository.findByProduct_id(id);
+    }
+
+    @Override
+    public List<ProductImage> findImageUrlByProductId(Integer id) {
+        return productImageRepository.findImageByProduct_id(id);
     }
 
     @Override
@@ -34,7 +44,7 @@ public class ProductImageServiceImpl implements ProductImageService {
     }
 
     @Override
-    public void deleteProductImage(Long id) {
+    public void deleteProductImage(Integer id) {
         productImageRepository.deleteById(id);
     }
 }

@@ -1,6 +1,6 @@
 <!-- ======= Header ======= -->
 <header id="header"
-        class="header fixed-top d-flex align-items-center">
+        class="header fixed-top d-flex align-items-center" ng-controller="account_ctrl">
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index"
@@ -43,13 +43,12 @@
                     <img src="/adminCss/img/profile-img.jpg"
                          alt="Profile"
                          class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{Account.fullname}}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
+                        <h6>{{Account.fullname}}</h6>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -58,14 +57,14 @@
                         <a class="dropdown-item d-flex align-items-center"
                            href="/home/index">
                             <i class="bi bi-person"></i>
-                            <span>Back to shop</span>
+                            <span>Trở về shop</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item d-flex align-items-center"
                            href="users-profile">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>Hồ sơ của tôi</span>
                         </a>
                     </li>
                     <li>
@@ -76,7 +75,7 @@
                         <a class="dropdown-item d-flex align-items-center"
                            href="users-profile">
                             <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
+                            <span>Cài đặt tài khoản</span>
                         </a>
                     </li>
                     <li>
@@ -87,7 +86,7 @@
                         <a class="dropdown-item d-flex align-items-center"
                            href="pages-faq">
                             <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
+                            <span>Trợ giúp?</span>
                         </a>
                     </li>
                     <li>
@@ -98,7 +97,7 @@
                         <a class="dropdown-item d-flex align-items-center"
                            href="#">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
+                            <span>Đăng xuất</span>
                         </a>
                     </li>
 

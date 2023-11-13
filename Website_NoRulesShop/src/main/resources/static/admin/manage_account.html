@@ -1,7 +1,8 @@
 <main id="main"
-      class="main">
+	  class="main">
 	<div class="pagetitle">
 		<h1>Quản lý tài khoản</h1>
+
 		<nav>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">
@@ -20,59 +21,60 @@
 
 					<li class="nav-item">
 						<button class="nav-link active"
-						        data-bs-toggle="tab"
-						        data-bs-target="#list-account">Tất cả
+								data-bs-toggle="tab"
+								data-bs-target="#list-account">Tất cả
 						</button>
 					</li>
 
 					<li class="nav-item">
 						<button class="nav-link"
-						        data-bs-toggle="tab"
-						        data-bs-target="#account_active">Đang hoat động
+								data-bs-toggle="tab"
+								data-bs-target="#account_active">Đang hoat động
 						</button>
 					</li>
 					<li class="nav-item">
 						<button class="nav-link"
-						        data-bs-toggle="tab"
-						        data-bs-target="#account_considering">Đang xem xét
+								data-bs-toggle="tab"
+								data-bs-target="#account_considering">Đang xem xét
 						</button>
 					</li>
 					<li class="nav-item">
 						<button class="nav-link"
-						        data-bs-toggle="tab"
-						        data-bs-target="#account_report">Vi phạm
+								data-bs-toggle="tab"
+								data-bs-target="#account_report">Vi phạm
 						</button>
 					</li>
 					<li class="nav-item">
 						<button class="nav-link"
-						        data-bs-toggle="tab"
-						        data-bs-target="#account_hide">Đã ẩn
+								data-bs-toggle="tab"
+								data-bs-target="#account_hide">Đã ẩn
 						</button>
 					</li>
+
 				</ul>
+
 				<div class="tab-content pt-2">
 
 					<div class="tab-pane fade show active list-account"
-					     id="list-account">
+						 id="list-account">
 						<section ng-include="'/admin/account_all.html'"
-						"></section>
+						></section>
 					</div>
-W
 					<div class="tab-pane fade account_active pt-3"
-					     id="account_active">
+						 id="account_active">
 						<section ng-include="'/admin/account_active.html'"></section>
 					</div>
 					<div class="tab-pane fade show account_considering"
-					     id="account_considering">
+						 id="account_considering">
 						<section ng-include="'/admin/account_considering.html'"></section>
 					</div>
 
 					<div class="tab-pane fade account_report pt-3"
-					     id="account_report">
+						 id="account_report">
 						<section ng-include="'/admin/account_report.html'"></section>
 					</div>
 					<div class="tab-pane fade account_hide pt-3"
-					     id="account_hide">
+						 id="account_hide">
 						<section ng-include="'/admin/account_hide.html'"></section>
 					</div>
 				</div><!-- End Bordered Tabs -->

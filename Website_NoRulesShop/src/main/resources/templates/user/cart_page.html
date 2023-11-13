@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">
 <head>
-	<meta charset="UTF-8">
-	<title>Cart</title>
+    <meta charset="UTF-8">
+    <title>Cart</title>
 </head>
 <body>
 
-  <nav aria-label="breadcrumb" class="w-100 float-left">
+<nav aria-label="breadcrumb" class="w-100 float-left">
     <ol
             class="breadcrumb parallax justify-content-center"
             data-source-url="/user/img/banner/parallax.jpg"
@@ -15,143 +15,131 @@
           background-position: 50% 0.809717%;
         "
     >
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">cart</li>
+        <li class="breadcrumb-item"><a th:href="@{index}">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Giỏ Hàng</li>
     </ol>
-  </nav>
+</nav>
 
-  <div class="cart-area table-area pt-110 pb-95 float-left w-100">
+<div class="cart-area table-area pt-110 pb-95 float-left w-100">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-12 col-sm-12 float-left cart-wrapper">
-          <div class="table-responsive">
-            <table class="table product-table text-center">
-              <thead>
-              <tr>
-                <th class="table-remove text-capitalize">remove</th>
-                <th class="table-image text-capitalize">image</th>
-                <th class="table-p-name text-capitalize">product</th>
-                <th class="table-p-price text-capitalize">price</th>
-                <th class="table-p-qty text-capitalize">quantity</th>
-                <th class="table-total text-capitalize">total</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td class="table-remove">
-                  <button><i class="material-icons">delete</i></button>
-                </td>
-                <td class="table-image">
-                  <a href="product-details"
-                  ><img src="/user/img/products/02.jpg" alt=""
-                  /></a>
-                </td>
-                <td class="table-p-name text-capitalize">
-                  <a href="product-details"
-                  >aspetur autodit autfugit</a
-                  >
-                </td>
-                <td class="table-p-price"><p>$100.00</p></td>
-                <td class="table-p-qty">
-                  <input value="1" name="cart-qty" type="number" />
-                </td>
-                <td class="table-total"><p>$100.00</p></td>
-              </tr>
-              <tr>
-                <td class="table-remove">
-                  <button><i class="material-icons">delete</i></button>
-                </td>
-                <td class="table-image">
-                  <a href="product-details"
-                  ><img src="/user/img/products/03.jpg" alt=""
-                  /></a>
-                </td>
-                <td class="table-p-name text-capitalize">
-                  <a href="product-details">magni dolores eosquies</a>
-                </td>
-                <td class="table-p-price"><p>$100.00</p></td>
-                <td class="table-p-qty">
-                  <input value="1" name="cart-qty" type="number" />
-                </td>
-                <td class="table-total"><p>$100.00</p></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="table-bottom-wrapper">
-            <div
-                    class="table-coupon d-flex d-xs-block d-lg-flex d-sm-flex fix justify-content-start float-left"
-            >
-              <input type="text" placeholder="Coupon code" />
-              <button type="submit" class="btn-primary btn">
-                Apply coupon
-              </button>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 float-left cart-wrapper">
+                <div class="table-responsive">
+                    <div ng-if="!cart.items.length" class="panel-body text-center">
+                        <h3 class="text-capitalize">Chưa có sản phẩm trong giỏ hàng</h3>
+                        <!--                        <a th:href="@{/home/index}" class="btn btn-info continue-shop">Tiếp tục mua sắm</a>-->
+                    </div>
+                    <table class="table product-table text-center" ng-if="cart.items.length">
+                        <thead>
+                        <tr>
+                            <th class="table-remove text-capitalize">Xoá</th>
+                            <th class="table-image text-capitalize">Ảnh</th>
+                            <th class="table-p-name text-capitalize">Tên sản phẩm</th>
+                            <th class="table-p-price text-capitalize">Giá</th>
+                            <th class="table-p-qty text-capitalize">Số lượng</th>
+                            <th class="table-total text-capitalize">Tổng tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in cart.items">
+                            <!--                            <input type="hidden" name="productId" ng-model="item.productId" value="{{item.productId}}" />-->
+                            <td class="table-remove">
+                                <button ng-click="cart.remove(item.productId)"><i class="material-icons">delete</i>
+                                </button>
+                            </td>
+                            <td class="table-image">
+                                <a href="product-details">
+                                    <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
+                                         alt="{{item.productImageList[0].image_url}}"
+                                         title="{{item.productImageList[0].image_url}}" />
+                                </a>
+                            </td>
+                            <td class="table-p-name text-capitalize">
+                                <a href="product-details">{{item.productName}}</a>
+                            </td>
+                            <td class="table-p-price"><p>{{item.priceMin | vndFormat }}</p></td>
+                            <td class="table-p-qty">
+                                <input ng-model="item.qty" name="qty" type="number" min="1" />
+                            </td>
+                            <td class="table-total"><p>{{item.priceMin * item.qty | vndFormat }}</p></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-bottom-wrapper">
+                    <div
+                            class="table-coupon d-flex d-xs-block d-lg-flex d-sm-flex fix justify-content-start float-left"
+                    >
+                        <input type="text" placeholder="Mã giảm giá" />
+                        <button type="submit" class="btn-primary btn">
+                            Áp dụng phiếu giảm giá
+                        </button>
+                    </div>
+                    <div
+                            class="table-update d-flex d-xs-block d-lg-flex d-sm-flex justify-content-end"
+                    >
+                        <button type="button" class="btn-primary btn">
+                            Cập nhật giỏ hàng
+                        </button>
+                    </div>
+                </div>
             </div>
             <div
-                    class="table-update d-flex d-xs-block d-lg-flex d-sm-flex justify-content-end"
+                    class="table-total-wrapper d-flex justify-content-end pt-60 col-md-12 col-sm-12 col-lg-4 float-left align-items-center"
             >
-              <button type="button" class="btn-primary btn">
-                Update cart
-              </button>
+                <div class="table-total-content" ng-if="cart.items.length">
+                    <h2 class="pb-20">Tổng giỏ hàng</h2>
+                    <div class="table-total-amount">
+                        <div
+                                class="single-total-content d-flex justify-content-between float-left w-100"
+                        >
+                            <strong>Tổng phụ</strong>
+                            <span class="c-total-price">{{cart.amount | vndFormat}}</span>
+                        </div>
+                        <div
+                                class="single-total-content d-flex justify-content-between float-left w-100"
+                        >
+                            <strong>Phí vận chuyển</strong>
+                            <span class="c-total-price"
+                            ><span>Tỷ giá cố định:</span> $5.00</span
+                            >
+                        </div>
+                        <div
+                                class="single-total-content d-flex justify-content-end float-left w-100"
+                        >
+                            <a href="#">Tính toán phí vận chuyển</a>
+                        </div>
+                        <div
+                                class="single-total-content tt-total d-flex justify-content-between float-left w-100"
+                        >
+                            <strong>Tổng tiền</strong>
+                            <span class="c-total-price">$165.00</span>
+                        </div>
+                        <a
+                                href="checkout_page"
+                                class="btn btn-primary float-left w-100 text-center"
+                        >Tiến hành thanh toán</a
+                        >
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div
-                class="table-total-wrapper d-flex justify-content-end pt-60 col-md-12 col-sm-12 col-lg-4 float-left align-items-center"
-        >
-          <div class="table-total-content">
-            <h2 class="pb-20">Cart totals</h2>
-            <div class="table-total-amount">
-              <div
-                      class="single-total-content d-flex justify-content-between float-left w-100"
-              >
-                <strong>Subtotal</strong>
-                <span class="c-total-price">$160.00</span>
-              </div>
-              <div
-                      class="single-total-content d-flex justify-content-between float-left w-100"
-              >
-                <strong>Shipping</strong>
-                <span class="c-total-price"
-                ><span>Flat Rate:</span> $5.00</span
-                >
-              </div>
-              <div
-                      class="single-total-content d-flex justify-content-end float-left w-100"
-              >
-                <a href="#">Calculate shipping</a>
-              </div>
-              <div
-                      class="single-total-content tt-total d-flex justify-content-between float-left w-100"
-              >
-                <strong>Total</strong>
-                <span class="c-total-price">$165.00</span>
-              </div>
-              <a
-                      href="checkout_page"
-                      class="btn btn-primary float-left w-100 text-center"
-              >Proceed to checkout</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {},
-            Tawk_LoadStart = new Date();
-    (function () {
-      var s1 = document.createElement("script"),
-              s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/5ac1aabb4b401e45400e4197/default";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-  <!--End of Tawk.to Script-->
+</div>
+<!--Start of Tawk.to Script-->
+<!--<script type="text/javascript">-->
+<!--    var Tawk_API = Tawk_API || {},-->
+<!--        Tawk_LoadStart = new Date();-->
+<!--    (function () {-->
+<!--        var s1 = document.createElement("script"),-->
+<!--            s0 = document.getElementsByTagName("script")[0];-->
+<!--        s1.async = true;-->
+<!--        s1.src = "https://embed.tawk.to/5ac1aabb4b401e45400e4197/default";-->
+<!--        s1.charset = "UTF-8";-->
+<!--        s1.setAttribute("crossorigin", "*");-->
+<!--        s0.parentNode.insertBefore(s1, s0);-->
+<!--    })();-->
+<!--</script>-->
+<!--End of Tawk.to Script-->
 </body>
 </html>

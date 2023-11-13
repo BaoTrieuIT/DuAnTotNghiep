@@ -1,6 +1,5 @@
 package com.poly.website_norulesshop.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -11,6 +10,8 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -19,7 +20,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Table(name = "account")
-public class Account implements Serializable {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer account_id;
@@ -40,14 +41,14 @@ public class Account implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "bit default 1")
     )
     private Set<Role> roles = new HashSet<>();
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ranked_id")
     private Ranked ranked;
 
     @ManyToOne
     @JoinColumn(name = "account_status_id")
-    private AccountStatus accountStatus;
+    AccountStatus accountStatus;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Address> addressList;

@@ -6,44 +6,47 @@
 
 <head>
 
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description"
-          content=""/>
+          content="" />
     <meta name="author"
-          content=""/>
+          content="" />
     <link rel="shortcut icon"
           type="image/x-icon"
-          href="/user/img/favicon.ico"/>
+          href="/user/img/favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900"
-          rel="stylesheet"/>
+          rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,900"
-          rel="stylesheet"/>
+          rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"/>
+          rel="stylesheet" />
     <!-- Bootstrap core CSS -->
     <link href="/user/vendor/bootstrap/css/bootstrap.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
 
     <!-- Bootstrap core CSS -->
     <link href="/user/css/styles.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
     <link href="/user/css/animate.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
     <link href="/user/css/owl-carousel.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
     <link href="/user/css/lightbox.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
+    <link href="/user/css/jquery-ui.css"
+          rel="stylesheet" />
     <link href="/user/css/otp_verification.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          rel="stylesheet"/>
+          rel="stylesheet" />
+
     <title th:text="${title}"></title>
 
 </head>
-<body ng-app="app">
+<body ng-app="app" ng-controller="cart_ctrl">
 <header th:insert="~{/user/menu/header.html :: header}"></header>
 
 <main th:replace="${view}"></main>
@@ -67,6 +70,7 @@
 <script src="/user/js/theia-sticky-sidebar.min.js"></script>
 <script src="/user/js/inview.js"></script>
 <script src="/user/js/cookiealert.js"></script>
+<script src="/user/js/jquery-ui.min.js"></script>
 <script src="/user/js/jquery.countdown.min.js"></script>
 <script src="/user/js/masonry.pkgd.min.js"></script>
 <script src="/user/js/imagesloaded.pkgd.min.js"></script>
@@ -74,5 +78,6 @@
 <script src="/user/js/jquery.lazy.min.js"></script>
 <script src="/user/js/app.js"></script>
 <script src="/user/js/otp_verification.js"></script>
+<script src="/user/js/cartController.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.service;
 
 import com.poly.website_norulesshop.entity.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 @Service
 public interface ProductService {
     void saveProduct(Product product);
+
+    Page<Product> productPaginate(int page, int pageSize);
 
     Product getProductById(Integer id);
 
@@ -21,6 +24,7 @@ public interface ProductService {
 
     List<Product> SearchProductSoldoutByName(String productName);
 
+    Product findProductWithImagesById(Integer id);
 
     List<Product> isHidden();
 

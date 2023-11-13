@@ -20,7 +20,7 @@ public interface AccountService {
     void deleteAccount(Long id);
 
     Account findByEmail(String email);
-
+Account update (Account account);
     Account resetPassword(String email, String newPassword);
 
 }
