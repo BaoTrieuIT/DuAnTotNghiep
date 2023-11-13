@@ -7,6 +7,7 @@ public interface EmailService {
 
     void sendCode(String email);
 
+
     String generateCode();
 //
 //    String getCode(String code);

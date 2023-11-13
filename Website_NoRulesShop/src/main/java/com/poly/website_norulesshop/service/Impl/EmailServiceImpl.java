@@ -20,6 +20,9 @@ public class EmailServiceImpl implements EmailService {
 
     private static final String EMAIL_SEND_CODE = "NORULES SHOP - YOUR CODE FORGET PASSWORD";
 
+    private static final String EMAIL_SEND_CONTACT_US = "NORULES SHOP - CUSTOMER CONTACT INFORMATION";
+
+
 
     AccountService accountService;
     private final JavaMailSender mailSender;
