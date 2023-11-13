@@ -12,26 +12,52 @@
 							<th scope="col">Tài khoản</th>
 							<th scope="col">Mật khẩu</th>
 							<th scope="col">Họ và tên</th>
-							<th scope="col">Giới tính</th>
 							<th scope="col">Email</th>
 							<th scope="col">SĐT</th>
 							<th scope="col">Ngày sinh</th>
-							<th scope="col">Lý do bị cấm</th>
-							<th scope="col">Hành động</th>
+							<th scope="col">Trạng thái</th>
+							<th scope="col"></th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr>
-							<td>Designer</td>
-							<td> <input type="password" class="form-control"></td>
-							<td>28</td>
-							<td>28</td>
-							<td>2016-05-25</td>
-							<td>2014-12-05</td>
-							<td>2016-05-25</td>
-							<td>2016-05-25</td>
+						<tr ng-repeat="item in pager.items" ng-if="item.accountStatus.accountStatusName === 'Suspended'" >
+							<td>{{item.username}}</td>
+							<td> <input type="password" class="form-control" value="{{item.password}}"></td>
+							<td>{{item.fullname}}</td>
+							<td>{{item.email}}</td>
+							<td>{{item.phone_number}}</td>
+							<td>{{item.birthday}}</td>
+							<td>{{item.accountStatus.accountStatusName}}</td>
+
 							<td>
-								<button type="button" class="btn btn-primary">Ấn xá</button>
+								<button type="button" class="btn btn-primary"  ng-click="edit(item)">Cập nhật</button>
+								<button  ng-click="setItemToHide(item)"  type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#verticalycenteredreport">
+									Ân xá
+								</button>
+								<div class="modal fade" id="verticalycenteredreport" tabindex="-1">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title"> Bạn có chắc muốn ân xá tài khoản này</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<!-- <div class="modal-body">
+                                              <form action="" class="row g-3">
+                                                <div class="col-md-12">
+                                                  <div class="form-floating">
+                                                    <input type="text" class="form-control" id="floatingReasonBan" placeholder="Lý do cấm">
+                                                    <label for="floatingReasonBan">Bạn có chắc chắn muốn ẩn</label>
+                                                  </div>
+                                                </div>
+                                              </form>
+                                            </div> -->
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+												<button type="button" class="btn btn-primary" ng-click="report(itemToHide)" data-bs-dismiss="modal">Xác nhận</button>
+											</div>
+										</div>
+									</div>
+								</div><!-- End Vertically centered Modal-->
 							</td>
 						</tr>
 						</tbody>

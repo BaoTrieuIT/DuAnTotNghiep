@@ -1,5 +1,7 @@
 app = angular.module("app", ["ngRoute"]);
+
 app.config(function ($routeProvider) {
+
     $routeProvider
         .when("/manage_account", {
             templateUrl: "/admin/manage_account.html",
@@ -7,7 +9,7 @@ app.config(function ($routeProvider) {
         })
         .when("/account_add", {
             templateUrl: "/admin/account_add.html",
-            controller: "account_ctrl"
+            controller: "AddAccountController"
         })
         .when("/manage_brand", {
             templateUrl: "/admin/manage_brand.html",
@@ -63,4 +65,7 @@ app.config(function ($routeProvider) {
             controller: "discount_ctrl"
 
         })
+        .otherwise({
+            templateUrl : "/admin/overview.html"
+        });
 })
