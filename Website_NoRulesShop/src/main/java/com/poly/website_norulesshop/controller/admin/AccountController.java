@@ -51,12 +51,18 @@ public class AccountController {
         public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file, HttpServletRequest request) {
             try {
                 if (file != null && !file.isEmpty()) {
+                    String directoryPath1 = "src/main/resources/static/admin/imagesAccount/";
+                    Path path1 = Paths.get(directoryPath1);
+
+                    if (!Files.exists(path1)) {
+                        Files.createDirectories(path1);
+                    }
+
+                    String fileName1 = file.getOriginalFilename();
+                    Path filePath1 = Paths.get(directoryPath1, fileName1);
+                    Files.write(filePath1, file.getBytes());
                     // Get the user's home directory
                     String userHome = System.getProperty("user.home");
-
-                    // Or use a temporary directory
-                    // String tempDir = System.getProperty("java.io.tmpdir");
-
                     String directoryPath = userHome + File.separator + "imagesAccount/";
                     Path path = Paths.get(directoryPath);
 

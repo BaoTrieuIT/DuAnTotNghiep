@@ -165,4 +165,7 @@ app.controller('AddAccountController', ['$scope','$http' ,'$location','$timeout'
             });
         }
     }
+    $scope.reset = function (){
+        $scope.form = {};
+    }
 }])
