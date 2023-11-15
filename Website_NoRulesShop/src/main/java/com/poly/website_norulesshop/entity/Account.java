@@ -11,6 +11,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,6 +27,9 @@ public class Account implements Serializable {
     private Integer account_id;
     private String password;
     private String fullname;
+    @NotNull(message = "Số điện thoại không được để trống")
+    @NotEmpty(message = "Số điện thoại không được để trống")
+    @Pattern(regexp = "\\d{10}", message = "Số điện thoại phải có 10 chữ số")
     private String phone_number;
     private String email;
     private String username;

@@ -2,206 +2,220 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout :: user(~{::body})}"
       xmlns="http://www.w3.org/1999/html">
 <head>
-	<meta charset="UTF-8">
-	<title>My Account</title>
+    <meta charset="UTF-8">
+    <title>My Account</title>
 </head>
 <body>
-  <nav aria-label="breadcrumb" class="w-100 float-left">
+<nav aria-label="breadcrumb" class="w-100 float-left">
     <ol class="breadcrumb parallax justify-content-center" data-source-url="/user/img/banner/parallax.jpg"
         style="background-image: url(&quot;/user/img/banner/parallax.jpg&quot;); background-position: 50% 0.809717%;">
-      <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Tài khoản</li>
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tài khoản</li>
     </ol>
-  </nav>
-  <div class="main-content w-100 float-left blog-list">
+</nav>
+<div class="main-content w-100 float-left blog-list">
     <div class="container">
-      <form method="post" class="myacoount-form" action="/home/my-account/update" th:object="${acc}">
-      <div class="row">
-        <div class="products-grid col-xl-9 col-lg-6 order-lg-2">
-          <div class="row">
-            <div class="col-lg-12 order-lg-last account-content">
-              <h4>Thông tin tài khoản</h4>
-                <div class="row">
-                  <div class="col-sm-12">
+        <form method="post" class="myacoount-form needs-validation" action="/home/my-account/update" th:object="${acc}"
+              novalidate>
+            <div class="row">
+                <div class="products-grid col-xl-9 col-lg-6 order-lg-2">
                     <div class="row">
-                      <div class="col-md-4">
-                        <input type="hidden" name="account_id" th:value="${acc.account_id}" th:field="*{account_id}">
-                        <div class="form-group has-validation">
-                          <label for="username">Tên đăng nhập<span
-                                  class="required">*</span></label>
-                          <input type="text" class="form-control" id="username"
-                                 name="username" th:field="*{username}" th:value="${acc.username}" required>
-                          <div class="valid-tooltip">Look good</div>
-                          <div class="invalid-tooltip">Không để trống tên đăng nhập</div>
+                        <div class="col-lg-12 order-lg-last account-content">
+                            <h4>Thông tin tài khoản</h4>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="hidden" name="account_id" th:value="${acc.account_id}"
+                                                   th:field="*{account_id}">
+                                            <div class="form-group has-validation">
+                                                <label for="username">Tên đăng nhập<span
+                                                        class="required">*</span></label>
+                                                <input type="text" class="form-control" id="username"
+                                                       name="username" th:field="*{username}" th:value="${acc.username}"
+                                                       required>
+                                                <div class="invalid-feedback">Không để trống tên đăng nhập</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="fullname">Họ và tên<span
+                                                        class="required">*</span></label>
+                                                <input type="text" class="form-control" id="fullname"
+                                                       name="fullname" th:field="*{fullname}" th:value="${acc.fullname}"
+                                                       required>
+                                                <div class="invalid-tooltip">Không để trống họ tên</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="acc-email">Email</label>
+                                <input type="email" class="form-control" id="acc-email" name="email"
+                                       required th:field="*{email}" th:value="${acc.email}">
+                                <div class="invalid-feedback">Không để trống email</div>
+                            </div>
+
+                            <div class="form-group has-validation">
+                                <label for="phone_number">Số điện thoại</label>
+                                <input type="number" class="form-control" id="phone_number" name="phone_number"
+                                       required th:field="*{phone_number}" th:value="${acc.phone_number}">
+                                <div id="phoneErrorDiv">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthday">Ngày sinh</label>
+                                <input type="date" class="form-control" id="birthday" name="birthday"
+                                       required th:field="*{birthday}"
+                                       th:value="${#dates.format(acc.birthday, 'yyyy-MM-dd')}">
+                                <div class="invalid-feedback">Không để trống ngày sinh</div>
+                            </div>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="change-password-checkbox"
+                                       value="1" onchange="togglePasswordFields()" name="changePassword">
+                                <label class="custom-control-label" for="change-password-checkbox">Thay đổi mật
+                                    khẩu</label>
+                            </div>
+                            <div id="account-change-password" class="">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group required-field">
+                                            <label for="password">Mật khẩu mới</label>
+                                            <input type="password" class="form-control" id="password"
+                                                   name="password" th:value="${acc.password}" th:field="*{password}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group required-field">
+                                            <label for="comfirmPassword">Xác minh mật khẩu</label>
+                                            <input type="password" class="form-control" id="comfirmPassword"
+                                                   name="comfirmPassword">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 " id="password-mismatch-error"
+                                     style="color: red; margin-top: 7px; display: none;">
+                                    <!--                    Mật khẩu không khớp. Vui lòng kiểm tra lại.-->
+                                </div>
+                                <!-- End .row -->
+                            </div>
+                            <!-- End #account-chage-pass -->
+
+                            <div class="required text-right">* Thông tin bắt buộc</div>
+                            <div class="form-footer d-flex justify-content-between align-items-center">
+                                <a th:href="@{/home/index}"><i class="material-icons">navigate_before</i>Trở lại trang
+                                    chủ</a>
+
+                                <div class="form-footer-right">
+                                    <button type="submit" class="btn btn-primary btn-primary"
+                                            th:href="@{/home/my-account/update}">Lưu thông tin
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- End .form-footer -->
+
                         </div>
-                        <!-- End .form-group -->
-                      </div>
-                      <!-- End .col-md-4 -->
-                      <div class="col-md-8">
-                        <div class="form-group required-field has-validation">
-                          <label for="fullname">Họ và tên<span
-                                  class="required">*</span></label>
-                          <input type="text" class="form-control" id="fullname"
-                                 name="fullname" th:field="*{fullname}" th:value="${acc.fullname}" required>
-                          <div class="valid-tooltip">Look good</div>
-                          <div class="invalid-tooltip">Không để trống họ tên </div>
+                    </div>
+                </div>
+                <div class="sidebar col-xl-3 col-lg-4 order-lg-1">
+                    <div class="sidebar-product left-sidebar w-100 float-right">
+                        <div class="title">
+                            <a data-toggle="collapse" href="#sidebar-product" aria-expanded="false"
+                               aria-controls="sidebar-product" class="d-lg-none block-toggler">Your Avatar</a>
                         </div>
-                        <!-- End .form-group -->
-                      </div>
-                      <!-- End .col-md-4 -->
+                        <div id="sidebar-product" class="collapse w-100 float-right">
+                            <div class="sidebar-block sale products">
+                                <h3 class="widget-title">Ảnh đại diện</h3>
+                                <div class="personal-image d-flex justify-content-center">
+                                    <label class="label">
+                                        <input type="file" name="avatar_url" th:field="*{avatar_url}"/>
+                                        <figure class="personal-figure">
+                                            <img th:src="${imagePath}" class="personal-avatar"
+                                                 th:value="${acc.avatar_url}" alt="avatar">
+                                            <figcaption class="personal-figcaption">
+                                                <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
+                                            </figcaption>
+                                        </figure>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- End .row -->
-                  </div>
-                  <!-- End .col-sm-11 -->
                 </div>
-                <!-- End .row -->
-
-                <div class="form-group  has-validation">
-                  <label for="acc-email">Email</label>
-                  <input type="email" class="form-control" id="acc-email" name="email"
-                         required th:field="*{email}" th:value="${acc.email}">
-                  <div class="valid-tooltip">Look good</div>
-                  <div class="invalid-tooltip">Không để trống email </div>
-                </div>
-
-                <div class="form-group required-field">
-                  <label for="phone_number">Số điện thoại</label>
-                  <input type="number" class="form-control" id="phone_number" name="phone_number"
-                         required th:field="*{phone_number}" th:value="${acc.phone_number}">
-                  <div class="valid-tooltip">Look good</div>
-                  <div class="invalid-tooltip">Không để trống số điện thoại </div>
-                </div>
-
-                <div class="form-group required-field">
-                  <label for="birthday">Ngày sinh</label>
-                  <input type="date" class="form-control" id="birthday" name="birthday"
-                         required th:field="*{birthday}" th:value="${#dates.format(acc.birthday, 'yyyy-MM-dd')}">
-                  <div class="valid-tooltip">Look good</div>
-                  <div class="invalid-tooltip">Không để trống ngày sinh </div>
-                </div>
-                <!-- End .form-group -->
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="change-password-checkbox"
-                         value="1" onchange="togglePasswordFields()" >
-                  <input type="hidden" name="changePassword" id="changePassword" value="">
-                  <label class="custom-control-label" for="change-password-checkbox">Thay đổi mật khẩu</label>
-                </div>
-                <!-- End .custom-checkbox -->
-
-                <div id="account-change-password" class="">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group required-field">
-                        <label for="password">Mật khẩu mới</label>
-                        <input type="password" class="form-control" id="password"
-                               name="password" th:value="${acc.password}" th:field="*{password}">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group required-field">
-                        <label for="comfirmPassword">Xác minh mật khẩu</label>
-                        <input type="password" class="form-control" id="comfirmPassword"
-                               name="comfirmPassword">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 " id="password-mismatch-error" style="color: red; margin-top: 7px; display: none;">
-<!--                    Mật khẩu không khớp. Vui lòng kiểm tra lại.-->
-                  </div>
-                  <!-- End .row -->
-                </div>
-                <!-- End #account-chage-pass -->
-
-                <div class="required text-right">* Thông tin bắt buộc</div>
-                <div class="form-footer d-flex justify-content-between align-items-center">
-                  <a th:href="@{/home/index}"><i class="material-icons">navigate_before</i>Trở lại trang chủ</a>
-
-                  <div class="form-footer-right">
-                    <button type="submit" class="btn btn-primary btn-primary"
-                            th:href="@{/home/my-account/update}">Lưu thông tin
-                    </button>
-                  </div>
-                </div>
-                <!-- End .form-footer -->
-
             </div>
-          </div>
-        </div>
-        <div class="sidebar col-xl-3 col-lg-4 order-lg-1">
-          <div class="sidebar-product left-sidebar w-100 float-right">
-            <div class="title">
-              <a data-toggle="collapse" href="#sidebar-product" aria-expanded="false"
-                 aria-controls="sidebar-product" class="d-lg-none block-toggler">Your Avatar</a>
-            </div>
-            <div id="sidebar-product" class="collapse w-100 float-right">
-              <div class="sidebar-block sale products">
-                <h3 class="widget-title">Ảnh đại diện</h3>
-                <div class="personal-image d-flex justify-content-center">
-                  <label class="label">
-                    <input type="file" name="avatar_url" th:field="*{avatar_url}"/>
-                    <figure class="personal-figure">
-                      <img th:src="${imagePath}" class="personal-avatar"  th:value="${acc.avatar_url}" alt="avatar">
-                      <figcaption class="personal-figcaption">
-                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
-                      </figcaption>
-                    </figure>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </form>
+        </form>
     </div>
-  </div>
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
+</div>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
     (function () {
-      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
-      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin', '*');
-      s0.parentNode.insertBefore(s1, s0);
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
-  </script>
+</script>
 <!--  kiểm tra password-->
-  <script>
-      function togglePasswordFields() {
-      var checkbox = document.getElementById('change-password-checkbox');
-      var hiddenField = document.getElementById('changePassword');
-      var passwordFields = document.getElementById('account-change-password');
+<script>
+    function togglePasswordFields() {
+        var checkbox = document.getElementById('change-password-checkbox');
+        var hiddenField = document.getElementById('changePassword');
+        var passwordFields = document.getElementById('account-change-password');
 
-      if (checkbox.checked) {
-      hiddenField.value = 'on';
-      passwordFields.style.display = 'block';
-    } else {
-      hiddenField.value = '';
-      passwordFields.style.display = 'none';
-    }
-    }
-  document.getElementById('comfirmPassword').addEventListener('input', function () {
-      var newPassword = document.getElementById('password').value;
-      var confirmPassword = document.getElementById('comfirmPassword').value;
-      var errorDiv = document.getElementById('password-mismatch-error');
-
-      if (newPassword.length < 6) {
-        errorDiv.innerHTML = "Mật khẩu mới phải có ít nhất 6 ký tự.";
-        errorDiv.style.display = 'block';
-      } else {
-        if (newPassword === confirmPassword) {
-          errorDiv.style.display = 'none';
+        if (checkbox.checked) {
+            hiddenField.value = 'on';
+            passwordFields.style.display = 'block';
         } else {
-          errorDiv.innerHTML = "Mật khẩu không khớp. Vui lòng kiểm tra lại.";
-          errorDiv.style.display = 'block';
+            hiddenField.value = '';
+            passwordFields.style.display = 'none';
         }
-      }
-      console.log("newPassword: "+ newPassword);
-      console.log("confirmPassword: "+ confirmPassword);
+    }
+
+    document.getElementById('comfirmPassword').addEventListener('input', function () {
+        var newPassword = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('comfirmPassword').value;
+        var errorDiv = document.getElementById('password-mismatch-error');
+
+        if (newPassword.length < 6) {
+            errorDiv.innerHTML = "Mật khẩu mới phải có ít nhất 6 ký tự.";
+            errorDiv.style.display = 'block';
+        } else {
+            if (newPassword === confirmPassword) {
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.innerHTML = "Mật khẩu không khớp. Vui lòng kiểm tra lại.";
+                errorDiv.style.display = 'block';
+            }
+        }
+        console.log("newPassword: " + newPassword);
+        console.log("confirmPassword: " + confirmPassword);
     });
-  </script>
+
+    document.getElementById("phone_number").addEventListener("input", function() {
+        var phoneNumber = this.value.replace(/\D/g, ''); // Loại bỏ các kí tự không phải số
+        console.log(phoneNumber)
+        if (phoneNumber !== null){
+            if (phoneNumber.length === 10) {
+                // this.setCustomValidity("");
+                document.getElementById("phoneErrorDiv").innerText ="";
+            } else {
+                console.log("Số điện thoại phải là 10 chữ số");
+                document.getElementById("phoneErrorDiv").innerText ="Số điện thoại phải là 10 chữ số";
+                // this.setCustomValidity("Số điện thoại phải là 10 chữ số");
+            }
+        }else {
+            console.log("Số điện thoại không được để trống");
+            document.getElementById("phoneErrorDiv").innerText ="Số điện thoại không được để trống";
+        }
+
+    });
+</script>
 
 </body>
 </html>

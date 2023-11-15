@@ -8,8 +8,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("home")
@@ -54,13 +57,18 @@ public class MyAccountController {
 //    }
     @PostMapping("/my-account/update")
     public String update(@Valid @ModelAttribute Account acc, Model model,
+                         BindingResult result,
                          @RequestParam("password") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
-                         @RequestParam(value = "changePassword", required = false) String changePassword) {
+                         @RequestParam(value = "changePassword", required = false,defaultValue = "false") boolean changePassword,
+                         Principal principal) {
         System.out.println("newPassword: " + newPassword);
         System.out.println("comfirmPassword: " + comfirmPassword);
-
-        if (comfirmPassword != null && changePassword.equals("on") && newPassword != null && newPassword.length() > 6) {
+        if(result.hasErrors()){
+            model.addAttribute("errorDiv", "Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin của bạn.");
+            return "user/my_account";
+        }
+        if (comfirmPassword != null && changePassword && newPassword != null && newPassword.length() > 6) {
             if (newPassword.equals(comfirmPassword)) {
                 acc.setPassword(newPassword);
                 System.out.println(acc.getPassword());
@@ -68,6 +76,7 @@ public class MyAccountController {
                 model.addAttribute("acc", acc);
                 session.set("acc", acc);
                 System.out.println(acc);
+                System.out.println("ID: "+acc.getAccount_id());
                 return "redirect:/home/my-account";
             } else {
                 model.addAttribute("errorDiv", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
@@ -79,6 +88,7 @@ public class MyAccountController {
             model.addAttribute("acc", acc);
             session.set("acc", acc);
             System.out.println(acc);
+            System.out.println("ID: "+acc.getAccount_id());
             return "redirect:/home/my-account";
         }
 
