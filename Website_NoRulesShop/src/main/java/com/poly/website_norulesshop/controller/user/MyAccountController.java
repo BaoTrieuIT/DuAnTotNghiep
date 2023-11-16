@@ -13,6 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+
+import static java.time.ZoneId.getAvailableZoneIds;
+import static java.time.ZoneId.systemDefault;
 
 @Controller
 @RequestMapping("home")
@@ -55,19 +63,26 @@ public class MyAccountController {
 //        }
 //        return "redirect:/home/my-account";
 //    }
+
     @PostMapping("/my-account/update")
     public String update(@Valid @ModelAttribute Account acc, Model model,
                          BindingResult result,
                          @RequestParam("password") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
-                         @RequestParam(value = "changePassword", required = false,defaultValue = "false") boolean changePassword,
+                         @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
                          Principal principal) {
         System.out.println("newPassword: " + newPassword);
         System.out.println("comfirmPassword: " + comfirmPassword);
-        if(result.hasErrors()){
-            model.addAttribute("errorDiv", "Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin của bạn.");
+        // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
+        if (acc.getFullname() == null || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
+            result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
             return "user/my_account";
         }
+//        if(ChronoUnit.YEARS.between(acc.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),LocalDate.now())<=12){
+//            result.rejectValue("birthday","error.account","Ngày sinh không hợp lệ");
+//            return "user/my_account";
+//        }
+
         if (comfirmPassword != null && changePassword && newPassword != null && newPassword.length() > 6) {
             if (newPassword.equals(comfirmPassword)) {
                 acc.setPassword(newPassword);
@@ -76,7 +91,7 @@ public class MyAccountController {
                 model.addAttribute("acc", acc);
                 session.set("acc", acc);
                 System.out.println(acc);
-                System.out.println("ID: "+acc.getAccount_id());
+                System.out.println("ID: " + acc.getAccount_id());
                 return "redirect:/home/my-account";
             } else {
                 model.addAttribute("errorDiv", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
@@ -88,7 +103,7 @@ public class MyAccountController {
             model.addAttribute("acc", acc);
             session.set("acc", acc);
             System.out.println(acc);
-            System.out.println("ID: "+acc.getAccount_id());
+            System.out.println("ID: " + acc.getAccount_id());
             return "redirect:/home/my-account";
         }
 
