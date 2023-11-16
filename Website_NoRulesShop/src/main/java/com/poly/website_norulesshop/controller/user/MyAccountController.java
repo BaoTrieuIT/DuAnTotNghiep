@@ -46,6 +46,63 @@ public class MyAccountController {
         return "user/my_account";
     }
 
+//    @PostMapping("/my-account/update")
+//    public String update(@RequestParam("image") MultipartFile file,
+//                         @Valid @ModelAttribute Account acc, Model model,
+//                         BindingResult result,
+//                         @RequestParam("password") String newPassword,
+//                         @RequestParam("comfirmPassword") String comfirmPassword,
+//                         @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
+//                         Principal principal) {
+//        System.out.println("newPassword: " + newPassword);
+//        System.out.println("comfirmPassword: " + comfirmPassword);
+//        // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
+//        if (acc.getFullname() == null || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
+//            result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
+//            return "user/my_account";
+//        }
+//
+//        if (comfirmPassword != null && changePassword && newPassword != null && newPassword.length() > 6) {
+//            if (newPassword.equals(comfirmPassword)) {
+//                acc.setPassword(newPassword);
+//                System.out.println(acc.getPassword());
+//                accountService.updateAccount_frUser(acc);
+//                model.addAttribute("acc", acc);
+//                session.set("acc", acc);
+//                System.out.println(acc);
+//                System.out.println("ID: " + acc.getAccount_id());
+//                return "redirect:/home/my-account";
+//            } else {
+//                model.addAttribute("errorDiv", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
+//            }
+//        } else {
+//            // Người dùng không chọn checkbox, giữ nguyên mật khẩu cũ
+//            try {
+//                StringBuilder fileNames = new StringBuilder();
+//                String directoryPath = "src/main/resources/static/user/img/avatar/";
+//                Path fileNameAndPath = Paths.get(directoryPath, (file.getOriginalFilename()));
+//                fileNames.append(file.getOriginalFilename());
+//                Files.write(fileNameAndPath, file.getBytes());
+//                String filename = StringUtils.cleanPath(file.getOriginalFilename());
+//                // Lưu đường dẫn của ảnh vào cơ sở dữ liệu
+//
+//                // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
+//                acc.setAvatar_url(filename);
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            }
+//            acc.setPassword(acc.getPassword());
+//            accountService.updateAccount_frUser(acc);
+//            model.addAttribute("acc", acc);
+//            session.set("acc", acc);
+//            System.out.println(acc);
+//            System.out.println("ID: " + acc.getAccount_id());
+//            return "redirect:/home/my-account";
+//        }
+//
+//        return "user/forgot_password";
+//    }
+
     @PostMapping("/my-account/update")
     public String update(@RequestParam("image") MultipartFile file,
                          @Valid @ModelAttribute Account acc, Model model,
@@ -84,6 +141,7 @@ public class MyAccountController {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
 
         // Cập nhật thông tin tài khoản
         accountService.updateAccount_frUser(acc);
