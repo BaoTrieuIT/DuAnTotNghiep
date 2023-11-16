@@ -96,10 +96,11 @@ function validateFullname(fullnameInput) {
 
     if (!fullnameRegex.test(fullname)) {
         fullnameInput.setCustomValidity("Họ và tên không được chứa kí tự đặc biệt và số");
-        document.getElementById("fullnameErrorDiv").innerText="Họ và tên không được chứa kí tự đặc biệt và số";
+        document.getElementById("fullnameErrorDiv").innerText = "Họ và tên không được chứa kí tự đặc biệt và số";
     } else {
         fullnameInput.setCustomValidity("");
     }
+    
 
     //Kiểm tra ngày sinh đủ 12 tuổi
     function validateBirthday(birthdayInput) {
@@ -107,8 +108,7 @@ function validateFullname(fullnameInput) {
         var today = new Date();
         var age = today.getFullYear() - birthday.getFullYear();
 
-        if (today.getMonth() < birthday.getMonth() ||
-            (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
+        if (today.getMonth() < birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
             age--;
         }
 
@@ -116,14 +116,13 @@ function validateFullname(fullnameInput) {
             document.getElementById("birthday-error").style.display = "none";
             document.getElementById("age-error").style.display = "block";
             birthdayInput.setCustomValidity("Ngày sinh không đủ 12 tuổi");
-            document.getElementById("birthday-error").innerText ="Ngày sinh không đủ 12 tuổi";
+            document.getElementById("birthday-error").innerText = "Ngày sinh không đủ 12 tuổi";
         } else {
             document.getElementById("birthday-error").style.display = "none";
             document.getElementById("age-error").style.display = "none";
             birthdayInput.setCustomValidity("");
         }
     }
-
 
 
 }

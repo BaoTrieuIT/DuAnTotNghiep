@@ -15,7 +15,7 @@
 </nav>
 <div class="main-content w-100 float-left blog-list">
     <div class="container">
-        <form method="post" class="myacoount-form needs-validation" action="/home/my-account/update" th:object="${acc}" novalidate>
+        <form method="post" class="myacoount-form needs-validation" action="/home/my-account/update" th:object="${acc}" enctype="multipart/form-data" novalidate>
             <div class="row">
                 <div class="products-grid col-xl-9 col-lg-6 order-lg-2">
                     <div class="row">
@@ -134,10 +134,11 @@
                                 <h3 class="widget-title">Ảnh đại diện</h3>
                                 <div class="personal-image d-flex justify-content-center">
                                     <label class="label">
-                                        <input type="file" name="avatar_url" th:field="*{avatar_url}"/>
+                                        <input type="hidden" th:field="*{avatar_url}">
+                                        <input type="file" name="image" id="fileInput" accept="image/*"  onchange="displayImage()"/>
                                         <figure class="personal-figure">
                                             <img th:src="${imagePath}" class="personal-avatar"
-                                                 th:value="${acc.avatar_url}" alt="avatar">
+                                                 th:value="${acc.avatar_url}" alt="avatar" id="selectedImage">
                                             <figcaption class="personal-figcaption">
                                                 <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
                                             </figcaption>
@@ -163,6 +164,24 @@
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
     })();
+
+    function displayImage() {
+        var fileInput = document.getElementById('fileInput');
+        var selectedImage = document.getElementById('selectedImage');
+
+        var file = fileInput.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                selectedImage.src = e.target.result;
+                selectedImage.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
 </script>
 <!--  kiểm tra password-->
 <script src="../../././static/user/js/my_account.js"/>
