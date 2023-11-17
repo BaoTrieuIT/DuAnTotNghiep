@@ -7,9 +7,11 @@ import java.util.List;
 public interface CategoryQuantityService {
     CategoryQuantity saveCategoryQuantity(CategoryQuantity categoryQuantity);
 
-    CategoryQuantity getCategoryQuantityById(Long id);
+    CategoryQuantity getCategoryQuantityById(Integer id);
+
+    List<CategoryQuantity> findByProductId(Integer id);
 
     List<CategoryQuantity> getAllCategoryQuantities();
 
-    void deleteCategoryQuantity(Long id);
+    void deleteCategoryQuantity(Integer id);
 }

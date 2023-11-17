@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.entity;
+
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,7 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "directory")
 public class Directory {
     @Id
@@ -21,7 +26,7 @@ public class Directory {
 
     @ManyToOne
     @JoinColumn(name = "gender_id")
-    Gender gender;
+    private Gender gender;
 
     @JsonIgnore
     @OneToMany(mappedBy = "directory")

@@ -24,8 +24,13 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
     }
 
     @Override
-    public CategoryQuantity getCategoryQuantityById(Long id) {
+    public CategoryQuantity getCategoryQuantityById(Integer id) {
         return categoryQuantityRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<CategoryQuantity> findByProductId(Integer productId) {
+        return categoryQuantityRepository.findByProductId(productId);
     }
 
     @Override
@@ -34,7 +39,7 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
     }
 
     @Override
-    public void deleteCategoryQuantity(Long id) {
+    public void deleteCategoryQuantity(Integer id) {
         categoryQuantityRepository.deleteById(id);
     }
 }

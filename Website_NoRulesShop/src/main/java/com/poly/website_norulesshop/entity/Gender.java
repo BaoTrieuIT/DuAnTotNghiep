@@ -11,17 +11,18 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "gender")
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "gender_id")
-    Integer genderId;
+    private Integer genderId;
     @Column(name = "gender_name")
-    String genderName;
+    private String genderName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "gender")
-    List<Directory> directoryList;
+    private List<Directory> directoryList;
 }

@@ -56,37 +56,41 @@
                              th:text="${#numbers.formatDecimal(product.getPriceMin(), 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></div>
                     </div>
                     <div class="product-variants float-left w-100">
-                        <div class="col-md-3 col-sm-6 col-xs-12 size-options d-flex align-items-center">
-                            <h5>Kích thước:</h5>
-
-                            <select class="form-control" name="select">
-                                <option value="" selected="">Kích thước</option>
-                                <option value="black">Medium</option>
-                                <option value="white">Large</option>
-                                <option value="gold">Small</option>
-                                <option value="rose gold">Extra large</option>
-                            </select>
+                        <div class="col-md-4 col-sm-6 col-xs-12 size-options d-flex align-items-center">
+                            <div>
+                                <h5>Kích thước:</h5>
+                            </div>
+                            <div>
+                                <select class="form-control" name="CategoryLV1Detail">
+                                    <option th:each="category : ${category}"
+                                            th:value="${category.getCategoryLevel1Detail().getCategory_level_1_detail_id()}"
+                                            th:text="${category.getCategoryLevel1Detail().getCategory_level_1_detail_name()}"
+                                    >
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="color-option d-flex align-items-center">
-                            <h5>Màu sắc :</h5>
-                            <ul class="color-categories">
-                                <li class="active">
-                                    <a class="tt-pink" href="#" title="Pink"></a>
-                                </li>
-                                <li>
-                                    <a class="tt-blue" href="#" title="Blue"></a>
-                                </li>
-                                <li>
-                                    <a class="tt-yellow" href="#" title="Yellow"></a>
-                                </li>
-                            </ul>
+                        <div class="col-md-4 col-sm-6 col-xs-12 color-option d-flex align-items-center">
+                            <div>
+                                <h5>Màu sắc :</h5>
+                            </div>
+                            <div>
+                                <select class="form-control" name="CategoryLV2Detail">
+                                    <option th:each="category : ${category}"
+                                            th:value="${category.getCategoryLevel2Detail().getCategory_level_2_detail_id()}"
+                                            th:text="${category.getCategoryLevel2Detail().getCategory_level_2_detail_name()}"
+                                    >
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="btn-cart d-flex align-items-center float-left w-100">
                         <h5>Số lượng:</h5>
-                        <input value="1" type="number">
-                        <button type="button" class="btn btn-primary btn-cart m-0" data-target="#cart-pop"
-                                data-toggle="modal"><i class="material-icons">shopping_cart</i> Thêm vào giỏ hàng
+                        <input value="1" min="1" type="number">
+                        <button type="button" class="btn btn-primary btn-cart m-0"
+                                th:attr="ng-click=@{|cart.add(${product.getProductId})|}">
+                            <i class="material-icons">shopping_cart</i> Thêm vào giỏ hàng
                         </button>
                     </div>
                     <div class="tt-links d-flex align-items-center float-left w-100 mb-15">
@@ -518,15 +522,7 @@
 </div>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
+
 </script>
 <!--End of Tawk.to Script-->
 </body>

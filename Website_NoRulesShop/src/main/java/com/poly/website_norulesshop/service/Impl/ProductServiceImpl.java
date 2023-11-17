@@ -3,10 +3,13 @@ package com.poly.website_norulesshop.service.Impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.poly.website_norulesshop.Repository.Specification.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.poly.website_norulesshop.Repository.ProductRepository;
@@ -32,6 +35,35 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> productPaginate(int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return productRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryId, Integer genderId, Integer categoryLV1DetailId, Integer categoryLV2DetailId, String priceSort, int page, int pageSize) {
+        Pageable pageable;
+        if (priceSort != null && priceSort.equalsIgnoreCase("asc")) {
+            pageable = PageRequest.of(page, pageSize, Sort.by("priceMin"));
+        } else if (priceSort != null && priceSort.equalsIgnoreCase("desc")) {
+            pageable = PageRequest.of(page, pageSize, Sort.by("priceMin").descending());
+        } else {
+            pageable = PageRequest.of(page, pageSize, Sort.unsorted());
+        }
+        Specification<Product> spec = Specification.where(null);
+        if (brandId != null) {
+            spec = ProductSpecification.findbyBrandId(brandId);
+        }
+        if (directoryId != null) {
+            spec = ProductSpecification.findbyDirectoryId(directoryId);
+        }
+        if (genderId != null) {
+            spec = ProductSpecification.findbyGenderId(genderId);
+        }
+        if (categoryLV1DetailId != null) {
+            spec = ProductSpecification.findbyCategoryLV1Detail(categoryLV1DetailId);
+        }
+        if (categoryLV2DetailId != null) {
+            spec = ProductSpecification.findbyCategoryLV2Detail(categoryLV2DetailId);
+        }
+        return productRepository.findAll(spec, pageable);
     }
 
     @Override

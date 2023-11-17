@@ -20,32 +20,6 @@
     <div class="container">
         <div class="row">
             <div class="content-wrapper col-xl-9 col-lg-9 order-lg-2">
-                <header class="product-grid-header d-flex d-xs-block d-sm-flex d-lg-flex w-100 float-left">
-                    <div class="shop-results-wrapper d-flex d-sm-flex d-xs-block d-lg-flex justify-content-end col-md-9 col-sm-9 col-xs-12">
-                        <div class="shop-results d-flex align-items-center">
-                            <span>Hiển thị</span>
-                            <div class="shop-select">
-                                <select name="number" id="number">
-                                    <option value="9">9</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="75">75</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="shop-results d-flex align-items-center">
-                            <span>Sắp xếp theo</span>
-                            <div class="shop-select">
-                                <select name="sort" id="sort">
-                                    <option value="position">Sắp xếp mặc định</option>
-                                    <option value="p-name">Sắp xếp theo tên</option>
-                                    <option value="p-price">Sắp xếp theo giá</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </header>
                 <div class="tab-content text-center products w-100 float-left">
                     <div class="tab-pane grid fade active" id="grid" role="tabpanel">
                         <div class="row">
@@ -104,7 +78,14 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <li class="page-item" th:classappend="${productPage.first} ? 'disabled' : ''">
-                                <a class="page-link" th:href="@{/home/product(page=${productPage.number - 1})}"
+                                <a class="page-link"
+                                   th:href="@{/home/product(page=${productPage.number - 1},
+                                                                   brandId=${filterCriteria.brandId},
+                                                                   directoryId=${filterCriteria.directoryId},
+                                                                   genderId=${filterCriteria.genderId},
+                                                                   categoryLV1DetailId=${filterCriteria.categoryLV1DetailId},
+                                                                   categoryLV2DetailId=${filterCriteria.categoryLV2DetailId},
+                                                                   priceSort=${filterCriteria.priceSort})}"
                                    aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
@@ -113,12 +94,26 @@
                             <li class="page-item"
                                 th:each="pageNumber : ${#numbers.sequence(0, productPage.totalPages - 1)}"
                                 th:classappend="${pageNumber == productPage.number} ? 'active' : ''">
-                                <a class="page-link" th:href="@{/home/product(page=${pageNumber})}"
+                                <a class="page-link"
+                                   th:href="@{/home/product(page=${pageNumber},
+                                                            brandId=${filterCriteria.brandId},
+                                                            directoryId=${filterCriteria.directoryId},
+                                                            genderId=${filterCriteria.genderId},
+                                                            categoryLV1DetailId=${filterCriteria.categoryLV1DetailId},
+                                                            categoryLV2DetailId=${filterCriteria.categoryLV2DetailId},
+                                                            priceSort=${filterCriteria.priceSort})}"
                                    th:text="${pageNumber + 1}"></a>
                             </li>
 
                             <li class="page-item" th:classappend="${productPage.last} ? 'disabled' : ''">
-                                <a class="page-link" th:href="@{/home/product(page=${productPage.number + 1})}"
+                                <a class="page-link"
+                                   th:href="@{/home/product(page=${productPage.number + 1},
+                                                                   brandId=${filterCriteria.brandId},
+                                                                   directoryId=${filterCriteria.directoryId},
+                                                                   genderId=${filterCriteria.genderId},
+                                                                   categoryLV1DetailId=${filterCriteria.categoryLV1DetailId},
+                                                                   categoryLV2DetailId=${filterCriteria.categoryLV2DetailId},
+                                                                   priceSort=${filterCriteria.priceSort})}"
                                    aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
@@ -129,120 +124,164 @@
                 </div>
             </div>
             <div class="left-column sidebar col-xl-3 col-lg-3 order-lg-1">
-                <div class="sidebar-filter left-sidebar w-100 float-left">
-                    <div class="title">
-                        <a data-toggle="collapse" href="#sidebar-main" aria-expanded="false"
-                           aria-controls="sidebar-main" class="d-lg-none block-toggler">Danh mục sản phẩm</a>
-                    </div>
-                    <div id="sidebar-main" class="sidebar-main collapse">
-                        <div class="sidebar-block categories">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#categoriesMenu" role="button" aria-expanded="true"
-                                   aria-controls="categoriesMenu">Danh mục</a>
-                            </h3>
-                            <div id="categoriesMenu" class="expand-lg collapse show">
-                                <div class="nav nav-pills flex-column mt-4">
-                                    <a class="nav-link d-flex justify-content-between collapse mb-2"
-                                       data-toggle="collapse"
-                                       href="#categories1"
-                                       role="button"
-                                       aria-expanded="true"
-                                       aria-controls="categories1"
-                                    >
-                                        <span>Jackets</span>
-                                        <span>120</span>
-                                    </a>
-                                    <div class="expand-lg collapse" id="categories1">
-                                        <div class="nav nav-pills flex-column ml-3">
-                                            <a href="#" class="mb-2">Lorem ipsum</a>
-                                            <a href="#" class="mb-2">Donec vitae</a>
+                <form th:action="@{/home/product/filters}" method="get">
+                    <div class="sidebar-filter left-sidebar w-100 float-left">
+                        <div class="title">
+                            <a data-toggle="collapse" href="#sidebar-main" aria-expanded="false"
+                               aria-controls="sidebar-main" class="d-lg-none block-toggler">Danh mục sản phẩm</a>
+                        </div>
+                        <div id="sidebar-main" class="sidebar-main collapse">
+                            <button formaction="/home/product/clear">Clear Filter</button>
+                            <div th:if="${filterCriteria.getBrandId() != null ||
+                                          filterCriteria.getDirectoryId() != null ||
+                                          filterCriteria.getGenderId() != null ||
+                                          filterCriteria.getCategoryLV1DetailId() != null ||
+                                          filterCriteria.getCategoryLV2DetailId() != null ||
+                                          filterCriteria.getPriceSort() != null}" class="siderbar-block filter">
+                                <h3 class="widget-title">
+                                    Bộ lọc
+                                </h3>
+                                <div class="expand-lg">
+                                    
+                                </div>
+                            </div>
+                            <div class="siderbar-block price-sort">
+                                <h3 class="widget-title">
+                                    Sắp xếp theo
+                                </h3>
+                                <div class="expand-lg">
+                                    <div class="shop-select">
+                                        <select onchange="this.form.submit()" class="p-2 border border-1"
+                                                name="priceSort"
+                                                id="priceSort">
+                                            <option value="" th:selected="${priceSort == null}">Sắp xếp mặc định
+                                            </option>
+                                            <option value="asc"
+                                                    th:selected="${priceSort == 'asc'}">Sắp xếp theo giá tăng
+                                            </option>
+                                            <option value="desc"
+                                                    th:selected="${priceSort == 'desc'}">Sắp xếp theo giá giảm
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sidebar-block categories">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#categoriesMenu" role="button" aria-expanded="false"
+                                       aria-controls="categoriesMenu">Danh mục</a>
+                                </h3>
+                                <div id="categoriesMenu" class="sidebar-widget-option-wrapper collapse hide">
+                                    <div class="directory-inner" th:each="directoryList : ${directoryList}">
+                                        <div class="sidebar-widget-option">
+                                            <input onclick="this.form.submit()" type="radio" th:name="directoryId"
+                                                   th:id="directoryId + ${directoryList.directoryId}"
+                                                   th:value="${directoryList.directoryId}"
+                                                   th:checked="${directoryList.directoryId == directoryId}" />
+                                            <label th:for="directoryId + ${directoryList.directoryId}"
+                                                   th:text="${directoryList.directoryName}"></label>
                                         </div>
                                     </div>
-                                    <a
-                                            href="#"
-                                            class="nav-link d-flex justify-content-between mb-2 active"
-                                    ><span>Jeans &amp; chinos</span
-                                    ><span class="sidebar-badge"> 55</span></a
-                                    >
-                                    <div class="nav nav-pills flex-column ml-3">
-                                        <a href="#" class="nav-link mb-2">Dolor</a>
-                                        <a href="#" class="nav-link mb-2">Sit amet</a>
+                                </div>
+                            </div>
+                            <div class="sidebar-block brands">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#brands" role="button" aria-expanded="false"
+                                       aria-controls="brands">Thương hiệu</a>
+                                </h3>
+                                <div id="brands" class="sidebar-widget-option-wrapper collapse hide">
+                                    <div class="brand-inner" th:each="brand : ${brand}">
+                                        <div class="sidebar-widget-option">
+                                            <input onclick="this.form.submit()" type="radio" th:name="brandId"
+                                                   th:id="brandId + ${brand.brandId}"
+                                                   th:value="${brand.brandId}"
+                                                   th:checked="${brand.brandId == brandId}" />
+                                            <label th:for="brandId + ${brand.brandId}"
+                                                   th:text="${brand.brandName}"></label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="sidebar-block price">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#price" role="button" aria-expanded="true"
-                                   aria-controls="price">Giá</a>
-                            </h3>
-                            <div id="price" class="collapse show">
-                                <div class="price-inner">
-                                    <label for="amount">Price range:</label>
-                                    <input
-                                            type="text"
-                                            id="amount"
-                                            readonly
-                                            style="border: 0; font-weight: bold; background: none" />
-                                    <div id="slider-range">
+                            <div class="sidebar-block price">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#price" role="button" aria-expanded="false"
+                                       aria-controls="price">Giá</a>
+                                </h3>
+                                <div id="price" class="collapse hide">
+                                    <div class="price-inner">
+                                        <label for="amount">Price range:</label>
+                                        <input
+                                                type="text"
+                                                id="amount"
+                                                readonly
+                                                style="border: 0; font-weight: bold; background: none" />
+                                        <div id="slider-range">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="sidebar-block color">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#color" role="button" aria-expanded="true"
-                                   aria-controls="color">Màu sắc</a>
-                            </h3>
-                            <div id="color" class="sidebar-widget-option-wrapper collapse show">
-                                <div class="color-inner">
-                                    <div class="sidebar-widget-option">
-                                        <a href="#" style="background-color: #000000"></a>
-                                        Black <span>(4)</span>
-                                    </div>
-                                    <div class="sidebar-widget-option">
-                                        <a href="#" style="background-color: #11426b"></a>
-                                        Blue <span>(3)</span>
-                                    </div>
-                                    <div class="sidebar-widget-option">
-                                        <a href="#" style="background-color: #7d5a3c"></a>
-                                        Brown <span>(3)</span>
-                                    </div>
-                                    <div class="sidebar-widget-option">
-                                        <a href="#" style="background-color: #ffffff"></a>
-                                        White <span>(3)</span>
+                            <div class="sidebar-block gender">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#gender" role="button" aria-expanded="false"
+                                       aria-controls="gender">Giới tính</a>
+                                </h3>
+                                <div id="gender" class="sidebar-widget-option-wrapper collapse hide">
+                                    <div class="gender-inner" th:each="gender : ${gender}">
+                                        <div class="sidebar-widget-option">
+                                            <input onclick="this.form.submit()" type="radio" name="genderId"
+                                                   th:id="genderId + ${gender.genderId}"
+                                                   th:value="${gender.genderId}"
+                                                   th:checked="${gender.genderId == genderId}" />
+                                            <label th:for="genderId + ${gender.genderId}"
+                                                   th:text="${gender.genderName}"></label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="sidebar-block size">
-                            <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#size" role="button" aria-expanded="true"
-                                   aria-controls="size">Kích thước</a>
-                            </h3>
-                            <div id="size" class="sidebar-widget-option-wrapper collapse show">
-                                <div class="size-inner">
-                                    <div class="sidebar-widget-option">
-                                        <input type="checkbox" id="size-1" />
-                                        <label for="size-1">L <span>(4)</span></label>
+                            <div class="sidebar-block color">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#color" role="button" aria-expanded="false"
+                                       aria-controls="color">Màu sắc</a>
+                                </h3>
+                                <div id="color" class="sidebar-widget-option-wrapper collapse hide">
+                                    <div class="color-inner" th:each="color : ${color}">
+                                        <div class="sidebar-widget-option">
+                                            <input onclick="this.form.submit()"
+                                                   type="radio"
+                                                   name="categoryLV2DetailId"
+                                                   th:id="categoryLevel2DetailId + ${color.category_level_2_detail_id}"
+                                                   th:value="${color.category_level_2_detail_id}"
+                                                   th:checked="${color.category_level_2_detail_id == categoryLV2DetailId}" />
+                                            <label th:for="categoryLevel2DetailId + ${color.category_level_2_detail_id}"
+                                                   th:text="${color.category_level_2_detail_name}"></label>
+                                        </div>
                                     </div>
-                                    <div class="sidebar-widget-option">
-                                        <input type="checkbox" id="size-2" />
-                                        <label for="size-2">XS <span>(3)</span></label>
-                                    </div>
-                                    <div class="sidebar-widget-option">
-                                        <input type="checkbox" id="size-3" />
-                                        <label for="size-3">S <span>(3)</span></label>
-                                    </div>
-                                    <div class="sidebar-widget-option">
-                                        <input type="checkbox" id="size-4" />
-                                        <label for="size-4">Xl <span>(3)</span></label>
+                                </div>
+                            </div>
+                            <div class="sidebar-block size">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#size" role="button" aria-expanded="false"
+                                       aria-controls="size">Kích thước</a>
+                                </h3>
+                                <div id="size" class="sidebar-widget-option-wrapper collapse hide">
+                                    <div class="size-inner" th:each="size : ${size}">
+                                        <div class="sidebar-widget-option">
+                                            <input type="radio"
+                                                   onclick="this.form.submit()"
+                                                   th:id="categoryLevel1DetailId + ${size.category_level_1_detail_id}"
+                                                   name="categoryLV1DetailId"
+                                                   th:value="${size.category_level_1_detail_id}"
+                                                   th:checked="${size.category_level_1_detail_id == categoryLV1DetailId}"
+                                            />
+                                            <label th:for="categoryLevel1DetailId + ${size.category_level_1_detail_id}"
+                                                   th:text="${size.category_level_1_detail_name}"></label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <div class="sidebar-product left-sidebar w-100 float-left">
                     <div class="title">
                         <a data-toggle="collapse" href="#sidebar-product" aria-expanded="false"
@@ -261,21 +300,18 @@
         </div>
     </div>
 </div>
-<!--Start of Tawk.to Script-->
-<!--<script type="text/javascript">-->
-<!--    var Tawk_API = Tawk_API || {},-->
-<!--        Tawk_LoadStart = new Date();-->
-<!--    (function () {-->
-<!--        var s1 = document.createElement("script"),-->
-<!--            s0 = document.getElementsByTagName("script")[0];-->
-<!--        s1.async = true;-->
-<!--        s1.src = "https://embed.tawk.to/5ac1aabb4b401e45400e4197/default";-->
-<!--        s1.charset = "UTF-8";-->
-<!--        s1.setAttribute("crossorigin", "*");-->
-<!--        s0.parentNode.insertBefore(s1, s0);-->
-<!--    })();-->
-<!--</script>-->
-<!--End of Tawk.to Script-->
+<script>
+    let lastClickedRadio = null;
+
+    function toggleSelection(radio) {
+        if (radio === lastClickedRadio) {
+            radio.checked = false;
+            lastClickedRadio = null;
+        } else {
+            lastClickedRadio = radio;
+        }
+    }
+</script>
 </body>
 
 </html>

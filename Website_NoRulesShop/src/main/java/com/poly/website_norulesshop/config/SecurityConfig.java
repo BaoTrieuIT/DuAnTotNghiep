@@ -88,7 +88,10 @@ public class SecurityConfig {
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/home/sign-out")
-                        .permitAll())
+                        .permitAll()
+                        .logoutSuccessHandler((request, response, authentication) -> {
+
+                        }))
                 .rememberMe((remember) -> remember
                         .rememberMeServices(rememberMeServices))
                 .exceptionHandling(execpetion -> execpetion
