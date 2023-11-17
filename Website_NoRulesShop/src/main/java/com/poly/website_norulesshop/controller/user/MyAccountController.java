@@ -53,13 +53,19 @@ public class MyAccountController {
             result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
             return "user/my_account";
         }
+        // Kiểm tra số điện thoại là số và có độ dài là 10
+        if (acc.getPhone_number() == null || !acc.getPhone_number().matches("\\d{10}")) {
+            result.rejectValue("phone_number", "error.user", "Số điện thoại không hợp lệ");
+            return "user/my_account";
+        }
+
         // Kiểm tra ngày sinh
         if (acc.getBirthday() != null) {
             LocalDate today = LocalDate.now();
             LocalDate birthday = acc.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             long age = ChronoUnit.YEARS.between(birthday, today);
             System.out.println(age);
-            if (age < 12 || age > 200) {
+            if (age < 12 || age > 120) {
                 result.rejectValue("birthday", "error.account", "Ngày sinh không đủ 12 tuổi hoặc lớn hơn 200 tuổi");
                 return "user/my_account";
             }

@@ -45,29 +45,12 @@ document.getElementById('comfirmPassword').addEventListener('input', function ()
     console.log("confirmPassword: " + confirmPassword);
 });
 
-document.getElementById("phone_number").addEventListener("input", function () {
-    var phoneNumber = this.value.replace(/\D/g, ''); // Loại bỏ các kí tự không phải số
-    console.log(phoneNumber)
-    if (phoneNumber !== null) {
-        if (phoneNumber.length === 10) {
-            // this.setCustomValidity("");
-            document.getElementById("phoneErrorDiv").innerText = "";
-        } else {
-            console.log("Số điện thoại phải là 10 chữ số");
-            document.getElementById("phoneErrorDiv").innerText = "Số điện thoại phải là 10 chữ số";
-            // this.setCustomValidity("Số điện thoại phải là 10 chữ số");
-        }
-    } else {
-        console.log("Số điện thoại không được để trống");
-        document.getElementById("phoneErrorDiv").innerText = "Số điện thoại không được để trống";
-    }
 
-});
 document.addEventListener("DOMContentLoaded", function () {
     var emailInput = document.getElementById("acc-email");
     var fullnameInput = document.getElementById("fullname");
     var birthdayInput = document.getElementById("birthday");
-    var phonenumberInput = document.getElementById("phone_number");
+    var phonenumberInput = document.getElementById("phone_number")
     emailInput.addEventListener("input", function () {
         validateEmail(emailInput);
     });
@@ -77,6 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     birthdayInput.addEventListener("input", function () {
         validateBirthday(birthdayInput);
+    });
+    phonenumberInput.addEventListener("input", function () {
+        validatePhoneNumber(phonenumberInput);
     });
 });
 
@@ -112,10 +98,27 @@ function validateBirthday(birthdayInput) {
         age--;
     }
     console.log(age);
-    if (age < 12 || age > 200) {
+    if (age < 12 || age > 120) {
         birthdayInput.setCustomValidity("Ngày sinh không đủ 12 tuổi");
         document.getElementById("birthdayErrorDiv").innerText = "Ngày sinh không đủ 12 tuổi hoặc không hợp lệ";
     } else {
         birthdayInput.setCustomValidity("");
+    }
+}
+function validatePhoneNumber(phoneInput) {
+    var phoneNumber = phoneInput.value.replace(/\D/g, '');
+
+    if (phoneNumber !== null) {
+        if (phoneNumber.length === 10) {
+            phoneInput.setCustomValidity("");
+            document.getElementById("phoneErrorDiv").innerText = "";
+        } else {
+            console.error("Số điện thoại phải là 10 chữ số");
+            document.getElementById("phoneErrorDiv").innerText = "Số điện thoại phải là 10 chữ số";
+            phoneInput.setCustomValidity("Số điện thoại phải là 10 chữ số");
+        }
+    } else {
+        console.error("Số điện thoại không được để trống");
+        document.getElementById("phoneErrorDiv").innerText = "Số điện thoại không được để trống";
     }
 }
