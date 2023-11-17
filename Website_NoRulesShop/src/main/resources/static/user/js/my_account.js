@@ -66,7 +66,8 @@ document.getElementById("phone_number").addEventListener("input", function () {
 document.addEventListener("DOMContentLoaded", function () {
     var emailInput = document.getElementById("acc-email");
     var fullnameInput = document.getElementById("fullname");
-
+    var birthdayInput = document.getElementById("birthday");
+    var phonenumberInput = document.getElementById("phone_number");
     emailInput.addEventListener("input", function () {
         validateEmail(emailInput);
     });
@@ -74,8 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
     fullnameInput.addEventListener("input", function () {
         validateFullname(fullnameInput);
     });
-    document.getElementById("birthday").addEventListener("input", function () {
-        validateBirthday(this);
+    birthdayInput.addEventListener("input", function () {
+        validateBirthday(birthdayInput);
     });
 });
 
@@ -100,29 +101,21 @@ function validateFullname(fullnameInput) {
     } else {
         fullnameInput.setCustomValidity("");
     }
-    
+}
+//Kiểm tra ngày sinh đủ 12 tuổi
+function validateBirthday(birthdayInput) {
+    var birthday = new Date(birthdayInput.value);
+    var today = new Date();
+    var age = today.getFullYear() - birthday.getFullYear();
 
-    //Kiểm tra ngày sinh đủ 12 tuổi
-    function validateBirthday(birthdayInput) {
-        var birthday = new Date(birthdayInput.value);
-        var today = new Date();
-        var age = today.getFullYear() - birthday.getFullYear();
-
-        if (today.getMonth() < birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
-            age--;
-        }
-
-        if (age < 12 || age > 200) {
-            document.getElementById("birthday-error").style.display = "none";
-            document.getElementById("age-error").style.display = "block";
-            birthdayInput.setCustomValidity("Ngày sinh không đủ 12 tuổi");
-            document.getElementById("birthday-error").innerText = "Ngày sinh không đủ 12 tuổi";
-        } else {
-            document.getElementById("birthday-error").style.display = "none";
-            document.getElementById("age-error").style.display = "none";
-            birthdayInput.setCustomValidity("");
-        }
+    if (today.getMonth() < birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
+        age--;
     }
-
-
+    console.log(age);
+    if (age < 12 || age > 200) {
+        birthdayInput.setCustomValidity("Ngày sinh không đủ 12 tuổi");
+        document.getElementById("birthdayErrorDiv").innerText = "Ngày sinh không đủ 12 tuổi hoặc không hợp lệ";
+    } else {
+        birthdayInput.setCustomValidity("");
+    }
 }
