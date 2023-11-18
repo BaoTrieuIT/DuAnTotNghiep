@@ -25,32 +25,15 @@ Array.prototype.slice.call(needsValidation)
             form.classList.add('was-validated')
         }, false)
     })
-document.getElementById('comfirmPassword').addEventListener('input', function () {
-    var newPassword = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('comfirmPassword').value;
-    var errorDiv = document.getElementById('password-mismatch-error');
-
-    if (newPassword.length < 6) {
-        errorDiv.innerHTML = "Mật khẩu mới phải có ít nhất 6 ký tự.";
-        errorDiv.style.display = 'block';
-    } else {
-        if (newPassword === confirmPassword) {
-            errorDiv.style.display = 'none';
-        } else {
-            errorDiv.innerHTML = "Mật khẩu không khớp. Vui lòng kiểm tra lại.";
-            errorDiv.style.display = 'block';
-        }
-    }
-    console.log("newPassword: " + newPassword);
-    console.log("confirmPassword: " + confirmPassword);
-});
-
 
 document.addEventListener("DOMContentLoaded", function () {
     var emailInput = document.getElementById("acc-email");
     var fullnameInput = document.getElementById("fullname");
     var birthdayInput = document.getElementById("birthday");
     var phonenumberInput = document.getElementById("phone_number")
+    var newPassword = document.getElementById('password');
+    var confirmPassword = document.getElementById('comfirmPassword');
+
     emailInput.addEventListener("input", function () {
         validateEmail(emailInput);
     });
@@ -64,8 +47,30 @@ document.addEventListener("DOMContentLoaded", function () {
     phonenumberInput.addEventListener("input", function () {
         validatePhoneNumber(phonenumberInput);
     });
+    confirmPassword.addEventListener('input', function () {
+        validateNewPassword(newPassword.value,confirmPassword.value);
+    });
 });
+function validateNewPassword(newPassword,confirmPassword) {
+    var errorDiv = document.getElementById('password-mismatch-error');
 
+    if (newPassword.length < 6) {
+        document.getElementById('comfirmPassword').setCustomValidity("Mật khẩu mới phải có ít nhất 6 ký tự")
+        errorDiv.innerHTML = "Mật khẩu mới phải có ít nhất 6 ký tự";
+        errorDiv.style.display = 'block';
+    } else {
+        if (newPassword === confirmPassword) {
+            document.getElementById('comfirmPassword').setCustomValidity("")
+            errorDiv.style.display = 'none';
+        } else {
+            document.getElementById('comfirmPassword').setCustomValidity("Mật khẩu không khớp. Vui lòng kiểm tra lại.")
+            errorDiv.innerHTML = "Mật khẩu không khớp. Vui lòng kiểm tra lại.";
+            errorDiv.style.display = 'block';
+        }
+    }
+    console.log("newPassword: " + newPassword);
+    console.log("confirmPassword: " + confirmPassword);
+}
 function validateEmail(emailInput) {
     var email = emailInput.value;
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -76,7 +81,6 @@ function validateEmail(emailInput) {
         emailInput.setCustomValidity("");
     }
 }
-
 function validateFullname(fullnameInput) {
     var fullname = fullnameInput.value;
     var fullnameRegex = /^[a-zA-Z ]*$/;

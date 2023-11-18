@@ -64,7 +64,6 @@ public class MyAccountController {
             LocalDate today = LocalDate.now();
             LocalDate birthday = acc.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             long age = ChronoUnit.YEARS.between(birthday, today);
-            System.out.println(age);
             if (age < 12 || age > 120) {
                 result.rejectValue("birthday", "error.account", "Ngày sinh không đủ 12 tuổi hoặc lớn hơn 200 tuổi");
                 return "user/my_account";
@@ -72,9 +71,9 @@ public class MyAccountController {
         }
 
         // Kiểm tra mật khẩu nếu có sự thay đổi
-        if (comfirmPassword != null && changePassword && newPassword != null && newPassword.length() > 6) {
-            if (!newPassword.equals(comfirmPassword)) {
-                model.addAttribute("errorDiv", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
+        if (comfirmPassword != null && changePassword && acc.getPassword() != null && acc.getPassword().length() > 6) {
+            if (!acc.getPassword().equals(comfirmPassword)) {
+                result.rejectValue("password", "error.account", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
                 return "user/my_account";
             }
             acc.setPassword(newPassword);
@@ -82,35 +81,26 @@ public class MyAccountController {
         // Xử lý ảnh
         try {
             String directoryPath = "src/main/resources/static/user/img/avatar/";
-            // Lấy ID của người dùng
-            Integer userId = acc.getAccount_id();
-            // Tạo tên file mới với định dạng: id_tênfilenguoidung
-            String newFileName = "Avatar_"+ userId + "_" + file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(directoryPath, newFileName);
-            // Nếu file đã tồn tại, xóa để ghi đè
-            if (Files.exists(fileNameAndPath)) {
-                Files.delete(fileNameAndPath);
-            }
-            // Ghi đè file mới
+            Path fileNameAndPath = Paths.get(directoryPath, file.getOriginalFilename());
             Files.write(fileNameAndPath, file.getBytes());
 
             // Lưu đường dẫn của ảnh vào cơ sở dữ liệu
-            acc.setAvatar_url(newFileName);
-
-            // Cập nhật thông tin tài khoản
-            accountService.updateAccount_frUser(acc);
-
-            // Cập nhật thông tin tài khoản trong session
-            session.set("acc", acc);
-
-            // Redirect về trang my-account
-            return "redirect:/home/my-account";
+            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            acc.setAvatar_url(filename);
         } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-            model.addAttribute("errorDiv", "Error updating image");
-            return "user/my_account";
+            System.out.println(e.getMessage());
         }
+
+
+        // Cập nhật thông tin tài khoản
+        accountService.updateAccount_frUser(acc);
+        model.addAttribute("acc", acc);
+        session.set("acc", acc);
+        System.out.println(acc);
+        System.out.println("ID: " + acc.getAccount_id());
+        return "redirect:/home/my-account";
     }
+}
 //    @PostMapping("/my-account/update")
 //    public String update(@RequestParam("image") MultipartFile file,
 //                         @Valid @ModelAttribute Account acc, Model model,
@@ -170,4 +160,4 @@ public class MyAccountController {
 //        System.out.println("ID: " + acc.getAccount_id());
 //        return "redirect:/home/my-account";
 //    }
-}
+//}

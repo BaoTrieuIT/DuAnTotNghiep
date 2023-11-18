@@ -105,10 +105,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 " id="password-mismatch-error"
-                                     style="color: red; margin-top: 7px; display: none;">
+                                <p class="invalid-feedback" id="password-mismatch-error">
                                     <!--                    Mật khẩu không khớp. Vui lòng kiểm tra lại.-->
-                                </div>
+                                </p>
+                                <div th:errors="*{password}" th:if="${#fields.hasErrors('password')}" ></div>
                                 <!-- End .row -->
                             </div>
                             <!-- End #account-chage-pass -->
@@ -152,6 +152,16 @@
                                         </figure>
                                     </label>
                                 </div>
+<!--                                <div class="progress mt-3">-->
+<!--                                    <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--                                </div>-->
+                                <div id="upload-progress" style="display: none;">
+                                    <div class="progress mt-3">
+                                        <div id="progress-bar" class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="progress-text" class="mt-2"></div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -189,29 +199,49 @@
             reader.readAsDataURL(file);
         }
     }
-    // function updateAndReload() {
-    //     var fileInput = document.getElementById('fileInput');
-    //     var formData = new FormData();
-    //     formData.append('image', fileInput.files[0]);
-    //
-    //     // Gửi request đến máy chủ để xử lý cập nhật ảnh
-    //     // Đảm bảo endpoint /my-account/update trả về response chính xác
-    //     fetch('/my-account/update', {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //         .then(response => {
-    //             if (response.ok) {
-    //                 // Nếu cập nhật thành công, làm mới trang
-    //                 location.reload();
-    //             } else {
-    //                 console.error('Update failed:', response.statusText);
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error('Update failed:', error);
-    //         });
-    // }
+    function updateAndReload() {
+        var formData = new FormData(document.getElementById("yourFormId"));
+        var progressBar = document.getElementById("progress-bar");
+        var progressText = document.getElementById("progress-text");
+        var progressContainer = document.getElementById("upload-progress");
+
+        // Hiển thị thanh tiến trình khi bắt đầu upload
+        progressContainer.style.display = "block";
+
+        fetch("/home/my-account/update", {
+            method: "POST",
+            body: formData,
+            headers: {
+                // Các header cần thiết, nhưng không cần thiết để hiển thị thanh tiến trình
+            },
+            signal: new AbortController().signal,
+            onUploadProgress: function (progressEvent) {
+                if (progressEvent.lengthComputable) {
+                    var percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+                    progressBar.style.width = percentComplete + "%";
+                    progressText.innerText = percentComplete.toFixed(2) + "%";
+                }
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error("Lỗi khi upload ảnh");
+            }
+            return response.json();
+        }).then(data => {
+            // Ẩn thanh tiến trình sau khi hoàn thành
+            progressContainer.style.display = "none";
+            // Hiển thị thông báo và reload trang
+            alert("Upload thành công! " + data); // Dữ liệu từ server
+            window.location.reload();
+        }).catch(error => {
+            console.error("Lỗi khi upload ảnh:", error);
+            document.getElementById("phoneErrorDiv").innerText = "Đã xảy ra lỗi khi upload ảnh";
+            // Ẩn thanh tiến trình nếu có lỗi
+            progressContainer.style.display = "none";
+        });
+    }
+
+
 </script>
 <!--  kiểm tra password-->
 <script src="../../././static/user/js/my_account.js"/>
