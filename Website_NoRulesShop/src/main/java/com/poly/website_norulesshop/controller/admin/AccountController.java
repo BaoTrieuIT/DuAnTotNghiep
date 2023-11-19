@@ -14,6 +14,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,10 +24,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @CrossOrigin("*")
 @RestController
@@ -37,7 +35,8 @@ public class AccountController {
 
     @Autowired
     AccountStatusService accountStatusService;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     RoleService roleService;
     @Autowired
@@ -118,6 +117,7 @@ public class AccountController {
     @PutMapping("{account_id}")
     public Account put(@PathVariable("account_id") Integer id, @RequestBody Account account) {
         Account account1 = accountService.getAccountById(Long.valueOf(id));
+      
         Ranked ranked1 = account1.getRanked();
         account.setRanked(ranked1);
         return accountService.update(account);

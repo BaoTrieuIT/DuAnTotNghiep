@@ -68,9 +68,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(USER_RESOURCES)
-                        .authenticated()
                         .requestMatchers(ADMIN_RESOURCES).hasAuthority("Admin")
+                        .requestMatchers(USER_RESOURCES).authenticated()
                         .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/home/sign-in")
                         .usernameParameter("username")
