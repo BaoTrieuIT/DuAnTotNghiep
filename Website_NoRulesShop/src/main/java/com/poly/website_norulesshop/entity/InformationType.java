@@ -10,7 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "information_type")
 public class InformationType {
     @Id
@@ -19,8 +23,6 @@ public class InformationType {
     private Integer information_type_id;
 
     private String information_type_name;
-
-
 
     @ManyToOne
     @JoinColumn(name = "type_id")
@@ -35,7 +37,7 @@ public class InformationType {
     private List<DetailInformationType> detailInformationTypeList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "informationType")
+    @OneToMany(mappedBy = "information_type")
     private List<ProductInformationType> ProductInformationTypeList;
 
     // Getters and setters
