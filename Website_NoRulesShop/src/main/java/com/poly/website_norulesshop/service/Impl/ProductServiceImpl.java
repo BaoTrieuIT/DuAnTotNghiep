@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryId, Integer genderId, Integer categoryLV1DetailId, Integer categoryLV2DetailId, String priceSort, int page, int pageSize) {
+    public Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryLv1Id, String priceSort, int page, int pageSize) {
         Pageable pageable;
         if (priceSort != null && priceSort.equalsIgnoreCase("asc")) {
             pageable = PageRequest.of(page, pageSize, Sort.by("priceMin"));
@@ -51,17 +51,8 @@ public class ProductServiceImpl implements ProductService {
         if (brandId != null) {
             spec = ProductSpecification.findbyBrandId(brandId);
         }
-        if (directoryId != null) {
-            spec = ProductSpecification.findbyDirectoryId(directoryId);
-        }
-        if (genderId != null) {
-            spec = ProductSpecification.findbyGenderId(genderId);
-        }
-        if (categoryLV1DetailId != null) {
-            spec = ProductSpecification.findbyCategoryLV1Detail(categoryLV1DetailId);
-        }
-        if (categoryLV2DetailId != null) {
-            spec = ProductSpecification.findbyCategoryLV2Detail(categoryLV2DetailId);
+        if (directoryLv1Id != null) {
+            spec = ProductSpecification.findbyDirectoryLV1Id(directoryLv1Id);
         }
         return productRepository.findAll(spec, pageable);
     }
@@ -74,6 +65,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Integer getTotalQuantity(Integer id) {
+        return productRepository.getTotalById(id);
     }
 
     @Override

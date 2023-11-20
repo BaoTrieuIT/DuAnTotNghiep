@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymleaf-extras-springsecurity6">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -102,9 +102,11 @@
                                 <div id="user-dropdown"
                                      class="user-menu">
 
+
                                     <ul sec:authorize="isAuthenticated()">
                                         <li>
-                                            <a th:href="@{/admin/index}">Trang quản trị</a>
+                                            <a th:href="@{/admin/index}"
+                                            >Trang quản trị</a>
                                         </li>
                                         <li>
                                             <a th:href="@{/home/my-account}"

@@ -27,4 +27,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
 
     @Query("SELECT o FROM Product o WHERE o.brand.brandId = ?1")
     Page<Product> findByBrandBrandId(String id, Pageable pageable);
+
+    @Query("SELECT o.totalQuantity FROM Product o WHERE o.productId = ?1")
+    Integer getTotalById(Integer id);
 }

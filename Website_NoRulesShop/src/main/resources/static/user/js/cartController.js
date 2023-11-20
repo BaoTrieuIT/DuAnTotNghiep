@@ -2,17 +2,30 @@ app.controller("cart_ctrl", function ($scope, $http) {
     var $cart = $scope.cart = {
         items: [],
         add(productId) { // thêm sản phẩm vào giỏ hàng
+            this.qty = 1;
+            var maxQty = 0;
+            // var quantity = this.qty;
             var item = this.items.find(item => item.productId === productId);
             if (item) {
-                item.qty++;
-                this.saveToLocalStorage();
+                $http.get(`/rest/getMaxQty/${productId}`).then(response => {
+                    // Assuming the server returns the maxQty value
+                    maxQty = response.data;
+                    if (item.qty >= maxQty || this.qty >= maxQty) {
+                        alert("Không đủ số lượng");
+                        return false;
+                    }
+                    item.qty += this.qty;
+                    this.saveToLocalStorage();
+                }).catch(error => {
+                    console.error('Error fetching maxQty:', error);
+                });
+
             } else {
                 $http.get(`/rest/products/${productId}`).then(resp => {
                     $http.get(`/rest/productImages/${productId}`).then(respImage => {
                         resp.data.qty = 1;
                         resp.data.productImageList = respImage.data;
                         this.items.push(resp.data);
-                        console.log(this.items);
                         this.saveToLocalStorage();
                     })
                 });

@@ -68,9 +68,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(USER_RESOURCES)
-                        .authenticated()
-                        .requestMatchers(ADMIN_RESOURCES).hasAuthority("Admin")
+                        .requestMatchers(USER_RESOURCES).hasAuthority("USER")
+                        .requestMatchers(ADMIN_RESOURCES).hasAuthority("ADMIN")
                         .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/home/sign-in")
                         .usernameParameter("username")
@@ -88,10 +87,7 @@ public class SecurityConfig {
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/home/sign-out")
-                        .permitAll()
-                        .logoutSuccessHandler((request, response, authentication) -> {
-
-                        }))
+                        .permitAll())
                 .rememberMe((remember) -> remember
                         .rememberMeServices(rememberMeServices))
                 .exceptionHandling(execpetion -> execpetion

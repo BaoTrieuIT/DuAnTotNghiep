@@ -199,12 +199,13 @@ INSERT INTO `directory_lv1` (`directory_lv1_name`,`directory_id`) VALUES
 	('Quần Khaki Nam', 1);
 select * from directory_lv1;
 select * from product;
-
+select * from brand;
+select * from category_quantity;
 -- Insert data into `product` table
 INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`,`product_description`,`brand_id`,`directory_lv1_id`,`price_min`,`price_max`,`total_quantity`) VALUES 
-('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',10,57,800000,1000000,1600),
-('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,10,300000,500000,0),
-('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,90,2000000,2500000,1600),
+('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',10 ,57,800000,1000000,5),
+('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,63,300000,500000,0),
+('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,90,2000000,2500000,10),
 ('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc DARK BLUE Chất liệu 99% Cotton 01% Elastane',1,70,800000,1000000,1600),
 ('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',3,91,600000,800000,1600),
 ('Áo Thun Nữ',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc SPORTSWEAR LOGO WHITE Chất liệu 100% Cotton',1,68,1500000,1800000,1600),
@@ -216,7 +217,7 @@ INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`
 ('Áo Sơ Mi Tay Dài Nam',4.7,'2023-09-11 00:00:00.000000',0,'Màu Sắc GREEN STRIPE',2,76,690000,890000,1600),
 ('Quần Vải Dài Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK MOSS',2,82,1690000,1890000,16000),
 ('Quần Vải Dài Nam - Essential Khaki Slim Fit',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc ICONIC KHAKI',2,82,2690000,2890000,1600), 
-('Nón Nam - Logo',4.7,'2023-09-11 00:00:00.000000',0,'Màu Sắc DEEP GARNET RED 501',1,2,290000,490000,16000),
+('Nón Nam - Logo',4.7,'2023-09-11 00:00:00.000000',0,'Màu Sắc DEEP GARNET RED 501',2,1,290000,490000,16000),
 ('Áo Sơ Mi Tay Ngắn Nam',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc NAVY GINGHAM',1,76,890000,1890000,1600), 
 ('Quần Short Vải Nam - 8 Inch Vintage Short',4.9,'2023-09-11 00:00:00.000000',0,'Màu Sắc PILOT GREY',2,84,1690000,1890000,16000),
 ('Đầm Vải Nữ',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BURGUNDY PINK FLORAL',2,57,3890000,4290000,1600),
@@ -296,83 +297,52 @@ SELECT * from category_quantity;
 INSERT INTO `category_quantity` (`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`,`price`) VALUES 
  (1,1,1,100,1000000),
  (1,2,1,100,1000000),
-
- 
  (1,3,2,0,500000),
  (2,1,2,0,500000),
-
- 
  (1,1,3,100,2500000),
  (2,3,3,100,2500000),
-
- 
  (2,1,4,100,1000000),
  (3,3,4,100,1000000),
-
- 
  (2,1,5,100,800000),
  (4,2,5,100,800000),
-
- 
  (1,3,6,100,1800000),
  (2,3,6,100,1800000),
  (3,2,6,100,1800000),
-
-
- 
  (2,1,7,100,1200000),
  (1,2,7,100,1200000),
  (3,3,7,100,1200000),
-
- 
  (1,1,8,0,4200000),
  (2,1,8,0,4200000),
  (3,2,8,0,4200000),
-
-
- 
  (2,3,9,100,999000),
  (3,2,9,100,999000),
-
- 
  (1,1,10,100,890000),
  (2,3,10,100,890000),
-
- 
  (1,2,11,100,1200000),
  (2,2,11,100,1200000),
-
- 
  (4,1,12,100,890000),
  (4,2,12,100,890000),
- 
  (4,3,13,1000,1890000),
  (3,1,13,1000,1890000),
-
- 
  (1,2,14,100,2890000),
  (2,1,14,100,2890000),
  (3,2,14,100,2890000),
-
- 
  (4,1,15,1000,490000),
  (2,3,15,1000,490000),
  (3,2,15,1000,490000),
- 
  (1,2,16,100,1890000),
  (4,1,16,100,1890000),
-
- 
  (3,1,17,1000,1890000),
-
- 
  (2,1,18,100,4290000),
  (3,3,18,100,4290000),
  (1,2,18,100,4290000),
-
- 
  (3,3,19,1000,690000),
-
- 
  (1,2,20,100,990000),
  (4,1,20,100,990000);
+ 
+SELECT DISTINCT *
+FROM category_quantity
+WHERE category_level_1_detail_id = 1 and product_id = 1;
+SELECT DISTINCT  *
+FROM category_quantity
+WHERE category_level_1_detail_id = 1 and product_id = 1
