@@ -98,9 +98,9 @@ public class ProductController {
         } else {
             System.out.println("filtering...");
             for (Product product : listProduct) {
-                if ((product.getPriceMin() <= max && product.getPriceMin() > min) || (product.getPriceMax() <= max && product.getPriceMax() > min)) {
-                    listToReturn.add(product);
-                }
+//                if ((product.getPriceMin() <= max && product.getPriceMin() > min) || (product.getPriceMax() <= max && product.getPriceMax() > min)) {
+//                    listToReturn.add(product);
+//                }
             }
         }
         if (listToReturn.isEmpty()) {

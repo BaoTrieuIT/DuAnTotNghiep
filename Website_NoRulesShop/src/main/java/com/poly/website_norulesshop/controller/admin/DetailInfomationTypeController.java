@@ -1,8 +1,8 @@
 package com.poly.website_norulesshop.controller.admin;
 
 
-import com.poly.website_norulesshop.model.DetailInformationType;
-import com.poly.website_norulesshop.model.InformationType;
+import com.poly.website_norulesshop.entity.DetailInformationType;
+import com.poly.website_norulesshop.entity.InformationType;
 import com.poly.website_norulesshop.service.DetailInformationTypeService;
 import com.poly.website_norulesshop.service.InformationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,15 @@ public class DetailInfomationTypeController {
 
     @Autowired
     InformationTypeService informationTypeService;
+
     @GetMapping
-    public List<DetailInformationType> detailInformationTypeList(){
+    public List<DetailInformationType> detailInformationTypeList() {
         return detailinformationTypeService.getAllDetailInformationTypes();
     }
 
     @GetMapping("byInfo")
-    public List<DetailInformationType> getByInfo(@RequestParam String InfoId){
-        InformationType informationType =  informationTypeService.getInformationTypeById(Long.parseLong(InfoId));
+    public List<DetailInformationType> getByInfo(@RequestParam String InfoId) {
+        InformationType informationType = informationTypeService.getInformationTypeById(Long.parseLong(InfoId));
         return detailinformationTypeService.getByInfomationType(informationType);
     }
 }

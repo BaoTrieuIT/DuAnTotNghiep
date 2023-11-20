@@ -2,8 +2,8 @@ package com.poly.website_norulesshop.service;
 
 import java.util.List;
 
+import com.poly.website_norulesshop.entity.DirectoryLv1;
 import com.poly.website_norulesshop.entity.InformationType;
-import com.poly.website_norulesshop.model.DirectoryLv1;
 
 public interface InformationTypeService {
     InformationType saveInformationType(InformationType informationType);

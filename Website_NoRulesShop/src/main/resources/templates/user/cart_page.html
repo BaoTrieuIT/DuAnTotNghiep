@@ -57,11 +57,11 @@
                             <td class="table-p-name text-capitalize">
                                 <a href="product-details">{{item.productName}}</a>
                             </td>
-                            <td class="table-p-price"><p>{{item.priceMin | vndFormat }}</p></td>
+                            <td class="table-p-price"><p>{{item.priceNew | vndFormat }}</p></td>
                             <td class="table-p-qty">
                                 <input ng-model="item.qty" name="qty" type="number" min="1" />
                             </td>
-                            <td class="table-total"><p>{{item.priceMin * item.qty | vndFormat }}</p></td>
+                            <td class="table-total"><p>{{item.priceNew * item.qty | vndFormat }}</p></td>
                         </tr>
                         </tbody>
                     </table>

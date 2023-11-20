@@ -2,12 +2,12 @@ package com.poly.website_norulesshop.service.Impl;
 
 import java.util.List;
 
+import com.poly.website_norulesshop.entity.DirectoryLv1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poly.website_norulesshop.Repository.InformationTypeRepository;
 import com.poly.website_norulesshop.entity.InformationType;
-import com.poly.website_norulesshop.model.DirectoryLv1;
 import com.poly.website_norulesshop.service.InformationTypeService;
 
 @Service
