@@ -12,11 +12,13 @@ public interface ProductService {
 
     Page<Product> productPaginate(int page, int pageSize);
 
-    Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryId, Integer genderId, Integer categoryLV1DetailId, Integer categoryLV2etailId, String priceSort, int page, int pageSize);
+    Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryLv1Id, String priceSort, int page, int pageSize);
 
     Product getProductById(Integer id);
 
     List<Product> getAllProducts();
+
+    Integer getTotalQuantity(Integer id);
 
     void deleteProduct(Integer id);
 

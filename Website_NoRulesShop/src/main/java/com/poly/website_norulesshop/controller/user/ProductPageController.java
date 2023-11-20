@@ -54,32 +54,22 @@ public class ProductPageController {
                                 @ModelAttribute("filterCriteria") FilterCriteria filterCriteria,
                                 @RequestParam(defaultValue = "0") int page,
                                 SessionStatus sessionStatus) {
-        List<CategoryLevel2Detail> categoryLevel2Details = categoryLevel2DetailService.getAllCategoryLevel2Details();
-        List<CategoryLevel1Detail> categoryLevel1Details = categoryLevel1DetailService.getAllCategoryLevel1Details();
-        List<Gender> genders = genderService.getAllGenders();
         List<Directory> directoryList = directoryService.getAllDirectories();
+        List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
         List<Brand> brandList = brandService.getAllBrands();
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
-                filterCriteria.getDirectoryId(),
-                filterCriteria.getGenderId(),
-                filterCriteria.getCategoryLV1DetailId(),
-                filterCriteria.getCategoryLV2DetailId(),
+                filterCriteria.getDirectoryLv1Id(),
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE);
         model.addAttribute("brandId", filterCriteria.getBrandId());
-        model.addAttribute("directoryId", filterCriteria.getDirectoryId());
-        model.addAttribute("genderId", filterCriteria.getGenderId());
-        model.addAttribute("categoryLV1DetailId", filterCriteria.getCategoryLV1DetailId());
-        model.addAttribute("categoryLV2DetailId", filterCriteria.getCategoryLV2DetailId());
+        model.addAttribute("directoryId", filterCriteria.getDirectoryLv1Id());
         model.addAttribute("priceSort", filterCriteria.getPriceSort());
 
         model.addAttribute("directoryList", directoryList);
+        model.addAttribute("directoryLV1List", directoryLV1List);
         model.addAttribute("brand", brandList);
-        model.addAttribute("size", categoryLevel1Details);
-        model.addAttribute("color", categoryLevel2Details);
-        model.addAttribute("gender", genders);
         model.addAttribute("productPage", productPage);
         model.addAttribute("title", "Sản phẩm");
         return "user/product_page";
@@ -92,67 +82,44 @@ public class ProductPageController {
                               SessionStatus sessionStatus) {
         filterCriteria.clear(); // Xóa thông tin bộ lọc
         sessionStatus.setComplete();
-        List<CategoryLevel2Detail> categoryLevel2Details = categoryLevel2DetailService.getAllCategoryLevel2Details();
-        List<CategoryLevel1Detail> categoryLevel1Details = categoryLevel1DetailService.getAllCategoryLevel1Details();
-        List<Gender> genders = genderService.getAllGenders();
         List<Directory> directoryList = directoryService.getAllDirectories();
+        List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
         List<Brand> brandList = brandService.getAllBrands();
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
-                filterCriteria.getDirectoryId(),
-                filterCriteria.getGenderId(),
-                filterCriteria.getCategoryLV1DetailId(),
-                filterCriteria.getCategoryLV2DetailId(),
+                filterCriteria.getDirectoryLv1Id(),
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE);
         model.addAttribute("brandId", filterCriteria.getBrandId());
-        model.addAttribute("directoryId", filterCriteria.getDirectoryId());
-        model.addAttribute("genderId", filterCriteria.getGenderId());
-        model.addAttribute("categoryLV1DetailId", filterCriteria.getCategoryLV1DetailId());
-        model.addAttribute("categoryLV2DetailId", filterCriteria.getCategoryLV2DetailId());
+        model.addAttribute("directoryId", filterCriteria.getDirectoryLv1Id());
         model.addAttribute("priceSort", filterCriteria.getPriceSort());
-
         model.addAttribute("directoryList", directoryList);
+        model.addAttribute("directoryLV1List", directoryLV1List);
         model.addAttribute("brand", brandList);
-        model.addAttribute("size", categoryLevel1Details);
-        model.addAttribute("color", categoryLevel2Details);
-        model.addAttribute("gender", genders);
         model.addAttribute("productPage", productPage);
         model.addAttribute("title", "Sản phẩm");
-        return "user/product_page";
+        return "redirect:/home/product";
     }
 
     @RequestMapping(value = "/product/filters", method = {RequestMethod.GET, RequestMethod.POST})
     public String handleFilterProduct(
             @ModelAttribute("filterCriteria") FilterCriteria filterCriteria,
             @RequestParam(name = "brandId", required = false) Integer brandId,
-            @RequestParam(name = "directoryId", required = false) Integer directoryId,
-            @RequestParam(name = "genderId", required = false) Integer genderId,
-            @RequestParam(name = "categoryLV1DetailId", required = false) Integer categoryLV1DetailId,
-            @RequestParam(name = "categoryLV2DetailId", required = false) Integer categoryLV2DetailId,
+            @RequestParam(name = "directoryLv1Id", required = false) Integer directoryLv1Id,
             @RequestParam(name = "priceSort", required = false) String priceSort,
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             Model model,
             SessionStatus sessionStatus) {
         if (brandId != null
-                || directoryId != null
-                || genderId != null
-                || categoryLV1DetailId != null
-                || categoryLV2DetailId != null
+                || directoryLv1Id != null
                 || priceSort != null) {
             filterCriteria.setBrandId(brandId);
-            filterCriteria.setDirectoryId(directoryId);
-            filterCriteria.setGenderId(genderId);
-            filterCriteria.setCategoryLV1DetailId(categoryLV1DetailId);
-            filterCriteria.setCategoryLV2DetailId(categoryLV2DetailId);
+            filterCriteria.setDirectoryLv1Id(directoryLv1Id);
             filterCriteria.setPriceSort(priceSort);
         } else {
             if (filterCriteria.getBrandId() != null
-                    || filterCriteria.getDirectoryId() != null
-                    || filterCriteria.getGenderId() != null
-                    || filterCriteria.getCategoryLV1DetailId() != null
-                    || filterCriteria.getCategoryLV2DetailId() != null
+                    || filterCriteria.getDirectoryLv1Id() != null
                     || filterCriteria.getPriceSort() != null) {
                 filterCriteria.clear(); // Xóa thông tin bộ lọc
                 sessionStatus.setComplete();
@@ -162,34 +129,24 @@ public class ProductPageController {
 
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
-                filterCriteria.getDirectoryId(),
-                filterCriteria.getGenderId(),
-                filterCriteria.getCategoryLV1DetailId(),
-                filterCriteria.getCategoryLV2DetailId(),
+                filterCriteria.getDirectoryLv1Id(),
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE
         );
 
-        List<CategoryLevel2Detail> categoryLevel2Details = categoryLevel2DetailService.getAllCategoryLevel2Details();
-        List<CategoryLevel1Detail> categoryLevel1Details = categoryLevel1DetailService.getAllCategoryLevel1Details();
-        List<Gender> genders = genderService.getAllGenders();
         List<Directory> directoryList = directoryService.getAllDirectories();
+        List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
+
         List<Brand> brandList = brandService.getAllBrands();
 
         model.addAttribute("title", "Tất cả sản phẩm");
         model.addAttribute("brandId", filterCriteria.getBrandId());
-        model.addAttribute("directoryId", filterCriteria.getDirectoryId());
-        model.addAttribute("genderId", filterCriteria.getGenderId());
-        model.addAttribute("categoryLV1DetailId", filterCriteria.getCategoryLV1DetailId());
-        model.addAttribute("categoryLV2DetailId", filterCriteria.getCategoryLV2DetailId());
+        model.addAttribute("directoryLv1Id", filterCriteria.getDirectoryLv1Id());
         model.addAttribute("priceSort", filterCriteria.getPriceSort());
-
-        model.addAttribute("brand", brandList);
         model.addAttribute("directoryList", directoryList);
-        model.addAttribute("size", categoryLevel1Details);
-        model.addAttribute("color", categoryLevel2Details);
-        model.addAttribute("gender", genders);
+        model.addAttribute("brand", brandList);
+        model.addAttribute("directoryLV1List", directoryLV1List);
 
         model.addAttribute("productPage", productPage);
 
@@ -208,4 +165,19 @@ public class ProductPageController {
         model.addAttribute("productImages", productImageList);
         return "user/product_details";
     }
+
+    @GetMapping("/product-details/filter")
+    public String filterCategory(Model model, @PathVariable("productId") int productId) {
+        Product product = productService.getProductById(productId);
+        List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
+        List<ProductImage> productImageList = productImageService.findByProductId(productId);
+        model.addAttribute("title", product.getProductName());
+        model.addAttribute("products", product);
+        model.addAttribute("category", categoryQuantityList);
+
+        model.addAttribute("productImages", productImageList);
+        return "user/product_details";
+    }
+
+
 }

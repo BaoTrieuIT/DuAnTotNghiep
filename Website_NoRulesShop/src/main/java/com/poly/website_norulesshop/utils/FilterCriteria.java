@@ -5,18 +5,12 @@ import lombok.Data;
 @Data
 public class FilterCriteria {
     private Integer brandId;
-    private Integer directoryId;
-    private Integer genderId;
-    private Integer categoryLV1DetailId;
-    private Integer categoryLV2DetailId;
+    private Integer directoryLv1Id;
     private String priceSort;
 
     public void clear() {
         this.brandId = null;
-        this.directoryId = null;
-        this.genderId = null;
-        this.categoryLV1DetailId = null;
-        this.categoryLV2DetailId = null;
+        this.directoryLv1Id = null;
         this.priceSort = null;
     }
 }
