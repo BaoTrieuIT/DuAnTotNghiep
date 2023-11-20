@@ -9,13 +9,14 @@ import lombok.Setter;
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "category_quantity")
 public class CategoryQuantity {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_quantity_id")
     private Integer category_quantity_id;
 
     private Integer quantity;
-    private Integer price;
 
     @ManyToOne
     @JoinColumn(name = "category_level_1_detail_id")

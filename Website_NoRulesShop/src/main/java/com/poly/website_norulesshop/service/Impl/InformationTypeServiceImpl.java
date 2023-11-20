@@ -1,12 +1,14 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.InformationTypeRepository;
-import com.poly.website_norulesshop.entity.InformationType;
-import com.poly.website_norulesshop.service.InformationTypeService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.InformationTypeRepository;
+import com.poly.website_norulesshop.entity.InformationType;
+import com.poly.website_norulesshop.model.DirectoryLv1;
+import com.poly.website_norulesshop.service.InformationTypeService;
 
 @Service
 public class InformationTypeServiceImpl implements InformationTypeService {
@@ -36,5 +38,10 @@ public class InformationTypeServiceImpl implements InformationTypeService {
     @Override
     public void deleteInformationType(Long id) {
         informationTypeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<InformationType> getByDirectoryLv1(DirectoryLv1 directoryLv1) {
+        return informationTypeRepository.findByDirectoryLv1(directoryLv1);
     }
 }

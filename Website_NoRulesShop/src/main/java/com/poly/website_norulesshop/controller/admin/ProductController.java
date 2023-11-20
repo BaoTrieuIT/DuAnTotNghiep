@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.poly.website_norulesshop.test.FindAllService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -109,19 +108,4 @@ public class ProductController {
         }
         return listToReturn;
     }
-
-//    @RequestMapping("product_all")
-//    public static String product_all(){
-//        return "admin/product_all";
-//    }
-//    @RequestMapping("product_add")
-//    public static String product_add(){
-//        return "admin/product_add";
-//    }
-//    @RequestMapping("product_report")
-//    public static String product_report(){
-//        return "admin/product_report";
-//    }
-
-
 }

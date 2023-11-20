@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface ProductService {
-    void saveProduct(Product product);
+    Product saveProduct(Product product);
 
     Page<Product> productPaginate(int page, int pageSize);
 

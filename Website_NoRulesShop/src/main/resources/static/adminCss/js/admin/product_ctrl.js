@@ -95,6 +95,8 @@ app.controller("product_ctrl", function($scope, $http){
             $scope.items = resp.data
             $scope.itemType = "active";
         })
+
+
     }
     $scope.renderProductIsSoldOut = function (){
         $http.get("/rest/product_all/isSoldOut").then(resp => {
@@ -148,8 +150,6 @@ app.controller("product_ctrl", function($scope, $http){
             this.page--;
         }
     }
-
-
 });
 
 

@@ -1,9 +1,11 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.DetailInformationType;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.InformationType;
+import com.poly.website_norulesshop.model.DetailInformationType;
 @Service
 public interface DetailInformationTypeService {
     DetailInformationType saveDetailInformationType(DetailInformationType detailInformationType);
@@ -13,4 +15,6 @@ public interface DetailInformationTypeService {
     List<DetailInformationType> getAllDetailInformationTypes();
 
     void deleteDetailInformationType(Long id);
+
+    List<DetailInformationType> getByInfomationType(InformationType informationType);
 }

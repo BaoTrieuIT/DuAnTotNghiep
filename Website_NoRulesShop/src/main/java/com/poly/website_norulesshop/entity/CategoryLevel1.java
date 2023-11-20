@@ -12,6 +12,7 @@ import lombok.Setter;
 @Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 @Table(name = "category_level_1")
 public class CategoryLevel1 {
+
     @Id
     @Column(name = "category_level_1_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

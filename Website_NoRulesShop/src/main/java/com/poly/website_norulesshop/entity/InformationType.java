@@ -32,8 +32,11 @@ public class InformationType {
 
     @JsonIgnore
     @OneToMany(mappedBy = "informationType")
-    List<DetailInformationType> detailInformationTypeList;
+    private List<DetailInformationType> detailInformationTypeList;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "information_type")
-    List<ProductInformationType> informationTypeList;
+    @OneToMany(mappedBy = "informationType")
+    private List<ProductInformationType> ProductInformationTypeList;
+
+    // Getters and setters
 }
