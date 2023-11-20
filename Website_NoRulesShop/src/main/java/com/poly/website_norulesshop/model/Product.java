@@ -23,19 +23,30 @@ public class Product {
     private String productName;
 
     @Column(name = "product_rating")
-    private Float productRating;
+    private Float productRating = 5.0F;
 
-    @Column(name = "create_date")
-    private Date createDate;
 
     @Column(name = "is_remove")
-    private Boolean isRemoved;
+    private Boolean isRemoved = false;
 
     @Column(name = "product_description")
     private String productDescription;
 
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "create_date")
+    private Date createDate;
+
+    @Column(name = "price_new")
+    private Double priceNew;
+
+    @Column(name = "price_old")
+    private Double priceOld;
+
+
+    @Column(name = "discount")
+    private Double discount;
+
+    @Column(name = "total_quantity")
+    private Integer totalQuantity;
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
@@ -64,4 +75,6 @@ public class Product {
     @JsonIgnore
     @OneToMany(mappedBy = "product")
     List<ProductInformationType> informationTypeList;
+
+
 }
