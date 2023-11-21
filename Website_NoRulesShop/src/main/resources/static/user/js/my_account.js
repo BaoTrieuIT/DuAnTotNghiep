@@ -48,10 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
         validatePhoneNumber(phonenumberInput);
     });
     confirmPassword.addEventListener('input', function () {
-        validateNewPassword(newPassword.value,confirmPassword.value);
+        validateNewPassword(newPassword.value, confirmPassword.value);
     });
 });
-function validateNewPassword(newPassword,confirmPassword) {
+
+function validateNewPassword(newPassword, confirmPassword) {
     var errorDiv = document.getElementById('password-mismatch-error');
 
     if (newPassword.length < 6) {
@@ -71,6 +72,7 @@ function validateNewPassword(newPassword,confirmPassword) {
     console.log("newPassword: " + newPassword);
     console.log("confirmPassword: " + confirmPassword);
 }
+
 function validateEmail(emailInput) {
     var email = emailInput.value;
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -81,6 +83,7 @@ function validateEmail(emailInput) {
         emailInput.setCustomValidity("");
     }
 }
+
 function validateFullname(fullnameInput) {
     var fullname = fullnameInput.value;
     var fullnameRegex = /^[a-zA-Z ]*$/;
@@ -92,6 +95,7 @@ function validateFullname(fullnameInput) {
         fullnameInput.setCustomValidity("");
     }
 }
+
 //Kiểm tra ngày sinh đủ 12 tuổi
 function validateBirthday(birthdayInput) {
     var birthday = new Date(birthdayInput.value);
@@ -109,6 +113,7 @@ function validateBirthday(birthdayInput) {
         birthdayInput.setCustomValidity("");
     }
 }
+
 function validatePhoneNumber(phoneInput) {
     var phoneNumber = phoneInput.value.replace(/\D/g, '');
 
@@ -125,4 +130,104 @@ function validatePhoneNumber(phoneInput) {
         console.error("Số điện thoại không được để trống");
         document.getElementById("phoneErrorDiv").innerText = "Số điện thoại không được để trống";
     }
+}
+
+var citis = document.getElementById("city");
+var districts = document.getElementById("district");
+var wards = document.getElementById("ward");
+var Parameter = {
+    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+    method: "GET",
+    responseType: "application/json",
+};
+var promise = axios(Parameter);
+promise.then(function (result) {
+    renderCity(result.data);
+    console.log(result.data);
+});
+
+function renderCity(data) {
+    for (const x of data) {
+        citis.options[citis.options.length] = new Option(x.Name, x.Id);
+    }
+    citis.onchange = function () {
+        district.length = 1;
+        ward.length = 1;
+        if (this.value != "") {
+            const result = data.filter(n => n.Id === this.value);
+
+            for (const k of result[0].Districts) {
+                district.options[district.options.length] = new Option(k.Name, k.Id);
+            }
+        }
+    };
+    district.onchange = function () {
+        ward.length = 1;
+        const dataCity = data.filter((n) => n.Id === citis.value);
+        if (this.value != "") {
+            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+            for (const w of dataWards) {
+                wards.options[wards.options.length] = new Option(w.Name, w.Id);
+            }
+        }
+    };
+}
+
+// function updateAddress() {
+//     var city = document.getElementById("city").value;
+//     var district = document.getElementById("district").value;
+//     var ward = document.getElementById("ward").value;
+//
+//     var address = "";
+//
+//
+//     if (ward) {
+//         address += ward;
+//     }
+//
+//     if (district) {
+//         address += ", " + district;
+//     }
+//
+//     if (city) {
+//         address +=", "+ city;
+//     }
+//     // Cập nhật giá trị của input ẩn
+//     document.getElementById("hiddenAddress").value = address;
+//     console.log("D/c: "+address);
+// }
+function updateAddress() {
+    var citySelect = document.getElementById("city");
+    var districtSelect = document.getElementById("district");
+    var wardSelect = document.getElementById("ward");
+    var city = citySelect.options[citySelect.selectedIndex].text;
+    var district = districtSelect.options[districtSelect.selectedIndex].text;
+    var ward = wardSelect.options[wardSelect.selectedIndex].text;
+
+    var address = "";
+
+    if (ward) {
+        address += ward;
+    }
+    if (district) {
+        address += ", " + district;
+    }
+    if (city) {
+        address += ", " + city;
+    }
+
+
+    // Hiển thị địa chỉ lên một thẻ span
+    // document.getElementById("address_detail").innerText = address;
+    console.log("D/c: " + address);
+
+    // Cập nhật giá trị của input để có thể gửi lên server nếu cần thiết
+    document.getElementById("hiddenAddress").value = address;
+
+    // Gán giá trị cho select box và input
+    document.getElementById("city").value = receivedCityValue;
+    document.getElementById("district").value = receivedDistrictValue;
+    document.getElementById("ward").value = receivedWardValue;
+    document.getElementById("address_detail").value = receivedSpecificAddress;
 }

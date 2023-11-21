@@ -29,7 +29,7 @@ public class Address {
     @Column(name = "specific_address")
     private String specificAddress;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
 

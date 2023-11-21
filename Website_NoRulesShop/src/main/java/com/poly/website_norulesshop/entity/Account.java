@@ -52,8 +52,8 @@ public class Account implements Serializable {
     @JoinColumn(name = "account_status_id")
     private AccountStatus accountStatus;
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
-    public List<Address> addressList;
+    @OneToOne(mappedBy = "account",cascade = CascadeType.ALL, orphanRemoval = true)
+    public Address address;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;

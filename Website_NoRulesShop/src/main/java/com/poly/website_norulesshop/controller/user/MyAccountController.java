@@ -1,7 +1,9 @@
 package com.poly.website_norulesshop.controller.user;
 
 import com.poly.website_norulesshop.entity.Account;
+import com.poly.website_norulesshop.entity.Address;
 import com.poly.website_norulesshop.service.AccountService;
+import com.poly.website_norulesshop.service.AddressService;
 import com.poly.website_norulesshop.utils.SessionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 
 @Controller
@@ -29,6 +32,8 @@ public class MyAccountController {
     SessionService session;
     @Autowired
     AccountService accountService;
+    @Autowired
+    AddressService addressService;
 
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
@@ -46,8 +51,13 @@ public class MyAccountController {
                          BindingResult result,
                          @RequestParam("password") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
+                         @RequestParam("hiddenAddress") String address,
+                         @RequestParam(value = "address_detail", required = false) String spec_address,
                          @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
                          Principal principal) {
+        // Lấy thông tin tài khoản từ username của người đăng nhập
+        String username = principal.getName();
+        Account existingAccount = accountService.findByUsername(username);
         // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
         if (acc.getFullname() == null || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
             result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
@@ -58,7 +68,6 @@ public class MyAccountController {
             result.rejectValue("phone_number", "error.user", "Số điện thoại không hợp lệ");
             return "user/my_account";
         }
-
         // Kiểm tra ngày sinh
         if (acc.getBirthday() != null) {
             LocalDate today = LocalDate.now();
@@ -68,6 +77,50 @@ public class MyAccountController {
                 result.rejectValue("birthday", "error.account", "Ngày sinh không đủ 12 tuổi hoặc lớn hơn 200 tuổi");
                 return "user/my_account";
             }
+        }
+        // Địa chỉ
+//        System.out.println(address);
+//        Optional<Address> existingAddress = addressService.getAddressByAccountId(acc);
+//        Address ad;
+//        if (existingAddress.isPresent()) {
+//            ad = existingAddress.get();
+//            System.out.println(ad);
+//        } else {
+//            ad = new Address();
+//        }
+//
+//        System.out.println("Specific Address: " + ad.getSpecificAddress());
+//
+//        ad.setRecipientName(acc.getFullname());
+//        ad.setRecipientPhoneNumber(acc.getPhone_number());
+//        ad.setSpecificAddress(spec_address);
+//        ad.setAccount(acc);
+//        ad.setGeneralAddress(address);
+//        addressService.saveAddress(ad);
+
+        // Xử lý địa chỉ
+        System.out.println(spec_address);
+        // Địa chỉ
+        Optional<Address> existingAddress = addressService.getAddressByAccountId(acc);
+
+        if (existingAddress.isPresent()) {
+            // Đối tượng địa chỉ đã tồn tại, cập nhật thông tin
+            Address ad = existingAddress.get();
+            ad.setRecipientName(acc.getFullname());
+            ad.setRecipientPhoneNumber(acc.getPhone_number());
+            ad.setSpecificAddress(spec_address);
+            ad.setAccount(acc);
+            ad.setGeneralAddress(address);
+            addressService.saveAddress(ad);
+        } else {
+            // Đối tượng địa chỉ chưa tồn tại, tạo mới và gán cho tài khoản
+            Address newAddress = new Address();
+            newAddress.setRecipientName(acc.getFullname());
+            newAddress.setRecipientPhoneNumber(acc.getPhone_number());
+            newAddress.setSpecificAddress(spec_address);
+            newAddress.setAccount(acc);
+            newAddress.setGeneralAddress(address);
+            addressService.saveAddress(newAddress);
         }
 
         // Kiểm tra mật khẩu nếu có sự thay đổi
