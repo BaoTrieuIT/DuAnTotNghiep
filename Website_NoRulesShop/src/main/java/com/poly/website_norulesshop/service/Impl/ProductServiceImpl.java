@@ -41,9 +41,9 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryLv1Id, String priceSort, int page, int pageSize) {
         Pageable pageable;
         if (priceSort != null && priceSort.equalsIgnoreCase("asc")) {
-            pageable = PageRequest.of(page, pageSize, Sort.by("priceMin"));
+            pageable = PageRequest.of(page, pageSize, Sort.by("priceNew"));
         } else if (priceSort != null && priceSort.equalsIgnoreCase("desc")) {
-            pageable = PageRequest.of(page, pageSize, Sort.by("priceMin").descending());
+            pageable = PageRequest.of(page, pageSize, Sort.by("priceNew").descending());
         } else {
             pageable = PageRequest.of(page, pageSize, Sort.unsorted());
         }
