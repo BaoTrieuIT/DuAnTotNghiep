@@ -11,20 +11,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private Integer order_id;
-
-    private Date order_time;
-    private Integer discount_amout;
-    private String recipient_name;
-    private String phonenumber;
-    private String specified_address;
-    private String order_note;
+    private Integer orderId;
+    @Column(name = "order_time")
+    private Date orderTime;
+    @Column(name = "discount_amout")
+    private Integer discountAmout;
+    @Column(name = "recipient_name")
+    private String recipientName;
+    @Column(name = "phonenumber")
+    private String phoneNumber;
+    @Column(name = "specified_address")
+    private String specifiedAddress;
+    @Column(name = "order_note")
+    private String orderNote;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -44,7 +53,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "payment_method_id")
-    private PaymentMethod  paymentMethod;
+    private PaymentMethod paymentMethod;
 
     @JsonIgnore
     @OneToMany(mappedBy = "order")

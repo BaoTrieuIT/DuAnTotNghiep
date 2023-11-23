@@ -239,7 +239,6 @@ create table `orders`(
 create table `order_detail`(
 	order_detail_id int auto_increment primary key,
     quantity int not null,
-    unit_price bigint not null,
     discount_amout int not null,
     total_price_before_discount int not null,
     total_price int not null,

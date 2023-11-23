@@ -381,7 +381,7 @@ INSERT INTO `product_image` (`image_url`,`product_id`) VALUES
 ('product50.png',50),
 ('product50_1.png',50);
 
-
+select * from account;
 select * from category_level_1_detail;
 select * from category_level_2_detail;
 SELECT * from category_quantity;
@@ -505,3 +505,19 @@ INSERT INTO `category_quantity` (`category_level_1_detail_id`,`category_level_2_
  (2,3,50,100),
  (3,3,50,100);
  
+select * from payment_method;
+-- Insert data into `payment_method` table
+INSERT INTO `payment_method` (`payment_method_name`) VALUE 
+('Thanh toán bằng tiền mặt'),
+('Thanh toán bằng qua thẻ');
+select * from order_status;
+-- Insert data into `order_status` table
+INSERT INTO `order_status` (`order_status_name`) VALUE 
+('Đang chờ xác nhận'),
+('Xuất kho'),
+('Đang giao'),
+('Đã giao'),
+('Bị huỷ');
+
+Select * from orders;
+Select * from order_detail;

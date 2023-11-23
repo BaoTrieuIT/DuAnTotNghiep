@@ -10,19 +10,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "order_detail")
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_detail_id")
-    private Integer order_detail_id;
-
+    private Integer orderDetailId;
     private Integer quantity;
-    private Integer unit_price;
-    private Integer discount_amout;
-    private Integer total_price_before_discount ;
-    private Integer total_price;
+    @Column(name = "discount_amout")
+    private Integer discountAmout;
+    @Column(name = "total_price_before_discount")
+    private Integer priceOld;
+    @Column(name = "total_price")
+    private Integer priceNew;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -34,7 +39,7 @@ public class OrderDetail {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy =  "orderDetail")
+    @OneToMany(mappedBy = "orderDetail")
     public List<Feedback> feedbackList;
     // Getters and setters
 }

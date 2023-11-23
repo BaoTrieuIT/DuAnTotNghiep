@@ -102,31 +102,22 @@ app.controller("cart_ctrl", function ($scope, $http) {
 
         return totalCount;
     };
-    $scope.decrementQty = function (item) {
-        if (item.qty > 0) {
-            item.qty--;
-        }
-        $cart.saveToLocalStorage();
-    };
-
-    $scope.incrementQty = function (item) {
-        item.qty++;
-        $cart.saveToLocalStorage();
-    };
     $cart.loadFromLocalStorage();
     // Đặt hàng
     $scope.order = {
         get account() {
             return {username: $auth.user.username}
         },
-        createDate: new Date(),
-        sdt: "",
-        address: "",
+        orderTime: new Date(),
+        phoneNumber: "",
+        recipientName: "",
+        specifiedAddress: "",
+        orderNote: "",
         get orderDetails() {
             return $cart.items.map(item => {
                 return {
-                    product: {id: item.id},
-                    price: item.price,
+                    product: {productId: item.productId},
+                    priceNew: item.priceNew,
                     quantity: item.qty
                 }
             });

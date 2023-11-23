@@ -10,15 +10,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "payment_method")
 public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_method_id")
-    private Integer payment_method_id;
+    private Integer paymentMethodId;
 
-    private String payment_method_name;
+    @Column(name = "payment_method_name")
+    private String paymentMethodName;
 
     // Getters and setters
 
