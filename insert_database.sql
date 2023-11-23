@@ -88,7 +88,8 @@ INSERT INTO `category_level_2` (`category_level_2_name`) VALUES
 INSERT INTO `category_level_2_detail` (`category_level_2_detail_name`,`category_level_2_id`) VALUES 
 ('Đen',1),
 ('Trắng',1),
-('Nhiều màu',1);
+('Nhiều màu',1),
+('Vàng',1);
 
 -- Insert data into `directory` table
 INSERT INTO `directory` (`directory_name`,`gender_id`) VALUES
@@ -203,8 +204,8 @@ select * from product;
  -- -- FIX cai nay 
 -- Insert data into `product` table
 INSERT INTO `product` (`product_name`,`product_rating`,`create_date`,`is_remove`,`product_description`,`brand_id`,`directory_lv1_id`,`price_new`,`price_old`,`total_quantity`, `discount`) VALUES 
-('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',10,57,900000,800000,300, 0.1),
-('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,10,600000,500000,400, 0.2),
+('Đầm Nữ Banks',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc YELLOW/ GOLD Chất liệu Body: 18% Polyamide, 82% VISCOSE',10,57,900000,800000,10, 0.1),
+('Áo Liền Quần Iggyp',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc BLACK Chất liệu 98% Cotton, 02% Elastane',1,10,600000,500000,10, 0.2),
 ('Áo Len Foilc',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc RUST - COPPER Chất liệu 100% Acrylic',1,90,3000000,2800000,1000, 0.2),
 ('Quần Jeans Violet',4.2,'2023-09-11 00:00:00.000000',0,'Màu Sắc DARK BLUE Chất liệu 99% Cotton 01% Elastane',1,70,1100000,1000000,200, 0.1),
 ('Quần Khaki Nam Ngắn Chino Shorts',4.5,'2023-09-11 00:00:00.000000',0,'Màu Sắc HARVEST GOLD TWILL Chất liệu 100% Cotton',3,91,850000,800000,200, 0.1),
@@ -387,8 +388,8 @@ SELECT * from category_quantity;
 -- FIX Cai nay 
 -- Insert data into `category_quantity` table
 INSERT INTO `category_quantity` (`category_level_1_detail_id`,`category_level_2_detail_id`,`product_id`,`quantity`) VALUES 
- (1,1,1,100),
- (1,2,1,200),
+ (1,1,1,0),
+ (1,2,1,10),
  (1,3,2,200),
  (2,1,2,300),
  (1,1,3,500),

@@ -2,6 +2,7 @@ package com.poly.website_norulesshop.controller.user;
 
 import com.poly.website_norulesshop.entity.*;
 import com.poly.website_norulesshop.service.*;
+import com.poly.website_norulesshop.utils.FilterCategoryCriteria;
 import com.poly.website_norulesshop.utils.FilterCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -48,6 +49,7 @@ public class ProductPageController {
     public FilterCriteria geFilterCriteria() {
         return new FilterCriteria();
     }
+
 
     @GetMapping("/product")
     public String getProductAll(Model model,
@@ -137,7 +139,6 @@ public class ProductPageController {
 
         List<Directory> directoryList = directoryService.getAllDirectories();
         List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
-
         List<Brand> brandList = brandService.getAllBrands();
 
         model.addAttribute("title", "Tất cả sản phẩm");
@@ -151,32 +152,6 @@ public class ProductPageController {
         model.addAttribute("productPage", productPage);
 
         return "user/product_page";
-    }
-
-    @GetMapping("/product-details/productId={productId}")
-    public String getProductDetails(Model model, @PathVariable("productId") int productId) {
-        Product product = productService.getProductById(productId);
-        List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
-        List<ProductImage> productImageList = productImageService.findByProductId(productId);
-        model.addAttribute("title", product.getProductName());
-        model.addAttribute("products", product);
-        model.addAttribute("category", categoryQuantityList);
-
-        model.addAttribute("productImages", productImageList);
-        return "user/product_details";
-    }
-
-    @GetMapping("/product-details/filter")
-    public String filterCategory(Model model, @PathVariable("productId") int productId) {
-        Product product = productService.getProductById(productId);
-        List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
-        List<ProductImage> productImageList = productImageService.findByProductId(productId);
-        model.addAttribute("title", product.getProductName());
-        model.addAttribute("products", product);
-        model.addAttribute("category", categoryQuantityList);
-
-        model.addAttribute("productImages", productImageList);
-        return "user/product_details";
     }
 
 

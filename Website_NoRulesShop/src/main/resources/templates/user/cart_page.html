@@ -55,11 +55,25 @@
                                 </a>
                             </td>
                             <td class="table-p-name text-capitalize">
-                                <a href="product-details">{{item.productName}}</a>
+                                <a href="product-details">
+                                    {{item.productName}}
+
+                                </a>
+                                ({{item.categoryQuantity.categoryLevel1Detail.category_level_1_detail_name}}
+                                ,{{item.categoryQuantity.categoryLevel2Detail.category_level_2_detail_name}})
                             </td>
+
+
                             <td class="table-p-price"><p>{{item.priceNew | vndFormat }}</p></td>
                             <td class="table-p-qty">
-                                <input ng-model="item.qty" name="qty" type="number" min="1" />
+                                <button class="minus btn" ng-click="cart.minus(item)">-
+                                </button>
+                                <label>
+                                    <input type="number" min="1" ng-model="item.qty" readonly />
+                                </label>
+                                <button class="plus btn" ng-click="cart.plus(item)"
+                                >+
+                                </button>
                             </td>
                             <td class="table-total"><p>{{item.priceNew * item.qty | vndFormat }}</p></td>
                         </tr>
@@ -96,14 +110,14 @@
                             <strong>Tổng phụ</strong>
                             <span class="c-total-price">{{cart.amount | vndFormat}}</span>
                         </div>
-                        <div
-                                class="single-total-content d-flex justify-content-between float-left w-100"
-                        >
-                            <strong>Phí vận chuyển</strong>
-                            <span class="c-total-price"
-                            ><span>Tỷ giá cố định:</span> $5.00</span
-                            >
-                        </div>
+                        <!--                        <div-->
+                        <!--                                class="single-total-content d-flex justify-content-between float-left w-100"-->
+                        <!--                        >-->
+                        <!--                            <strong>Phí vận chuyển</strong>-->
+                        <!--                            <span class="c-total-price"-->
+                        <!--                            ><span>Tỷ giá cố định:</span> $5.00</span-->
+                        <!--                            >-->
+                        <!--                        </div>-->
                         <div
                                 class="single-total-content d-flex justify-content-end float-left w-100"
                         >
@@ -113,10 +127,10 @@
                                 class="single-total-content tt-total d-flex justify-content-between float-left w-100"
                         >
                             <strong>Tổng tiền</strong>
-                            <span class="c-total-price">$165.00</span>
+                            <span class="c-total-price">{{cart.amount | vndFormat}}</span>
                         </div>
                         <a
-                                href="checkout_page"
+                                th:href="@{/home/checkout-page}"
                                 class="btn btn-primary float-left w-100 text-center"
                         >Tiến hành thanh toán</a
                         >

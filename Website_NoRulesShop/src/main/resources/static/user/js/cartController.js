@@ -1,35 +1,64 @@
 app.controller("cart_ctrl", function ($scope, $http) {
     var $cart = $scope.cart = {
         items: [],
-        add(productId) { // thêm sản phẩm vào giỏ hàng
-            this.qty = 1;
+        minus(item) {
+            if (item.qty > 1) {
+                item.qty--;
+                this.saveToLocalStorage();
+            }
+        },
+        plus(item) {
+            var maxQty = 0;
+            $http.get(`/rest/getMaxQty/${item.productId}/${item.categoryQuantity.categoryLevel1Detail.category_level_1_detail_id}/${item.categoryQuantity.categoryLevel2Detail.category_level_2_detail_id}`).then(response => {
+                maxQty = response.data;
+                if (item.qty < maxQty) {
+                    item.qty++;
+                    this.saveToLocalStorage();
+                }
+            });
+        },
+        add(productId, quantity, categoryLv1Id, categoryLv2Id) { // thêm sản phẩm vào giỏ hàng
+            if (categoryLv1Id == null || categoryLv2Id == null) {
+                alert("Vui lòng chọn kích thước và màu sắc");
+                return false;
+            }
+            if (quantity === undefined || quantity < 1 || isNaN(quantity)) {
+                alert("Vui lòng nhập số lượng");
+                return false;
+            }
             var maxQty = 0;
             // var quantity = this.qty;
             var item = this.items.find(item => item.productId === productId);
-            if (item) {
-                $http.get(`/rest/getMaxQty/${productId}`).then(response => {
-                    // Assuming the server returns the maxQty value
-                    maxQty = response.data;
-                    if (item.qty >= maxQty || this.qty >= maxQty) {
+            $http.get(`/rest/getMaxQty/${productId}/${categoryLv1Id}/${categoryLv2Id}`).then(response => {
+                // Assuming the server returns the maxQty value
+                maxQty = response.data;
+                if (quantity > maxQty) {
+                    alert("Không đủ số lượng");
+                    return false;
+                }
+                if (item) {
+                    if (item.qty + quantity > maxQty) {
                         alert("Không đủ số lượng");
                         return false;
                     }
-                    item.qty += this.qty;
+                    item.qty += quantity;
                     this.saveToLocalStorage();
-                }).catch(error => {
-                    console.error('Error fetching maxQty:', error);
-                });
+                } else {
+                    $http.get(`/rest/products/${productId}`).then(resp => {
+                        $http.get(`/rest/productImages/${productId}`).then(respImage => {
+                            $http.get(`/rest/categoryQuantity/${productId}/${categoryLv1Id}/${categoryLv2Id}`).then(respCategory => {
+                                resp.data.qty = quantity;
+                                resp.data.categoryQuantity = respCategory.data;
+                                resp.data.productImageList = respImage.data;
+                                console.log(resp.data);
+                                this.items.push(resp.data);
+                                this.saveToLocalStorage();
+                            })
+                        })
+                    });
+                }
+            })
 
-            } else {
-                $http.get(`/rest/products/${productId}`).then(resp => {
-                    $http.get(`/rest/productImages/${productId}`).then(respImage => {
-                        resp.data.qty = 1;
-                        resp.data.productImageList = respImage.data;
-                        this.items.push(resp.data);
-                        this.saveToLocalStorage();
-                    })
-                });
-            }
         },
         remove(productId) { // xóa sản phẩm khỏi giỏ hàng
             var index = this.items.findIndex(item => item.productId === productId);
@@ -42,7 +71,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
         },
         amt_of(item) { // tính thành tiền của 1 sản phẩm
 
-            return item.priceMin * item.qty;
+            return item.priceNew * item.qty;
         },
         get count() { // tính tổng số lượng các mặt hàng trong giỏ
             return this.items
@@ -116,3 +145,6 @@ app.controller("cart_ctrl", function ($scope, $http) {
         }
     }
 })
+
+$(document).ready(function () {
+});

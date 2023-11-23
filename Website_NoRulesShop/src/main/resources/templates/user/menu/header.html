@@ -154,7 +154,7 @@
                                                 <tbody>
                                                 <tr ng-repeat="item in cart.items">
                                                     <td class="text-center">
-                                                        <a href="#">
+                                                        <a ng-href="/home/product-details/productId={{item.productId}}">
                                                             <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
                                                                  alt="{{item.productImageList[0].image_url}}"
                                                                  title="{{item.productImageList[0].image_url}}"
@@ -163,10 +163,14 @@
                                                         </a>
                                                     </td>
                                                     <td class="text-left product-name">
-                                                        <a href="#">{{item.productName}}</a>
+                                                        <a class="text-wrap"
+                                                           ng-href="/home/product-details/productId={{item.productId}}">
+                                                            {{item.productName}}
+                                                            ({{item.categoryQuantity.categoryLevel1Detail.category_level_1_detail_name}}
+                                                            ,{{item.categoryQuantity.categoryLevel2Detail.category_level_2_detail_name}})</a>
                                                         <div class="quantity float-left w-100">
                                                             <span class="cart-qty">{{item.qty}} x</span>
-                                                            <span class="text-left price">{{item.priceMin | vndFormat }}</span>
+                                                            <span class="text-left price">{{item.priceNew | vndFormat }}</span>
                                                         </div>
 
                                                     </td>
