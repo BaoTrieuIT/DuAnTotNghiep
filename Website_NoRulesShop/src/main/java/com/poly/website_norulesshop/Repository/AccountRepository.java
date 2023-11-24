@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Long> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
     // Các phương thức đặc thù cho bảng Account (nếu cần)
     @Query("SELECT o FROM Account o WHERE o.username = :username")
     Account findByUsername(String username);

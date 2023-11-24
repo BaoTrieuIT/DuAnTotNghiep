@@ -11,13 +11,13 @@ public interface AccountService {
     void saveAccount(AccountDTO accountDTO);
 
 
-    Account getAccountById(Long id);
+    Account getAccountById(Integer id);
 
     Account findByUsername(String username);
 
     List<Account> getAllAccounts();
 
-    void deleteAccount(Long id);
+    void deleteAccount(Integer id);
 
     Account findByEmail(String email);
 Account update (Account account);

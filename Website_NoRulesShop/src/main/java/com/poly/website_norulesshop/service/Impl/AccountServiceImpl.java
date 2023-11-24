@@ -76,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account getAccountById(Long id) {
+    public Account getAccountById(Integer id) {
         return accountRepository.findById(id).orElse(null);
     }
 
@@ -86,7 +86,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void deleteAccount(Long id) {
+    public void deleteAccount(Integer id) {
         accountRepository.deleteById(id);
     }
 
@@ -97,9 +97,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account update(Account account) {
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
         return accountRepository.save(account);
     }
+
 
     @Override
     public Account resetPassword(String email, String newPassword) {

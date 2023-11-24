@@ -31,6 +31,7 @@ public class Account {
     private String username;
     private Date create_date;
     private Date birthday;
+    private String passwordnew;
     private String avatar_url;
 
 

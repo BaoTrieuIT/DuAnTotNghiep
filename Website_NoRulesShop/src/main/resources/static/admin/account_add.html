@@ -67,11 +67,14 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-floating">
-						<input type="password" name="password" class="form-control" id="floatingPassword" ng-model="form.password" placeholder="Mật khẩu" required>
-						<!--							<input ng-if="passwordType === 'text'" type="text" class="form-control" id="floatingPassword1" ng-model="form.password" placeholder="Mật khẩu"  style="position: absolute">-->
-						<!--							<button ng-click="togglePasswordVisibility()" style="position: relative;top: 15px;right: -550px">Hiện Mật khẩu</button>-->
+						<input type="password" name="password" class="form-control" id="floatingPassword" ng-model="form.password" placeholder="Mật khẩu" disabled>
 						<label for="floatingPassword">Mật khẩu</label>
-						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.password.$touched && myForm.password.$invalid">Mật khẩu không được để trống.</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="password" name="passwordnew" class="form-control" id="floatingPassword1" ng-model="form.passwordnew" placeholder="Mật khẩu mới">
+						<label for="floatingPassword1">Mật khẩu mới</label>
 					</div>
 				</div>
 				<fieldset class="col-12">
@@ -93,7 +96,7 @@
 					</div>
 				</fieldset>
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary" ng-click="update()">Xác nhận</button>
+					<button type="submit" class="btn btn-primary" ng-click="update()" ng-disabled="disable">Xác nhận</button>
 					<button class="btn btn-secondary" ng-click="reset()">Đặt lại</button>
 				</div>
 			</form><!-- End floating Labels Form -->

@@ -116,16 +116,22 @@ public class AccountController {
     }
     @PutMapping("{account_id}")
     public Account put(@PathVariable("account_id") Integer id, @RequestBody Account account) {
-        Account account1 = accountService.getAccountById(Long.valueOf(id));
-      
-        Ranked ranked1 = account1.getRanked();
-        account.setRanked(ranked1);
+        Account account1 = accountService.getAccountById(id);
+        if(account.getPasswordnew() == null || account.getPasswordnew().isEmpty()){
+            Ranked ranked1 = account1.getRanked();
+            account.setRanked(ranked1);
+            account.setPassword(account1.getPassword());
+        }else {
+            Ranked ranked1 = account1.getRanked();
+            account.setRanked(ranked1);
+            account.setPassword(passwordEncoder.encode(account.getPasswordnew()));
+        }
         return accountService.update(account);
     }
 
 
     @PutMapping("hidden/{account_id}")
-    public Account Hidden(@PathVariable("account_id") Long id,@RequestBody Account account){
+    public Account Hidden(@PathVariable("account_id") Integer id,@RequestBody Account account){
         Account account1 = accountService.getAccountById(id);
         Set<Role> roles = account1.getRoles();
         Ranked ranked = account1.getRanked();
@@ -136,7 +142,7 @@ public class AccountController {
         return  accountService.update(account);
     }
     @PutMapping("show/{account_id}")
-    public Account Show(@PathVariable("account_id") Long id,@RequestBody Account account){
+    public Account Show(@PathVariable("account_id") Integer id,@RequestBody Account account){
         Account account1 = accountService.getAccountById(id);
         Set<Role> roles = account1.getRoles();
         Ranked ranked = account1.getRanked();
@@ -147,7 +153,7 @@ public class AccountController {
         return  accountService.update(account);
     }
     @PutMapping("report/{account_id}")
-    public Account Report(@PathVariable("account_id") Long id,@RequestBody Account account){
+    public Account Report(@PathVariable("account_id") Integer id,@RequestBody Account account){
         Account account1 = accountService.getAccountById(id);
         Set<Role> roles = account1.getRoles();
         Ranked ranked = account1.getRanked();

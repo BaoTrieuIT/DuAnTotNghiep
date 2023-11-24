@@ -104,7 +104,7 @@
                                      class="user-menu">
 
                                     <ul sec:authorize="isAuthenticated()">
-                                        <li>
+                                        <li sec:authorize="isAuthenticated() and hasAuthority('Admin')">
                                             <a th:href="@{/admin/index}">Trang quản trị</a>
                                         </li>
                                         <li>
