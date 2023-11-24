@@ -86,33 +86,27 @@
                                 <label class="col-12 col-form-label">Địa chỉ</label>
                                 <div class="col-3 mb-3 ml-3 form-group">
                                     <label class="col-form-label">Tỉnh/ Thành phố</label>
-                                    <select class="form-select" id="city" aria-label="Default select example"
+                                    <select class="form-select" id="city"  aria-label="Default select example"
                                             onchange="updateAddress()">
-                                        <option selected="" value="">Tỉnh/ Thành phố</option>
+                                        <option selected="" value="" th:text="${city}">Tỉnh/ Thành phố</option>
                                     </select>
                                 </div>
                                 <div class="col-3 mb-3 ml-3 form-group">
                                     <label class="col-form-label">Quận/ Huyện</label>
                                     <select class="form-select" id="district" aria-label="Default select example"
                                             onchange="updateAddress()">
-                                        <option selected="" value="">Quận/ Huyện</option>
+                                        <option selected="" value="" th:text="${district}">Quận/ Huyện</option>
                                     </select>
                                 </div>
                                 <div class="col-3 mb-3 ml-3 form-group">
                                     <label class="col-form-label">Phường/Thị trấn</label>
-                                    <select class="form-select" id="ward" aria-label="Default select example"
+                                    <select class="form-select" id="ward"  aria-label="Default select example"
                                             onchange="updateAddress()">
-                                        <option selected="" value="">Phường/Thị trấn</option>
+                                        <option selected="" value="" th:text="${ward}">Phường/Thị trấn</option>
                                     </select>
                                 </div>
-<!--                                <div class="form-group col-12">-->
-<!--                                    <label for="address_detail">Số nhà, tên đường</label>-->
-<!--                                    <input type="text" class="form-control" id="address_detail" name="specificAddress"-->
-<!--                                           th:field="*{addressList.specificAddress}">-->
-<!--&lt;!&ndash;                                           th:value="${acc.addressList.specificAddress}">&ndash;&gt;-->
-<!--                                </div>-->
-                                <div class="form-group col-12">
-                                    <label for="address_detail">Số nhà, tên đường</label>
+                                <div class="form-group col-12 ml-3 mr-3">
+                                    <label class="col-form-label" for="address_detail">Số nhà, tên đường</label>
                                     <input type="text" class="form-control" id="address_detail" name="specificAddress"
                                            th:value="${acc.address.specificAddress}" th:field="*{address.specificAddress}">
                                 </div>

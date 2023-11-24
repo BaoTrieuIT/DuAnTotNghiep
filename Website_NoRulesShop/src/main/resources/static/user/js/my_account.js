@@ -225,9 +225,4 @@ function updateAddress() {
     // Cập nhật giá trị của input để có thể gửi lên server nếu cần thiết
     document.getElementById("hiddenAddress").value = address;
 
-    // Gán giá trị cho select box và input
-    document.getElementById("city").value = receivedCityValue;
-    document.getElementById("district").value = receivedDistrictValue;
-    document.getElementById("ward").value = receivedWardValue;
-    document.getElementById("address_detail").value = receivedSpecificAddress;
 }

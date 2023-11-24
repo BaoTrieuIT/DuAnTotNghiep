@@ -35,6 +35,26 @@ public class MyAccountController {
     @Autowired
     AddressService addressService;
 
+//    @GetMapping("/my-account")
+//    public String index(Model model) throws InterruptedException {
+//        model.addAttribute("title", "Tài khoản của tôi");
+//        Account account = session.get("acc");
+//        String path = "/user/img/avatar/" + account.getAvatar_url();
+//        model.addAttribute("imagePath", path);
+//        model.addAttribute("acc", account);
+//        String generalAddress = account.getAddress().getGeneralAddress();
+//        System.out.println("D/c: "+generalAddress);
+//        String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
+//
+//        System.out.println("city: "+addressParts[2].trim());
+//        System.out.println("district: "+addressParts[1].trim());
+//        System.out.println("ward: "+ addressParts[0].trim());
+//        // Truyền giá trị cho từng select box
+//        model.addAttribute("city", addressParts[2].trim());
+//        model.addAttribute("district", addressParts[1].trim());
+//        model.addAttribute("ward", addressParts[0].trim());
+//        return "user/my_account";
+//    }
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
         model.addAttribute("title", "Tài khoản của tôi");
@@ -42,8 +62,32 @@ public class MyAccountController {
         String path = "/user/img/avatar/" + account.getAvatar_url();
         model.addAttribute("imagePath", path);
         model.addAttribute("acc", account);
+
+        String generalAddress = account.getAddress().getGeneralAddress();
+        System.out.println("D/c: " + generalAddress);
+
+        // Kiểm tra nếu generalAddress không phải là null trước khi sử dụng split
+        if (generalAddress != null) {
+            String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
+
+            System.out.println("city: " + (addressParts.length > 2 ? addressParts[2].trim() : ""));
+            System.out.println("district: " + (addressParts.length > 1 ? addressParts[1].trim() : ""));
+            System.out.println("ward: " + (addressParts.length > 0 ? addressParts[0].trim() : ""));
+
+            // Truyền giá trị cho từng select box
+            model.addAttribute("city", addressParts.length > 2 ? addressParts[2].trim() : "");
+            model.addAttribute("district", addressParts.length > 1 ? addressParts[1].trim() : "");
+            model.addAttribute("ward", addressParts.length > 0 ? addressParts[0].trim() : "");
+        } else {
+            // Xử lý khi generalAddress là null
+            model.addAttribute("city", "Tỉnh/ Thành phố");
+            model.addAttribute("district",  "Quận/ Huyện");
+            model.addAttribute("ward",  "Phường/Thị trấn");
+        }
+
         return "user/my_account";
     }
+
 
     @PostMapping("/my-account/update")
     public String update(@RequestParam("image") MultipartFile file,
@@ -52,7 +96,6 @@ public class MyAccountController {
                          @RequestParam("password") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
                          @RequestParam("hiddenAddress") String address,
-                         @RequestParam(value = "address_detail", required = false) String spec_address,
                          @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
                          Principal principal) {
         // Lấy thông tin tài khoản từ username của người đăng nhập
@@ -78,49 +121,29 @@ public class MyAccountController {
                 return "user/my_account";
             }
         }
-        // Địa chỉ
-//        System.out.println(address);
-//        Optional<Address> existingAddress = addressService.getAddressByAccountId(acc);
-//        Address ad;
-//        if (existingAddress.isPresent()) {
-//            ad = existingAddress.get();
-//            System.out.println(ad);
-//        } else {
-//            ad = new Address();
-//        }
-//
-//        System.out.println("Specific Address: " + ad.getSpecificAddress());
-//
-//        ad.setRecipientName(acc.getFullname());
-//        ad.setRecipientPhoneNumber(acc.getPhone_number());
-//        ad.setSpecificAddress(spec_address);
-//        ad.setAccount(acc);
-//        ad.setGeneralAddress(address);
-//        addressService.saveAddress(ad);
 
-        // Xử lý địa chỉ
-        System.out.println(spec_address);
         // Địa chỉ
         Optional<Address> existingAddress = addressService.getAddressByAccountId(acc);
 
+//        String
         if (existingAddress.isPresent()) {
-            // Đối tượng địa chỉ đã tồn tại, cập nhật thông tin
             Address ad = existingAddress.get();
             ad.setRecipientName(acc.getFullname());
             ad.setRecipientPhoneNumber(acc.getPhone_number());
-            ad.setSpecificAddress(spec_address);
+            ad.setSpecificAddress(acc.address.getSpecificAddress());
             ad.setAccount(acc);
             ad.setGeneralAddress(address);
             addressService.saveAddress(ad);
         } else {
-            // Đối tượng địa chỉ chưa tồn tại, tạo mới và gán cho tài khoản
             Address newAddress = new Address();
             newAddress.setRecipientName(acc.getFullname());
             newAddress.setRecipientPhoneNumber(acc.getPhone_number());
-            newAddress.setSpecificAddress(spec_address);
+            newAddress.setSpecificAddress(acc.address.getSpecificAddress());
             newAddress.setAccount(acc);
             newAddress.setGeneralAddress(address);
             addressService.saveAddress(newAddress);
+            System.out.println(newAddress);
+
         }
 
         // Kiểm tra mật khẩu nếu có sự thay đổi
