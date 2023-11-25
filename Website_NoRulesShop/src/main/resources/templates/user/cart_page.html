@@ -23,7 +23,7 @@
 <div class="cart-area table-area pt-110 pb-95 float-left w-100">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12 float-left cart-wrapper">
+            <div class="col-lg-9 col-md-12 col-sm-12 float-left cart-wrapper">
                 <div class="table-responsive">
                     <div ng-if="!cart.items.length" class="panel-body text-center">
                         <h3 class="text-capitalize">Chưa có sản phẩm trong giỏ hàng</h3>
@@ -54,13 +54,12 @@
                                          title="{{item.productImageList[0].image_url}}" />
                                 </a>
                             </td>
-                            <td class="table-p-name text-capitalize">
-                                <a href="product-details">
+                            <td class="table-p-name text-capitalize d-flex flex-column align-items-start justify-content-start">
+                                <a class="text-wrap" href="product-details">
                                     {{item.productName}}
-
                                 </a>
-                                ({{item.categoryQuantity.categoryLevel1Detail.category_level_1_detail_name}}
-                                ,{{item.categoryQuantity.categoryLevel2Detail.category_level_2_detail_name}})
+                                <p>({{item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_name}}
+                                   ,{{item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_name}})</p>
                             </td>
 
 
@@ -99,8 +98,10 @@
                 </div>
             </div>
             <div
-                    class="table-total-wrapper d-flex justify-content-end pt-60 col-md-12 col-sm-12 col-lg-4 float-left align-items-center"
-            >
+                    class="table-total-wrapper
+                    d-flex justify-content-end
+                    pt-60
+                    col-md-12 col-sm-12 col-lg-3 float-left align-items-center">
                 <div class="table-total-content" ng-if="cart.items.length">
                     <h2 class="pb-20">Tổng giỏ hàng</h2>
                     <div class="table-total-amount">

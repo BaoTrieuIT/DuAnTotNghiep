@@ -24,8 +24,8 @@
             <div class="list-group-item d-flex justify-content-between lh-condensed" ng-repeat="item in cart.items">
               <div>
                 <h6 class="my-0">{{item.productName}} ({{item.qty}})</h6>
-                ({{item.categoryQuantity.categoryLevel1Detail.category_level_1_detail_name}}
-                ,{{item.categoryQuantity.categoryLevel2Detail.category_level_2_detail_name}})
+                ({{item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_name}}
+                ,{{item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_name}})
               </div>
               <span class="text-muted">{{item.priceNew | vndFormat}}</span>
             </div>

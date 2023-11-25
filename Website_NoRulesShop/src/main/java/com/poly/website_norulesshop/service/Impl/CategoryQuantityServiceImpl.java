@@ -32,17 +32,33 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
         return categoryQuantityRepository.findById(id).orElse(null);
     }
 
+    //    @Override
+//    public CategoryQuantity filter(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
+//        return categoryQuantityRepository.findByProductIdAndCategoryAndCategoryLevel1DetailAndCategoryLevel2Detail(productId, categoryLv1DetailId, categoryLv1DetailId);
+//    }
+//
     @Override
-    public CategoryQuantity filter(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
-        if (categoryLv1DetailId != null) {
-            return categoryQuantityRepository.findByProductIdAndCategoryAndCategoryLevel1Detail(productId, categoryLv1DetailId);
+    public List<CategoryQuantity> filterList(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
+        if (categoryLv1DetailId != null && categoryLv2DetailId == null) {
+            System.out.println("LV1");
+            return categoryQuantityRepository.findByCategoryLv1(productId, categoryLv1DetailId);
         }
-        if (categoryLv2DetailId != null) {
-            return categoryQuantityRepository.findByProductIdAndCategoryAndCategoryLevel2Detail(productId, categoryLv2DetailId);
-
+        if (categoryLv2DetailId != null && categoryLv1DetailId == null) {
+            System.out.println("LV2");
+            return categoryQuantityRepository.findByCategoryLv2(productId, categoryLv2DetailId);
         }
-        return categoryQuantityRepository.findByProductIdAndCategoryAndCategoryLevel1DetailAndCategoryLevel2Detail(productId, categoryLv1DetailId, categoryLv1DetailId);
+        System.out.println("All");
+        return categoryQuantityRepository.findByCategoryLv1AndLv2(productId, categoryLv1DetailId, categoryLv2DetailId);
     }
+//
+//    @Override
+//    public List<CategoryQuantity> filterLv1orLv2(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
+//        if (categoryLv1DetailId != null) {
+//            return categoryQuantityRepository.findByProductIdAndCategoryAndCategoryLevel1Detail(productId, categoryLv1DetailId);
+//        }
+//        return categoryQuantityRepository.findByProductIdAndCategoryAndCategoryLevel2Detail(productId, categoryLv2DetailId);
+//    }
+
 
     @Override
     public List<CategoryQuantity> findByProductId(Integer productId) {

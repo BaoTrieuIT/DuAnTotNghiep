@@ -32,22 +32,22 @@
                                     <div id="otp" class="inputs d-flex flex-row  mt-2">
                                         <input class="m-2 text-center form-control rounded otp-input" type="text"
                                                id="input-0"
-                                               maxlength="1"/>
+                                               maxlength="1" />
                                         <input class="m-2 text-center form-control rounded otp-input" type="text"
                                                id="input-1"
-                                               maxlength="1"/>
+                                               maxlength="1" />
                                         <input class="m-2 text-center form-control rounded otp-input" type="text"
                                                id="input-2"
-                                               maxlength="1"/>
+                                               maxlength="1" />
                                         <input class="m-2 text-center form-control rounded otp-input" type="text"
                                                id="input-3"
-                                               maxlength="1"/>
+                                               maxlength="1" />
                                         <input class="m-2 text-center form-control rounded otp-input" type="text"
                                                id="input-4"
-                                               maxlength="1"/>
+                                               maxlength="1" />
                                         <input class="m-2 text-center form-control rounded otp-input" type="text"
                                                id="input-5"
-                                               maxlength="1"/>
+                                               maxlength="1" />
                                     </div>
                                     <div class=" mt-2">
                                         <span class="d-block" id="countdown"></span>
@@ -65,7 +65,7 @@
                             <div class="form-footer ">
 
                                 <div class="form-footer-center">
-                                    <input type="hidden" id="hiddenInputField" name="fullCode"/>
+                                    <input type="hidden" id="hiddenInputField" name="fullCode" />
                                     <button type="submit" class="btn btn-primary btn-primary"
                                             formaction="/home/check-code">Submit
                                     </button>
@@ -154,6 +154,7 @@
     for (let i = 0; i <= 5; i++) {
         const inputCell = document.getElementById(`input-${i}`);
         inputCell.addEventListener("keyup", () => {
+            console.log(event.keyCode)
             if (event.key === "Backspace") {
                 // Set the numbers array to empty.
                 numbers = [];
@@ -174,21 +175,9 @@
             }
 
         });
-        // inputCell.addEventListener("change", () => {
-        //     // Update the number at the corresponding position in the numbers array.
-        //     numbers[i - 1] = inputCell.value;
-        //     // If the array contains 6 numbers, join them into a string.
-        //     if (numbers.length === 6) {
-        //         const string = numbers.join("");
-        //
-        //         // Update the summary element.
-        //         document.getElementById("summary").textContent = string;
-        //     }
-        // });
         inputCell.addEventListener("input", () => {
             // Check if the user has deleted all the numbers from the input cell.
             if (inputCell.value === "") {
-                // Empty the numbers array.
                 numbers = [];
             }
         });

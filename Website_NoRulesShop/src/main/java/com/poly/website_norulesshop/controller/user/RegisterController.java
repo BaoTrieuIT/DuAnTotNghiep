@@ -81,6 +81,8 @@ public class RegisterController {
     @PostMapping("/check-code")
     public String check_code(Model model, @ModelAttribute("fullCode") String code) {
         String generatorCode = sessionService.get("generatorCode");
+        System.out.println("Code check: " + generatorCode);
+        System.out.println("Code input: " + code);
         if (!generatorCode.equals(code)) {
             return "redirect:/home/send-otp?error";
         }

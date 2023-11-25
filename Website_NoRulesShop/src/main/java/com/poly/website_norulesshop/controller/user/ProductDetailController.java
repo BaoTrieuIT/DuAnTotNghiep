@@ -53,7 +53,6 @@ public class ProductDetailController {
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
         model.addAttribute("category", categoryQuantityList);
-        System.out.println(categoryQuantityList);
         model.addAttribute("productImages", productImageList);
         model.addAttribute("categoryLv1Id", null);
         model.addAttribute("categoryLv2Id", null);
@@ -81,18 +80,14 @@ public class ProductDetailController {
                                  @RequestParam(name = "categoryLv2Id", required = false) Integer categoryLv2Id
     ) {
         Product product = productService.getProductById(productId);
-        if (categoryLv1Id != null
-                || categoryLv2Id != null
-        ) {
-            CategoryQuantity categoryQuantityList = categoryQuantityService.filter(productId, categoryLv1Id, categoryLv2Id);
+        if (categoryLv1Id != null || categoryLv2Id != null) {
+            List<CategoryQuantity> categoryQuantityList = categoryQuantityService.filterList(productId, categoryLv1Id, categoryLv2Id);
             model.addAttribute("category", categoryQuantityList);
             model.addAttribute("categoryLv1Id", categoryLv1Id);
             model.addAttribute("categoryLv2Id", categoryLv2Id);
         } else {
             List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
             model.addAttribute("category", categoryQuantityList);
-            System.out.println(categoryQuantityList);
-
         }
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());

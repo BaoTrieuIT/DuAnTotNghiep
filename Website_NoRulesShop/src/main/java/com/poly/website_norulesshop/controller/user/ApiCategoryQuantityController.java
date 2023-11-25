@@ -17,9 +17,11 @@ public class ApiCategoryQuantityController {
     CategoryQuantityService categoryQuantityService;
 
     @GetMapping("{productId}/{categoryLv1Id}/{categoryLv2Id}")
-    public CategoryQuantity getOne(@PathVariable("productId") Integer productId,
-                                   @PathVariable("categoryLv1Id") Integer categoryLv1Id,
-                                   @PathVariable("categoryLv2Id") Integer categoryLv2Id) {
-        return categoryQuantityService.filter(productId, categoryLv1Id, categoryLv2Id);
+    public List<CategoryQuantity> getOne(@PathVariable("productId") Integer productId,
+                                         @PathVariable("categoryLv1Id") Integer categoryLv1Id,
+                                         @PathVariable("categoryLv2Id") Integer categoryLv2Id) {
+        return categoryQuantityService.filterList(productId, categoryLv1Id, categoryLv2Id);
     }
+
+
 }
