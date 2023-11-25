@@ -174,29 +174,7 @@ function renderCity(data) {
     };
 }
 
-// function updateAddress() {
-//     var city = document.getElementById("city").value;
-//     var district = document.getElementById("district").value;
-//     var ward = document.getElementById("ward").value;
-//
-//     var address = "";
-//
-//
-//     if (ward) {
-//         address += ward;
-//     }
-//
-//     if (district) {
-//         address += ", " + district;
-//     }
-//
-//     if (city) {
-//         address +=", "+ city;
-//     }
-//     // Cập nhật giá trị của input ẩn
-//     document.getElementById("hiddenAddress").value = address;
-//     console.log("D/c: "+address);
-// }
+
 function updateAddress() {
     var citySelect = document.getElementById("city");
     var districtSelect = document.getElementById("district");
@@ -226,3 +204,4 @@ function updateAddress() {
     document.getElementById("hiddenAddress").value = address;
 
 }
+

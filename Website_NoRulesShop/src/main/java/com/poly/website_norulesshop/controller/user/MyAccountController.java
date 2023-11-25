@@ -35,26 +35,6 @@ public class MyAccountController {
     @Autowired
     AddressService addressService;
 
-//    @GetMapping("/my-account")
-//    public String index(Model model) throws InterruptedException {
-//        model.addAttribute("title", "Tài khoản của tôi");
-//        Account account = session.get("acc");
-//        String path = "/user/img/avatar/" + account.getAvatar_url();
-//        model.addAttribute("imagePath", path);
-//        model.addAttribute("acc", account);
-//        String generalAddress = account.getAddress().getGeneralAddress();
-//        System.out.println("D/c: "+generalAddress);
-//        String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
-//
-//        System.out.println("city: "+addressParts[2].trim());
-//        System.out.println("district: "+addressParts[1].trim());
-//        System.out.println("ward: "+ addressParts[0].trim());
-//        // Truyền giá trị cho từng select box
-//        model.addAttribute("city", addressParts[2].trim());
-//        model.addAttribute("district", addressParts[1].trim());
-//        model.addAttribute("ward", addressParts[0].trim());
-//        return "user/my_account";
-//    }
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
         model.addAttribute("title", "Tài khoản của tôi");
@@ -62,28 +42,28 @@ public class MyAccountController {
         String path = "/user/img/avatar/" + account.getAvatar_url();
         model.addAttribute("imagePath", path);
         model.addAttribute("acc", account);
-
-        String generalAddress = account.getAddress().getGeneralAddress();
-        System.out.println("D/c: " + generalAddress);
-
-        // Kiểm tra nếu generalAddress không phải là null trước khi sử dụng split
-        if (generalAddress != null) {
-            String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
-
-            System.out.println("city: " + (addressParts.length > 2 ? addressParts[2].trim() : ""));
-            System.out.println("district: " + (addressParts.length > 1 ? addressParts[1].trim() : ""));
-            System.out.println("ward: " + (addressParts.length > 0 ? addressParts[0].trim() : ""));
-
-            // Truyền giá trị cho từng select box
-            model.addAttribute("city", addressParts.length > 2 ? addressParts[2].trim() : "");
-            model.addAttribute("district", addressParts.length > 1 ? addressParts[1].trim() : "");
-            model.addAttribute("ward", addressParts.length > 0 ? addressParts[0].trim() : "");
-        } else {
-            // Xử lý khi generalAddress là null
-            model.addAttribute("city", "Tỉnh/ Thành phố");
-            model.addAttribute("district",  "Quận/ Huyện");
-            model.addAttribute("ward",  "Phường/Thị trấn");
-        }
+//
+//        String generalAddress = account.getAddress().getGeneralAddress();
+//        System.out.println("D/c: " + generalAddress);
+//
+//        // Kiểm tra nếu generalAddress không phải là null trước khi sử dụng split
+//        if (generalAddress != null) {
+//            String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
+//
+//            System.out.println("city: " + (addressParts.length > 2 ? addressParts[2].trim() : ""));
+//            System.out.println("district: " + (addressParts.length > 1 ? addressParts[1].trim() : ""));
+//            System.out.println("ward: " + (addressParts.length > 0 ? addressParts[0].trim() : ""));
+//
+//            // Truyền giá trị cho từng select box
+//            model.addAttribute("city", addressParts.length > 2 ? addressParts[2].trim() : "");
+//            model.addAttribute("district", addressParts.length > 1 ? addressParts[1].trim() : "");
+//            model.addAttribute("ward", addressParts.length > 0 ? addressParts[0].trim() : "");
+//        } else {
+//            // Xử lý khi generalAddress là null
+//            model.addAttribute("city", "Tỉnh/ Thành phố");
+//            model.addAttribute("district",  "Quận/ Huyện");
+//            model.addAttribute("ward",  "Phường/Thị trấn");
+//        }
 
         return "user/my_account";
     }
@@ -124,7 +104,8 @@ public class MyAccountController {
 
         // Địa chỉ
         Optional<Address> existingAddress = addressService.getAddressByAccountId(acc);
-
+        String cities = (String) model.getAttribute("city");
+        System.out.println("general: "+cities);
 //        String
         if (existingAddress.isPresent()) {
             Address ad = existingAddress.get();
@@ -132,7 +113,8 @@ public class MyAccountController {
             ad.setRecipientPhoneNumber(acc.getPhone_number());
             ad.setSpecificAddress(acc.address.getSpecificAddress());
             ad.setAccount(acc);
-            ad.setGeneralAddress(address);
+//            ad.setGeneralAddress(address);
+            ad.setGeneralAddress(acc.address.getGeneralAddress());
             addressService.saveAddress(ad);
         } else {
             Address newAddress = new Address();
@@ -140,7 +122,7 @@ public class MyAccountController {
             newAddress.setRecipientPhoneNumber(acc.getPhone_number());
             newAddress.setSpecificAddress(acc.address.getSpecificAddress());
             newAddress.setAccount(acc);
-            newAddress.setGeneralAddress(address);
+            newAddress.setGeneralAddress(acc.address.getGeneralAddress());
             addressService.saveAddress(newAddress);
             System.out.println(newAddress);
 
@@ -177,6 +159,26 @@ public class MyAccountController {
         return "redirect:/home/my-account";
     }
 }
+//    @GetMapping("/my-account")
+//    public String index(Model model) throws InterruptedException {
+//        model.addAttribute("title", "Tài khoản của tôi");
+//        Account account = session.get("acc");
+//        String path = "/user/img/avatar/" + account.getAvatar_url();
+//        model.addAttribute("imagePath", path);
+//        model.addAttribute("acc", account);
+//        String generalAddress = account.getAddress().getGeneralAddress();
+//        System.out.println("D/c: "+generalAddress);
+//        String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
+//
+//        System.out.println("city: "+addressParts[2].trim());
+//        System.out.println("district: "+addressParts[1].trim());
+//        System.out.println("ward: "+ addressParts[0].trim());
+//        // Truyền giá trị cho từng select box
+//        model.addAttribute("city", addressParts[2].trim());
+//        model.addAttribute("district", addressParts[1].trim());
+//        model.addAttribute("ward", addressParts[0].trim());
+//        return "user/my_account";
+//    }
 //    @PostMapping("/my-account/update")
 //    public String update(@RequestParam("image") MultipartFile file,
 //                         @Valid @ModelAttribute Account acc, Model model,
