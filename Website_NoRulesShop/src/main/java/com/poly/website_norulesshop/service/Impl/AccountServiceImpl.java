@@ -123,6 +123,7 @@ public class AccountServiceImpl implements AccountService {
                 existingAccount.setEmail(updatedAccount.getEmail());
                 existingAccount.setPhone_number(updatedAccount.getPhone_number());
                 existingAccount.setBirthday(updatedAccount.getBirthday());
+                existingAccount.setAddress(updatedAccount.getAddress());
                 // Lưu tài khoản đã cập nhật vào cơ sở dữ liệu (nếu cần)
                 accountRepository.save(existingAccount);
             } else {

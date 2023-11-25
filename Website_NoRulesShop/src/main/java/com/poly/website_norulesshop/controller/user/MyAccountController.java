@@ -42,29 +42,6 @@ public class MyAccountController {
         String path = "/user/img/avatar/" + account.getAvatar_url();
         model.addAttribute("imagePath", path);
         model.addAttribute("acc", account);
-//
-//        String generalAddress = account.getAddress().getGeneralAddress();
-//        System.out.println("D/c: " + generalAddress);
-//
-//        // Kiểm tra nếu generalAddress không phải là null trước khi sử dụng split
-//        if (generalAddress != null) {
-//            String[] addressParts = generalAddress.split(","); // Tách chuỗi dựa trên dấu phẩy
-//
-//            System.out.println("city: " + (addressParts.length > 2 ? addressParts[2].trim() : ""));
-//            System.out.println("district: " + (addressParts.length > 1 ? addressParts[1].trim() : ""));
-//            System.out.println("ward: " + (addressParts.length > 0 ? addressParts[0].trim() : ""));
-//
-//            // Truyền giá trị cho từng select box
-//            model.addAttribute("city", addressParts.length > 2 ? addressParts[2].trim() : "");
-//            model.addAttribute("district", addressParts.length > 1 ? addressParts[1].trim() : "");
-//            model.addAttribute("ward", addressParts.length > 0 ? addressParts[0].trim() : "");
-//        } else {
-//            // Xử lý khi generalAddress là null
-//            model.addAttribute("city", "Tỉnh/ Thành phố");
-//            model.addAttribute("district",  "Quận/ Huyện");
-//            model.addAttribute("ward",  "Phường/Thị trấn");
-//        }
-
         return "user/my_account";
     }
 
@@ -75,7 +52,6 @@ public class MyAccountController {
                          BindingResult result,
                          @RequestParam("password") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
-                         @RequestParam("hiddenAddress") String address,
                          @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
                          Principal principal) {
         // Lấy thông tin tài khoản từ username của người đăng nhập
@@ -102,31 +78,6 @@ public class MyAccountController {
             }
         }
 
-        // Địa chỉ
-        Optional<Address> existingAddress = addressService.getAddressByAccountId(acc);
-        String cities = (String) model.getAttribute("city");
-        System.out.println("general: "+cities);
-//        String
-        if (existingAddress.isPresent()) {
-            Address ad = existingAddress.get();
-            ad.setRecipientName(acc.getFullname());
-            ad.setRecipientPhoneNumber(acc.getPhone_number());
-            ad.setSpecificAddress(acc.address.getSpecificAddress());
-            ad.setAccount(acc);
-//            ad.setGeneralAddress(address);
-            ad.setGeneralAddress(acc.address.getGeneralAddress());
-            addressService.saveAddress(ad);
-        } else {
-            Address newAddress = new Address();
-            newAddress.setRecipientName(acc.getFullname());
-            newAddress.setRecipientPhoneNumber(acc.getPhone_number());
-            newAddress.setSpecificAddress(acc.address.getSpecificAddress());
-            newAddress.setAccount(acc);
-            newAddress.setGeneralAddress(acc.address.getGeneralAddress());
-            addressService.saveAddress(newAddress);
-            System.out.println(newAddress);
-
-        }
 
         // Kiểm tra mật khẩu nếu có sự thay đổi
         if (comfirmPassword != null && changePassword && acc.getPassword() != null && acc.getPassword().length() > 6) {

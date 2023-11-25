@@ -34,6 +34,7 @@ public class Account implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday;
     private String avatar_url;
+    private String address;
 
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -51,9 +52,9 @@ public class Account implements Serializable {
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     private AccountStatus accountStatus;
-    @JsonIgnore
-    @OneToOne(mappedBy = "account",cascade = CascadeType.ALL, orphanRemoval = true)
-    public Address address;
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "account",cascade = CascadeType.ALL, orphanRemoval = true)
+//    public Address address;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;
