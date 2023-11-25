@@ -81,13 +81,13 @@
 					<legend class="col-form-label col-sm-2 pt-0">Quyền</legend>
 					<div class="col-sm-10">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="form.roles[0].role_id " ng-value="1">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-disabled="disable" ng-model="form.roles[0].role_id " ng-value="1">
 							<label class="form-check-label" for="gridRadios1">
 								Admin
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="form.roles[0].role_id" ng-value="2">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-disabled="disable" ng-model="form.roles[0].role_id" ng-value="2">
 							<label class="form-check-label" for="gridRadios2">
 								Người dùng
 							</label>
@@ -96,7 +96,7 @@
 					</div>
 				</fieldset>
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary" ng-click="update()" ng-disabled="disable">Xác nhận</button>
+					<button type="submit" class="btn btn-primary" ng-click="update()" >Xác nhận</button>
 					<button class="btn btn-secondary" ng-click="reset()">Đặt lại</button>
 				</div>
 			</form><!-- End floating Labels Form -->

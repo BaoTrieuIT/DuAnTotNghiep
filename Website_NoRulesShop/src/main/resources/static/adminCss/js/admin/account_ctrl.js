@@ -112,13 +112,13 @@ app.controller('AddAccountController', ['$scope','$http' ,'$location','$timeout'
             $scope.Account = resp.data;
             $scope.form = AccountService.getEditedAccount();
             $scope.form.birthday = new Date($scope.form.birthday);
-            if($scope.form.account_id !== $scope.Account.account_id){
-                $scope.disable = false;
+            if($scope.form.account_id === $scope.Account.account_id){
+                $scope.disable = true;
             }
         })
     }
     $scope.initialize();
-    $scope.disable = true;
+    $scope.disable = false;
     $scope.update = function() {
         var item = angular.copy($scope.form);
             var inputFile = document.getElementById("inputFile");
@@ -140,7 +140,6 @@ app.controller('AddAccountController', ['$scope','$http' ,'$location','$timeout'
                         $http.put(`/rest/manage_account/${item.account_id}`, item).then(function (resp) {
                             var index = $scope.items.findIndex(p => p.account_id === item.account_id);
                             $scope.items[index] = item;
-
                             AccountService.setAlert('Thành công!');
                             $location.path('/manage_account').search('success', 'true');
                         }).catch(error => {
@@ -163,6 +162,6 @@ app.controller('AddAccountController', ['$scope','$http' ,'$location','$timeout'
     }
     $scope.reset = function (){
         $scope.form = {};
-        $scope.disable = true;
+        $scope.disable = false;
     }
 }])
