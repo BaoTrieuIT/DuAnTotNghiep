@@ -1,9 +1,7 @@
 package com.poly.website_norulesshop.controller.user;
 
 import com.poly.website_norulesshop.entity.Account;
-import com.poly.website_norulesshop.entity.Address;
 import com.poly.website_norulesshop.service.AccountService;
-import com.poly.website_norulesshop.service.AddressService;
 import com.poly.website_norulesshop.utils.SessionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +17,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
 
 @Controller
