@@ -31,8 +31,6 @@ public class MyAccountController {
     SessionService session;
     @Autowired
     AccountService accountService;
-    @Autowired
-    AddressService addressService;
 
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {

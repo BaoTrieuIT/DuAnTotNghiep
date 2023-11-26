@@ -47,7 +47,7 @@
                                                        name="fullname" th:field="*{fullname}"
                                                        th:value="${acc.fullname}">
                                                 <p class="invalid-feedback" id="fullnameErrorDiv">Họ tên không được để
-                                                    trống</p>
+                                                                                                  trống</p>
                                                 <div th:errors="*{fullname}" th:if="${#fields.hasErrors('fullname')}">
                                                 </div>
                                             </div>
@@ -95,7 +95,7 @@
                                 <input type="checkbox" class="custom-control-input" id="change-password-checkbox"
                                        value="1" onchange="togglePasswordFields()" name="changePassword">
                                 <label class="custom-control-label" for="change-password-checkbox">Thay đổi mật
-                                    khẩu</label>
+                                                                                                   khẩu</label>
                             </div>
                             <div id="account-change-password" class="">
                                 <div class="row">
@@ -125,12 +125,12 @@
                             <div class="required text-right">* Thông tin bắt buộc</div>
                             <div class="form-footer d-flex justify-content-between align-items-center">
                                 <a th:href="@{/home/index}"><i class="material-icons">navigate_before</i>Trở lại trang
-                                    chủ</a>
+                                                                                                         chủ</a>
 
                                 <div class="form-footer-right">
                                     <button type="submit" class="btn btn-primary btn-primary"
                                             th:href="@{/home/my-account/update}" onclick="updateAndReload()">Lưu thông
-                                        tin
+                                                                                                             tin
                                     </button>
                                 </div>
                             </div>
@@ -152,10 +152,11 @@
                                     <label class="label">
                                         <input type="hidden" th:field="*{avatar_url}">
                                         <input type="file" name="image" id="fileInput" accept="image/*"
-                                               onchange="displayImage()"/>
+                                               onchange="displayImage()" />
                                         <figure class="personal-figure">
-                                            <img th:src="${imagePath}" class="personal-avatar"
-                                                 th:value="${acc.avatar_url}" alt="avatar" id="selectedImage">
+                                            <img th:src="@{'/user/img/avatar/'+ ${acc.avatar_url}}"
+                                                 class="personal-avatar"
+                                                 alt="avatar" id="selectedImage">
                                             <figcaption class="personal-figcaption">
                                                 <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
                                             </figcaption>
@@ -181,16 +182,6 @@
 </div>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-
     function displayImage() {
         var fileInput = document.getElementById('fileInput');
         var selectedImage = document.getElementById('selectedImage');
@@ -257,7 +248,7 @@
 
 </script>
 <!--  kiểm tra password-->
-<script src="../../././static/user/js/my_account.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<!--<script src="../../././static/user/js/my_account.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>-->
 </body>
 </html>

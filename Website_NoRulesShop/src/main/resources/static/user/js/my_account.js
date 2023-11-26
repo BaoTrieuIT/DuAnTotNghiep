@@ -131,6 +131,7 @@ function validatePhoneNumber(phoneInput) {
         document.getElementById("phoneErrorDiv").innerText = "Số điện thoại không được để trống";
     }
 }
+
 //
 // var citis = document.getElementById("city");
 // var districts = document.getElementById("district");
