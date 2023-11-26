@@ -6,12 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.relation.Role;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -30,16 +32,13 @@ public class Account {
     private String email;
     private String username;
     private Date create_date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date birthday;
     private String avatar_url;
-
+    private String address;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "accounts_roles",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "bit default 1")
-    )
+    @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "bit default 1"))
     private Set<Role> roles = new HashSet<>();
     @JsonIgnore
     @ManyToOne
@@ -48,10 +47,11 @@ public class Account {
 
     @ManyToOne
     @JoinColumn(name = "account_status_id")
-    AccountStatus accountStatus;
-    @JsonIgnore
-    @OneToMany(mappedBy = "account")
-    public List<Address> addressList;
+    private AccountStatus accountStatus;
+    // @JsonIgnore
+    // @OneToOne(mappedBy = "account",cascade = CascadeType.ALL, orphanRemoval =
+    // true)
+    // public Address address;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;

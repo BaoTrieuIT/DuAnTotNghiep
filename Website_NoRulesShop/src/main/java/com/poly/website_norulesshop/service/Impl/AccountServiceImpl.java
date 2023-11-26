@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.management.relation.Role;
 
-import com.poly.website_norulesshop.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,6 @@ import com.poly.website_norulesshop.service.AccountService;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     private final AccountRepository accountRepository;
@@ -31,7 +30,6 @@ public class AccountServiceImpl implements AccountService {
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
     }
-
 
     @Override
     public Account findByUsername(String username) {
@@ -47,8 +45,8 @@ public class AccountServiceImpl implements AccountService {
     public void saveAccount(AccountDTO accountDTO) {
         Date currentDate = new Date(System.currentTimeMillis());
         Account account = new Account();
-        //encrypt the password once we integrate spring security
-        //user.setPassword(UserDTO.getPassword());
+        // encrypt the password once we integrate spring security
+        // user.setPassword(UserDTO.getPassword());
         account.setUsername(accountDTO.getUsername());
         account.setEmail(accountDTO.getEmail());
         account.setCreate_date(currentDate);
@@ -109,4 +107,37 @@ public class AccountServiceImpl implements AccountService {
                     return accountRepository.save(users);
                 }).orElse(null);
     }
+
+    @Override
+    public void updateAccount_frUser(Account updatedAccount) {
+        // Lấy tài khoản từ session
+        Optional<Account> existingAccountOptional = accountRepository
+                .findById(updatedAccount.getAccount_id().longValue());
+
+        // Kiểm tra xem tài khoản trong session có phù hợp với account_id hay không
+        if (existingAccountOptional.isPresent()) {
+            Account existingAccount = existingAccountOptional.get();
+
+            // Check if the existing account's account_id matches the updatedAccount's
+            // account_id
+            if (existingAccount.getAccount_id().equals(updatedAccount.getAccount_id())) {
+                // Cập nhật thông tin tài khoản
+                existingAccount.setUsername(updatedAccount.getUsername());
+                existingAccount.setFullname(updatedAccount.getFullname());
+                existingAccount.setAvatar_url(updatedAccount.getAvatar_url());
+                existingAccount.setPassword(passwordEncoder.encode(updatedAccount.getPassword()));
+                existingAccount.setEmail(updatedAccount.getEmail());
+                existingAccount.setPhone_number(updatedAccount.getPhone_number());
+                existingAccount.setBirthday(updatedAccount.getBirthday());
+                existingAccount.setAddress(updatedAccount.getAddress());
+                // Lưu tài khoản đã cập nhật vào cơ sở dữ liệu (nếu cần)
+                accountRepository.save(existingAccount);
+            } else {
+                // Handle the case where account_id does not match
+            }
+        } else {
+            // Handle the case where no account with the provided account_id is found
+        }
+    }
+
 }

@@ -105,23 +105,23 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
     $scope.update = function(){
 
         if($scope.form.brandName !== undefined && $scope.form.websiteUrl !== undefined && $scope.form.anotherInformation  !== undefined){
-            var item = angular.copy($scope.form);
-            var inputFile = document.getElementById("inputFile");
-            var formData = new FormData();
-            if (inputFile.files.length > 0) {
-                formData.append("fileName", inputFile.files[0]);
-                $http.post('/rest/manage_brand/upload', formData, {
-                    transformRequest: angular.identity,
-                    headers: { 'Content-Type': undefined }
-                }).then(function(response) {
-                    var data = response.data;
-                    var successMessage = data.message;
-                    // Lấy đường dẫn hoặc tên tệp ảnh từ response
-                    var imagePath = data.imagePath;
-                    console.log(successMessage);
-                    console.log("Image path: " + imagePath);
-                    // Cập nhật thuộc tính logo_url của thương hiệu
-                    item.logoUrl = imagePath;
+        var item = angular.copy($scope.form);
+        var inputFile = document.getElementById("inputFile");
+        var formData = new FormData();
+        if (inputFile.files.length > 0) {
+            formData.append("fileName", inputFile.files[0]);
+            $http.post('/rest/manage_brand/upload', formData, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).then(function(response) {
+                var data = response.data;
+                var successMessage = data.message;
+                // Lấy đường dẫn hoặc tên tệp ảnh từ response
+                var imagePath = data.imagePath;
+                console.log(successMessage);
+                console.log("Image path: " + imagePath);
+                // Cập nhật thuộc tính logo_url của thương hiệu
+                item.logoUrl = imagePath;
 
                     // Tạo thương hiệu sau khi đã cập nhật logo_url
                     $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {

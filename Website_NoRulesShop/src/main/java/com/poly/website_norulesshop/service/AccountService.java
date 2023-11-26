@@ -10,7 +10,6 @@ public interface AccountService {
 
     void saveAccount(AccountDTO accountDTO);
 
-
     Account getAccountById(Long id);
 
     Account findByUsername(String username);
@@ -20,7 +19,10 @@ public interface AccountService {
     void deleteAccount(Long id);
 
     Account findByEmail(String email);
-Account update (Account account);
+
+    Account update(Account account);
+
     Account resetPassword(String email, String newPassword);
 
+    void updateAccount_frUser(Account account);
 }
