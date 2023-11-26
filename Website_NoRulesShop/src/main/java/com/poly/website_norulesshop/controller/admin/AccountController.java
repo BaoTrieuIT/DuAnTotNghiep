@@ -46,51 +46,61 @@ public class AccountController {
         Account account = sessionService.get("acc");
         return account;
     }
-        @PostMapping("/upload")
-        public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file, HttpServletRequest request) {
-            try {
-                if (file != null && !file.isEmpty()) {
-                    String directoryPath1 = "src/main/resources/static/admin/imagesAccount/";
-                    Path path1 = Paths.get(directoryPath1);
+            @PostMapping("/upload")
+            public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file,@RequestParam("account_id") Integer id) {
+                try {
+                    if (file != null && !file.isEmpty()) {
+                        String directoryPath1 = "src/main/resources/static/admin/imagesAccount/";
+                        Path path1 = Paths.get(directoryPath1);
 
-                    if (!Files.exists(path1)) {
-                        Files.createDirectories(path1);
+                        if (!Files.exists(path1)) {
+                            Files.createDirectories(path1);
+                        }
+                        int count1 = 1;
+                        Account account2 = accountService.getAccountById(id);
+                        String fileName2 = "accountImgId="+account2.getAccount_id()+".jpg"; // Adjust the file format based on your image type
+                        Path filePath2 = Paths.get(directoryPath1, fileName2);
+                        while(Files.exists(filePath2)){
+                            fileName2 = "accountImgId=" + account2.getAccount_id() + "_" + count1 + ".jpg";
+                            filePath2 = Paths.get(directoryPath1, fileName2);
+                            count1++;
+                        }
+                        Files.write(filePath2, file.getBytes());
+
+                        // Get the user's home directory
+                        String userHome = System.getProperty("user.home");
+                        String directoryPath = userHome + File.separator + "imagesAccount/";
+                        Path path = Paths.get(directoryPath);
+
+                        if (!Files.exists(path)) {
+                            Files.createDirectories(path);
+                        }
+                        int count = 1;
+
+                        Account account = accountService.getAccountById(id);
+                        String fileName = "accountImgId="+account.getAccount_id()+".jpg"; // Adjust the file format based on your image type
+                        Path filePath = Paths.get(directoryPath, fileName);
+                        while(Files.exists(filePath)){
+                            fileName = "accountImgId=" + account.getAccount_id() + "_" + count + ".jpg";
+                            filePath = Paths.get(directoryPath, fileName);
+                            count++;
+                        }
+                        Files.write(filePath, file.getBytes());
+                        // Now you can save the imagePath into your database or perform other operations
+                        String imagePath = fileName;
+                        // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
+                        Account account1 = new Account();
+                        account1.setAvatar_url(imagePath);
+                        return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
+                    }else {
+                        // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
+                        return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
                     }
-
-                    String fileName1 = file.getOriginalFilename();
-                    Path filePath1 = Paths.get(directoryPath1, fileName1);
-                    Files.write(filePath1, file.getBytes());
-                    // Get the user's home directory
-                    String userHome = System.getProperty("user.home");
-                    String directoryPath = userHome + File.separator + "imagesAccount/";
-                    Path path = Paths.get(directoryPath);
-
-                    if (!Files.exists(path)) {
-                        Files.createDirectories(path);
-                    }
-
-                    String fileName = UUID.randomUUID().toString() + ".jpg"; // Adjust the file format based on your image type
-                    Path filePath = Paths.get(directoryPath, fileName);
-                    Files.write(filePath, file.getBytes());
-
-                    // Use Resource to get the image path
-                    Resource resource = new FileSystemResource(filePath.toString());
-
-                    // Now you can save the imagePath into your database or perform other operations
-                    String imagePath = fileName;
-                    // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
-                    Account account = new Account();
-                    account.setAvatar_url(imagePath);
-                    return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
-                }else {
-                    // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
-                    return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tải ảnh lên.");
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tải ảnh lên.");
             }
-        }
     @GetMapping("/image/{fileName:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String fileName) throws MalformedURLException {
         String userHome = System.getProperty("user.home");
