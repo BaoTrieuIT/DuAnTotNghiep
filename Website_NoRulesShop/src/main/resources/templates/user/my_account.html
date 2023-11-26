@@ -16,7 +16,7 @@
 <div class="main-content w-100 float-left blog-list">
     <div class="container">
         <form method="post" class="myacoount-form needs-validation" action="/home/my-account/update" th:object="${acc}"
-              enctype="multipart/form-data" novalidate>
+              enctype="multipart/form-data" novalidate id="myaccount-form">
             <div class="row">
                 <div class="products-grid col-xl-9 col-lg-6 order-lg-2">
                     <div class="row">
@@ -162,20 +162,15 @@
                                         </figure>
                                     </label>
                                 </div>
-<!--                                <div class="progress mt-3">-->
-<!--                                    <div class="progress-bar progress-bar-striped bg-info progress-bar-animated"-->
-<!--                                         role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"-->
-<!--                                         aria-valuemax="100"></div>-->
-<!--                                </div>-->
-<!--                                <div id="upload-progress" style="display: none;">-->
-<!--                                    <div class="progress mt-3">-->
-<!--                                        <div id="progress-bar"-->
-<!--                                             class="progress-bar progress-bar-striped bg-info progress-bar-animated"-->
-<!--                                             role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"-->
-<!--                                             aria-valuemax="100"></div>-->
-<!--                                    </div>-->
-<!--                                    <div id="progress-text" class="mt-2"></div>-->
-<!--                                </div>-->
+                                <div id="upload-progress" style="display: none;">
+                                    <div class="progress mt-3">
+                                        <div id="progress-bar"
+                                             class="progress-bar progress-bar-striped bg-info progress-bar-animated"
+                                             role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                             aria-valuemax="100"></div>
+                                    </div>
+                                    <div id="progress-text" class="mt-2"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -215,7 +210,7 @@
     }
 
     function updateAndReload() {
-        var formData = new FormData(document.getElementById("yourFormId"));
+        var formData = new FormData(document.getElementById("myaccount-form"));
         var progressBar = document.getElementById("progress-bar");
         var progressText = document.getElementById("progress-text");
         var progressContainer = document.getElementById("upload-progress");
@@ -232,8 +227,10 @@
             signal: new AbortController().signal,
             onUploadProgress: function (progressEvent) {
                 if (progressEvent.lengthComputable) {
-                    var percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+                    let percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+                    console.log(percentComplete);
                     progressBar.style.width = percentComplete + "%";
+                    progressBar.setAttribute("aria-valuenow", percentComplete.toFixed(2)); // Cập nhật giá trị aria-valuenow
                     progressText.innerText = percentComplete.toFixed(2) + "%";
                 }
             }
@@ -245,8 +242,10 @@
         }).then(data => {
             // Ẩn thanh tiến trình sau khi hoàn thành
             progressContainer.style.display = "none";
-            // Hiển thị thông báo và reload trang
+            // Hiển thị thông báo
             alert("Upload thành công! " + data); // Dữ liệu từ server
+
+            // Nếu upload thành công, thì mới reload trang
             window.location.reload();
         }).catch(error => {
             console.error("Lỗi khi upload ảnh:", error);
@@ -255,7 +254,6 @@
             progressContainer.style.display = "none";
         });
     }
-
 
 </script>
 <!--  kiểm tra password-->

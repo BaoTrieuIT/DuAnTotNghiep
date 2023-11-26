@@ -14,6 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -77,8 +80,6 @@ public class MyAccountController {
                 return "user/my_account";
             }
         }
-
-
         // Kiểm tra mật khẩu nếu có sự thay đổi
         if (comfirmPassword != null && changePassword && acc.getPassword() != null && acc.getPassword().length() > 6) {
             if (!acc.getPassword().equals(comfirmPassword)) {
@@ -87,14 +88,34 @@ public class MyAccountController {
             }
             acc.setPassword(newPassword);
         }
+
         // Xử lý ảnh
         try {
             String directoryPath = "src/main/resources/static/user/img/avatar/";
-            Path fileNameAndPath = Paths.get(directoryPath, file.getOriginalFilename());
-            Files.write(fileNameAndPath, file.getBytes());
 
-            // Lưu đường dẫn của ảnh vào cơ sở dữ liệu
-            String filename = StringUtils.cleanPath(file.getOriginalFilename());
+            // Lấy thông tin từ tên file gốc
+            String originalFileName = file.getOriginalFilename();
+            String[] fileNameParts = originalFileName.split("\\.");
+
+// Lấy tên file và đuôi file từ mảng fileNameParts
+            String fileName = fileNameParts[0]; // Tên file (trước dấu chấm)
+            String fileExtension = "png"; // Đặt đuôi file mới
+
+// Tạo tên file mới
+            String newFileName = "avatar_" + acc.getAccount_id() + "_" + fileName + "." + fileExtension;
+
+// Lưu ảnh và đường dẫn vào cơ sở dữ liệu
+            if (!originalFileName.toLowerCase().endsWith(".png")) {
+                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, fileExtension, byteArrayOutputStream);
+                Files.write(Paths.get(directoryPath, newFileName), byteArrayOutputStream.toByteArray());
+            } else {
+                Files.write(Paths.get(directoryPath, newFileName), file.getBytes());
+            }
+
+// Lưu đường dẫn ảnh vào thuộc tính avatar_url
+            String filename = StringUtils.cleanPath(newFileName);
             acc.setAvatar_url(filename);
         } catch (IOException e) {
             System.out.println(e.getMessage());
