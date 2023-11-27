@@ -1,6 +1,6 @@
---  drop database norule_shop;
---  create database norule_shop;
---   use norule_shop;
+ drop database norule_shop;
+ create database norule_shop;
+  use norule_shop;
 create table `account_status`(
 	account_status_id int auto_increment primary key,
     account_status_name nvarchar(50)
@@ -30,6 +30,7 @@ create table `account`(
     avatar_url varchar(50) not null,
     ranked_id int,
     account_status_id int,
+    address varchar(255),
     foreign key (account_status_id) references `account_status`(account_status_id),
     foreign key (ranked_id) references `ranked`(ranked_id)
 );
@@ -302,6 +303,7 @@ create table `directory_lv1_brand`(
 );
 
 create table `accounts_roles`(
+account_roles int AUTO_INCREMENT primary key,
 	account_id int,
     role_id int,
     FOREIGN KEY (account_id) REFERENCES account(account_id)

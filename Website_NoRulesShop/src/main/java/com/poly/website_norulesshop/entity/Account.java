@@ -35,10 +35,12 @@ public class Account {
     private Date birthday;
     private String avatar_url;
     private String address;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "bit default 1"))
+    //    columnDefinition = "bit default 2" , ALL
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ranked_id")

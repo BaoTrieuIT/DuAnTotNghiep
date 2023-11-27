@@ -23,7 +23,9 @@ public class Order {
     @Column(name = "order_id")
     private Integer orderId;
     @Column(name = "order_time")
-    private Date orderTime;
+    private Date orderTime = new Date();
+    @Column(name = "order_update_time")
+    private Date orderUpdateTime;
     @Column(name = "discount_amout")
     private Integer discountAmout;
     @Column(name = "recipient_name")

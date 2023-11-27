@@ -1,7 +1,7 @@
 package com.poly.website_norulesshop.service;
 
 import com.poly.website_norulesshop.entity.CategoryQuantity;
-import org.springframework.data.relational.core.sql.In;
+//import org.springframework.data.relational.core.sql.In;
 
 import java.util.List;
 
