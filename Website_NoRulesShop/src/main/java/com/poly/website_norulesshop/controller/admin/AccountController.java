@@ -47,7 +47,7 @@ public class AccountController {
         return account;
     }
             @PostMapping("/upload")
-            public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file,@RequestParam("account_id") Integer id) {
+            public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file, @RequestParam("floatingPassword") String password) {
                 try {
                     if (file != null && !file.isEmpty()) {
                         String directoryPath1 = "src/main/resources/static/admin/imagesAccount/";
@@ -56,16 +56,9 @@ public class AccountController {
                         if (!Files.exists(path1)) {
                             Files.createDirectories(path1);
                         }
-                        int count1 = 1;
-                        Account account2 = accountService.getAccountById(id);
-                        String fileName2 = "accountImgId="+account2.getAccount_id()+".jpg"; // Adjust the file format based on your image type
-                        Path filePath2 = Paths.get(directoryPath1, fileName2);
-                        while(Files.exists(filePath2)){
-                            fileName2 = "accountImgId=" + account2.getAccount_id() + "_" + count1 + ".jpg";
-                            filePath2 = Paths.get(directoryPath1, fileName2);
-                            count1++;
-                        }
-                        Files.write(filePath2, file.getBytes());
+                        String fileName1 = file.getOriginalFilename();
+                        Path filePath1 = Paths.get(directoryPath1, fileName1);
+                        Files.write(filePath1, file.getBytes());
 
                         // Get the user's home directory
                         String userHome = System.getProperty("user.home");
@@ -75,21 +68,15 @@ public class AccountController {
                         if (!Files.exists(path)) {
                             Files.createDirectories(path);
                         }
-                        int count = 1;
-
-                        Account account = accountService.getAccountById(id);
-                        String fileName = "accountImgId="+account.getAccount_id()+".jpg"; // Adjust the file format based on your image type
+                        String fileName = UUID.randomUUID().toString(); // Adjust the file format based on your image type
                         Path filePath = Paths.get(directoryPath, fileName);
-                        while(Files.exists(filePath)){
-                            fileName = "accountImgId=" + account.getAccount_id() + "_" + count + ".jpg";
-                            filePath = Paths.get(directoryPath, fileName);
-                            count++;
-                        }
+
                         Files.write(filePath, file.getBytes());
                         // Now you can save the imagePath into your database or perform other operations
                         String imagePath = fileName;
                         // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
                         Account account1 = new Account();
+                        System.out.println(password);
                         account1.setAvatar_url(imagePath);
                         return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
                     }else {
@@ -127,15 +114,8 @@ public class AccountController {
     @PutMapping("{account_id}")
     public Account put(@PathVariable("account_id") Integer id, @RequestBody Account account) {
         Account account1 = accountService.getAccountById(id);
-        if(account.getPasswordnew() == null || account.getPasswordnew().isEmpty()){
-            Ranked ranked1 = account1.getRanked();
-            account.setRanked(ranked1);
-            account.setPassword(account1.getPassword());
-        }else {
-            Ranked ranked1 = account1.getRanked();
-            account.setRanked(ranked1);
-            account.setPassword(passwordEncoder.encode(account.getPasswordnew()));
-        }
+        Ranked ranked1 = account1.getRanked();
+        account.setRanked(ranked1);
         return accountService.update(account);
     }
 

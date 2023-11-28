@@ -64,21 +64,16 @@
 				</div>
 				<div class="col-md-12">
 					<div class="form-floating">
+						<input type="text" name="address" ng-model="form.address"  class="form-control" id="floatingAddress" placeholder="Address" required>
+						<label for="floatingAddress">Địa chỉ</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.address.$touched && myForm.address.$invalid">Address không được để trống.</span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-floating">
 						<input type="date" id="floatingDate" name="birthday" ng-model="form.birthday"  class="form-control" required>
 						<label for="floatingDate">Ngày sinh</label>
 						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.birthday.$touched && myForm.birthday.$invalid">Ngày tháng năm sinh không được để trống.</span>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating">
-						<input type="password" name="password" class="form-control" id="floatingPassword" ng-model="form.password" placeholder="Mật khẩu" disabled>
-						<label for="floatingPassword">Mật khẩu</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating">
-						<input type="password" name="passwordnew" class="form-control" id="floatingPassword1" ng-model="form.passwordnew" placeholder="Mật khẩu mới">
-						<label for="floatingPassword1">Mật khẩu mới</label>
 					</div>
 				</div>
 				<fieldset class="col-12">

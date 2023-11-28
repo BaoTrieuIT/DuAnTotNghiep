@@ -31,9 +31,8 @@ public class Account {
     private String username;
     private Date create_date;
     private Date birthday;
-    private String passwordnew;
     private String avatar_url;
-
+    private String address;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -50,9 +49,6 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     AccountStatus accountStatus;
-    @JsonIgnore
-    @OneToMany(mappedBy = "account")
-    public List<Address> addressList;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;

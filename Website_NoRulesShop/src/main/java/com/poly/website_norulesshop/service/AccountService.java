@@ -21,6 +21,7 @@ public interface AccountService {
 
     Account findByEmail(String email);
 Account update (Account account);
+
     Account resetPassword(String email, String newPassword);
 
 }

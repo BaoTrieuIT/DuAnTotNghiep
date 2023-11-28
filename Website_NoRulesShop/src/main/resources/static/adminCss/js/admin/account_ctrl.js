@@ -122,10 +122,9 @@ app.controller('AddAccountController', ['$scope','$http' ,'$location','$timeout'
     $scope.update = function() {
         var item = angular.copy($scope.form);
         var inputFile = document.getElementById("inputFile");
-            var formData = new FormData();
+        var formData = new FormData();
                 if (inputFile.files.length > 0) {
                     formData.append("fileName", inputFile.files[0]);
-                    formData.append('account_id', item.account_id);
                     $http.post('/rest/manage_account/upload', formData, {
                         transformRequest: angular.identity,
                         headers: {'Content-Type': undefined}
