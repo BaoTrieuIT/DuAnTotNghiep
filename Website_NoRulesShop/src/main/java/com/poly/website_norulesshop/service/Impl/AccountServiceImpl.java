@@ -6,7 +6,10 @@ import java.util.Optional;
 import java.util.Set;
 
 
+import com.poly.website_norulesshop.Repository.AccountStatusRepository;
+import com.poly.website_norulesshop.entity.AccountStatus;
 import com.poly.website_norulesshop.entity.Role;
+import com.poly.website_norulesshop.service.AccountStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,10 +28,14 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final RoleRepository roleRepository;
 
+    private final AccountStatusService accountStatusService;
+
+
     @Autowired
-    public AccountServiceImpl(AccountRepository accountRepository, RoleRepository roleRepository) {
+    public AccountServiceImpl(AccountRepository accountRepository, RoleRepository roleRepository, AccountStatusService accountStatusService) {
         this.accountRepository = accountRepository;
         this.roleRepository = roleRepository;
+        this.accountStatusService = accountStatusService;
     }
 
     @Override
@@ -52,11 +59,13 @@ public class AccountServiceImpl implements AccountService {
         account.setCreate_date(currentDate);
         account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
 
+        AccountStatus accountStatus = accountStatusService.getAccountStatusById(1);
         Role role = roleRepository.findRoleByRole_name("USER");
         if (role == null) {
             role = checkRoleExist();
         }
         account.setRoles(Set.of(role));
+        account.setAccountStatus(accountStatus);
         accountRepository.save(account);
     }
 

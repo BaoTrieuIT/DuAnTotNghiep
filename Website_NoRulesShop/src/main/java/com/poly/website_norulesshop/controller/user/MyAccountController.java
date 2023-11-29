@@ -84,6 +84,7 @@ public class MyAccountController {
             }
             acc.setPassword(newPassword);
         }
+        
         try {
             String originalFileName = file.getOriginalFilename();
             FileUploadUtil.saveFile(UPLOAD_DIRECTORY, originalFileName, file);
@@ -91,39 +92,6 @@ public class MyAccountController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
-//        // Xử lý ảnh
-//        try {
-//            String directoryPath = "src/main/resources/static/user/img/avatar/";
-//
-//            // Lấy thông tin từ tên file gốc
-//            String originalFileName = file.getOriginalFilename();
-//            String[] fileNameParts = originalFileName.split("\\.");
-//
-//// Lấy tên file và đuôi file từ mảng fileNameParts
-//            String fileName = fileNameParts[0]; // Tên file (trước dấu chấm)
-//            String fileExtension = "png"; // Đặt đuôi file mới
-//
-//// Tạo tên file mới
-//            String newFileName = "avatar_" + acc.getAccount_id() + "_" + fileName + "." + fileExtension;
-//
-//// Lưu ảnh và đường dẫn vào cơ sở dữ liệu
-//            if (!originalFileName.toLowerCase().endsWith(".png")) {
-//                BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-//                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//                ImageIO.write(bufferedImage, fileExtension, byteArrayOutputStream);
-//                Files.write(Paths.get(directoryPath, newFileName), byteArrayOutputStream.toByteArray());
-//            } else {
-//                Files.write(Paths.get(directoryPath, newFileName), file.getBytes());
-//            }
-//
-//// Lưu đường dẫn ảnh vào thuộc tính avatar_url
-//            String filename = StringUtils.cleanPath(newFileName);
-//            acc.setAvatar_url(filename);
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
 
 
         // Cập nhật thông tin tài khoản

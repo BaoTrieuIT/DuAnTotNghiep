@@ -77,6 +77,7 @@ public class SecurityConfig {
                         .successHandler((request, response, authentication) -> {
                             String username = authentication.getName();
                             Account acc = accountService.findByUsername(username);
+                            System.out.println(authentication.getAuthorities());
                             session.setAttribute("acc", acc);
                             response.sendRedirect("/home/index");
                         })

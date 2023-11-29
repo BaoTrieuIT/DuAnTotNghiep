@@ -40,14 +40,11 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
     @Override
     public List<CategoryQuantity> filterList(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
         if (categoryLv1DetailId != null && categoryLv2DetailId == null) {
-            System.out.println("LV1");
             return categoryQuantityRepository.findByCategoryLv1(productId, categoryLv1DetailId);
         }
         if (categoryLv2DetailId != null && categoryLv1DetailId == null) {
-            System.out.println("LV2");
             return categoryQuantityRepository.findByCategoryLv2(productId, categoryLv2DetailId);
         }
-        System.out.println("All");
         return categoryQuantityRepository.findByCategoryLv1AndLv2(productId, categoryLv1DetailId, categoryLv2DetailId);
     }
 //

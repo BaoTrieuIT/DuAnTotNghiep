@@ -14,10 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @GetMapping("sign-in")
     public String login_form(Model model) {
-//       Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//       if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
-//           return "user/index";
-//       }
         model.addAttribute("title", "Đăng nhập");
         return "user/sign_in";
 

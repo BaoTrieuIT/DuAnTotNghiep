@@ -45,14 +45,9 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "ranked_id")
     private Ranked ranked;
-
     @ManyToOne
     @JoinColumn(name = "account_status_id")
     private AccountStatus accountStatus;
-    // @JsonIgnore
-    // @OneToOne(mappedBy = "account",cascade = CascadeType.ALL, orphanRemoval =
-    // true)
-    // public Address address;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     public List<Feedback> feedbackList;
