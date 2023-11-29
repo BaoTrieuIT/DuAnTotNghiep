@@ -76,6 +76,10 @@ public class MyAccountDetails implements UserDetails {
         return this.account.getAvatar_url();
     }
 
+    public Integer getAccountId() {
+        return this.account.getAccount_id();
+    }
+
     public boolean hasRole(String roleName) {
         return account.hasRole(roleName);
     }

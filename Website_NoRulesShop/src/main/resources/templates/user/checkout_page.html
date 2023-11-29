@@ -7,7 +7,7 @@
 <body>
   <nav aria-label="breadcrumb" class="w-100 float-left">
     <ol class="breadcrumb parallax justify-content-center" data-source-url="/user/img/banner/parallax.jpg"
-        style="background-image: url(&quot;/user/img/'banner/parallax.jpg&quot;); background-position: 50% 0.809717%;">
+        style="background-image: url('/user/img/banner/parallax.jpg'); background-position: 50% 0.809717%;">
       <li class="breadcrumb-item active"><a th:href="@{index}">Trang chủ</a></li>
       <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
 
@@ -35,13 +35,21 @@
               <strong>{{cart.amount | vndFormat}}</strong>
             </div>
             <div class="list-group-item  justify-content-between" >
-              <div class="custom-control custom-radio" id="checkbox-card" th:each="method : ${paymentMethod}">
-                <input th:id="payment+${method.getPaymentMethodName()}" name="paymentMethod" type="radio" class="custom-control-input"
+              <div class="custom-control custom-radio" id="checkbox-card" ng-repeat="method in paymentMethods">
+                <input
+                        id="{{'payment-' + method.paymentMethodId}}"
+                       name="order.paymentMethod"
+                       ng-model="order.paymentMethod"
+                       ng-value="method.paymentMethodId"
+                       type="radio"
+                       class="custom-control-input"
                        required="">
-                <label class="custom-control-label" th:for="payment+${method.getPaymentMethodName()}" th:text="${method.getPaymentMethodName()}"></label>
+                <label class="custom-control-label"
+                       for="{{'payment-' + method.paymentMethodId}}"
+                       ng-bind="method.paymentMethodName"></label>
               </div>
             </div>
-            <a th:href="@{/home/order-confirmation}" class="btn btn-primary btn-lg btn-primary">Đặt hàng</a>
+            <a ng-click="order.purchase()" class="btn btn-primary btn-lg btn-primary">Đặt hàng</a>
             </ul>
           </div>
         </div>
@@ -49,6 +57,7 @@
           <h4 class="mb-3">Thông tin đặt hàng</h4>
           <form class="needs-validation" >
             <div class="row">
+              <input type="hidden" ng-model="order.accountId" th:value="${acc.account_id}">
               <div class="col-md-6 mb-3">
                 <label for="fullName">Họ tên người nhận<span class="required">*</span></label>
                 <input type="text" class="form-control" id="fullName" placeholder="" ng-model="order.recipientName" value=""

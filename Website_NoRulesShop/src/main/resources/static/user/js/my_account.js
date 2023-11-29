@@ -1,3 +1,67 @@
+function displayImage() {
+    var fileInput = document.getElementById('fileInput');
+    var selectedImage = document.getElementById('selectedImage');
+
+    var file = fileInput.files[0];
+
+    if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            selectedImage.src = e.target.result;
+            selectedImage.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+function updateAndReload() {
+    var formData = new FormData(document.getElementById("myaccount-form"));
+    var progressBar = document.getElementById("progress-bar");
+    var progressText = document.getElementById("progress-text");
+    var progressContainer = document.getElementById("upload-progress");
+
+    // Hiển thị thanh tiến trình khi bắt đầu upload
+    progressContainer.style.display = "block";
+
+    fetch("/home/my-account/update", {
+        method: "POST",
+        body: formData,
+        headers: {
+            // Các header cần thiết, nhưng không cần thiết để hiển thị thanh tiến trình
+        },
+        signal: new AbortController().signal,
+        onUploadProgress: function (progressEvent) {
+            if (progressEvent.lengthComputable) {
+                let percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+                console.log(percentComplete);
+                progressBar.style.width = percentComplete + "%";
+                progressBar.setAttribute("aria-valuenow", percentComplete.toFixed(2)); // Cập nhật giá trị aria-valuenow
+                progressText.innerText = percentComplete.toFixed(2) + "%";
+            }
+        }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error("Lỗi khi upload ảnh");
+        }
+        return response.json();
+    }).then(data => {
+        // Ẩn thanh tiến trình sau khi hoàn thành
+        progressContainer.style.display = "none";
+        // Hiển thị thông báo
+        alert("Upload thành công! " + data); // Dữ liệu từ server
+
+        // Nếu upload thành công, thì mới reload trang
+        window.location.reload();
+    }).catch(error => {
+        console.error("Lỗi khi upload ảnh:", error);
+        document.getElementById("phoneErrorDiv").innerText = "Đã xảy ra lỗi khi upload ảnh";
+        // Ẩn thanh tiến trình nếu có lỗi
+        progressContainer.style.display = "none";
+    });
+}
+
 function togglePasswordFields() {
     var checkbox = document.getElementById('change-password-checkbox');
     var hiddenField = document.getElementById('changePassword');

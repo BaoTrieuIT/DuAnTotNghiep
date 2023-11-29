@@ -108,8 +108,6 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-
-
     @Override
     public Account resetPassword(String email, String newPassword) {
         return Optional.ofNullable(findByEmail(email))
@@ -123,7 +121,7 @@ public class AccountServiceImpl implements AccountService {
     public void updateAccount_frUser(Account updatedAccount) {
         // Lấy tài khoản từ session
         Optional<Account> existingAccountOptional = accountRepository
-                .findById(updatedAccount.getAccount_id().longValue());
+                .findById(updatedAccount.getAccount_id());
 
         // Kiểm tra xem tài khoản trong session có phù hợp với account_id hay không
         if (existingAccountOptional.isPresent()) {

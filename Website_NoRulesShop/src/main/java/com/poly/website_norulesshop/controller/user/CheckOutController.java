@@ -2,6 +2,7 @@ package com.poly.website_norulesshop.controller.user;
 
 import com.poly.website_norulesshop.entity.PaymentMethod;
 import com.poly.website_norulesshop.service.PaymentMethodService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,12 @@ public class CheckOutController {
     PaymentMethodService paymentMethodService;
 
     @GetMapping("checkout-page")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
+
         List<PaymentMethod> paymentMethodList = paymentMethodService.getAllPaymentMethods();
         model.addAttribute("paymentMethod", paymentMethodList);
+        model.addAttribute("acc", session.getAttribute("acc"));
+
         return "user/checkout_page";
     }
 

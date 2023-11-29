@@ -1,4 +1,10 @@
 app.controller("cart_ctrl", function ($scope, $http) {
+    $scope.init = function () {
+        $http.get("/rest/paymenMethod").then(resp => {
+            $scope.paymentMethods = resp.data;
+        });
+    }
+    $scope.init();
     var $cart = $scope.cart = {
         items: [],
         minus(item) {
@@ -106,13 +112,15 @@ app.controller("cart_ctrl", function ($scope, $http) {
     // Đặt hàng
     $scope.order = {
         get account() {
-            return {username: $auth.user.username}
+            return {accountId: $auth.principal.accountId}
         },
         orderTime: new Date(),
         phoneNumber: "",
         recipientName: "",
         specifiedAddress: "",
         orderNote: "",
+        orderStatusId: 1,
+        paymentMethod: "",
         get orderDetails() {
             return $cart.items.map(item => {
                 return {
@@ -124,15 +132,17 @@ app.controller("cart_ctrl", function ($scope, $http) {
         },
         purchase() {
             var order = angular.copy(this);
+            console.log(order);
             // Thực hiện đặt hàng
-            $http.post("/rest/orders", order).then(resp => {
-                alert("Đặt hàng thành công!");
-                $cart.clear();
-                location.href = "/home/order-detail/" + resp.data.id;
-            }).catch(error => {
-                alert("Đặt hàng lỗi!")
-                console.log(error)
-            })
+            // $http.post("/rest/order", order).then(resp => {
+            //     alert("Đặt hàng thành công!");
+            //     $cart.clear();
+            //     // location.href = "/home/order-detail/" + resp.data.id;
+            //     location.href = "/home/index";
+            // }).catch(error => {
+            //     alert("Đặt hàng lỗi!")
+            //     console.log(error)
+            // })
         }
     }
 })

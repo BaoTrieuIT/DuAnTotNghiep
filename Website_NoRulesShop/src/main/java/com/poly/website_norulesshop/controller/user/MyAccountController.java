@@ -84,7 +84,7 @@ public class MyAccountController {
             }
             acc.setPassword(newPassword);
         }
-        
+
         try {
             String originalFileName = file.getOriginalFilename();
             FileUploadUtil.saveFile(UPLOAD_DIRECTORY, originalFileName, file);
@@ -95,7 +95,10 @@ public class MyAccountController {
 
 
         // Cập nhật thông tin tài khoản
+        System.out.println("pw cu~:" + acc.getPassword());
         accountService.updateAccount_frUser(acc);
+        System.out.println("pw mới~:" + acc.getPassword());
+
         model.addAttribute("acc", acc);
         session.set("acc", acc);
         return "redirect:/home/my-account";

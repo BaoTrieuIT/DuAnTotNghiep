@@ -6,8 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.management.relation.Role;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,12 +37,12 @@ public class Account {
     //    columnDefinition = "bit default 2" , ALL
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
-        name = "accounts_roles", 
-        joinColumns = @JoinColumn(name = "account_id"),
-        inverseJoinColumns = @JoinColumn(
-            name = "role_id", 
-            referencedColumnName = "role_id", 
-            columnDefinition = "bit default 2"))
+            name = "accounts_roles",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "role_id",
+                    columnDefinition = "bit default 2"))
     private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore

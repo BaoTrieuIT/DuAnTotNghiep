@@ -80,6 +80,7 @@ public class SecurityConfig {
                             String username = authentication.getName();
                             Account acc = accountService.findByUsername(username);
                             System.out.println(authentication.getAuthorities());
+                            session.setAttribute("authentication", authentication);
                             session.setAttribute("acc", acc);
                             response.sendRedirect("/home/index");
                         })

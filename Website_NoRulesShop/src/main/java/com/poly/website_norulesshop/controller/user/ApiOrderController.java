@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.controller.user;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.website_norulesshop.entity.CategoryQuantity;
 import com.poly.website_norulesshop.entity.Order;
 import com.poly.website_norulesshop.service.CategoryQuantityService;
@@ -25,13 +26,20 @@ public class ApiOrderController {
     @PostConstruct
     public void init() {
         softMap.put("orderId", true);
-        softMap.put("custormerName", true);
+        softMap.put("accountId", true);
         softMap.put("orderTime", true);
-        softMap.put("discountAmout", true);
+//        softMap.put("discountAmount", true);
         softMap.put("recipientName", true);
-
         softMap.put("phoneNumber", true);
         softMap.put("specifiedAddress", true);
-        softMap.put("confirmation", true);
+        softMap.put("orderNote", true);
+        softMap.put("orderStatus", true);
+        softMap.put("paymentMethod", true);
+    }
+
+    @PostMapping
+    public Order purchase(@RequestBody JsonNode orderData) {
+        System.out.println("OrderData: " + orderData);
+        return orderService.createData(orderData);
     }
 }
