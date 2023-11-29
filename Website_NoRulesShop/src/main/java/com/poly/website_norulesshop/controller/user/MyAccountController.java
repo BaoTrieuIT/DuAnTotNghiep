@@ -1,28 +1,24 @@
 package com.poly.website_norulesshop.controller.user;
 
-import com.poly.website_norulesshop.entity.Account;
-import com.poly.website_norulesshop.service.AccountService;
-import com.poly.website_norulesshop.utils.FileUploadUtil;
-import com.poly.website_norulesshop.utils.SessionService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.poly.website_norulesshop.entity.Account;
+import com.poly.website_norulesshop.service.AccountService;
+import com.poly.website_norulesshop.utils.FileUploadUtil;
+import com.poly.website_norulesshop.utils.SessionService;
+
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -57,8 +53,13 @@ public class MyAccountController {
         String username = principal.getName();
         Account existingAccount = accountService.findByUsername(username);
         // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
-        if (acc.getFullname() == null || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
+        if (acc.getFullname() == null ||  acc.getFullname().trim().isEmpty() || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
             result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
+            return "user/my_account";
+        }
+        // Kiểm tra email
+        if (acc.getEmail() == null || !acc.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$")) {
+            result.rejectValue("email", "error.account", "Email không hợp lệ");
             return "user/my_account";
         }
         // Kiểm tra số điện thoại là số và có độ dài là 10
@@ -93,9 +94,8 @@ public class MyAccountController {
             System.out.println(e.getMessage());
         }
 
-
+        System.out.println("Pass nè: "+acc.getPassword());
         // Cập nhật thông tin tài khoản
-        System.out.println("pw cu~:" + acc.getPassword());
         accountService.updateAccount_frUser(acc);
         System.out.println("pw mới~:" + acc.getPassword());
 
