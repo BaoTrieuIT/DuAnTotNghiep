@@ -47,7 +47,7 @@
                                                        name="fullname" th:field="*{fullname}"
                                                        th:value="${acc.fullname}">
                                                 <p class="invalid-feedback" id="fullnameErrorDiv">Họ tên không được để
-                                                                                                  trống</p>
+                                                    trống</p>
                                                 <div th:errors="*{fullname}" th:if="${#fields.hasErrors('fullname')}">
                                                 </div>
                                             </div>
@@ -59,8 +59,9 @@
                                 <label for="acc-email">Email</label>
                                 <input type="email" class="form-control" id="acc-email" name="email"
                                        required th:field="*{email}" th:value="${acc.email}">
-                                <div class="invalid-feedback"><p th:errors="*{email}"
-                                                                 th:if="${#fields.hasErrors('email')}"></p></div>
+                                <p id="emailErrorDiv" class="invalid-feedback"></p>
+                                <div th:errors="*{email}"
+                                     th:if="${#fields.hasErrors('email')}"></div>
                             </div>
 
                             <div class="form-group">
@@ -95,7 +96,7 @@
                                 <input type="checkbox" class="custom-control-input" id="change-password-checkbox"
                                        value="1" onchange="togglePasswordFields()" name="changePassword">
                                 <label class="custom-control-label" for="change-password-checkbox">Thay đổi mật
-                                                                                                   khẩu</label>
+                                    khẩu</label>
                             </div>
                             <div id="account-change-password" class="">
                                 <div class="row">
@@ -125,12 +126,12 @@
                             <div class="required text-right">* Thông tin bắt buộc</div>
                             <div class="form-footer d-flex justify-content-between align-items-center">
                                 <a th:href="@{/home/index}"><i class="material-icons">navigate_before</i>Trở lại trang
-                                                                                                         chủ</a>
+                                    chủ</a>
 
                                 <div class="form-footer-right">
                                     <button type="submit" class="btn btn-primary btn-primary"
                                             th:href="@{/home/my-account/update}" onclick="updateAndReload()">Lưu thông
-                                                                                                             tin
+                                        tin
                                     </button>
                                 </div>
                             </div>
@@ -152,7 +153,7 @@
                                     <label class="label">
                                         <input type="hidden" th:field="*{avatar_url}">
                                         <input type="file" name="image" id="fileInput" accept="image/*"
-                                               onchange="displayImage()" />
+                                               onchange="displayImage()"/>
                                         <figure class="personal-figure">
                                             <img th:src="@{'/user/img/avatar/'+ ${acc.avatar_url}}"
                                                  class="personal-avatar"
@@ -170,7 +171,7 @@
                                              role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0"
                                              aria-valuemax="100"></div>
                                     </div>
-                                    <div id="progress-text" class="mt-2"></div>
+                                    <div id="progress-text imageErrorDiv" class="mt-2"></div>
                                 </div>
                             </div>
                         </div>
@@ -240,15 +241,12 @@
             window.location.reload();
         }).catch(error => {
             console.error("Lỗi khi upload ảnh:", error);
-            document.getElementById("phoneErrorDiv").innerText = "Đã xảy ra lỗi khi upload ảnh";
+            document.getElementById("imageErrorDiv").innerText = "Đã xảy ra lỗi khi upload ảnh";
             // Ẩn thanh tiến trình nếu có lỗi
             progressContainer.style.display = "none";
         });
     }
 
 </script>
-<!--  kiểm tra password-->
-<!--<script src="../../././static/user/js/my_account.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>-->
 </body>
 </html>

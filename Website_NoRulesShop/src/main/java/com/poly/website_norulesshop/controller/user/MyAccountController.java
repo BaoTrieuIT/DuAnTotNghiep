@@ -57,8 +57,13 @@ public class MyAccountController {
         String username = principal.getName();
         Account existingAccount = accountService.findByUsername(username);
         // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
-        if (acc.getFullname() == null || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
+        if (acc.getFullname() == null ||  acc.getFullname().trim().isEmpty() || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
             result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
+            return "user/my_account";
+        }
+        // Kiểm tra email
+        if (acc.getEmail() == null || !acc.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,6}$")) {
+            result.rejectValue("email", "error.account", "Email không hợp lệ");
             return "user/my_account";
         }
         // Kiểm tra số điện thoại là số và có độ dài là 10
@@ -84,6 +89,8 @@ public class MyAccountController {
             }
             acc.setPassword(newPassword);
         }
+
+
         try {
             String originalFileName = file.getOriginalFilename();
             FileUploadUtil.saveFile(UPLOAD_DIRECTORY, originalFileName, file);
@@ -125,8 +132,9 @@ public class MyAccountController {
 //            System.out.println(e.getMessage());
 //        }
 
-
+        System.out.println("Pass nè: "+acc.getPassword());
         // Cập nhật thông tin tài khoản
+//        acc.setPassword(passwordEncoder.encode());
         accountService.updateAccount_frUser(acc);
         model.addAttribute("acc", acc);
         session.set("acc", acc);

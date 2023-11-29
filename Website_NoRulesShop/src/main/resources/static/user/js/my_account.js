@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     emailInput.addEventListener("input", function () {
         validateEmail(emailInput);
     });
-
     fullnameInput.addEventListener("input", function () {
         validateFullname(fullnameInput);
     });
@@ -79,6 +78,7 @@ function validateEmail(emailInput) {
 
     if (!emailRegex.test(email)) {
         emailInput.setCustomValidity("Địa chỉ email không hợp lệ");
+        document.getElementById("emailErrorDiv").innerText = "Địa chỉ email không hợp lệ";
     } else {
         emailInput.setCustomValidity("");
     }
@@ -88,7 +88,7 @@ function validateFullname(fullnameInput) {
     var fullname = fullnameInput.value;
     var fullnameRegex = /^[a-zA-Z ]*$/;
 
-    if (!fullnameRegex.test(fullname)) {
+    if (!fullnameRegex.test(fullname) && fullname == null) {
         fullnameInput.setCustomValidity("Họ và tên không được chứa kí tự đặc biệt và số");
         document.getElementById("fullnameErrorDiv").innerText = "Họ và tên không được chứa kí tự đặc biệt và số";
     } else {
