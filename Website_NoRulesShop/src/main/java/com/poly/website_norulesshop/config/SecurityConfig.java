@@ -1,9 +1,5 @@
 package com.poly.website_norulesshop.config;
 
-import com.poly.website_norulesshop.entity.Account;
-import com.poly.website_norulesshop.service.AccountService;
-import com.poly.website_norulesshop.service.Impl.AccountDetailsServiceImpl;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+
+import com.poly.website_norulesshop.entity.Account;
+import com.poly.website_norulesshop.service.AccountService;
+import com.poly.website_norulesshop.service.Impl.AccountDetailsServiceImpl;
+
+import jakarta.servlet.http.HttpSession;
 
 @Configuration
 @EnableWebSecurity
@@ -68,8 +70,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(ADMIN_RESOURCES).hasAuthority("Admin")
                         .requestMatchers(USER_RESOURCES).authenticated()
-                        .requestMatchers(ADMIN_RESOURCES).hasAuthority("ADMIN")
                         .anyRequest().permitAll())
                 .formLogin(login -> login.loginPage("/home/sign-in")
                         .usernameParameter("username")

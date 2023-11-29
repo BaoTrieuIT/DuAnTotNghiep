@@ -104,9 +104,8 @@
 
 
                                     <ul sec:authorize="isAuthenticated()">
-                                        <li>
-                                            <a th:href="@{/admin/index}"
-                                            >Trang quản trị</a>
+                                        <li sec:authorize="isAuthenticated() and hasAuthority('Admin')">
+                                            <a th:href="@{/admin/index}">Trang quản trị</a>
                                         </li>
                                         <li>
                                             <a th:href="@{/home/my-account}"

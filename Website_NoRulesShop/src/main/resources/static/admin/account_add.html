@@ -16,8 +16,12 @@
 			<h5 class="card-title">Thông tin tài khoản</h5>
 
 			<!-- Floating Labels Form -->
-			<form class="row g-3" method="post">
+			<form class="row g-3" name="myForm" method="post">
+
 				<div class="col-md-12">
+					<label>
+						<input type="text" id="account_id" name="account_id" ng-model="form.account_id" class="form-control" hidden="hidden" >
+					</label>
 					<label class="col-md-4 col-lg-3 col-form-label">Ảnh đại diện</label>
 					<div class="col-md-2 form-group inputDnD">
 						<input type="file"
@@ -32,53 +36,57 @@
 				</div>
 				<div class="col-md-12">
 					<div class="form-floating">
-						<input type="text" ng-model="form.username" class="form-control" id="floatingName" placeholder="Username">
+						<input type="text" name="username" ng-model="form.username" class="form-control" id="floatingName" placeholder="Username" required >
 						<label for="floatingName">Tên tài khoản</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.username.$touched && myForm.username.$invalid">Username không được để trống.</span>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-floating">
-						<input type="text"  ng-model="form.fullname" class="form-control" id="floatingFullName" placeholder="Họ và tên">
+						<input type="text" name="fullname" ng-model="form.fullname" class="form-control" id="floatingFullName" placeholder="Họ và tên" required>
 						<label for="floatingName">Họ và tên</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.fullname.$touched && myForm.fullname.$invalid">Fullname không được để trống.</span>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-floating">
-						<input type="text"  ng-model="form.phone_number"  class="form-control" id="floatingPhoneNumber" placeholder="Số điện thoại">
+						<input type="text" name="phone_number" ng-model="form.phone_number"  class="form-control" id="floatingPhoneNumber" placeholder="Số điện thoại" required>
 						<label for="floatingName">Số điện thoại</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.phone_number.$touched && myForm.phone_number.$invalid">Số điện thoại không được để trống.</span>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-floating">
-						<input type="email"  ng-model="form.email"  class="form-control" id="floatingEmail" placeholder="Email">
+						<input type="email" name="email" ng-model="form.email"  class="form-control" id="floatingEmail" placeholder="Email" required>
 						<label for="floatingEmail">Email</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.email.$touched && myForm.email.$invalid">Email không được để trống.</span>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-floating">
-						<input type="date" id="floatingDate"  ng-model="form.birthday"  class="form-control">
-						<label for="floatingDate">Ngày sinh</label>
+						<input type="text" name="address" ng-model="form.address"  class="form-control" id="floatingAddress" placeholder="Address" required>
+						<label for="floatingAddress">Địa chỉ</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.address.$touched && myForm.address.$invalid">Address không được để trống.</span>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="form-floating">
-						<input type="password" class="form-control" id="floatingPassword" ng-model="form.password" placeholder="Mật khẩu" >
-						<!--							<input ng-if="passwordType === 'text'" type="text" class="form-control" id="floatingPassword1" ng-model="form.password" placeholder="Mật khẩu"  style="position: absolute">-->
-						<!--							<button ng-click="togglePasswordVisibility()" style="position: relative;top: 15px;right: -550px">Hiện Mật khẩu</button>-->
-						<label for="floatingPassword">Mật khẩu</label>
+						<input type="date" id="floatingDate" name="birthday" ng-model="form.birthday"  class="form-control" required>
+						<label for="floatingDate">Ngày sinh</label>
+						<span style="color: red;font-weight: 600;font-style: italic" ng-show=" myForm.birthday.$touched && myForm.birthday.$invalid">Ngày tháng năm sinh không được để trống.</span>
 					</div>
 				</div>
 				<fieldset class="col-12">
 					<legend class="col-form-label col-sm-2 pt-0">Quyền</legend>
 					<div class="col-sm-10">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="form.roles[0].role_id " ng-value="1">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-disabled="disable" ng-model="form.roles[0].role_id " ng-value="1">
 							<label class="form-check-label" for="gridRadios1">
 								Admin
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="form.roles[0].role_id" ng-value="2">
+							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-disabled="disable" ng-model="form.roles[0].role_id" ng-value="2">
 							<label class="form-check-label" for="gridRadios2">
 								Người dùng
 							</label>
@@ -87,8 +95,8 @@
 					</div>
 				</fieldset>
 				<div class="text-center">
-					<button type="submit" class="btn btn-primary" ng-click="update()">Xác nhận</button>
-					<button type="reset" class="btn btn-secondary">Đặt lại</button>
+					<button type="submit" class="btn btn-primary" ng-click="update()" >Xác nhận</button>
+					<button class="btn btn-secondary" ng-click="reset()">Đặt lại</button>
 				</div>
 			</form><!-- End floating Labels Form -->
 
