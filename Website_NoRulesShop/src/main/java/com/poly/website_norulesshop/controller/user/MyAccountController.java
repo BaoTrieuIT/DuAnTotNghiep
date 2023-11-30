@@ -43,17 +43,17 @@ public class MyAccountController {
 
     @PostMapping("/my-account/update")
     public String update(@RequestParam("image") MultipartFile file,
-                         @Valid @ModelAttribute Account acc, Model model,
+                         @Valid @ModelAttribute Account acc,
+                         Model model,
                          BindingResult result,
-                         @RequestParam("password") String newPassword,
+                         @RequestParam("password") String oldPassword,
+                         @RequestParam("newPassword") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
                          @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
                          Principal principal) throws IOException {
         // Lấy thông tin tài khoản từ username của người đăng nhập
-        String username = principal.getName();
-        Account existingAccount = accountService.findByUsername(username);
         // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
-        if (acc.getFullname() == null ||  acc.getFullname().trim().isEmpty() || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
+        if (acc.getFullname() == null || acc.getFullname().trim().isEmpty() || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
             result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
             return "user/my_account";
         }
@@ -78,14 +78,17 @@ public class MyAccountController {
             }
         }
         // Kiểm tra mật khẩu nếu có sự thay đổi
-        if (comfirmPassword != null && changePassword && acc.getPassword() != null && acc.getPassword().length() > 6) {
-            if (!acc.getPassword().equals(comfirmPassword)) {
+        if (changePassword) {
+            if (!newPassword.equals(comfirmPassword)) {
                 result.rejectValue("password", "error.account", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
                 return "user/my_account";
             }
             acc.setPassword(newPassword);
+            System.out.println("Change");
+        } else {
+            acc.setPassword(oldPassword);
+            System.out.println("!Change");
         }
-
         try {
             String originalFileName = file.getOriginalFilename();
             FileUploadUtil.saveFile(UPLOAD_DIRECTORY, originalFileName, file);
@@ -93,12 +96,8 @@ public class MyAccountController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        System.out.println("Pass nè: "+acc.getPassword());
-        // Cập nhật thông tin tài khoản
-        accountService.updateAccount_frUser(acc);
-        System.out.println("pw mới~:" + acc.getPassword());
-
+//        // Cập nhật thông tin tài khoản
+        accountService.updateAccount_frUser(acc, newPassword);
         model.addAttribute("acc", acc);
         session.set("acc", acc);
         return "redirect:/home/my-account";

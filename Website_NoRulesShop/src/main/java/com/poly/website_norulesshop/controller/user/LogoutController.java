@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("home")
 public class LogoutController {
+    @Autowired
+    SessionService service;
 
     @RequestMapping("sign-out")
-    public String logout(){
-
+    public String logout() {
+        service.remove("acc");
+        service.remove("authentication");
         return "user/sign_in";
     }
-
-
 }
