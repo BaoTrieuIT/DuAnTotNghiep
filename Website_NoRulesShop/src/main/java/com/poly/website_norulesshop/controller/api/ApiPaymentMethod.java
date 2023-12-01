@@ -1,4 +1,4 @@
-package com.poly.website_norulesshop.controller.user;
+package com.poly.website_norulesshop.controller.api;
 
 import com.poly.website_norulesshop.entity.PaymentMethod;
 import com.poly.website_norulesshop.service.CategoryQuantityService;

@@ -1,4 +1,4 @@
-package com.poly.website_norulesshop.controller.user;
+package com.poly.website_norulesshop.controller.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.poly.website_norulesshop.entity.CategoryQuantity;
