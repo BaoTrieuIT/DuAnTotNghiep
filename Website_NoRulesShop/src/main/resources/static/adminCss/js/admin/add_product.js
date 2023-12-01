@@ -100,9 +100,9 @@ app.controller("product_ctrl", function ($scope, $http) {
                     .then(function () {
                         return $scope.addProductImages();
                     })
-                    .then(function () {
-                        return $scope.addProductInformationType();
-                    })
+                    // .then(function () {
+                    //     return $scope.addProductInformationType();
+                    // })
                     .then(function () {
                         return $scope.addCategoryLv1();
                     })
