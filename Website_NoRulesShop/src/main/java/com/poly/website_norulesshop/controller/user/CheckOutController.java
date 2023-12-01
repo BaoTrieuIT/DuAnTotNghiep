@@ -68,7 +68,9 @@ public class CheckOutController {
     @PostMapping("/order-update/{orderId}")
     public String updateCancelOrder(@PathVariable Integer orderId) {
         OrderStatus orderStatus = orderStatusService.getOrderStatusById(1);
+        System.out.println("orderStatus" + orderStatus.getOrderStatusId());
         Order order = orderService.getOrderById(orderId);
+        System.out.println("order" + order.getOrderStatus().getOrderStatusId());
         order.setOrderStatus(orderStatus);
         orderService.saveOrder(order);
         return "redirect:/home/order-history";
