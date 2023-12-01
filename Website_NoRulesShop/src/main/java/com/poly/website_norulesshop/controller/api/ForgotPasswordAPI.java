@@ -29,22 +29,22 @@ public class ForgotPasswordAPI {
     HttpSession httpSession;
 
     @GetMapping("/sendOTP/{email}")
-    public ResponseEntity<?> sendOTP(@PathVariable("email") String email){
+    public ResponseEntity<?> sendOTP(@PathVariable("email") String email) {
         Map<String, Object> result = new HashMap<>();
 //            send OTP here
-        try{
-            String OTP  = generateOTP();
-            Account account =  accountService.findByEmail(email);
-            if(account != null){
-                result.put("status","Success");
-                result.put("OTP",OTP);
+        try {
+            String OTP = generateOTP();
+            Account account = accountService.findByEmail(email);
+            if (account != null) {
+                result.put("status", "Success");
+                result.put("OTP", OTP);
                 result.put("account", account);
-                emailService.sendEmail(email, OTP, EmailType.EMAIL_SEND_CODE);
-            }else{
-                result.put("status","Failed");
-                result.put("detail","Not Found Account");
+//                emailService.sendEmail(email, OTP, EmailType.EMAIL_SEND_CODE);
+            } else {
+                result.put("status", "Failed");
+                result.put("detail", "Not Found Account");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             result.put("status", "error");
             result.put("detail", e);
         }
@@ -52,18 +52,18 @@ public class ForgotPasswordAPI {
     }
 
     @PostMapping("/changePassword")
-    public ResponseEntity<?> changePassword(@RequestParam String newPassword, @RequestParam("email") String email){
+    public ResponseEntity<?> changePassword(@RequestParam String newPassword, @RequestParam("email") String email) {
         Map<String, Object> result = new HashMap<>();
 //            send OTP here
-        try{
-            Account existAccount =  accountService.resetPassword(email, newPassword);
-            if(existAccount != null){
-                result.put("status","Success");
-            }else{
-                result.put("status","Failed");
-                result.put("detail","Not Found Account");
+        try {
+            Account existAccount = accountService.resetPassword(email, newPassword);
+            if (existAccount != null) {
+                result.put("status", "Success");
+            } else {
+                result.put("status", "Failed");
+                result.put("detail", "Not Found Account");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             result.put("status", "Error");
             result.put("detail", e);
         }

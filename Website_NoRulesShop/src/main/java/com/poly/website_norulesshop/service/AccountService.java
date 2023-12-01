@@ -20,9 +20,10 @@ public interface AccountService {
 
     Account findByEmail(String email);
 
+//    Account update(Account account);
+
     Account update(Account account);
 
-    Account update (Account account);
     Account resetPassword(String email, String newPassword);
 
     void updateAccount_frUser(Account account, String newPassword);
