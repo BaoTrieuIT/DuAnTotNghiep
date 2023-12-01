@@ -10,11 +10,13 @@ import java.util.List;
 public interface OrderService {
     Order saveOrder(Order order);
 
-    Order getOrderById(Long id);
+    Order getOrderById(Integer id);
 
     List<Order> getAllOrders();
 
-    void deleteOrder(Long id);
+    void deleteOrder(Integer id);
+
+    List<Order> findByUserId(Integer accountId);
 
     Order createData(JsonNode orderData);
 }

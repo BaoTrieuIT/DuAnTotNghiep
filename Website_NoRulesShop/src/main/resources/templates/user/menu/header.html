@@ -113,6 +113,11 @@
                                             </a>
                                         </li>
                                         <li>
+                                            <a th:href="@{/home/order-history}"
+                                               class="text-capitalize">Lịch sử mua hàng
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a th:href="@{/home/sign-out}"
                                                class="text-capitalize">
                                                 Đăng xuất
@@ -174,7 +179,12 @@
 
                                                     </td>
                                                     <td class="text-center close">
-                                                        <a class="close-cart" ng-click="cart.remove(item.productId)"><i
+                                                        <a class="close-cart"
+                                                           ng-click="cart.remove(
+                                                                        item.productId,
+                                                                        item.qty,
+                                                                        item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_id,
+                                                                        item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_id)"><i
                                                                 class="material-icons">close</i>
                                                         </a>
                                                     </td>

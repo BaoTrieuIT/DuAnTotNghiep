@@ -28,7 +28,7 @@ public class ApiOrderController {
         softMap.put("orderId", true);
         softMap.put("accountId", true);
         softMap.put("orderTime", true);
-//        softMap.put("discountAmount", true);
+        softMap.put("discountAmount", true);
         softMap.put("recipientName", true);
         softMap.put("phoneNumber", true);
         softMap.put("specifiedAddress", true);

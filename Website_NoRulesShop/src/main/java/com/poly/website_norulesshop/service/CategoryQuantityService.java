@@ -16,6 +16,8 @@ public interface CategoryQuantityService {
 
 //    List<CategoryQuantity> filterLv1orLv2(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId);
 
+    CategoryQuantity getOne(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId);
+
     List<CategoryQuantity> findByProductId(Integer id);
 
     List<CategoryQuantity> getAllCategoryQuantities();

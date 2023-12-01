@@ -24,7 +24,7 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     }
 
     @Override
-    public OrderStatus getOrderStatusById(Long id) {
+    public OrderStatus getOrderStatusById(Integer id) {
         return orderStatusRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +34,7 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     }
 
     @Override
-    public void deleteOrderStatus(Long id) {
+    public void deleteOrderStatus(Integer id) {
         orderStatusRepository.deleteById(id);
     }
 }

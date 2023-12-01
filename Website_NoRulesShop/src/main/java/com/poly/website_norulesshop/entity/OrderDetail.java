@@ -24,10 +24,10 @@ public class OrderDetail {
     private Integer quantity;
     @Column(name = "discount_amout")
     private Integer discountAmout;
-    @Column(name = "total_price_before_discount")
-    private Integer priceOld;
-    @Column(name = "total_price")
+    @Column(name = "total_after_discount")
     private Integer priceNew;
+    @Column(name = "price")
+    private Integer price;
 
     @ManyToOne
     @JoinColumn(name = "order_id")

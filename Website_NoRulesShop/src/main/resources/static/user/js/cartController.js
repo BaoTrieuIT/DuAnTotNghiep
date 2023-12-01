@@ -53,12 +53,17 @@ app.controller("cart_ctrl", function ($scope, $http) {
                     $http.get(`/rest/products/${productId}`).then(resp => {
                         $http.get(`/rest/productImages/${productId}`).then(respImage => {
                             $http.get(`/rest/categoryQuantity/${productId}/${categoryLv1Id}/${categoryLv2Id}`).then(respCategory => {
-                                resp.data.qty = quantity;
-                                resp.data.categoryQuantity = respCategory.data;
-                                resp.data.productImageList = respImage.data;
-                                console.log(resp.data);
-                                this.items.push(resp.data);
-                                this.saveToLocalStorage();
+                                $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
+                                    resp.data.qty = quantity;
+                                    resp.data.categoryQuantity = respCategory.data;
+                                    resp.data.productImageList = respImage.data;
+                                    console.log(resp.data);
+                                    this.items.push(resp.data);
+                                    this.saveToLocalStorage();
+                                }).catch(error => {
+                                    alert("Update lỗi!")
+                                    console.log(error)
+                                })
                             })
                         })
                     });
@@ -66,9 +71,15 @@ app.controller("cart_ctrl", function ($scope, $http) {
             })
 
         },
-        remove(productId) { // xóa sản phẩm khỏi giỏ hàng
+        remove(productId, quantity, categoryLv1Id, categoryLv2Id) { // xóa sản phẩm khỏi giỏ hàng
             var index = this.items.findIndex(item => item.productId === productId);
             this.items.splice(index, 1);
+            $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
+            }).catch(error => {
+                alert("Update lỗi!")
+                console.log(error)
+            })
+
             this.saveToLocalStorage();
         },
         clear() { // Xóa sạch các mặt hàng trong giỏ
@@ -111,38 +122,50 @@ app.controller("cart_ctrl", function ($scope, $http) {
     $cart.loadFromLocalStorage();
     // Đặt hàng
     $scope.order = {
+
         get account() {
-            return {accountId: $auth.principal.accountId}
+            return {account_id: $auth.principal.accountId}
         },
         orderTime: new Date(),
         phoneNumber: "",
         recipientName: "",
         specifiedAddress: "",
         orderNote: "",
-        orderStatusId: 1,
-        paymentMethod: "",
-        get orderDetails() {
+        orderStatus: {orderStatusId: 1},
+        paymentMethodId: "",
+        paymentMethod: {paymentMethodId: ""},
+        paymentStatus: {paymentStatusId: ""},
+        totalPrice: "",
+        get orderDetailList() {
             return $cart.items.map(item => {
                 return {
                     product: {productId: item.productId},
-                    priceNew: item.priceNew,
+                    price: item.priceNew,
                     quantity: item.qty
                 }
             });
         },
         purchase() {
-            var order = angular.copy(this);
-            console.log(order);
-            // Thực hiện đặt hàng
-            // $http.post("/rest/order", order).then(resp => {
-            //     alert("Đặt hàng thành công!");
-            //     $cart.clear();
-            //     // location.href = "/home/order-detail/" + resp.data.id;
-            //     location.href = "/home/index";
-            // }).catch(error => {
-            //     alert("Đặt hàng lỗi!")
-            //     console.log(error)
-            // })
+            this.totalPrice = $cart.amount;
+            if (this.paymentMethodId === 1) {
+                this.paymentStatus = {paymentStatusId: 1};
+                this.paymentMethod = {paymentMethodId: 1};
+                var order = angular.copy(this);
+                console.log(order);
+                // Thực hiện đặt hàng
+                $http.post("/rest/order", order).then(resp => {
+                    alert("Đặt hàng thành công!");
+                    $cart.clear();
+                    // location.href = "/home/order-detail/" + resp.data.id;
+                    console.log(resp.data.orderId)
+                    location.href = "/home/order-confirm/" + resp.data.orderId;
+                }).catch(error => {
+                    alert("Đặt hàng lỗi!")
+                    console.log(error)
+                })
+            } else if (this.paymentMethodId === 2) {
+
+            }
         }
     }
 })

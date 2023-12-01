@@ -27,19 +27,19 @@
                 ({{item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_name}}
                 ,{{item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_name}})
               </div>
-              <span class="text-muted">{{item.priceNew | vndFormat}}</span>
+              <span class="text-muted">{{cart.amt_of(item) | vndFormat}}</span>
             </div>
 
             <div class="list-group-item d-flex justify-content-between">
-              <strong>Total (VND)</strong>
+              <strong>Tổng tiền (VND)</strong>
               <strong>{{cart.amount | vndFormat}}</strong>
             </div>
             <div class="list-group-item  justify-content-between" >
               <div class="custom-control custom-radio" id="checkbox-card" ng-repeat="method in paymentMethods">
                 <input
                         id="{{'payment-' + method.paymentMethodId}}"
-                       name="order.paymentMethod"
-                       ng-model="order.paymentMethod"
+                       name="order.paymentMethodId"
+                       ng-model="order.paymentMethodId"
                        ng-value="method.paymentMethodId"
                        type="radio"
                        class="custom-control-input"

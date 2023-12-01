@@ -1,13 +1,9 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.CategoryQuantityRepository;
-import com.poly.website_norulesshop.Repository.Specification.CategorySpecification;
-import com.poly.website_norulesshop.Repository.Specification.ProductSpecification;
 import com.poly.website_norulesshop.entity.CategoryQuantity;
-import com.poly.website_norulesshop.entity.Product;
 import com.poly.website_norulesshop.service.CategoryQuantityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,6 +42,11 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
             return categoryQuantityRepository.findByCategoryLv2(productId, categoryLv2DetailId);
         }
         return categoryQuantityRepository.findByCategoryLv1AndLv2(productId, categoryLv1DetailId, categoryLv2DetailId);
+    }
+
+    @Override
+    public CategoryQuantity getOne(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
+        return categoryQuantityRepository.getOne(productId, categoryLv1DetailId, categoryLv2DetailId);
     }
 //
 //    @Override

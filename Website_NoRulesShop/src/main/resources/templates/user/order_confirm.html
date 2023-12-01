@@ -1,139 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout :: user(~{::body})}">
 <head>
-	<meta charset="UTF-8">
-	<title>Confirm</title>
+    <meta charset="UTF-8">
+    <title>Confirm</title>
 </head>
 <body>
-  <nav aria-label="breadcrumb" class="w-100 float-left">
-    <ol class="breadcrumb parallax justify-content-center" data-source-url="img/banner/parallax.jpg"
-        style="background-image: url(&quot;img/banner/parallax.jpg&quot;); background-position: 50% 0.809717%;">
-      <li class="breadcrumb-item active"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">order-confirmation</li>
-
+<nav aria-label="breadcrumb" class="w-100 float-left">
+    <ol class="breadcrumb parallax justify-content-center" data-source-url="/user/img/banner/parallax.jpg"
+        style="background-image: url('/user/img/banner/parallax.jpg'); background-position: 50% 0.809717%;">
+        <li class="breadcrumb-item active"><a th:href="@{index}">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Xác nhận đặt hàng</li>
     </ol>
-  </nav>
-  <div class="order-inner float-left w-100">
+</nav>
+<div class="order-inner float-left w-100">
     <div class="container">
-      <div class="row">
-        <div id="order-confirmation" class="card float-left w-100 mb-10">
-          <div class="card-block p-20">
-            <h3 class="card-title text-success">Your order is confirmed</h3>
-            <p>An email has been sent to your mail address admin7890@gmail.com.</p>
-          </div>
-        </div>
-
-        <div id="order-itens" class="card float-left w-100 mb-10">
-          <div class="card-block p-20">
-            <h3 class="card-title">order items</h3>
-            <div class="order-confirmation-table float-left w-100">
-              <div class="order-line float-left w-100">
-                <div class="row">
-                  <div class="col-sm-1 col-xs-3 float-left">
-                    <img src="img/products/02.jpg" alt="">
-                  </div>
-                  <div class="col-sm-5 col-xs-9 details float-left">
-                    <span>aspetur autodit autfugit</span>
-                  </div>
-                  <div class="col-sm-6 col-xs-12 qty float-left d-flex">
-                    <div class="col-xs-5 col-sm-5 text-sm-right text-xs-left">$100.00</div>
-                    <div class="col-xs-2 col-sm-2">1</div>
-                    <div class="col-xs-5 col-sm-5 text-sm-right bold">$100.00</div>
-                  </div>
+        <div class="row" th:object="${order}">
+            <div id="order-confirmation" class="card float-left w-100 mb-10">
+                <div class="card-block p-20">
+                    <h3 class="card-title text-success">Đơn hàng của bạn đã được xác nhận</h3>
+                    <!--                    <p>An email has been sent to your mail address admin7890@gmail.com.</p>-->
                 </div>
-              </div>
-              <hr class="float-left w-100">
-              <table class="float-left w-100 mb-30">
-                <tbody>
-                <tr class="mb-10">
-                  <td>Subtotal</td>
-                  <td class="text-right">$100.00</td>
-                </tr>
-                <tr class="mb-10">
-                  <td>Shipping and handling</td>
-                  <td class="text-right">$7.00</td>
-                </tr>
-                <tr class="font-weight-bold">
-                  <td><span class="text-uppercase">Total</span> (tax excl.)</td>
-                  <td class="text-right">$107.00</td>
-                </tr>
-                </tbody>
-              </table>
-              <div id="order-details" class="float-left w-100">
-                <h3 class="h3 card-title">Order details:</h3>
-                <ul>
-                  <li>Order reference: ZSMQIPYEH</li>
-                  <li>Payment method: Bank transfer</li>
-                  <li>
-                    Shipping method: Demo Store<br>
-                    <em>Pick up in-store</em>
-                  </li>
-                </ul>
-              </div>
-
             </div>
-          </div>
-        </div>
-        <div id="content-hook_payment_return" class="card definition-list float-left w-100">
-          <div class="card-block p-20">
-            <div class="row">
-              <div class="col-md-12">
 
-                <p>
-                  Your order on Demo Store is complete.<br>
-                  Please send us a bank wire with:
-                </p>
+            <div id="order-itens" class="card float-left w-100 mb-10">
+                <div class="card-block p-20">
+                    <h3 class="card-title">Những sản phẩm bạn đã đặt</h3>
+                    <div class="order-confirmation-table float-left w-100">
+                        <div class="order-line float-left w-100">
+                            <div class="row" th:each="detail : ${orderDetail}">
+                                <div class="col-sm-1 col-xs-3 float-left">
+                                    <img th:src="@{'/user/img/products/' + ${detail.product.productImageList.get(0).getImage_url()}}"
+                                         alt="">
+                                </div>
+                                <div class="col-sm-5 col-xs-9 details float-left">
+                                    <span th:text="${detail.product.productName}"></span>
+                                </div>
+                                <div class="col-sm-6 col-xs-12 qty float-left d-flex">
+                                    <div class="col-xs-5 col-sm-5 text-sm-right text-xs-left"
+                                         th:text="${#numbers.formatDecimal(detail.price, 0, 'COMMA', 0, 'POINT')} + ' VND'"></div>
+                                    <div class="col-xs-2 col-sm-2" th:text="${detail.quantity}">1</div>
+                                    <div class="col-xs-5 col-sm-5 text-sm-right bold"
+                                         th:text="${#numbers.formatDecimal(detail.price * detail.quantity, 0, 'COMMA', 0, 'POINT')} + ' VND'"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="float-left w-100">
+                        <table class="float-left w-100 mb-30">
+                            <tbody>
+                            <tr class="font-weight-bold">
+                                <td><span class="text-uppercase">Tổng tiền phải trả</span> (tax excl.)</td>
+                                <td class="text-right"
+                                    th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div id="order-details" class="float-left w-100">
+                            <h3 class="h3 card-title">Chi tiết đặt hàng:</h3>
+                            <ul>
+                                <li th:text="'Mã đơn hàng: ' + ${order.tradingCode}"></li>
+                                <li th:text="'Phương thức thanh toán: ' + ${order.paymentMethod.paymentMethodName}"></li>
+                                <li th:text="'Người nhận: ' + ${order.recipientName}"></li>
+                                <li th:text="'Số điện thoại người nhận: ' + ${order.phoneNumber}"></li>
+                                <li th:text="'Địa chỉ người nhận: ' + ${order.specifiedAddress}"></li>
+                                <li th:text="'Người đặt hàng: ' + ${order.account.fullname}"></li>
+                            </ul>
+                        </div>
 
-
-                <div class="order-content-main">
-                  <div class="order-content mb-10">
-                    <div>Amount</div>
-                    <div>$107.00</div>
-                  </div>
-                  <div class="order-content mb-10">
-                    <div>Name of account owner</div>
-                    <div>___________</div>
-                  </div>
-                  <div class="order-content mb-10">
-                    <div>Please include these details</div>
-                    <div>___________</div>
-                  </div>
-                  <div class="order-content mb-10">
-                    <div>Bank name</div>
-                    <div>___________</div>
-                  </div>
+                    </div>
                 </div>
-
-
-                <p>
-                  Please specify your order reference ZSMQIPYEH in the bankwire description.<br>
-                  We've also sent you this information by e-mail.
-                </p>
-                <strong>Your order will be sent as soon as we receive payment.</strong>
-                <p>
-                  If you have questions, comments or concerns, please contact our <strong><a
-                        href="contact-us">expert customer support team</a></strong>
-                </p>
-
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/5ac1aabb4b401e45400e4197/default';
-      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin', '*');
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script>
-  <!--End of Tawk.to Script-->
+</div>
+
 </body>
 </html>

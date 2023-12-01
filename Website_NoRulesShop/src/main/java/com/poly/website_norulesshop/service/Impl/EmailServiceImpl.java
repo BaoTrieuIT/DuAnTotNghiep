@@ -18,10 +18,9 @@ public class EmailServiceImpl implements EmailService {
     SessionService sessionService;
     private static final String EMAIL_WELCOME_SUBJECT = "WELCOME TO NORULES SHOP";
 
-    private static final String EMAIL_SEND_CODE = "NORULES SHOP - YOUR CODE FORGET PASSWORD";
+    private static final String EMAIL_SEND_CODE = "NORULES SHOP - YOUR CODE";
 
     private static final String EMAIL_SEND_CONTACT_US = "NORULES SHOP - CUSTOMER CONTACT INFORMATION";
-
 
 
     AccountService accountService;
@@ -33,10 +32,10 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendEmail(String to, String code, EmailType emailType) {
+    public void sendEmail(String to, String content, String subject, String code, EmailType emailType) {
         SimpleMailMessage message = new SimpleMailMessage();
-        String content = null;
-        String subject = null;
+//        String content = null;
+//        String subject = null;
         switch (emailType) {
             case WELCOME_TO_WEBSITE:
                 subject = EMAIL_WELCOME_SUBJECT;
@@ -45,6 +44,10 @@ public class EmailServiceImpl implements EmailService {
             case EMAIL_SEND_CODE:
                 subject = EMAIL_SEND_CODE;
                 content = "Your Code Here : " + code;
+                break;
+            case CONTACT_US:
+                subject = EMAIL_SEND_CONTACT_US;
+                content = content;
                 break;
             default:
                 subject = "NORULES SHOP";
@@ -56,20 +59,23 @@ public class EmailServiceImpl implements EmailService {
 
         mailSender.send(message);
     }
-    public void sendEmailContactUs(String to,String email, String content,String subject, String firstName, String lastName) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText("First Name: " + firstName + "\nLast Name: " + lastName + "\nEmail: " + email + "\n\n" + content);
 
-        mailSender.send(message);
+    public void sendEmailContactUs(String to, String email, String content, String subject, String firstName, String lastName) {
+        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo(to);
+//        message.setSubject(subject);
+//        message.setText("First Name: " + firstName + "\nLast Name: " + lastName + "\nEmail: " + email + "\n\n" + content);
+        content = "First Name: " + firstName + "\nLast Name: " + lastName + "\nEmail: " + email + "\n\n";
+        sendEmail(to, content, subject, null, EmailType.EMAIL_SEND_CODE);
+//        mailSender.send(message);
     }
+
     @Override
     public void sendCode(String email) {
 //        Optional.ofNullable(accountService.findByEmail(email))
 //                .map(account -> {
         String code = generateCode();
-        sendEmail(email, code, EmailType.EMAIL_SEND_CODE);
+        sendEmail(email, null, null, code, EmailType.EMAIL_SEND_CODE);
         System.out.println(code);
         sessionService.set("generatorCode", code);
 //                    return codeAccMap.put(code, account);

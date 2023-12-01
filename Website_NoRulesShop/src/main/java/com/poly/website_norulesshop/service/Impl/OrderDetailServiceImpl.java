@@ -24,7 +24,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public OrderDetail getOrderDetailById(Long id) {
+    public OrderDetail getOrderDetailById(Integer id) {
         return orderDetailRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +34,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public void deleteOrderDetail(Long id) {
+    public void deleteOrderDetail(Integer id) {
         orderDetailRepository.deleteById(id);
+    }
+
+    @Override
+    public List<OrderDetail> findByOrderId(Integer orderId) {
+        return orderDetailRepository.findByOrderId(orderId);
     }
 }

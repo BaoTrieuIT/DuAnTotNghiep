@@ -4,13 +4,14 @@ import com.poly.website_norulesshop.entity.OrderStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public interface OrderStatusService {
     OrderStatus saveOrderStatus(OrderStatus orderStatus);
 
-    OrderStatus getOrderStatusById(Long id);
+    OrderStatus getOrderStatusById(Integer id);
 
     List<OrderStatus> getAllOrderStatuses();
 
-    void deleteOrderStatus(Long id);
+    void deleteOrderStatus(Integer id);
 }

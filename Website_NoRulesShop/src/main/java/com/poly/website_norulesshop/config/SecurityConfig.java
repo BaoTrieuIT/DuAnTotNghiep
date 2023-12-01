@@ -30,7 +30,10 @@ import jakarta.servlet.http.HttpSession;
 @EnableMethodSecurity
 public class SecurityConfig {
     private static final String[] USER_RESOURCES = {
-            "/home/checkout-page/**", "/home/my-account/**"
+            "/home/checkout-page/**",
+            "/home/my-account/**",
+            "/home/order-confirm/**",
+            "/home/order-history/**"
     };
     private static final String[] ADMIN_RESOURCES = {
             "/admin/**"
@@ -90,10 +93,11 @@ public class SecurityConfig {
                                 .sendRedirect("/home/sign-in/error"))
                         .permitAll())
                 .logout(logout -> logout
+                        .deleteCookies("JSESSIONID")
                         .logoutUrl("/home/sign-out")
                         .permitAll())
                 .rememberMe((remember) -> remember
-                        .rememberMeServices(rememberMeServices))
+                        .rememberMeServices(rememberMeServices).tokenValiditySeconds(86400).rememberMeParameter("remember_me"))
                 .exceptionHandling(execpetion -> execpetion
                         .accessDeniedPage("/home/403Page")
                         .accessDeniedHandler(((request, response, accessDeniedException) -> response

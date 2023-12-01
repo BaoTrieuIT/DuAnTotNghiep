@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/user/layout.html :: user(~{::body})}">>
+<head>
+</head>
+<body>
+<nav aria-label="breadcrumb" class="w-100 float-left">
+    <ol class="breadcrumb parallax justify-content-center"
+        data-source-url="/user/img/banner/parallax.jpg"
+        style="background-image: url('/user/img/banner/parallax.jpg');
+        background-position: 50% 0.809717%;">
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Lịch sử giao hàng</li>
+    </ol>
+</nav>
+<div class="order-inner w-100">
+    <div
+            class="container d-flex justify-content-center align-items-center"
+            style="margin-top: 10rem"
+    >
+        <div th:if="${#lists.isEmpty(orderList)}">
+            <h4 class="card-title mb-4">Lịch sử mua hàng</h4>
+            <p class="text-danger my-3">Bạn chưa mua sản phẩm nào.</p>
+            <a class="btn btn-primary">Tiếp tục mua sắm</a>
+        </div>
+        <div th:unless="${#lists.isEmpty(orderList)}" class="tab-container">
+            <nav class="tab-nav">
+                <div class="mobile-select"><i class="bi bi-chevron-down"></i></div>
+                <ul>
+                    <li>
+                        <button class="btn tab-btn btn-primary active" id="waitConfirm">Đang chờ xác nhận</button>
+                    </li>
+                    <li>
+                        <button class="btn tab-btn btn-primary" id="export">Xuất Kho</button>
+                    </li>
+                    <li>
+                        <button class="btn tab-btn btn-primary" id="delivering">Đang giao</button>
+                    </li>
+                    <li>
+                        <button class="btn tab-btn btn-primary" id="delivered">Đã giao</button>
+                    </li>
+                    <li>
+                        <button class="btn tab-btn btn-primary" id="cancel">Bị huỷ</button>
+                    </li>
+
+                </ul>
+            </nav>
+            <div class="tab-content">
+                <div class="tab-item" data-id="waitConfirm">
+                    <table class="table table-hover align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                        <tr>
+                            <th class="fw-bold">Sản phẩm</th>
+                            <th class="fw-bold">Tên sản phẩm</th>
+                            <th class="fw-bold">Mã đơn hàng</th>
+                            <th class="fw-bold">Trạng thái</th>
+                            <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Tổng tiền</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                            <th:block th:each="orderItem : *{order.getOrderDetailList()}">
+                                <tr th:case="'Đang chờ xác nhận'">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <div th:each="image, limit : *{orderItem.getProduct().getProductImageList()}"
+                                                     th:if="${limit.index} &lt; 1">
+                                                    <img th:src="@{'/user/img/products/'+ *{image.getImage_url()}}"
+                                                         th:alt="*{image.getImage_url()}"
+                                                         th:class="${limit.index % 2 == 0 ? '' :'img-fluid'}"
+                                                         style="aspect-ratio: 1 / 1; width: 96px; height: 96px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">
+                                                    <span th:text="${orderItem.product.productName}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><span
+                                                        th:text="'HD' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <th:block th:switch="*{order.orderStatus.orderStatusName}">
+                                            <th:block>
+                                                <p class="fw-semibold mb-1 text-dark"><span
+                                                        th:text="*{order.orderStatus.orderStatusName} ? 'Đang chờ xác nhận' :''"></span>
+                                                </p>
+                                            </th:block>
+                                        </th:block>
+                                    </td>
+                                    <td>
+                                        <span class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                    </td>
+                                    <td><span class="mb-0 ms-2 text-danger fw-semibold"
+                                              th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/home/order-confirm/'+*{order.orderId}}"
+                                           class="btn btn-primary">
+                                            Xem
+                                        </a>
+                                    </td>
+                                    <td th:switch="*{order.orderStatus.orderStatusName}">
+
+                                        <th:block th:case="'Đang chờ xác nhận'">
+                                            <form th:action="@{'/home/order-update/'+*{order.orderId}}" method="post">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Hủy đơn hàng
+                                                </button>
+                                            </form>
+                                        </th:block>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-item hide" data-id="export">
+                    <table class="table table-hover align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                        <tr>
+                            <th class="fw-bold">Sản phẩm</th>
+                            <th class="fw-bold">Tên sản phẩm</th>
+                            <th class="fw-bold">Mã đơn hàng</th>
+                            <th class="fw-bold">Trạng thái</th>
+                            <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Tổng tiền</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-item hide" data-id="delivering">
+                    <table class="table table-hover align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                        <tr>
+                            <th class="fw-bold">Sản phẩm</th>
+                            <th class="fw-bold">Tên sản phẩm</th>
+                            <th class="fw-bold">Mã đơn hàng</th>
+                            <th class="fw-bold">Trạng thái</th>
+                            <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Tổng tiền</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="tab-item hide" data-id="delivered">
+                    <table class="table table-hover align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                        <tr>
+                            <th class="fw-bold">Sản phẩm</th>
+                            <th class="fw-bold">Tên sản phẩm</th>
+                            <th class="fw-bold">Mã đơn hàng</th>
+                            <th class="fw-bold">Trạng thái</th>
+                            <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Tổng tiền</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="tab-item hide" data-id="cancel">
+                    <table class="table table-hover align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                        <tr>
+                            <th class="fw-bold">Sản phẩm</th>
+                            <th class="fw-bold">Tên sản phẩm</th>
+                            <th class="fw-bold">Mã đơn hàng</th>
+                            <th class="fw-bold">Trạng thái</th>
+                            <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Tổng tiền</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

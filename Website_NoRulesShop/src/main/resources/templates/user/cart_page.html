@@ -44,7 +44,13 @@
                         <tr ng-repeat="item in cart.items">
                             <!--                            <input type="hidden" name="productId" ng-model="item.productId" value="{{item.productId}}" />-->
                             <td class="table-remove">
-                                <button ng-click="cart.remove(item.productId)"><i class="material-icons">delete</i>
+                                <button
+                                        ng-click="cart.remove(
+                                                        item.productId,
+                                                        item.qty,
+                                                        item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_id,
+                                                        item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_id)">
+                                    <i class="material-icons">delete</i>
                                 </button>
                             </td>
                             <td class="table-image">

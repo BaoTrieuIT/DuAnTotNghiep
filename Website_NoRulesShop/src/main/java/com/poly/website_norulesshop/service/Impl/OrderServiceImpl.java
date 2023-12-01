@@ -5,13 +5,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poly.website_norulesshop.Repository.OrderDetailRepository;
 import com.poly.website_norulesshop.Repository.OrderRepository;
+import com.poly.website_norulesshop.entity.CategoryQuantity;
 import com.poly.website_norulesshop.entity.Order;
 import com.poly.website_norulesshop.entity.OrderDetail;
+import com.poly.website_norulesshop.service.CategoryQuantityService;
 import com.poly.website_norulesshop.service.OrderDetailService;
 import com.poly.website_norulesshop.service.OrderService;
+import com.poly.website_norulesshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,11 +25,17 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
+    private final ProductService productService;
+
+    private final CategoryQuantityService categoryQuantityService;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, ProductService productService, CategoryQuantityService categoryQuantityService) {
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
+        this.productService = productService;
+        this.categoryQuantityService = categoryQuantityService;
+
     }
 
     @Override
@@ -33,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrderById(Long id) {
+    public Order getOrderById(Integer id) {
         return orderRepository.findById(id).orElse(null);
     }
 
@@ -43,26 +54,33 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(Long id) {
+    public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Order> findByUserId(Integer accountId) {
+        return orderRepository.findByAccountId(accountId);
     }
 
     @Override
     public Order createData(JsonNode orderData) {
 
-        ObjectMapper mapper = new ObjectMapper();
 
+        ObjectMapper mapper = new ObjectMapper();
         Order order = mapper.convertValue(orderData, Order.class);
-        System.out.println("Order: " + order);
-//        orderRepository.save(order);
+//        CategoryQuantity categoryQuantity = categoryQuantityService.findByProduct(categorylv1detail,categorylv2detail,order.get)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmm");
+        String formattedDate = dateFormat.format(new Date());
+        order.setTradingCode("NR" + formattedDate);
+        orderRepository.save(order);
 
         TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {
         };
-        List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetails"), type)
+        List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetailList"), type)
                 .stream().peek(d -> d.setOrder(order)).toList();
-//        orderDetailRepository.saveAll(details);
-        System.out.println("OrderDetail: " + details);
-
+        orderDetailRepository.saveAll(details);
+        System.out.println();
         return order;
     }
 }

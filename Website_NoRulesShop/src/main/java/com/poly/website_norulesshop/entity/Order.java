@@ -24,7 +24,7 @@ public class Order {
     private Integer orderId;
     @Column(name = "order_time")
     private Date orderTime = new Date();
-    @Column(name = "order_update_time")
+    @Column(name = "update_order_time")
     private Date orderUpdateTime;
     @Column(name = "discount_amout")
     private Integer discountAmout;
@@ -36,7 +36,10 @@ public class Order {
     private String specifiedAddress;
     @Column(name = "order_note")
     private String orderNote;
-
+    @Column(name = "trading_code")
+    private String tradingCode;
+    @Column(name = "total")
+    private Integer totalPrice;
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -56,6 +59,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "payment_method_id")
     private PaymentMethod paymentMethod;
+    @Transient  // Mark this field as transient to exclude it from persistence
+    private Integer paymentMethodId;
 
     @JsonIgnore
     @OneToMany(mappedBy = "order")
