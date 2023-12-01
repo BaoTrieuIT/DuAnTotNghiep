@@ -1,7 +1,9 @@
 package com.poly.website_norulesshop.service;
 
 import com.poly.website_norulesshop.constant.EmailType;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface EmailService {
     void sendEmail(String to, String content, String subject, String code, EmailType emailType);
 
