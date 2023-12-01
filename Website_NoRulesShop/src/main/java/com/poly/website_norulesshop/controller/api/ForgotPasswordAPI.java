@@ -39,7 +39,7 @@ public class ForgotPasswordAPI {
                 result.put("status", "Success");
                 result.put("OTP", OTP);
                 result.put("account", account);
-//                emailService.sendEmail(email, OTP, EmailType.EMAIL_SEND_CODE);
+                emailService.sendEmail(email, "","Forgot Password OTP", OTP ,EmailType.EMAIL_SEND_CODE);
             } else {
                 result.put("status", "Failed");
                 result.put("detail", "Not Found Account");
