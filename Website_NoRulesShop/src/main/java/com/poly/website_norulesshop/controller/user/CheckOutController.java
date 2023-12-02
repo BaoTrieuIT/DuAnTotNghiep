@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -67,11 +68,12 @@ public class CheckOutController {
 
     @PostMapping("/order-update/{orderId}")
     public String updateCancelOrder(@PathVariable Integer orderId) {
-        OrderStatus orderStatus = orderStatusService.getOrderStatusById(1);
+        OrderStatus orderStatus = orderStatusService.getOrderStatusById(5);
         System.out.println("orderStatus" + orderStatus.getOrderStatusId());
         Order order = orderService.getOrderById(orderId);
         System.out.println("order" + order.getOrderStatus().getOrderStatusId());
         order.setOrderStatus(orderStatus);
+        order.setOrderUpdateTime(new Date());
         orderService.saveOrder(order);
         return "redirect:/home/order-history";
     }

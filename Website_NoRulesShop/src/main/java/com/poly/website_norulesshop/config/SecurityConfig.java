@@ -121,8 +121,4 @@ public class SecurityConfig {
 //        return repository;
 //    }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() throws Exception {
-        return (web) -> web.ignoring().requestMatchers(HttpMethod.OPTIONS, "/**");
-    }
 }

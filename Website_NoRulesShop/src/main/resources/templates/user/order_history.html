@@ -89,7 +89,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
                                                 <p class="fw-bold mb-1"><span
-                                                        th:text="'HD' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
+                                                        th:text="'NR' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -141,12 +141,77 @@
                             <th class="fw-bold">Mã đơn hàng</th>
                             <th class="fw-bold">Trạng thái</th>
                             <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Ngày xuất kho</th>
                             <th class="fw-bold">Tổng tiền</th>
                             <th></th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                            <th:block th:each="orderItem : *{order.getOrderDetailList()}">
+                                <tr th:case="'Xuất kho'">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <div th:each="image, limit : *{orderItem.getProduct().getProductImageList()}"
+                                                     th:if="${limit.index} &lt; 1">
+                                                    <img th:src="@{'/user/img/products/'+ *{image.getImage_url()}}"
+                                                         th:alt="*{image.getImage_url()}"
+                                                         th:class="${limit.index % 2 == 0 ? '' :'img-fluid'}"
+                                                         style="aspect-ratio: 1 / 1; width: 96px; height: 96px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">
+                                                    <span th:text="${orderItem.product.productName}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><span
+                                                        th:text="'NR' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <th:block th:switch="*{order.orderStatus.orderStatusName}">
+                                            <th:block>
+                                                <p class="fw-semibold mb-1 text-dark"><span
+                                                        th:text="*{order.orderStatus.orderStatusName} ? 'Đơn hàng đã xuất kho' :''"></span>
+                                                </p>
+                                            </th:block>
+                                        </th:block>
+                                    </td>
+                                    <td>
+                                        <span class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                    </td>
+                                    <td>
+                                        <div class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderUpdateTime, 'dd-MM-yyyy HH:mm')}"></span>
+                                        </div>
+                                    </td>
+                                    <td><span class="mb-0 ms-2 text-danger fw-semibold"
+                                              th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/home/order-confirm/'+*{order.orderId}}"
+                                           class="btn btn-primary">
+                                            Xem
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </th:block>
 
                         </tbody>
                     </table>
@@ -160,12 +225,79 @@
                             <th class="fw-bold">Mã đơn hàng</th>
                             <th class="fw-bold">Trạng thái</th>
                             <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Bắt đầu giao hàng</th>
                             <th class="fw-bold">Tổng tiền</th>
                             <th></th>
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                            <th:block th:each="orderItem : *{order.getOrderDetailList()}">
+                                <tr th:case="'Đang giao'">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <div th:each="image, limit : *{orderItem.getProduct().getProductImageList()}"
+                                                     th:if="${limit.index} &lt; 1">
+                                                    <img th:src="@{'/user/img/products/'+ *{image.getImage_url()}}"
+                                                         th:alt="*{image.getImage_url()}"
+                                                         th:class="${limit.index % 2 == 0 ? '' :'img-fluid'}"
+                                                         style="aspect-ratio: 1 / 1; width: 96px; height: 96px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">
+                                                    <span th:text="${orderItem.product.productName}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><span
+                                                        th:text="'NR' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <th:block th:switch="*{order.orderStatus.orderStatusName}">
+                                            <th:block>
+                                                <p class="fw-semibold mb-1 text-dark"><span
+                                                        th:text="*{order.orderStatus.orderStatusName} ? 'Đang giao hàng' :''"></span>
+                                                </p>
+                                            </th:block>
+                                        </th:block>
+                                    </td>
+                                    <td>
+                                        <span class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                    </td>
+                                    <td>
+                                        <div class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderUpdateTime, 'dd-MM-yyyy HH:mm')}"></span>
+                                        </div>
+                                    </td>
+                                    <td><span class="mb-0 ms-2 text-danger fw-semibold"
+                                              th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/home/order-confirm/'+*{order.orderId}}"
+                                           class="btn btn-primary">
+                                            Xem
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </th:block>
+
+                        </tbody>
                     </table>
                 </div>
                 <div class="tab-item hide" data-id="delivered">
@@ -177,12 +309,78 @@
                             <th class="fw-bold">Mã đơn hàng</th>
                             <th class="fw-bold">Trạng thái</th>
                             <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Ngày nhận hàng</th>
                             <th class="fw-bold">Tổng tiền</th>
                             <th></th>
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                            <th:block th:each="orderItem : *{order.getOrderDetailList()}">
+                                <tr th:case="'Bị huỷ'">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <div th:each="image, limit : *{orderItem.getProduct().getProductImageList()}"
+                                                     th:if="${limit.index} &lt; 1">
+                                                    <img th:src="@{'/user/img/products/'+ *{image.getImage_url()}}"
+                                                         th:alt="*{image.getImage_url()}"
+                                                         th:class="${limit.index % 2 == 0 ? '' :'img-fluid'}"
+                                                         style="aspect-ratio: 1 / 1; width: 96px; height: 96px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">
+                                                    <span th:text="${orderItem.product.productName}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><span
+                                                        th:text="'NR' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <th:block th:switch="*{order.orderStatus.orderStatusName}">
+                                            <th:block>
+                                                <p class="fw-semibold mb-1 text-dark"><span
+                                                        th:text="*{order.orderStatus.orderStatusName} ? 'Đã giao thành công' :''"></span>
+                                                </p>
+                                            </th:block>
+                                        </th:block>
+                                    </td>
+                                    <td>
+                                        <span class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                    </td>
+                                    <td>
+                                        <div class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderUpdateTime, 'dd-MM-yyyy HH:mm')}"></span>
+                                        </div>
+                                    </td>
+                                    <td><span class="mb-0 ms-2 text-danger fw-semibold"
+                                              th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/home/order-confirm/'+*{order.orderId}}"
+                                           class="btn btn-primary">
+                                            Xem
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </th:block>
+                        </tbody>
                     </table>
                 </div>
                 <div class="tab-item hide" data-id="cancel">
@@ -194,12 +392,80 @@
                             <th class="fw-bold">Mã đơn hàng</th>
                             <th class="fw-bold">Trạng thái</th>
                             <th class="fw-bold">Ngày đặt hàng</th>
+                            <th class="fw-bold">Bị huỷ</th>
                             <th class="fw-bold">Tổng tiền</th>
                             <th></th>
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody>
+                        <tbody>
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                            <th:block th:each="orderItem : *{order.getOrderDetailList()}">
+                                <tr th:case="'Bị huỷ'">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <div th:each="image, limit : *{orderItem.getProduct().getProductImageList()}"
+                                                     th:if="${limit.index} &lt; 1">
+                                                    <img th:src="@{'/user/img/products/'+ *{image.getImage_url()}}"
+                                                         th:alt="*{image.getImage_url()}"
+                                                         th:class="${limit.index % 2 == 0 ? '' :'img-fluid'}"
+                                                         style="aspect-ratio: 1 / 1; width: 96px; height: 96px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1">
+                                                    <span th:text="${orderItem.product.productName}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="ms-3">
+                                                <p class="fw-bold mb-1"><span
+                                                        th:text="'NR' + ${#dates.format(order.orderTime, 'ddMMyyHHmm')}"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <th:block th:switch="*{order.orderStatus.orderStatusName}">
+                                            <th:block>
+                                                <p class="fw-semibold mb-1 text-dark"><span
+                                                        th:text="*{order.orderStatus.orderStatusName} ? 'Đã huỷ' :''"></span>
+                                                </p>
+                                            </th:block>
+                                        </th:block>
+                                    </td>
+                                    <td>
+                                        <span class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                    </td>
+                                    <td>
+                                        <div class="rounded-pill d-inline"><span
+                                                th:text="${#dates.format(order.orderUpdateTime, 'dd-MM-yyyy HH:mm')}"></span>
+                                        </div>
+                                    </td>
+                                    <td><span class="mb-0 ms-2 text-danger fw-semibold"
+                                              th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/home/order-confirm/'+*{order.orderId}}"
+                                           class="btn btn-primary">
+                                            Xem
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                        </th:block>
+                        </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>

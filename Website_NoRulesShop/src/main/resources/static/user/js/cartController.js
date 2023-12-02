@@ -147,10 +147,11 @@ app.controller("cart_ctrl", function ($scope, $http) {
         },
         purchase() {
             this.totalPrice = $cart.amount;
+            var order
             if (this.paymentMethodId === 1) {
                 this.paymentStatus = {paymentStatusId: 1};
                 this.paymentMethod = {paymentMethodId: 1};
-                var order = angular.copy(this);
+                order = angular.copy(this);
                 console.log(order);
                 // Thực hiện đặt hàng
                 $http.post("/rest/order", order).then(resp => {
@@ -164,7 +165,20 @@ app.controller("cart_ctrl", function ($scope, $http) {
                     console.log(error)
                 })
             } else if (this.paymentMethodId === 2) {
-
+                this.paymentStatus = {paymentStatusId: 2};
+                this.paymentMethod = {paymentMethodId: 2};
+                order = angular.copy(this);
+                console.log(order);
+                $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
+                    alert("Đặt hàng thành công!");
+                    // $cart.clear();
+                    // location.href = "/home/order-detail/" + resp.data.id;
+                    // console.log(resp.data.orderId)
+                    // location.href = "/home/order-confirm/" + resp.data.orderId;
+                }).catch(error => {
+                    alert("Đặt hàng lỗi!")
+                    console.log(error)
+                })
             }
         }
     }

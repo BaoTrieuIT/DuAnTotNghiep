@@ -19,4 +19,6 @@ public interface OrderService {
     List<Order> findByUserId(Integer accountId);
 
     Order createData(JsonNode orderData);
+
+    Order createDataWithVnPay(JsonNode orderData);
 }

@@ -83,4 +83,22 @@ public class OrderServiceImpl implements OrderService {
         System.out.println();
         return order;
     }
+
+    @Override
+    public Order createDataWithVnPay(JsonNode orderData) {
+        ObjectMapper mapper = new ObjectMapper();
+        Order order = mapper.convertValue(orderData, Order.class);
+//        CategoryQuantity categoryQuantity = categoryQuantityService.findByProduct(categorylv1detail,categorylv2detail,order.get)
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmm");
+//        String formattedDate = dateFormat.format(new Date());
+//        order.setTradingCode("NR" + formattedDate);
+//        orderRepository.save(order);
+
+        TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {
+        };
+        List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetailList"), type)
+                .stream().peek(d -> d.setOrder(order)).toList();
+//        orderDetailRepository.saveAll(details);
+        return order;
+    }
 }
