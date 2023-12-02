@@ -85,7 +85,7 @@ public class SecurityConfig {
                             System.out.println(authentication.getAuthorities());
                             session.setAttribute("authentication", authentication);
                             session.setAttribute("acc", acc);
-                            response.sendRedirect("/home/index");
+                            response.sendRedirect("/");
                         })
 
 //                        .failureUrl("/home/sign-in")
