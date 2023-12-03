@@ -21,6 +21,26 @@
                         <h4>Sign in</h4>
                         <form th:action="@{/home/sign-in}" method="post" class="myacoount-form">
                             <div class="row">
+                                <div class="col-md-5">
+                                    <div th:if="${param.logout}" class="alert alert-success mb-3">Đăng xuất thành công!</div>
+                                    <div th:if="${status}">
+                                        <th:block th:if="${param.error}">
+                                            <div class="alert alert-danger mb-3">
+                                                Tên đăng nhập hoặc mật khẩu không sai!
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                    <div th:unless="${status}">
+                                        <th:block th:if="${param.error}">
+                                            <div class="alert alert-danger mb-3">
+                                                Tài khoản của bạn đã bị khóa!
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-md-5">
@@ -72,11 +92,11 @@
                                 <div class="d-flex pt-2">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                         <div>hoặc Đăng ký bằng: </div></div>
-                                    <a href="#" class="login100-social-item bg1">
+                                    <a th:href="@{/oauth2/authorizaion/facebook}" class="login100-social-item bg1">
                                         <i class="fa-brands fa-facebook"></i>
                                     </a>
                                     </a>
-                                    <a href="#" class="login100-social-item bg3">
+                                    <a th:href="@{/oauth2/authorizaion/google}" class="login100-social-item bg3">
                                         <i class="fa-brands fa-google"></i>
                                     </a>
                                 </div>

@@ -90,7 +90,7 @@ public class SecurityConfig {
 
 //                        .failureUrl("/home/sign-in")
                         .failureHandler((request, response, exception) -> response
-                                .sendRedirect("/home/sign-in/error"))
+                                .sendRedirect("/home/sign-in?error"))
                         .permitAll())
                 .logout(logout -> logout
                         .deleteCookies("JSESSIONID")

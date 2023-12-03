@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.controller.user;
 
+import com.poly.website_norulesshop.config.GlobalFlag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -14,15 +15,14 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @GetMapping("sign-in")
     public String login_form(Model model) {
+        System.out.println(GlobalFlag.flag);
+        if (GlobalFlag.flag) {
+            model.addAttribute("status", true);
+        } else {
+            model.addAttribute("status", false);
+        }
         model.addAttribute("title", "Đăng nhập");
         return "user/sign_in";
 
     }
-
-    @RequestMapping("sign-in/error")
-    public String login_error() {
-        return "user/sign_in";
-    }
-
-
 }

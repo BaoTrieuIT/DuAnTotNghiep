@@ -7,6 +7,7 @@ import java.util.Set;
 
 
 import com.poly.website_norulesshop.Repository.AccountStatusRepository;
+import com.poly.website_norulesshop.constant.Provider;
 import com.poly.website_norulesshop.entity.AccountStatus;
 import com.poly.website_norulesshop.entity.Role;
 import com.poly.website_norulesshop.service.AccountStatusService;
@@ -58,6 +59,7 @@ public class AccountServiceImpl implements AccountService {
         account.setEmail(accountDTO.getEmail());
         account.setCreate_date(currentDate);
         account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+        account.setProvider(Provider.LOCAL);
 
         AccountStatus accountStatus = accountStatusService.getAccountStatusById(1);
         Role role = roleRepository.findRoleByRole_name("USER");

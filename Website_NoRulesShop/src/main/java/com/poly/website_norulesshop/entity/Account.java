@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.poly.website_norulesshop.constant.Provider;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,6 +35,8 @@ public class Account {
     private Date birthday;
     private String avatar_url;
     private String address;
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
     //    columnDefinition = "bit default 2" , ALL
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
