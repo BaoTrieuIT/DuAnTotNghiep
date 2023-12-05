@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @GetMapping("sign-in")
     public String login_form(Model model) {
-        System.out.println(GlobalFlag.flag);
         if (GlobalFlag.flag) {
             model.addAttribute("status", true);
         } else {

@@ -66,6 +66,6 @@ app.config(function ($routeProvider) {
 
         })
         .otherwise({
-            templateUrl : "/admin/overview.html"
+            templateUrl: "/admin/index.html"
         });
 })
