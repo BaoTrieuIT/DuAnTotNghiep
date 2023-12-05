@@ -166,7 +166,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
                 order = angular.copy(this);
                 console.log(order);
                 $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
-                    // $cart.clear();
+                    $cart.clear();
                     window.location.href = resp.data.paymentUrl;
                 }).catch(error => {
                     alert("Đặt hàng lỗi!")
