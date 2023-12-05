@@ -12,40 +12,35 @@
         <li class="breadcrumb-item active" aria-current="page">Lịch sử giao hàng</li>
     </ol>
 </nav>
-<div class="order-inner w-100">
-    <div
-            class="container d-flex justify-content-center align-items-center"
-            style="margin-top: 10rem"
-    >
+<div class="order-inner float-left w-100">
+    <div class="container">
         <div th:if="${#lists.isEmpty(orderList)}">
             <h4 class="card-title mb-4">Lịch sử mua hàng</h4>
             <p class="text-danger my-3">Bạn chưa mua sản phẩm nào.</p>
             <a class="btn btn-primary">Tiếp tục mua sắm</a>
         </div>
-        <div th:unless="${#lists.isEmpty(orderList)}" class="tab-container">
-            <nav class="tab-nav">
-                <div class="mobile-select"><i class="bi bi-chevron-down"></i></div>
-                <ul>
-                    <li>
-                        <button class="btn tab-btn btn-primary active" id="waitConfirm">Đang chờ xác nhận</button>
-                    </li>
-                    <li>
-                        <button class="btn tab-btn btn-primary" id="export">Xuất Kho</button>
-                    </li>
-                    <li>
-                        <button class="btn tab-btn btn-primary" id="delivering">Đang giao</button>
-                    </li>
-                    <li>
-                        <button class="btn tab-btn btn-primary" id="delivered">Đã giao</button>
-                    </li>
-                    <li>
-                        <button class="btn tab-btn btn-primary" id="cancel">Bị huỷ</button>
-                    </li>
-
-                </ul>
-            </nav>
+        <div th:unless="${#lists.isEmpty(orderList)}">
+            <!-- Nav pills -->
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill"  href="#waitConfirm">Đang chờ xác nhận</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill"  href="#export">Xuất Kho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill"  href="#delivering">Đang giao</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill"  href="#delivered">Đã giao</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"data-toggle="pill"  href="#cancel">Đã huỷ</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-item" data-id="waitConfirm">
+                <div class="tab-pane container active" id="waitConfirm">
                     <table class="table table-hover align-middle mb-0 bg-white">
                         <thead class="bg-light">
                         <tr>
@@ -104,8 +99,8 @@
                                         </th:block>
                                     </td>
                                     <td>
-                                        <span class="rounded-pill d-inline"><span
-                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                                    <span class="rounded-pill d-inline"><span
+                                                            th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
                                     </td>
                                     <td><span class="mb-0 ms-2 text-danger fw-semibold"
                                               th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></span>
@@ -132,7 +127,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-item hide" data-id="export">
+                <div class="tab-pane container fade" id="export">
                     <table class="table table-hover align-middle mb-0 bg-white">
                         <thead class="bg-light">
                         <tr>
@@ -192,8 +187,8 @@
                                         </th:block>
                                     </td>
                                     <td>
-                                        <span class="rounded-pill d-inline"><span
-                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                                    <span class="rounded-pill d-inline"><span
+                                                            th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
                                     </td>
                                     <td>
                                         <div class="rounded-pill d-inline"><span
@@ -216,7 +211,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-item hide" data-id="delivering">
+                <div class="tab-pane container fade" id="delivering">
                     <table class="table table-hover align-middle mb-0 bg-white">
                         <thead class="bg-light">
                         <tr>
@@ -276,8 +271,8 @@
                                         </th:block>
                                     </td>
                                     <td>
-                                        <span class="rounded-pill d-inline"><span
-                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                                    <span class="rounded-pill d-inline"><span
+                                                            th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
                                     </td>
                                     <td>
                                         <div class="rounded-pill d-inline"><span
@@ -300,7 +295,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-item hide" data-id="delivered">
+                <div class="tab-pane container fade" id="delivered">
                     <table class="table table-hover align-middle mb-0 bg-white">
                         <thead class="bg-light">
                         <tr>
@@ -360,8 +355,8 @@
                                         </th:block>
                                     </td>
                                     <td>
-                                        <span class="rounded-pill d-inline"><span
-                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                                    <span class="rounded-pill d-inline"><span
+                                                            th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
                                     </td>
                                     <td>
                                         <div class="rounded-pill d-inline"><span
@@ -383,7 +378,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-item hide" data-id="cancel">
+                <div class="tab-pane container fade" id="cancel">
                     <table class="table table-hover align-middle mb-0 bg-white">
                         <thead class="bg-light">
                         <tr>
@@ -444,8 +439,8 @@
                                         </th:block>
                                     </td>
                                     <td>
-                                        <span class="rounded-pill d-inline"><span
-                                                th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
+                                                    <span class="rounded-pill d-inline"><span
+                                                            th:text="${#dates.format(order.orderTime, 'dd-MM-yyyy')}"></span></span>
                                     </td>
                                     <td>
                                         <div class="rounded-pill d-inline"><span
@@ -472,5 +467,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

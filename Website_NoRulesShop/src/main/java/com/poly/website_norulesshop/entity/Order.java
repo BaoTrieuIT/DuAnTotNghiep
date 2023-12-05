@@ -63,7 +63,7 @@ public class Order {
     private Integer paymentMethodId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<OrderDetail> orderDetailList;
     // Getters and setters
 }

@@ -122,10 +122,6 @@ app.controller("cart_ctrl", function ($scope, $http) {
     $cart.loadFromLocalStorage();
     // Đặt hàng
     $scope.order = {
-
-        get account() {
-            return {account_id: $auth.principal.accountId}
-        },
         orderTime: new Date(),
         phoneNumber: "",
         recipientName: "",
@@ -170,11 +166,8 @@ app.controller("cart_ctrl", function ($scope, $http) {
                 order = angular.copy(this);
                 console.log(order);
                 $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
-                    alert("Đặt hàng thành công!");
                     // $cart.clear();
-                    // location.href = "/home/order-detail/" + resp.data.id;
-                    // console.log(resp.data.orderId)
-                    // location.href = "/home/order-confirm/" + resp.data.orderId;
+                    window.location.href = resp.data.paymentUrl;
                 }).catch(error => {
                     alert("Đặt hàng lỗi!")
                     console.log(error)

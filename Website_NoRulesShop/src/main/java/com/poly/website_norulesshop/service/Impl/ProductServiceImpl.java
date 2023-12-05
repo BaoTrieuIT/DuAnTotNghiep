@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryLv1Id, String priceSort, int page, int pageSize) {
+    public Page<Product> productPaginateWithFilter(Integer brandId, Integer directoryLv1Id, String keyword, String priceSort, int page, int pageSize) {
         Pageable pageable;
         if (priceSort != null && priceSort.equalsIgnoreCase("asc")) {
             pageable = PageRequest.of(page, pageSize, Sort.by("priceNew"));
@@ -53,6 +53,9 @@ public class ProductServiceImpl implements ProductService {
         }
         if (directoryLv1Id != null) {
             spec = ProductSpecification.findbyDirectoryLV1Id(directoryLv1Id);
+        }
+        if (keyword != null && !keyword.isEmpty()) {
+            spec = ProductSpecification.findByProductname(keyword);
         }
         return productRepository.findAll(spec, pageable);
     }

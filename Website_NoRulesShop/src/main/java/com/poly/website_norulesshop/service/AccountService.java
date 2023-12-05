@@ -27,4 +27,6 @@ public interface AccountService {
     Account resetPassword(String email, String newPassword);
 
     void updateAccount_frUser(Account account, String newPassword);
+
+    void processOAuthPostLogin(String email, String clientName);
 }

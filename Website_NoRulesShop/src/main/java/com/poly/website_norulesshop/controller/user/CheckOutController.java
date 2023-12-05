@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Comparator;
@@ -45,13 +42,27 @@ public class CheckOutController {
     }
 
     @GetMapping("order-confirm/{orderId}")
-    public String orderConfrim(Model model, @PathVariable("orderId") Integer id) {
+    public String orderConfirm(Model model, @PathVariable("orderId") Integer id) {
         Order order = orderService.getOrderById(id);
         List<OrderDetail> orderDetail = orderDetailService.findByOrderId(order.getOrderId());
-
         model.addAttribute("order", order);
         model.addAttribute("orderDetail", orderDetail);
+        model.addAttribute("title", "Xác nhận đơn hàng");
+        return "user/order_confirm";
+    }
 
+    @GetMapping("order-result")
+    public String orderConfirmByVnPay(Model model,
+                                      @RequestParam("orderId") Integer id,
+                                      @RequestParam("vnp_Amount") String vnp_Amount,
+                                      @RequestParam("vnp_TxnRef") String vnp_TxnRef,
+                                      @RequestParam("vnp_OrderInfo") String vnp_OrderInfo,
+                                      @RequestParam("vnp_PayDate") String vnp_PayDate,
+                                      @RequestParam("vnp_TransactionStatus") String vnp_TransactionStatus) {
+        Order order = orderService.getOrderById(id);
+        List<OrderDetail> orderDetail = orderDetailService.findByOrderId(order.getOrderId());
+        model.addAttribute("order", order);
+        model.addAttribute("orderDetail", orderDetail);
         model.addAttribute("title", "Xác nhận đơn hàng");
         return "user/order_confirm";
     }

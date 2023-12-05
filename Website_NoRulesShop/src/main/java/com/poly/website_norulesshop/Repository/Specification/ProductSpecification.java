@@ -16,5 +16,9 @@ public final class ProductSpecification {
                 criteriaBuilder.equal(root.get("brand").get("brandId"), brandId);
     }
 
-    
+    public static Specification<Product> findByProductname(String productName) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("productName"), "%" + productName + "%");
+    }
+
 }

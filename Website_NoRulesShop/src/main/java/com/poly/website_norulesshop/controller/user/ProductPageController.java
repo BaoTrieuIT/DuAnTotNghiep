@@ -6,6 +6,7 @@ import com.poly.website_norulesshop.utils.FilterCategoryCriteria;
 import com.poly.website_norulesshop.utils.FilterCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +63,7 @@ public class ProductPageController {
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
                 filterCriteria.getDirectoryLv1Id(),
+                null,
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE);
@@ -90,6 +92,7 @@ public class ProductPageController {
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
                 filterCriteria.getDirectoryLv1Id(),
+                null,
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE);
@@ -132,6 +135,7 @@ public class ProductPageController {
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
                 filterCriteria.getDirectoryLv1Id(),
+                null,
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE
@@ -154,5 +158,29 @@ public class ProductPageController {
         return "user/product_page";
     }
 
+    @RequestMapping("/search")
+    public String searchProducts(Model model, @Param("keyword") String keyword, @ModelAttribute("filterCriteria") FilterCriteria filterCriteria, @RequestParam(defaultValue = "0") int page) {
+        System.out.println(keyword);
+        Page<Product> productPage = productService.productPaginateWithFilter(
+                filterCriteria.getBrandId(),
+                filterCriteria.getDirectoryLv1Id(),
+                keyword,
+                filterCriteria.getPriceSort(),
+                page,
+                PAGE_SIZE
+        );
+        List<Directory> directoryList = directoryService.getAllDirectories();
+        List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
+        List<Brand> brandList = brandService.getAllBrands();
+        model.addAttribute("brandId", filterCriteria.getBrandId());
+        model.addAttribute("directoryLv1Id", filterCriteria.getDirectoryLv1Id());
+        model.addAttribute("priceSort", filterCriteria.getPriceSort());
+        model.addAttribute("directoryList", directoryList);
+        model.addAttribute("brand", brandList);
+        model.addAttribute("directoryLV1List", directoryLV1List);
+        model.addAttribute("title", "Tất cả sản phẩm");
+        model.addAttribute("productPage", productPage);
+        return "user/product_page";
+    }
 
 }

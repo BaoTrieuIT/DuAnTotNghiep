@@ -1,5 +1,7 @@
 package com.poly.website_norulesshop.config;
 
+import com.poly.website_norulesshop.auth.oauth2.CustomOAuth2AccountService;
+import com.poly.website_norulesshop.auth.oauth2.CustomOauth2Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +31,15 @@ import jakarta.servlet.http.HttpSession;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+    @Autowired
+    private CustomOAuth2AccountService customOAuth2AccountService;
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private HttpSession session;
+
+
     private static final String[] USER_RESOURCES = {
             "/home/checkout-page/**",
             "/home/my-account/**",
@@ -39,11 +50,6 @@ public class SecurityConfig {
             "/admin/**"
     };
 
-    @Autowired
-    AccountService accountService;
-
-    @Autowired
-    HttpSession session;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -101,8 +107,45 @@ public class SecurityConfig {
                 .exceptionHandling(execpetion -> execpetion
                         .accessDeniedPage("/home/403Page")
                         .accessDeniedHandler(((request, response, accessDeniedException) -> response
-                                .sendRedirect("/home/403Page"))));
-
+                                .sendRedirect("/home/403Page"))))
+                .oauth2Login(oauth2 -> {
+                    try {
+                        oauth2.loginPage("/home/sign-in").authorizationEndpoint((authorization ->
+                                        authorization
+                                                .baseUri("/home/sign-in/oauth2/authorization")
+                                                .baseUri("/oauth2/authorization")))
+                                .userInfoEndpoint(userInfo -> userInfo
+                                        .userService(customOAuth2AccountService))
+                                .successHandler((request, response, authentication) -> {
+                                    if (authentication.getPrincipal() instanceof CustomOauth2Account customOauth2Account) {
+                                        String email = customOauth2Account.getName();
+                                        Account existingUser = accountService.findByEmail(email);
+                                        if (existingUser != null) {
+                                            if (existingUser.getAccountStatus().getAccountStatusId() == 1) {
+                                                GlobalFlag.flag = true;
+                                                response.sendRedirect("/");
+                                                System.out.println("User is existing!");
+                                            } else {
+                                                GlobalFlag.flag = false;
+                                                response.sendRedirect("/home/sign-in?error");
+                                            }
+                                        } else {
+                                            String username = customOauth2Account.getUsername();
+                                            String clientName = customOauth2Account.getOauth2ClientNames();
+                                            System.out.println("email: " + email + ", client: " + clientName +
+                                                    ", username: " + username);
+                                            accountService.processOAuthPostLogin(email, clientName);
+                                            response.sendRedirect("/");
+                                        }
+                                    } else {
+                                        // Handle other cases if needed
+                                        response.sendRedirect("/home/sign-in"); // Redirect to login page in case of an issue
+                                    }
+                                });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
         return http.build();
     }

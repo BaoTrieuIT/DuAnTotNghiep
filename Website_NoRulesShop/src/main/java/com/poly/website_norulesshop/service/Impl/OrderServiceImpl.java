@@ -5,20 +5,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poly.website_norulesshop.Repository.OrderDetailRepository;
 import com.poly.website_norulesshop.Repository.OrderRepository;
-import com.poly.website_norulesshop.entity.CategoryQuantity;
+import com.poly.website_norulesshop.entity.Account;
 import com.poly.website_norulesshop.entity.Order;
 import com.poly.website_norulesshop.entity.OrderDetail;
-import com.poly.website_norulesshop.service.CategoryQuantityService;
-import com.poly.website_norulesshop.service.OrderDetailService;
-import com.poly.website_norulesshop.service.OrderService;
-import com.poly.website_norulesshop.service.ProductService;
+import com.poly.website_norulesshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -26,14 +22,15 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
     private final ProductService productService;
-
+    private final AccountService accountService;
     private final CategoryQuantityService categoryQuantityService;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, ProductService productService, CategoryQuantityService categoryQuantityService) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, ProductService productService, AccountService accountService, CategoryQuantityService categoryQuantityService) {
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
         this.productService = productService;
+        this.accountService = accountService;
         this.categoryQuantityService = categoryQuantityService;
 
     }
@@ -69,7 +66,6 @@ public class OrderServiceImpl implements OrderService {
 
         ObjectMapper mapper = new ObjectMapper();
         Order order = mapper.convertValue(orderData, Order.class);
-//        CategoryQuantity categoryQuantity = categoryQuantityService.findByProduct(categorylv1detail,categorylv2detail,order.get)
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmm");
         String formattedDate = dateFormat.format(new Date());
         order.setTradingCode("NR" + formattedDate);
@@ -80,25 +76,27 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetailList"), type)
                 .stream().peek(d -> d.setOrder(order)).toList();
         orderDetailRepository.saveAll(details);
-        System.out.println();
         return order;
     }
 
     @Override
-    public Order createDataWithVnPay(JsonNode orderData) {
-        ObjectMapper mapper = new ObjectMapper();
-        Order order = mapper.convertValue(orderData, Order.class);
-//        CategoryQuantity categoryQuantity = categoryQuantityService.findByProduct(categorylv1detail,categorylv2detail,order.get)
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmm");
-//        String formattedDate = dateFormat.format(new Date());
-//        order.setTradingCode("NR" + formattedDate);
-//        orderRepository.save(order);
-
-        TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {
-        };
-        List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetailList"), type)
-                .stream().peek(d -> d.setOrder(order)).toList();
-//        orderDetailRepository.saveAll(details);
-        return order;
+    public Order createDataWithVnPay(JsonNode orderData, Integer id, String code) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Order order = mapper.convertValue(orderData, Order.class);
+            Account account = accountService.getAccountById(id);
+            order.setAccount(account);
+            order.setTradingCode(code);
+            orderRepository.save(order);
+            TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {
+            };
+            List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetailList"), type)
+                    .stream().peek(d -> d.setOrder(order)).toList();
+            orderDetailRepository.saveAll(details);
+            return order;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

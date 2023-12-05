@@ -20,5 +20,5 @@ public interface OrderService {
 
     Order createData(JsonNode orderData);
 
-    Order createDataWithVnPay(JsonNode orderData);
+    Order createDataWithVnPay(JsonNode orderData, Integer id, String code);
 }

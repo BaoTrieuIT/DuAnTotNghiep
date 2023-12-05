@@ -83,14 +83,14 @@
                                 <a>
                                     <i class="material-icons search">search</i>
                                     <i class="material-icons close">close</i></a>
-                                <form autocomplete="off"
+                                <form th:action="@{/home/search}" method="get" autocomplete="off"
                                       action=""
                                       class="search-form">
                                     <div class="autocomplete">
                                         <input id="myInput"
                                                type="text"
-                                               name="myCountry"
-                                               placeholder="Search here">
+                                               name="keyword"
+                                               placeholder="Tìm kiếm sản phẩm...">
                                         <button type="button"><i class="material-icons">search</i></button>
                                     </div>
                                 </form>

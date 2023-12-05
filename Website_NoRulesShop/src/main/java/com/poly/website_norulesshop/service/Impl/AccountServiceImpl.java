@@ -62,6 +62,8 @@ public class AccountServiceImpl implements AccountService {
         account.setProvider(Provider.LOCAL);
 
         AccountStatus accountStatus = accountStatusService.getAccountStatusById(1);
+        Provider provider = Provider.valueOf("LOCAL");
+        account.setProvider(provider);
         Role role = roleRepository.findRoleByRole_name("USER");
         if (role == null) {
             role = checkRoleExist();
@@ -147,6 +149,27 @@ public class AccountServiceImpl implements AccountService {
             existingAccount.setBirthday(updatedAccount.getBirthday());
             existingAccount.setAddress(updatedAccount.getAddress());
             accountRepository.save(existingAccount);
+        }
+    }
+
+    @Override
+    public void processOAuthPostLogin(String email, String clientName) {
+        Account existUser = accountRepository.findByEmail(email);
+        if (existUser == null) {
+            Account newUser = new Account();
+            newUser.setEmail(email);
+            newUser.setUsername(email);
+            newUser.setPassword(passwordEncoder.encode("123456"));
+            Provider provider = Provider.valueOf(clientName.toUpperCase());
+            newUser.setProvider(provider);
+            AccountStatus accountStatus = accountStatusService.getAccountStatusById(1);
+            Role role = roleRepository.findRoleByRole_name("USER");
+            if (role == null) {
+                role = checkRoleExist();
+            }
+            newUser.setRoles(Set.of(role));
+            newUser.setAccountStatus(accountStatus);
+            accountRepository.save(newUser);
         }
     }
 

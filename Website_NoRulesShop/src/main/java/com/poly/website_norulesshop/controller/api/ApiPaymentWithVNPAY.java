@@ -10,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -31,14 +32,14 @@ public class ApiPaymentWithVNPAY {
     GeneralService generalService;
 
     @PostMapping("{totalPrice}")
-    public Order purchase(
+    public ResponseEntity<Map<String, Object>> purchase(
             @PathVariable("totalPrice") Integer totalPrice,
             @RequestBody JsonNode orderData,
             Principal principal,
             HttpServletRequest req,
             HttpServletResponse resp) throws ServletException, IOException {
         Integer userId = generalService.usernameHandler(principal);
-
+        Map<String, Object> responseData = new HashMap<>();
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
@@ -60,7 +61,12 @@ public class ApiPaymentWithVNPAY {
         vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
         vnp_Params.put("vnp_OrderType", orderType);
         vnp_Params.put("vnp_Locale", "vn");
-        vnp_Params.put("vnp_ReturnUrl", VNPayConfig.vnp_ReturnUrl);
+
+        Integer id = orderService.createDataWithVnPay(orderData, userId, vnp_TxnRef).getOrderId();
+        if (id == null) {
+            return null;
+        }
+        vnp_Params.put("vnp_ReturnUrl", VNPayConfig.vnp_ReturnUrl + "?orderId=" + id);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
 
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
@@ -99,8 +105,8 @@ public class ApiPaymentWithVNPAY {
         String vnp_SecureHash = VNPayConfig.hmacSHA512(VNPayConfig.secretKey, hashData.toString());
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
         String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
-        System.out.println(paymentUrl);
-        return orderService.createDataWithVnPay(orderData);
+        responseData.put("paymentUrl", paymentUrl);
+        return ResponseEntity.ok(responseData);
     }
 
 

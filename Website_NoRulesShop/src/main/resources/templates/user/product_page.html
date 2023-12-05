@@ -46,27 +46,9 @@
                                         <div class="price">
                                             <div class="regular-price"
                                                  th:text="${#numbers.formatDecimal(product.getPriceNew(), 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></div>
+                                            <div class="old-price"
+                                                 th:text="${#numbers.formatDecimal(product.getPriceOld(), 0, 'COMMA', 0, 'DEFAULT')} + ' &#x20AB;'"></div>
                                         </div>
-                                        <!--                                        <div class="button-wrapper">-->
-                                        <!--                                            <div class="button-group text-center">-->
-                                        <!--                                                <button type="button" class="btn btn-primary btn-cart"-->
-                                        <!--                                                        th:attr="ng-click=@{|cart.add(${product.getProductId})|}">-->
-                                        <!--                                                    &lt;!&ndash;                                                    data-target="#cart-pop" data-toggle="modal"&ndash;&gt;-->
-                                        <!--                                                    <i class="material-icons">shopping_cart</i>-->
-                                        <!--                                                    <span>Add to cart</span>-->
-                                        <!--                                                    &lt;!&ndash;stock</span>&ndash;&gt;&ndash;&gt;-->
-                                        <!--                                                </button>-->
-                                        <!--                                                <a href="wishlist" class="btn btn-primary btn-wishlist"><i-->
-                                        <!--                                                        class="material-icons">favorite</i><span>wishlist</span></a>-->
-                                        <!--                                                <button type="button" class="btn btn-primary btn-compare">-->
-                                        <!--                                                    <i class="material-icons">equalizer</i><span>Compare</span>-->
-                                        <!--                                                </button>-->
-                                        <!--                                                <button type="button" class="btn btn-primary btn-quickview"-->
-                                        <!--                                                        data-toggle="modal" data-target="#product_view">-->
-                                        <!--                                                    <i class="material-icons">visibility</i><span>Quick View</span>-->
-                                        <!--                                                </button>-->
-                                        <!--                                            </div>-->
-                                        <!--                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +108,6 @@
                             <div th:if="${filterCriteria.getBrandId()  != null || filterCriteria.getDirectoryLv1Id()  != null}"
                                  class="siderbar-block filter">
                                 <button class="btn" formaction="/home/product/clear">Xoá bộ lọc</button>
-                                </div>
                             </div>
                             <div class="siderbar-block price-sort mb-3">
                                 <h3 class="widget-title mb-1">
@@ -149,7 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <hr>
+                            <hr>
                             <div class="sidebar-block categories">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#categoriesMenu" role="button" aria-expanded="false"
@@ -183,7 +164,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <hr>
+                            <hr>
                             <div class="sidebar-block brands ">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#brands" role="button" aria-expanded="false"
@@ -202,42 +183,10 @@
                                     </div>
                                 </div>
                             </div>
-                        <hr>
-                            <div class="sidebar-block price ">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#price" role="button" aria-expanded="false"
-                                       aria-controls="price">Giá</a>
-                                </h3>
-                                <div id="price" class="collapse hide">
-                                    <div class="price-inner">
-                                        <label for="amount">Price range:</label>
-                                        <input
-                                                type="text"
-                                                id="amount"
-                                                readonly
-                                                style="border: 0; font-weight: bold; background: none" />
-                                        <div id="slider-range">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <hr>
                         </div>
                     </div>
                 </form>
-                <div class="sidebar-product left-sidebar w-100 float-left">
-                    <div class="title">
-                        <a data-toggle="collapse" href="#sidebar-product" aria-expanded="false"
-                           aria-controls="sidebar-product" class="d-lg-none block-toggler">Sản phẩm giảm giá</a>
-                    </div>
-                    <div id="sidebar-product" class="collapse w-100 float-left">
-                        <div class="sidebar-block sale">
-                            <h3 class="widget-title text-capitalize">Sản phẩm giảm giá</h3>
-                            <div class="products owl-carousel">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
