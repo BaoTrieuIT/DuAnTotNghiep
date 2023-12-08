@@ -8,10 +8,8 @@ import com.poly.website_norulesshop.Repository.OrderRepository;
 import com.poly.website_norulesshop.entity.CategoryQuantity;
 import com.poly.website_norulesshop.entity.Order;
 import com.poly.website_norulesshop.entity.OrderDetail;
-import com.poly.website_norulesshop.service.CategoryQuantityService;
-import com.poly.website_norulesshop.service.OrderDetailService;
-import com.poly.website_norulesshop.service.OrderService;
-import com.poly.website_norulesshop.service.ProductService;
+import com.poly.website_norulesshop.entity.OrderStatus;
+import com.poly.website_norulesshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +26,9 @@ public class OrderServiceImpl implements OrderService {
     private final ProductService productService;
 
     private final CategoryQuantityService categoryQuantityService;
+
+    @Autowired
+    OrderStatusService orderStatusService;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, OrderDetailRepository orderDetailRepository, ProductService productService, CategoryQuantityService categoryQuantityService) {
@@ -100,5 +101,40 @@ public class OrderServiceImpl implements OrderService {
                 .stream().peek(d -> d.setOrder(order)).toList();
 //        orderDetailRepository.saveAll(details);
         return order;
+    }
+
+    @Override
+    public List<Order> getOrderAwaitingConfirmation() {
+        OrderStatus orderStatus  = orderStatusService.getByOrderStatusName("Đang Chờ Xác Nhận");
+        List<Order> result =  orderRepository.findByOrderStatus(orderStatus);
+        return result;
+    }
+
+    @Override
+    public List<Order> getOrderHasBeenShipped() {
+        OrderStatus orderStatus  = orderStatusService.getByOrderStatusName("Xuất kho");
+        List<Order> result =  orderRepository.findByOrderStatus(orderStatus);
+        return result;
+    }
+
+    @Override
+    public List<Order> getOrderInTransit() {
+        OrderStatus orderStatus  = orderStatusService.getByOrderStatusName("Đang giao");
+        List<Order> result =  orderRepository.findByOrderStatus(orderStatus);
+        return result;
+    }
+
+    @Override
+    public List<Order> getOrderDeliveryComplete() {
+        OrderStatus orderStatus  = orderStatusService.getByOrderStatusName("Đã giao");
+        List<Order> result =  orderRepository.findByOrderStatus(orderStatus);
+        return result;
+    }
+
+    @Override
+    public List<Order> getOrderHasBeenCanceled() {
+        OrderStatus orderStatus  = orderStatusService.getByOrderStatusName("Bị hủy");
+        List<Order> result =  orderRepository.findByOrderStatus(orderStatus);
+        return result;
     }
 }

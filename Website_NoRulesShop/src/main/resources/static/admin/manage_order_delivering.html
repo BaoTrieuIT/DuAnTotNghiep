@@ -3,37 +3,43 @@
         <thead>
         <tr>
             <th scope="col">Sản Phẩm</th>
-            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Tên Người Đặt</th>
+            <th scope="col">Số Điện Thoại</th>
             <th scope="col">Mã đặt hàng</th>
-            <th scope="col">Người đặt hàng</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Ngày đặt hàng</th>
-            <th scope="col">Ngày giao hàng</th>
+            <th scope="col">Địa Chỉ</th>
+            <th scope="col">Ngày Đặt</th>
+            <th scope="col">Ngày Giao Hàng</th>
             <th scope="col">Tỗng tiền</th>
-            <th scope="col">Thanh toán</th>
+            <th scope="col">Tình Trạng Thanh Toán</th>
+            <th scope="col">Trạng Thái Đơn Hàng</th>
             <th scope="col">Phương thức thanh toán</th>
             <th scope="col">Thao tác</th>
-
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">Ảnh sản phẩm</th>
-            <td>Quần ống dài</td>
-            <td>NR1239128034912</td>
-            <td>Trieu Bao</td>
-            <td>Đang giao hàng</td>
-            <td>1/12/2023</td>
-            <td>4/12/2023</td>
-            <td>1.000.000 vnđ</td>
-            <td>Chưa thanh toán</td>
-            <td>Thanh toán bằng tiền mặt</td>
+        <tr ng-repeat="order in orderInTransit">
+            <th scope="row">{{order.orderId}}</th>
+            <td>{{order.recipientName}}</td>
+            <td>{{order.phoneNumber}}</td>
+            <td>{{order.tradingCode}}</td>
+            <td>{{order.specifiedAddress}}</td>
+            <td>{{order.orderTime}}</td>
+            <td>{{order.orderUpdateTime}}</td>
+            <td>{{order.totalPrice}}</td>
+            <td>{{order.paymentStatus.paymentStatusName}}</td>
+            <td>{{order.orderStatus.orderStatusName}}</td>
+            <td>{{order.paymentMethod.paymentMethodName}}</td>
             <td>
-                <button class="btn">Cập nhật trạng thái</button>
+                <a class="btn btn-primary"  ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
             </td>
-
+            <td>
+                <a class="btn btn-warning"  ng-click="updateStatus(order.orderId,4);">Đơn Hàng Đã Xuất Kho</a>
+            </td>
+            <td>
+                <a class="btn btn-danger"  ng-click="updateStatus(order.orderId,5)">Hủy Đơn Hàng</a>
+            </td>
         </tr>
-
+        </tr>
         </tbody>
     </table>
 </div>

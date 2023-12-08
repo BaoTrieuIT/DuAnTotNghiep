@@ -21,4 +21,11 @@ public interface OrderService {
     Order createData(JsonNode orderData);
 
     Order createDataWithVnPay(JsonNode orderData);
+
+    List<Order> getOrderAwaitingConfirmation();
+    List<Order> getOrderHasBeenShipped();
+    List<Order> getOrderInTransit();
+
+    List<Order> getOrderDeliveryComplete();
+    List<Order>getOrderHasBeenCanceled();
 }

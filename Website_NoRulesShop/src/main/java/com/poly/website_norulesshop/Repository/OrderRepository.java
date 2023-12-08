@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.Repository;
 
 import com.poly.website_norulesshop.entity.Order;
+import com.poly.website_norulesshop.entity.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,4 +13,7 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT o FROM Order o where o.account.account_id = :accountId")
     List<Order> findByAccountId(@Param("accountId") Integer accountId);
+
+
+    List<Order> findByOrderStatus(OrderStatus orderStatus);
 }

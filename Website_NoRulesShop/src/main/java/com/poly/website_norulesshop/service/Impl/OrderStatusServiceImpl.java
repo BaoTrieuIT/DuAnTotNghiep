@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.service.Impl;
 
 import com.poly.website_norulesshop.Repository.OrderStatusRepository;
+import com.poly.website_norulesshop.entity.Order;
 import com.poly.website_norulesshop.entity.OrderStatus;
 import com.poly.website_norulesshop.service.OrderStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class OrderStatusServiceImpl implements OrderStatusService {
     @Override
     public void deleteOrderStatus(Integer id) {
         orderStatusRepository.deleteById(id);
+    }
+
+    @Override
+    public OrderStatus getByOrderStatusName(String OrderStatusName) {
+        return orderStatusRepository.findByOrderStatusName(OrderStatusName);
     }
 }

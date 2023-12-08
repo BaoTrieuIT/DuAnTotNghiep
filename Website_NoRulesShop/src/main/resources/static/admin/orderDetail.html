@@ -1,0 +1,49 @@
+
+<div class="container" style="padding: 100px" ng-controller="order_detail_ctrl" >
+    <h3 style="text-align: center; margin-bottom: 10px;margin-top: 10px;">Cập nhật đơn hàng</h3>
+    <form action="">
+        <div class="mb-3">
+            <table class="table">
+                <thead class="table-light">
+                <tr>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Giá từng sản phẩm</th>
+                </tr>
+                </thead>
+
+                <tbody ng-repeat="orderDetail in orderDetails">
+                <tr>
+                    <td class="Name">{{ orderDetail.product.productName }}</td>
+                    <td class="Other">{{ orderDetail.price }}</td>
+                    <td class="Other">{{ orderDetail.quantity }}</td>
+                    <td class="Other">{{ orderDetail.totalPrice }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div class="row my-2">
+        <div class="col-md-6">
+            <div>
+                Tổng tiền: {{ calculateTotalPrice() }}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    td{
+        width: 25%;
+        vertical-align: middle;
+    }
+    img{
+        width: 30%;
+    }
+
+    .price{
+        font-size: 20px;
+        color: red;
+    }
+</style>
