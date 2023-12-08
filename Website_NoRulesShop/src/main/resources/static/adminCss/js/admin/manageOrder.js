@@ -117,11 +117,11 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
             status = "Đã giao";
         } else if (statusId === 5) {
             status = "Bị huỷ";
-        }else{
+        } else {
             status = "undefine";
         }
         Swal.fire({
-            title: status  + "?",
+            title: status + "?",
             text: 'Bạn Có Chắc Chắn Muốn Cập Nhật Trạng Thái Thành ' + status + ' Không !',
             icon: 'warning',
             showCancelButton: true,
@@ -133,7 +133,7 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
             if (result.isConfirmed) {
                 $.ajax({
                     url: '/rest/order/updateOrderStatus?orderId=' + orderId + '&&statusId=' + statusId,
-                    method : "GET",
+                    method: "GET",
                     success: function (data) {
                         Swal.fire(
                             'Cập Nhật Hoàn Tất!',
@@ -159,34 +159,35 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
 
 
 app.controller("order_detail_ctrl", function ($scope, $http, $location, order_service) {
-    $scope.initialize();
-    $scope.orderDetails = [];
-
 
     $scope.initialize = function () {
-        $scope.orderId =  order_service.getOrderDetail();
-        if( $scope.orderId){
-            getOrderDetails( $scope.orderId);
-        }
-    }
 
-    // Hàm tính tổng totalPrice
-    $scope.calculateTotalPrice = function() {
-        var totalPriceSum = 0;
-        angular.forEach($scope.orderDetails, function(orderDetail) {
-            totalPriceSum += orderDetail.totalPrice;
-        });
-        return totalPriceSum;
-    };
-
-    function getOrderDetails(orderId) {
         $.ajax({
-            url: `/rest/orderDetails/byOrder/${orderId}`,
+            url: `/rest/orderDetails/byOrder/${order_service.getOrderDetail()}`,
             method: "GET",
             success: function (data) {
-                if(data.status == "success"){
-                    $scope.orderDetails = data.data;
-                }else{
+                if (data.status == "success") {
+                    let html = "";
+                    data.data.forEach(orderDetail =>{
+                        html +=  `
+                                <tr>
+                                    <td class="Name">${orderDetail.product.productName}</td>
+                                    <td class="Other">${orderDetail.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                    <td class="Other">${orderDetail.quantity}</td>
+                                    <td class="Other">${orderDetail.totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                </tr>
+                            `;
+                    })
+                    document.getElementById("table-body").innerHTML = html;
+                    let totalPriceSum = 0;
+                    data.data.forEach(orderDetail => {
+                        totalPriceSum += orderDetail.totalPrice;
+                    });
+
+                    const formattedTotalPrice = totalPriceSum.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                    document.getElementById("totalPrice").innerHTML = formattedTotalPrice;
+
+                } else {
                     Swal.fire(
                         'Thất Bại!',
                         "Lỗi Khi Lấy Order Detail Từ Database",
@@ -197,6 +198,12 @@ app.controller("order_detail_ctrl", function ($scope, $http, $location, order_se
             error: function (error) {
                 console.log(error)
             }
-        })
+        });
     }
+
+    // Hàm tính tổng totalPrice
+    $scope.calculateTotalPrice = function () {
+        return totalPriceSum;
+    };
+    $scope.initialize();
 })

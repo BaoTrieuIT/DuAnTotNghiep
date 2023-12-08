@@ -1,5 +1,5 @@
 
-<div class="container" style="padding: 100px" ng-controller="order_detail_ctrl" >
+<div class="container" style="padding: 100px">
     <h3 style="text-align: center; margin-bottom: 10px;margin-top: 10px;">Cập nhật đơn hàng</h3>
     <form action="">
         <div class="mb-3">
@@ -7,19 +7,11 @@
                 <thead class="table-light">
                 <tr>
                     <th scope="col">Sản phẩm</th>
-                    <th scope="col">Tên sản phẩm</th>
                     <th scope="col">Số lượng</th>
                     <th scope="col">Giá từng sản phẩm</th>
                 </tr>
                 </thead>
-
-                <tbody ng-repeat="orderDetail in orderDetails">
-                <tr>
-                    <td class="Name">{{ orderDetail.product.productName }}</td>
-                    <td class="Other">{{ orderDetail.price }}</td>
-                    <td class="Other">{{ orderDetail.quantity }}</td>
-                    <td class="Other">{{ orderDetail.totalPrice }}</td>
-                </tr>
+                <tbody id="table-body">
                 </tbody>
             </table>
         </div>
@@ -27,7 +19,7 @@
     <div class="row my-2">
         <div class="col-md-6">
             <div>
-                Tổng tiền: {{ calculateTotalPrice() }}
+                Tổng tiền: <span id="totalPrice"></span>
             </div>
         </div>
     </div>
