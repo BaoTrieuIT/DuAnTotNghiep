@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-lg-12 order-lg-last account-content">
                         <h4>Quên mật khẩu</h4>
-                        <form action="#" class="myacoount-form needs-validation" novalidate>
+                        <form th:action="@{/}" class="myacoount-form needs-validation" novalidate>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-md-5">
@@ -34,8 +34,8 @@
                                         <div class="form-group required-field">
                                             <label for="acc-password">Nhập lại mật khẩu<span
                                                     class="required">*</span></label>
-                                            <input type="password" class="form-control" id="acc-password"
-                                                   name="acc-password" required="">
+                                            <input type="password" class="form-control" id="acc-Repassword"
+                                                   name="acc-Repassword" required="">
                                         </div>
                                     </div>
                                     <!-- End .row -->
@@ -62,24 +62,8 @@
                                     <button type="submit" class="btn btn-primary btn-primary">Xác nhận</button>
 
                                 </div>
-                                <!-- <div class="col"> -->
 
-                                <!-- <div class="d-flex pt-2">
-                                    <div class="d-flex flex-column align-items-center justify-content-center">
-                                        <div>or Sign up using: </div>
-                                    </div>
-                                    <a href="#" class="login100-social-item bg1">
-                                        <i class="fa-brands fa-facebook"></i>
-                                    </a>
-                                    </a>
-                                    <a href="#" class="login100-social-item bg3">
-                                        <i class="fa-brands fa-google"></i>
-                                    </a>
-                                </div> -->
-                                <!-- </div> -->
                             </div>
-
-                            <!-- End .form-footer -->
                         </form>
                     </div>
                 </div>

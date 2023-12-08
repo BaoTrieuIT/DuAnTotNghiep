@@ -71,10 +71,16 @@ public class CheckOutController {
     @GetMapping("order-history")
     public String orderHistory(Model model, Principal principal) {
         Integer accountId = generalService.usernameHandler(principal);
-        List<Order> orderList = orderService.findByUserId(accountId);
-        model.addAttribute("orderList", orderList);
-        orderList.sort(Comparator.comparing(Order::getOrderTime).reversed());
-        model.addAttribute("title", "Lịch sử đặt hàng");
+        System.out.println(accountId);
+        try {
+            List<Order> orderList = orderService.findByUserId(accountId);
+            model.addAttribute("orderList", orderList);
+            orderList.sort(Comparator.comparing(Order::getOrderTime).reversed());
+            model.addAttribute("title", "Lịch sử đặt hàng");
+            return "user/order_history";
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return "user/order_history";
     }
 

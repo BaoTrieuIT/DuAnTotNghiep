@@ -55,9 +55,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusId}">
                             <th:block th:each="orderItem : *{order.getOrderDetailList()}">
-                                <tr th:case="'Đang chờ xác nhận'">
+                                <tr th:case="1">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
@@ -143,9 +143,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusId}">
                             <th:block th:each="orderItem : *{order.getOrderDetailList()}">
-                                <tr th:case="'Xuất kho'">
+                                <tr th:case="2">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
@@ -227,9 +227,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusId}">
                             <th:block th:each="orderItem : *{order.getOrderDetailList()}">
-                                <tr th:case="'Đang giao'">
+                                <tr th:case="3">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
@@ -311,9 +311,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusId}">
                             <th:block th:each="orderItem : *{order.getOrderDetailList()}">
-                                <tr th:case="'Bị huỷ'">
+                                <tr th:case="4">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
@@ -395,9 +395,9 @@
                         </thead>
                         <tbody>
                         <tbody>
-                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusName}">
+                        <th:block th:each="order : ${orderList}" th:switch="*{order.orderStatus.orderStatusId}">
                             <th:block th:each="orderItem : *{order.getOrderDetailList()}">
-                                <tr th:case="'Bị huỷ'">
+                                <tr th:case="5">
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="ms-3">
