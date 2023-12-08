@@ -27,75 +27,90 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
 
 
     $scope.doGetOrderAwaitingConfirm = function () {
-        $.ajax({
-            url: "/rest/order/awatingConfirm",
-            method: "GET",
-            success: function (data) {
-                if (data.status = "Success") {
-                    $scope.orderAwatingConfirm = data.data;
-                } else {
-                    $scope.orderAwatingConfirm = null;
-                }
-            }
+        // $.ajax({
+        //     url: "/rest/order_manage/awaitingConfirm",
+        //     method: "GET",
+        //     success: function (data) {
+        //         if (data.status = "Success") {
+        //             $scope.orderAwatingConfirm = data.data;
+        //         } else {
+        //             $scope.orderAwatingConfirm = null;
+        //         }
+        //     }
+        // })
+        $http.get("/rest/order_manage/awaitingConfirm").then(resp => {
+            $scope.orderAwatingConfirm = resp.data;
         })
     };
 
 
     $scope.doGetOrderInTransit = function () {
-        $.ajax({
-            url: "/rest/order/inTransit",
-            method: "GET",
-            success: function (data) {
-                if (data.status = "Success") {
-                    $scope.orderInTransit = data.data;
-                } else {
-                    $scope.orderInTransit = null;
-                }
-            }
+        // $.ajax({
+        //     url: "/rest/order_manage/inTransit",
+        //     method: "GET",
+        //     success: function (data) {
+        //         if (data.status = "Success") {
+        //             $scope.orderInTransit = data.data;
+        //         } else {
+        //             $scope.orderInTransit = null;
+        //         }
+        //     }
+        // })
+        $http.get("/rest/order_manage/inTransit").then(resp => {
+            $scope.orderInTransit = resp.data;
         })
     };
 
 
     $scope.doGetOrderHasBeenShipped = function () {
-        $.ajax({
-            url: "/rest/order/hasBeenShipped",
-            method: "GET",
-            success: function (data) {
-                if (data.status = "Success") {
-                    $scope.orderHasBeenShipped = data.data;
-                } else {
-                    $scope.orderHasBeenShipped = null;
-                }
-            }
+        // $.ajax({
+        //     url: "/rest/order_manage/hasBeenShipped",
+        //     method: "GET",
+        //     success: function (data) {
+        //         if (data.status = "Success") {
+        //             $scope.orderHasBeenShipped = data.data;
+        //         } else {
+        //             $scope.orderHasBeenShipped = null;
+        //         }
+        //     }
+        // })
+        $http.get("/rest/order_manage/hasBeenShipped").then(resp => {
+            $scope.orderHasBeenShipped = resp.data;
         })
     };
 
     $scope.doGetOrderDeliveryComplete = function () {
-        $.ajax({
-            url: "/rest/order/deliveryComplete",
-            method: "GET",
-            success: function (data) {
-                if (data.status = "Success") {
-                    $scope.orderDeliveryComplete = data.data;
-                } else {
-                    $scope.orderDeliveryComplete = null;
-                }
-            }
+        // $.ajax({
+        //     url: "/rest/order_manage/deliveryComplete",
+        //     method: "GET",
+        //     success: function (data) {
+        //         if (data.status = "Success") {
+        //             $scope.orderDeliveryComplete = data.data;
+        //         } else {
+        //             $scope.orderDeliveryComplete = null;
+        //         }
+        //     }
+        // })
+        $http.get("/rest/order_manage/deliveryComplete").then(resp => {
+            $scope.orderDeliveryComplete = resp.data;
         })
     };
 
 
     $scope.doGetOrderHasBeenCanceled = function () {
-        $.ajax({
-            url: "/rest/order/hasBeenCanceled",
-            method: "GET",
-            success: function (data) {
-                if (data.status = "Success") {
-                    $scope.orderHasBeenCanceled = data.data;
-                } else {
-                    $scope.orderHasBeenCanceled = null;
-                }
-            }
+        // $.ajax({
+        //     url: "/rest/order_manage/hasBeenCanceled",
+        //     method: "GET",
+        //     success: function (data) {
+        //         if (data.status = "Success") {
+        //             $scope.orderHasBeenCanceled = data.data;
+        //         } else {
+        //             $scope.orderHasBeenCanceled = null;
+        //         }
+        //     }
+        // })
+        $http.get("/rest/order_manage/hasBeenCanceled").then(resp => {
+            $scope.orderDeliveryComplete = resp.data;
         })
     };
 
@@ -127,28 +142,50 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Xác nhận',
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
-                $.ajax({
-                    url: '/rest/order/updateOrderStatus?orderId=' + orderId + '&&statusId=' + statusId,
-                    method: "GET",
-                    success: function (data) {
+                // $.ajax({
+                //     url: '/rest/order_manage/updateOrderStatus?orderId=' + orderId + '&&statusId=' + statusId,
+                //     method: "GET",
+                //     success: function (data) {
+                //         Swal.fire(
+                //             'Cập Nhật Hoàn Tất!',
+                //             "Trạng Thái Đã Được Chuyển Thành " + status,
+                //             'success'
+                //         );
+                //     },
+                //     error: function (error) {
+                //         Swal.fire(
+                //             'Thất Bại!',
+                //             "Cập Nhật Trạng Thái Thất Bại",
+                //             'error'
+                //         );
+                //     }
+                // })
+                $http.get('/rest/order_manage/updateOrderStatus', {
+                    params: {
+                        orderId: orderId,
+                        statusId: statusId
+                    }
+                }).then(
+                    (resp) => {
                         Swal.fire(
                             'Cập Nhật Hoàn Tất!',
                             "Trạng Thái Đã Được Chuyển Thành " + status,
-                            'success'
+                            'success',
                         );
+                        location.reload();
                     },
-                    error: function (error) {
+                    (error) => {
                         Swal.fire(
                             'Thất Bại!',
                             "Cập Nhật Trạng Thái Thất Bại",
                             'error'
                         );
                     }
-                })
+                )
             }
         });
     }
@@ -168,13 +205,19 @@ app.controller("order_detail_ctrl", function ($scope, $http, $location, order_se
             success: function (data) {
                 if (data.status == "success") {
                     let html = "";
-                    data.data.forEach(orderDetail =>{
-                        html +=  `
+                    data.data.forEach(orderDetail => {
+                        html += `
                                 <tr>
                                     <td class="Name">${orderDetail.product.productName}</td>
-                                    <td class="Other">${orderDetail.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                    <td class="Other">${orderDetail.price.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })}</td>
                                     <td class="Other">${orderDetail.quantity}</td>
-                                    <td class="Other">${orderDetail.totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                                    <td class="Other">${orderDetail.totalPrice.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        })}</td>
                                 </tr>
                             `;
                     })
@@ -184,7 +227,10 @@ app.controller("order_detail_ctrl", function ($scope, $http, $location, order_se
                         totalPriceSum += orderDetail.totalPrice;
                     });
 
-                    const formattedTotalPrice = totalPriceSum.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+                    const formattedTotalPrice = totalPriceSum.toLocaleString('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    });
                     document.getElementById("totalPrice").innerHTML = formattedTotalPrice;
 
                 } else {

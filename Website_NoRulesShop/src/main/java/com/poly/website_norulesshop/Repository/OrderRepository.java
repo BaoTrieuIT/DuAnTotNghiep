@@ -25,8 +25,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT COALESCE(SUM(o.totalPrice), 0) " +
             "FROM Order o " +
             "WHERE o.orderStatus.orderStatusId = 4 " +
-            "AND MONTH(o.orderUpdateTime) = MONTH(CURRENT_DATE) " +
-            "AND YEAR(o.orderUpdateTime) = YEAR(CURRENT_DATE)")
+            "AND MONTH(o.orderUpdateTime) = MONTH(CURRENT_DATE)")
     Integer countRevenueAndMonth();
 
     @Query("SELECT COALESCE(SUM(o.totalPrice), 0) " +

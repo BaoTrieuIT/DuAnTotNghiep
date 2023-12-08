@@ -86,22 +86,11 @@ public class CheckOutController {
         for (OrderDetail orderDetail : orderDetailList) {
             Product product = orderDetail.getProduct();
             CategoryQuantity categoryQuantity = orderDetail.getCategoryQuantity();
-
-
             int quantityOfOrder = orderDetail.getQuantity();
             int currentQtyOfProduct = product.getTotalQuantity();
             int quantityOfCategory = categoryQuantity.getQuantity();
-
-            System.out.println("quantityOfOrder: " + quantityOfOrder);
-            System.out.println("currentQty: " + currentQtyOfProduct);
-            System.out.println("quantityOfCategory: " + quantityOfCategory);
-
             int updateQtyOfProduct = Math.max(0, currentQtyOfProduct + quantityOfOrder);
             int updateQtyOfCategory = Math.max(0, quantityOfCategory + quantityOfOrder);
-
-            System.out.println("updateQtyOfProduct: " + updateQtyOfProduct);
-            System.out.println("updateQtyOfCategory: " + updateQtyOfCategory);
-
             product.setTotalQuantity(updateQtyOfProduct);
             categoryQuantity.setQuantity(updateQtyOfCategory);
             categoryQuantityService.saveCategoryQuantity(categoryQuantity);
