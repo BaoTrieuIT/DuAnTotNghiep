@@ -64,6 +64,9 @@ app.config(function ($routeProvider) {
             templateUrl: "/admin/discount.html",
             controller: "discount_ctrl"
 
+        }).when("/orderDetail", {
+            templateUrl: "/admin/orderDetail.html",
+            controller: "order_detail_ctrl"
         })
         .otherwise({
             templateUrl: "/admin/index.html",

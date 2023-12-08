@@ -28,4 +28,12 @@ public interface OrderService {
 
 
     List<OrderDTO> getAllOrdersDashboard();
+    Order createDataWithVnPay(JsonNode orderData);
+
+    List<Order> getOrderAwaitingConfirmation();
+    List<Order> getOrderHasBeenShipped();
+    List<Order> getOrderInTransit();
+
+    List<Order> getOrderDeliveryComplete();
+    List<Order>getOrderHasBeenCanceled();
 }

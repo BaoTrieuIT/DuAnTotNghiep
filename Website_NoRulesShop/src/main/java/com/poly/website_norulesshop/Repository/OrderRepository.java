@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.Repository;
 
 import com.poly.website_norulesshop.entity.Order;
+import com.poly.website_norulesshop.entity.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,4 +41,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
             "GROUP BY MONTH(e.orderUpdateTime), YEAR(e.orderUpdateTime)")
     List<Object[]> getRevenueByMonth();
 
+    List<Order> findByOrderStatus(OrderStatus orderStatus);
 }
