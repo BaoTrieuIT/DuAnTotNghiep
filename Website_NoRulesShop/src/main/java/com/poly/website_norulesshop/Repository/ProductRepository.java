@@ -1,6 +1,7 @@
 package com.poly.website_norulesshop.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,8 +27,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer>, JpaS
     Product findProductWithImagesById(@Param("productId") Integer productId);
 
     @Query("SELECT o FROM Product o WHERE o.brand.brandId = ?1")
-    Page<Product> findByBrandBrandId(String id, Pageable pageable);
+    Page<Product> findByBrandId(String id, Pageable pageable);
 
     @Query("SELECT o.totalQuantity FROM Product o WHERE o.productId = ?1")
     Integer getTotalById(Integer id);
+
+    @Query("SELECT o FROM Product o WHERE o.brand.brandId = ?1")
+    List<Product> findByBrandId(Integer brandId);
 }

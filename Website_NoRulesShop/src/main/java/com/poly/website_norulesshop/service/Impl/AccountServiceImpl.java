@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 
 
-import com.poly.website_norulesshop.Repository.AccountStatusRepository;
 import com.poly.website_norulesshop.constant.Provider;
 import com.poly.website_norulesshop.entity.AccountStatus;
 import com.poly.website_norulesshop.entity.Role;
@@ -172,5 +171,16 @@ public class AccountServiceImpl implements AccountService {
             accountRepository.save(newUser);
         }
     }
+
+    @Override
+    public Integer totalAccountUser(String time) {
+        return switch (time) {
+            case "customer_today" -> accountRepository.countUsersByRoleAndToday();
+            case "customer_month" -> accountRepository.countUsersByRoleAndMonth();
+            case "customer_year" -> accountRepository.countUsersByRoleAndYear();
+            default -> throw new RuntimeException();
+        };
+    }
+
 
 }

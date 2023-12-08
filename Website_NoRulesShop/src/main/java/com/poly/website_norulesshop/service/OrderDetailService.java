@@ -16,4 +16,8 @@ public interface OrderDetailService {
     void deleteOrderDetail(Integer id);
 
     List<OrderDetail> findByOrderId(Integer orderId);
+
+    Integer totalSales(String time);
+
+
 }

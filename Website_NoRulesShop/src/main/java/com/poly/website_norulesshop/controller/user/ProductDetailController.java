@@ -45,13 +45,17 @@ public class ProductDetailController {
     DirectoryLv1Service directoryLv1Service;
 
 
-    @GetMapping("/product-details/productId={productId}")
-    public String getProductDetails(Model model, @PathVariable("productId") int productId) {
+    @GetMapping("/product-details/productId={productId}/brandId={brandId}")
+    public String getProductDetails(Model model,
+                                    @PathVariable("productId") int productId,
+                                    @PathVariable("brandId") int brandId) {
         Product product = productService.getProductById(productId);
+        List<Product> products = productService.getProductByBrandId(brandId);
         List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
+        model.addAttribute("productsRelate", products);
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);
         model.addAttribute("categoryLv1Id", null);
@@ -82,12 +86,18 @@ public class ProductDetailController {
         Product product = productService.getProductById(productId);
         if (categoryLv1Id != null || categoryLv2Id != null) {
             List<CategoryQuantity> categoryQuantityList = categoryQuantityService.filterList(productId, categoryLv1Id, categoryLv2Id);
+            Integer categoryQuantity = categoryQuantityService.getTotalQuantity(productId, categoryLv1Id, categoryLv2Id);
+            System.out.println(categoryQuantity);
             model.addAttribute("category", categoryQuantityList);
             model.addAttribute("categoryLv1Id", categoryLv1Id);
             model.addAttribute("categoryLv2Id", categoryLv2Id);
+            model.addAttribute("quantity", categoryQuantity);
+
         } else {
             List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
             model.addAttribute("category", categoryQuantityList);
+            model.addAttribute("quantity", -1);
+
         }
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());

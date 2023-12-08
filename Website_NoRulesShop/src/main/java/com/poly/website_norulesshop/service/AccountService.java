@@ -29,4 +29,9 @@ public interface AccountService {
     void updateAccount_frUser(Account account, String newPassword);
 
     void processOAuthPostLogin(String email, String clientName);
+
+
+    Integer totalAccountUser(String time);
+
+
 }

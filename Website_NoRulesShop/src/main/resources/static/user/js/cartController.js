@@ -48,6 +48,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
                         return false;
                     }
                     item.qty += quantity;
+                    location.href = "/home/product-details/filter?productId=" + productId + "&categoryLv1Id=" + categoryLv1Id + "&categoryLv2Id=" + categoryLv2Id;
                     this.saveToLocalStorage();
                 } else {
                     $http.get(`/rest/products/${productId}`).then(resp => {
@@ -57,9 +58,9 @@ app.controller("cart_ctrl", function ($scope, $http) {
                                     resp.data.qty = quantity;
                                     resp.data.categoryQuantity = respCategory.data;
                                     resp.data.productImageList = respImage.data;
-                                    console.log(resp.data);
                                     this.items.push(resp.data);
                                     this.saveToLocalStorage();
+                                    location.href = "/home/product-details/filter?productId=" + productId + "&categoryLv1Id=" + categoryLv1Id + "&categoryLv2Id=" + categoryLv2Id;
                                 }).catch(error => {
                                     alert("Update lỗi!")
                                     console.log(error)
@@ -75,6 +76,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
             var index = this.items.findIndex(item => item.productId === productId);
             this.items.splice(index, 1);
             $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
+                location.href = "/home/product-details/filter?productId=" + productId + "&categoryLv1Id=" + categoryLv1Id + "&categoryLv2Id=" + categoryLv2Id;
             }).catch(error => {
                 alert("Update lỗi!")
                 console.log(error)
@@ -121,7 +123,11 @@ app.controller("cart_ctrl", function ($scope, $http) {
     };
     $cart.loadFromLocalStorage();
     // Đặt hàng
+    $scope.flag = false;
     $scope.order = {
+        get account() {
+            return {account_id: $auth.account_id}
+        },
         orderTime: new Date(),
         phoneNumber: "",
         recipientName: "",
@@ -137,45 +143,46 @@ app.controller("cart_ctrl", function ($scope, $http) {
                 return {
                     product: {productId: item.productId},
                     price: item.priceNew,
-                    quantity: item.qty
+                    quantity: item.qty,
+                    totalPrice: $cart.amt_of(item),
+                    categoryQuantity: {category_quantity_id: item.categoryQuantity[0].category_quantity_id}
                 }
             });
         },
         purchase() {
-            this.totalPrice = $cart.amount;
-            var order
-            if (this.paymentMethodId === 1) {
-                this.paymentStatus = {paymentStatusId: 1};
-                this.paymentMethod = {paymentMethodId: 1};
-                order = angular.copy(this);
-                console.log(order);
-                // Thực hiện đặt hàng
-                $http.post("/rest/order", order).then(resp => {
-                    alert("Đặt hàng thành công!");
-                    $cart.clear();
-                    // location.href = "/home/order-detail/" + resp.data.id;
-                    console.log(resp.data.orderId)
-                    location.href = "/home/order-confirm/" + resp.data.orderId;
-                }).catch(error => {
-                    alert("Đặt hàng lỗi!")
-                    console.log(error)
-                })
-            } else if (this.paymentMethodId === 2) {
-                this.paymentStatus = {paymentStatusId: 2};
-                this.paymentMethod = {paymentMethodId: 2};
-                order = angular.copy(this);
-                console.log(order);
-                $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
-                    $cart.clear();
-                    window.location.href = resp.data.paymentUrl;
-                }).catch(error => {
-                    alert("Đặt hàng lỗi!")
-                    console.log(error)
-                })
+            if (this.recipientName === "" && this.phoneNumber === "" && this.specifiedAddress === "") {
+            } else {
+                this.totalPrice = $cart.amount;
+                var order
+                if (this.paymentMethodId === 1) {
+                    this.paymentStatus = {paymentStatusId: 1};
+                    this.paymentMethod = {paymentMethodId: 1};
+                    order = angular.copy(this);
+                    console.log(order);
+                    // Thực hiện đặt hàng
+                    $http.post("/rest/order", order).then(resp => {
+                        $cart.clear();
+                        location.href = "/home/order-confirm/" + resp.data.orderId;
+                    }).catch(error => {
+                        alert("Đặt hàng lỗi!")
+                        console.log(error)
+                    })
+                } else if (this.paymentMethodId === 2) {
+                    this.paymentStatus = {paymentStatusId: 2};
+                    this.paymentMethod = {paymentMethodId: 2};
+                    order = angular.copy(this);
+                    console.log(order);
+                    $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
+                        $cart.clear();
+                        window.location.href = resp.data.paymentUrl;
+                    }).catch(error => {
+                        alert("Đặt hàng lỗi!")
+                        console.log(error)
+                    })
+                }
+                $scope.flag.loading = true;
             }
+
         }
     }
 })
-
-$(document).ready(function () {
-});

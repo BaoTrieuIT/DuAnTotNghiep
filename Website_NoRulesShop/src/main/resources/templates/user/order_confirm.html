@@ -54,7 +54,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div id="order-details" class="float-left w-100">
+                        <div id="order-details" class="float-left w-100 mb-30">
                             <h3 class="h3 card-title">Chi tiết đặt hàng:</h3>
                             <ul>
                                 <li th:text="'Mã đơn hàng: ' + ${order.tradingCode}"></li>
@@ -65,7 +65,20 @@
                                 <li th:text="'Người đặt hàng: ' + ${order.account.fullname}"></li>
                             </ul>
                         </div>
-
+                        <div class="float-right w-100">
+                            <th:block th:if="${order.orderStatus.orderStatusId == 5}">
+                                <button type="submit" class="btn btn-primary" disabled>
+                                    Hủy đơn hàng
+                                </button>
+                            </th:block>
+                            <th:block th:if="${order.orderStatus.orderStatusId == 1}">
+                                <form th:action="@{'/home/order-update/'+${order.orderId}}" method="post">
+                                    <button type="submit" class="btn btn-primary">
+                                        Hủy đơn hàng
+                                    </button>
+                                </form>
+                            </th:block>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,6 @@
 package com.poly.website_norulesshop.controller.user;
 
-import com.poly.website_norulesshop.entity.Order;
-import com.poly.website_norulesshop.entity.OrderDetail;
-import com.poly.website_norulesshop.entity.OrderStatus;
-import com.poly.website_norulesshop.entity.PaymentMethod;
+import com.poly.website_norulesshop.entity.*;
 import com.poly.website_norulesshop.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,10 @@ public class CheckOutController {
     PaymentMethodService paymentMethodService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    CategoryQuantityService categoryQuantityService;
+    @Autowired
+    ProductService productService;
     @Autowired
     OrderStatusService orderStatusService;
     @Autowired
@@ -44,7 +45,7 @@ public class CheckOutController {
     @GetMapping("order-confirm/{orderId}")
     public String orderConfirm(Model model, @PathVariable("orderId") Integer id) {
         Order order = orderService.getOrderById(id);
-        List<OrderDetail> orderDetail = orderDetailService.findByOrderId(order.getOrderId());
+        List<OrderDetail> orderDetail = orderDetailService.findByOrderId(id);
         model.addAttribute("order", order);
         model.addAttribute("orderDetail", orderDetail);
         model.addAttribute("title", "Xác nhận đơn hàng");
@@ -80,9 +81,32 @@ public class CheckOutController {
     @PostMapping("/order-update/{orderId}")
     public String updateCancelOrder(@PathVariable Integer orderId) {
         OrderStatus orderStatus = orderStatusService.getOrderStatusById(5);
-        System.out.println("orderStatus" + orderStatus.getOrderStatusId());
         Order order = orderService.getOrderById(orderId);
-        System.out.println("order" + order.getOrderStatus().getOrderStatusId());
+        List<OrderDetail> orderDetailList = orderDetailService.findByOrderId(orderId);
+        for (OrderDetail orderDetail : orderDetailList) {
+            Product product = orderDetail.getProduct();
+            CategoryQuantity categoryQuantity = orderDetail.getCategoryQuantity();
+
+
+            int quantityOfOrder = orderDetail.getQuantity();
+            int currentQtyOfProduct = product.getTotalQuantity();
+            int quantityOfCategory = categoryQuantity.getQuantity();
+
+            System.out.println("quantityOfOrder: " + quantityOfOrder);
+            System.out.println("currentQty: " + currentQtyOfProduct);
+            System.out.println("quantityOfCategory: " + quantityOfCategory);
+
+            int updateQtyOfProduct = Math.max(0, currentQtyOfProduct + quantityOfOrder);
+            int updateQtyOfCategory = Math.max(0, quantityOfCategory + quantityOfOrder);
+
+            System.out.println("updateQtyOfProduct: " + updateQtyOfProduct);
+            System.out.println("updateQtyOfCategory: " + updateQtyOfCategory);
+
+            product.setTotalQuantity(updateQtyOfProduct);
+            categoryQuantity.setQuantity(updateQtyOfCategory);
+            categoryQuantityService.saveCategoryQuantity(categoryQuantity);
+            productService.saveProduct(product);
+        }
         order.setOrderStatus(orderStatus);
         order.setOrderUpdateTime(new Date());
         orderService.saveOrder(order);

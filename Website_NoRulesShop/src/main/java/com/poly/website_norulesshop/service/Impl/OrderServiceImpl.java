@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poly.website_norulesshop.Repository.OrderDetailRepository;
 import com.poly.website_norulesshop.Repository.OrderRepository;
+import com.poly.website_norulesshop.dto.OrderDTO;
 import com.poly.website_norulesshop.entity.Account;
 import com.poly.website_norulesshop.entity.Order;
 import com.poly.website_norulesshop.entity.OrderDetail;
@@ -12,9 +13,11 @@ import com.poly.website_norulesshop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -98,5 +101,24 @@ public class OrderServiceImpl implements OrderService {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+
+    @Override
+    public Integer totalRevenue(String time) {
+        return switch (time) {
+            case "revenue_today" -> orderRepository.countRevenueAndToday();
+            case "revenue_month" -> orderRepository.countRevenueAndMonth();
+            case "revenue_year" -> orderRepository.countRevenueAndYear();
+            default -> throw new RuntimeException();
+        };
+    }
+
+    @Override
+    public List<OrderDTO> getAllOrdersDashboard() {
+        List<Object[]> revenueList = orderRepository.getRevenueByMonth();
+        return revenueList.stream()
+                .map(data -> new OrderDTO((int) data[0], (int) data[1], (BigDecimal) data[2]))
+                .collect(Collectors.toList());
     }
 }

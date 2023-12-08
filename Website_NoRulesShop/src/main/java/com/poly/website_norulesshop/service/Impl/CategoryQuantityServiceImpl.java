@@ -77,4 +77,6 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
     public Integer getTotalQuantity(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
         return categoryQuantityRepository.getQuantity(productId, categoryLv1DetailId, categoryLv2DetailId);
     }
+
+
 }

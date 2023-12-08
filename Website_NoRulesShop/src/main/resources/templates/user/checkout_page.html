@@ -5,6 +5,7 @@
 	<title>Checkout</title>
 </head>
 <body>
+<div class="ttloading-bg" ng-show="flag.loading"></div>
   <nav aria-label="breadcrumb" class="w-100 float-left">
     <ol class="breadcrumb parallax justify-content-center" data-source-url="/user/img/banner/parallax.jpg"
         style="background-image: url('/user/img/banner/parallax.jpg'); background-position: 50% 0.809717%;">
@@ -15,7 +16,7 @@
   </nav>
   <div class="checkout-inner float-left w-100">
     <div class="container">
-      <div class="row">
+      <form class="row">
         <div class="cart-block-left col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Giỏ hàng của bạn</span>
@@ -49,36 +50,55 @@
                        ng-bind="method.paymentMethodName"></label>
               </div>
             </div>
-            <a ng-click="order.purchase()" class="btn btn-primary btn-lg btn-primary">Đặt hàng</a>
+            <button type="submit" ng-click="order.purchase()" class="btn btn-primary btn-lg btn-primary">Đặt hàng</button>
             </ul>
           </div>
         </div>
         <div class="cart-block-right col-md-8 order-md-1">
           <h4 class="mb-3">Thông tin đặt hàng</h4>
-          <form class="needs-validation" >
+          <div class="needs-validation">
             <div class="row">
-              <input type="hidden" ng-model="order.accountId" th:value="${acc.account_id}">
               <div class="col-md-6 mb-3">
                 <label for="fullName">Họ tên người nhận<span class="required">*</span></label>
-                <input type="text" class="form-control" id="fullName" placeholder="" ng-model="order.recipientName" value=""
+                <input type="text"
+                       class="form-control"
+                       id="fullName"
+                       placeholder=""
+                       ng-model="order.recipientName"
+                       value=""
                        required="">
               </div>
               <div class="col-md-6 mb-3">
                 <label for="phoneNumber">Số điện thoại <span class="text-muted"></span></label>
-                <input type="number" class="form-control" id="phoneNumber" ng-model="order.phoneNumber" placeholder="">
+                <input type="number"
+                       class="form-control"
+                       id="phoneNumber"
+                       ng-model="order.phoneNumber"
+                       placeholder=""
+                       required="">
               </div>
             </div>
             <div class="mb-3">
               <label for="address">Địa chỉ người nhận<span class="required">*</span> </label>
-              <input type="text" class="form-control" id="address" placeholder="" ng-model="order.specifiedAddress" required="">
+              <input type="text"
+                     class="form-control"
+                     id="address"
+                     placeholder=""
+                     ng-model="order.specifiedAddress"
+                     required="">
             </div>
             <div class="mb-3">
               <label for="note">Ghi chú<span class="required">*</span> </label>
-              <textarea class="form-control" placeholder="" ng-model="order.orderNote" id="note" style="height: 100px;"></textarea>
+              <textarea
+                      class="form-control"
+                      placeholder=""
+                      ng-model="order.orderNote"
+                      id="note"
+                      style="height: 100px;"></textarea>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <!--Start of Tawk.to Script-->

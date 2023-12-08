@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     // Các phương thức đặc thù cho bảng Account (nếu cần)
@@ -17,4 +19,22 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     Account findByEmail(String email);
 
     Account save(AccountDTO account);
+
+    @Query("SELECT COUNT(DISTINCT a) FROM Account a " +
+            "JOIN a.roles r " +
+            "WHERE r.role_name = 'USER' " +
+            "AND a.create_date = CURRENT_DATE")
+    Integer countUsersByRoleAndToday();
+
+    @Query("SELECT COUNT(DISTINCT a) FROM Account a " +
+            "JOIN a.roles r " +
+            "WHERE r.role_name = 'USER' " +
+            "AND YEAR(a.create_date) = YEAR(CURRENT_DATE) ")
+    Integer countUsersByRoleAndYear();
+
+    @Query("SELECT COUNT(DISTINCT a) FROM Account a " +
+            "JOIN a.roles r " +
+            "WHERE r.role_name = 'USER' " +
+            "AND MONTH(a.create_date) = MONTH(CURRENT_DATE) ")
+    Integer countUsersByRoleAndMonth();
 }

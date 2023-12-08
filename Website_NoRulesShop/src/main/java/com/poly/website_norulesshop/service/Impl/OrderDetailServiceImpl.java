@@ -42,4 +42,14 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public List<OrderDetail> findByOrderId(Integer orderId) {
         return orderDetailRepository.findByOrderId(orderId);
     }
+
+    @Override
+    public Integer totalSales(String time) {
+        return switch (time) {
+            case "sales_today" -> orderDetailRepository.countSalesAndToday();
+            case "sales_month" -> orderDetailRepository.countSalesAndMonth();
+            case "sales_year" -> orderDetailRepository.countSalesAndYear();
+            default -> throw new RuntimeException();
+        };
+    }
 }

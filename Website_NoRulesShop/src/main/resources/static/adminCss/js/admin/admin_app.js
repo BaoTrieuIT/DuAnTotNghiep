@@ -66,6 +66,7 @@ app.config(function ($routeProvider) {
 
         })
         .otherwise({
-            templateUrl: "/admin/index.html"
+            templateUrl: "/admin/index.html",
+            controller: "dashboard_ctrl"
         });
 })

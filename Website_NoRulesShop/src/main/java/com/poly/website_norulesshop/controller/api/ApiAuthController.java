@@ -12,6 +12,6 @@ public class ApiAuthController {
     @GetMapping("/rest/login/authentication")
     @ResponseBody
     public Object getAuthentication(HttpSession session) {
-        return session.getAttribute("authentication");
+        return session.getAttribute("acc");
     }
 }

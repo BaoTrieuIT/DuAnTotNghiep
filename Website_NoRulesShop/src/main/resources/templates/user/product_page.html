@@ -27,7 +27,7 @@
                                  th:each="product : ${productPage.content}">
                                 <div class="product-thumb">
                                     <div class="image zoom">
-                                        <a th:href="@{'/home/product-details/productId=' + ${product.getProductId()}}"
+                                        <a th:href="@{'/home/product-details/productId=' + ${product.getProductId()} + '/brandId=' +${product.getBrand.getBrandId()} }"
                                            th:each="image, limit: ${product.getProductImageList()}"
                                            th:if="${limit.index} &lt; 2">
                                             <img th:src="@{'/user/img/products/' + ${image.getImage_url}}"
@@ -39,7 +39,7 @@
                                     <div class="thumb-description">
                                         <div class="caption">
                                             <h4 class="product-title text-capitalize">
-                                                <a th:href="@{'/home/product-details/productId=' + ${product.getProductId()}}"
+                                                <a th:href="@{'/home/product-details/productId=' + ${product.getProductId()}+ '/brandId=' +${product.getBrand.getBrandId()}}"
                                                    th:text="${product.getProductName()}"></a>
                                             </h4>
                                         </div>

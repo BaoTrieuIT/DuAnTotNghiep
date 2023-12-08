@@ -25,4 +25,5 @@ public interface CategoryQuantityService {
     void deleteCategoryQuantity(Integer id);
 
     Integer getTotalQuantity(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId);
+
 }

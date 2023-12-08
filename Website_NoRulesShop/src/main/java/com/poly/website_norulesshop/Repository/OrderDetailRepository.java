@@ -14,4 +14,24 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
     @Query("SELECT O FROM OrderDetail O WHERE O.order.orderId = :orderId")
     List<OrderDetail> findByOrderId(@Param("orderId") Integer orderId);
 
+    @Query("SELECT COALESCE(SUM(od.quantity), 0) " +
+            "FROM OrderDetail od " +
+            "WHERE od.order.orderStatus.orderStatusId = 4 " +
+            "AND YEAR(od.order.orderTime) = YEAR(CURRENT_DATE)")
+    Integer countSalesAndYear();
+
+    @Query("SELECT COALESCE(SUM(od.quantity), 0) " +
+            "FROM OrderDetail od " +
+            "WHERE od.order.orderStatus.orderStatusId = 4 " +
+            "AND MONTH(od.order.orderTime) = MONTH(CURRENT_DATE) " +
+            "AND YEAR(od.order.orderTime) = YEAR(CURRENT_DATE)")
+    Integer countSalesAndMonth();
+
+    @Query("SELECT COALESCE(SUM(od.quantity), 0) " +
+            "FROM OrderDetail od " +
+            "WHERE od.order.orderStatus.orderStatusId = 4 " +
+            "AND DATE(od.order.orderTime) = CURRENT_DATE")
+    Integer countSalesAndToday();
+
+
 }

@@ -16,6 +16,8 @@ public interface ProductService {
 
     Product getProductById(Integer id);
 
+    List<Product> getProductByBrandId(Integer brandId);
+
     List<Product> getAllProducts();
 
     Integer getTotalQuantity(Integer id);
