@@ -53,7 +53,6 @@ public class CustomOauth2Account implements OAuth2User {
         Collection<? extends GrantedAuthority> mapRoles = roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole_name()))
                 .collect(Collectors.toList());
-        System.out.println(mapRoles);
         return mapRoles;
     }
 }

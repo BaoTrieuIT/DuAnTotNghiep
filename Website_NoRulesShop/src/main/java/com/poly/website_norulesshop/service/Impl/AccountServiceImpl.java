@@ -59,7 +59,7 @@ public class AccountServiceImpl implements AccountService {
         account.setCreate_date(currentDate);
         account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
         account.setProvider(Provider.LOCAL);
-
+        account.setAvatar_url("phong.png");
         AccountStatus accountStatus = accountStatusService.getAccountStatusById(1);
         Provider provider = Provider.valueOf("LOCAL");
         account.setProvider(provider);
@@ -161,6 +161,7 @@ public class AccountServiceImpl implements AccountService {
             newUser.setPassword(passwordEncoder.encode("123456"));
             Provider provider = Provider.valueOf(clientName.toUpperCase());
             newUser.setProvider(provider);
+            newUser.setAvatar_url("phong.png");
             AccountStatus accountStatus = accountStatusService.getAccountStatusById(1);
             Role role = roleRepository.findRoleByRole_name("USER");
             if (role == null) {

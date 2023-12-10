@@ -23,7 +23,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
                 }
             });
         },
-        add(productId, quantity, categoryLv1Id, categoryLv2Id) { // thêm sản phẩm vào giỏ hàng
+        async add(productId, quantity, categoryLv1Id, categoryLv2Id) { // thêm sản phẩm vào giỏ hàng
             if (categoryLv1Id == null || categoryLv2Id == null) {
                 alert("Vui lòng chọn kích thước và màu sắc");
                 return false;
@@ -32,51 +32,93 @@ app.controller("cart_ctrl", function ($scope, $http) {
                 alert("Vui lòng nhập số lượng");
                 return false;
             }
-            var maxQty = 0;
-            // var quantity = this.qty;
-            var item = this.items.find(item => item.productId === productId);
-            $http.get(`/rest/getMaxQty/${productId}/${categoryLv1Id}/${categoryLv2Id}`).then(response => {
-                // Assuming the server returns the maxQty value
-                maxQty = response.data;
+            try {
+                const maxQty = await this.getMaxQuantity(productId, categoryLv1Id, categoryLv2Id);
                 if (quantity > maxQty) {
                     alert("Không đủ số lượng");
                     return false;
                 }
-                if (item) {
-                    if (item.qty + quantity > maxQty) {
+                const item = this.findCartItem(productId);
+                if (item && item.qty <= 0) {
+                    if (item && item.qty + quantity > maxQty) {
                         alert("Không đủ số lượng");
                         return false;
                     }
-                    item.qty += quantity;
-                    location.href = "/home/product-details/filter?productId=" + productId + "&categoryLv1Id=" + categoryLv1Id + "&categoryLv2Id=" + categoryLv2Id;
-                    this.saveToLocalStorage();
                 } else {
-                    $http.get(`/rest/products/${productId}`).then(resp => {
-                        $http.get(`/rest/productImages/${productId}`).then(respImage => {
-                            $http.get(`/rest/categoryQuantity/${productId}/${categoryLv1Id}/${categoryLv2Id}`).then(respCategory => {
-                                $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
-                                    resp.data.qty = quantity;
-                                    resp.data.categoryQuantity = respCategory.data;
-                                    resp.data.productImageList = respImage.data;
-                                    this.items.push(resp.data);
-                                    this.saveToLocalStorage();
-                                    location.href = "/home/product-details/filter?productId=" + productId + "&categoryLv1Id=" + categoryLv1Id + "&categoryLv2Id=" + categoryLv2Id;
-                                }).catch(error => {
-                                    alert("Update lỗi!")
-                                    console.log(error)
-                                })
-                            })
-                        })
-                    });
+                    if (item && (item.qty + quantity) - item.qty > maxQty) {
+                        alert("Không đủ số lượng");
+                        return false;
+                    }
                 }
-            })
-
+                if (item) {
+                    await this.updateCartItem(item, quantity, productId, categoryLv1Id, categoryLv2Id);
+                } else {
+                    await this.addNewItemToCart(productId, categoryLv1Id, categoryLv2Id, quantity);
+                }
+                this.redirect("/home/product-details/filter", productId, categoryLv1Id, categoryLv2Id);
+                location.reload()
+                return true;
+            } catch (error) {
+                alert("Error");
+                console.error(error);
+                return false;
+            }
         },
+        async getMaxQuantity(productId, categoryLv1Id, categoryLv2Id) {
+            const response = await $http.get(`/rest/getMaxQty/${productId}/${categoryLv1Id}/${categoryLv2Id}`);
+            return response.data;
+        },
+        findCartItem(productId) {
+            return this.items.find(item => item.productId === productId);
+        },
+
+        async updateCartItem(item, quantity, productId, categoryLv1Id, categoryLv2Id) {
+            item.qty += quantity;
+            await $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`)
+                .then(resp => {
+                    location.reload();
+                    this.saveToLocalStorage();
+                })
+                .catch(error => {
+                        alert("Update lỗi!");
+                        console.log(error);
+                    }
+                );
+        },
+        async addNewItemToCart(productId, categoryLv1Id, categoryLv2Id, quantity) {
+            try {
+                const productResponse = await $http.get(`/rest/products/${productId}`);
+                const imageResponse = await $http.get(`/rest/productImages/${productId}`);
+                const categoryResponse = await $http.get(`/rest/categoryQuantity/${productId}/${categoryLv1Id}/${categoryLv2Id}`);
+
+                await $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`)
+                    .then(respQuantity => {
+                        productResponse.data.qty = quantity;
+                        productResponse.data.categoryQuantity = categoryResponse.data;
+                        productResponse.data.productImageList = imageResponse.data;
+                        this.items.push(productResponse.data);
+                        this.saveToLocalStorage();
+                        location.reload();
+                    })
+                    .catch(error => {
+                            alert("Update lỗi!");
+                            console.log(error);
+                        }
+                    );
+            } catch (error) {
+                console.error(error);
+                // Handle errors as needed
+            }
+        },
+        redirect(baseURL, productId, categoryLv1Id, categoryLv2Id) {
+            const url = `${baseURL}?productId=${productId}&categoryLv1Id=${categoryLv1Id}&categoryLv2Id=${categoryLv2Id}`;
+        },
+
         remove(productId, quantity, categoryLv1Id, categoryLv2Id) { // xóa sản phẩm khỏi giỏ hàng
             var index = this.items.findIndex(item => item.productId === productId);
             this.items.splice(index, 1);
             $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
-                location.href = "/home/product-details/filter?productId=" + productId + "&categoryLv1Id=" + categoryLv1Id + "&categoryLv2Id=" + categoryLv2Id;
+                location.reload()
             }).catch(error => {
                 alert("Update lỗi!")
                 console.log(error)

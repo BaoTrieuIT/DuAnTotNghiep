@@ -32,7 +32,6 @@ public class CustomOAuth2AccountService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         String clientName = userRequest.getClientRegistration().getClientName();
         OAuth2User user = super.loadUser(userRequest);
-        // Mở rộng yêu cầu để lấy thông tin vai trò từ OAuth2 provider
         Set<Role> roles = getRolesFromOAuth2Provider(user);
         Account existingAccount = getUsernameFromOAuth2(user);
         return new CustomOauth2Account(user, roles, clientName, existingAccount);

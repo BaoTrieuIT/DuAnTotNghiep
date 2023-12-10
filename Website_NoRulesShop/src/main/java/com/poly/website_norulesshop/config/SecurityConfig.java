@@ -117,20 +117,15 @@ public class SecurityConfig {
                                 .userInfoEndpoint(userInfo -> userInfo
                                         .userService(customOAuth2AccountService))
                                 .successHandler((request, response, authentication) -> {
-                                    System.out.println(authentication.getPrincipal());
-
                                     if (authentication.getPrincipal() instanceof CustomOauth2Account customOauth2Account) {
                                         String email = customOauth2Account.getName();
-                                        System.out.println(email);
                                         Account existingUser = accountService.findByEmail(email);
                                         if (existingUser != null) {
                                             if (existingUser.getAccountStatus().getAccountStatusId() == 1) {
-                                                System.out.println(authentication.getAuthorities());
                                                 session.setAttribute("authentication", authentication);
                                                 session.setAttribute("acc", existingUser);
                                                 GlobalFlag.flag = true;
                                                 response.sendRedirect("/");
-                                                System.out.println("User is existing!");
                                             } else {
                                                 GlobalFlag.flag = false;
                                                 response.sendRedirect("/home/sign-in?error");
@@ -163,11 +158,6 @@ public class SecurityConfig {
         rememberMe.setMatchingAlgorithm(TokenBasedRememberMeServices.RememberMeTokenAlgorithm.MD5);
         return rememberMe;
     }
-//    @Bean
-//    public PersistentTokenRepository persistentTokenRepository() {
-//        JdbcTokenRepositoryImpl repository = new JdbcTokenRepositoryImpl();
-//        repository.setDataSource(dataSource);
-//        return repository;
-//    }
+
 
 }
