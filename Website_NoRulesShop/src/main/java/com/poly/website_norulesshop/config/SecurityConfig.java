@@ -122,7 +122,8 @@ public class SecurityConfig {
                                         Account existingUser = accountService.findByEmail(email);
                                         if (existingUser != null) {
                                             if (existingUser.getAccountStatus().getAccountStatusId() == 1) {
-
+                                                session.setAttribute("authentication", authentication);
+                                                session.setAttribute("acc", existingUser);
                                                 GlobalFlag.flag = true;
                                                 response.sendRedirect("/");
                                             } else {
