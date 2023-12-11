@@ -1,4 +1,4 @@
-package com.poly.website_norulesshop.controller.user;
+package com.poly.website_norulesshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
