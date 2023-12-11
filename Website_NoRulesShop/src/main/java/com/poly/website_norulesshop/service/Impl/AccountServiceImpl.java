@@ -155,8 +155,10 @@ public class AccountServiceImpl implements AccountService {
     public void processOAuthPostLogin(String email, String clientName) {
         Account existUser = accountRepository.findByEmail(email);
         if (existUser == null) {
+            Date currentDate = new Date(System.currentTimeMillis());
             Account newUser = new Account();
             newUser.setEmail(email);
+            newUser.setCreate_date(currentDate);
             newUser.setUsername(email);
             newUser.setPassword(passwordEncoder.encode("123456"));
             Provider provider = Provider.valueOf(clientName.toUpperCase());
