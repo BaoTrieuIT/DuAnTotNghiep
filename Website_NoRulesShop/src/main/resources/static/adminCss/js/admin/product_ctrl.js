@@ -1,31 +1,30 @@
-app.controller("product_ctrl", function($scope, $http){
-
+app.controller("manage_product_ctrl", function ($scope, $http) {
+    $scope.initialize = function () {
+        $scope.renderProductIsActive();
+    }
     $scope.search_product_name = "";
     $scope.minValue = 0;
     $scope.maxValue = 10000000;
 
-    $scope.filterByPrice = function (){
+    $scope.filterByPrice = function () {
         $http.get("rest/product_all/")
     }
 
 
-    $scope.initialize = function () {
-        $scope.renderProductIsActive();
-    }
-    $scope.SearchByName = function (productName){
-        switch ($scope.itemType){
+    $scope.SearchByName = function (productName) {
+        switch ($scope.itemType) {
             case "hidden":
-                $http.get("/rest/product_all/searchByNameProductHidden?productName="+productName+"&min="+$scope.minValue +"&max="+$scope.maxValue).then(resp => {
+                $http.get("/rest/product_all/searchByNameProductHidden?productName=" + productName + "&min=" + $scope.minValue + "&max=" + $scope.maxValue).then(resp => {
                     $scope.items = resp.data
                 })
                 break;
             case "active":
-                $http.get("/rest/product_all/searchByNameProductOnline?productName="+productName+"&min="+$scope.minValue +"&max="+$scope.maxValue ).then(resp => {
+                $http.get("/rest/product_all/searchByNameProductOnline?productName=" + productName + "&min=" + $scope.minValue + "&max=" + $scope.maxValue).then(resp => {
                     $scope.items = resp.data
                 })
                 break;
             case "soldout":
-                $http.get("/rest/product_all/searchByNameProductSoldout?productName="+productName+"&min="+$scope.minValue +"&max="+$scope.maxValue ).then(resp => {
+                $http.get("/rest/product_all/searchByNameProductSoldout?productName=" + productName + "&min=" + $scope.minValue + "&max=" + $scope.maxValue).then(resp => {
                     $scope.items = resp.data
                 })
                 break;
@@ -37,16 +36,16 @@ app.controller("product_ctrl", function($scope, $http){
         range = document.querySelector(".slider .progress");
     let priceGap = 1000000;
 
-    priceInput.forEach(input =>{
-        input.addEventListener("input", e =>{
+    priceInput.forEach(input => {
+        input.addEventListener("input", e => {
             let minPrice = parseInt(priceInput[0].value),
                 maxPrice = parseInt(priceInput[1].value);
 
-            if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
-                if(e.target.className === "input-min"){
+            if ((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max) {
+                if (e.target.className === "input-min") {
                     rangeInput[0].value = minPrice;
                     range.style.left = ((minPrice / rangeInput[0].max) * 1000) + "%";
-                }else{
+                } else {
                     rangeInput[1].value = maxPrice;
                     range.style.right = 1000 - (maxPrice / rangeInput[1].max) * 1000 + "%";
                 }
@@ -54,18 +53,18 @@ app.controller("product_ctrl", function($scope, $http){
         });
     });
 
-    rangeInput.forEach(input =>{
-        input.addEventListener("input", e =>{
+    rangeInput.forEach(input => {
+        input.addEventListener("input", e => {
             let minVal = parseInt(rangeInput[0].value),
                 maxVal = parseInt(rangeInput[1].value);
 
-            if((maxVal - minVal) < priceGap){
-                if(e.target.className === "range-min"){
+            if ((maxVal - minVal) < priceGap) {
+                if (e.target.className === "range-min") {
                     rangeInput[0].value = maxVal - priceGap
-                }else{
+                } else {
                     rangeInput[1].value = minVal + priceGap;
                 }
-            }else{
+            } else {
                 priceInput[0].value = minVal;
                 priceInput[1].value = maxVal;
                 range.style.left = ((minVal / rangeInput[0].max) * 1000) + "%";
@@ -73,24 +72,13 @@ app.controller("product_ctrl", function($scope, $http){
             }
         });
     });
-    //
-    // $scope.changeTabContent =  function (TabPaneName){
-    //     switch (TabPaneName) {
-    //         case "hidden":
-    //             break;
-    //         case "activity":
-    //             break;
-    //         case "sold_out":
-    //             break;
-    //     }
-    // }
-    $scope.renderProductIsHidden = function (){
+    $scope.renderProductIsHidden = function () {
         $http.get("/rest/product_all/isHidden").then(resp => {
             $scope.items = resp.data
             $scope.itemType = "hidden";
         })
     }
-    $scope.renderProductIsActive = function (){
+    $scope.renderProductIsActive = function () {
         $http.get("/rest/product_all/isActive").then(resp => {
             $scope.items = resp.data
             $scope.itemType = "active";
@@ -98,29 +86,29 @@ app.controller("product_ctrl", function($scope, $http){
 
 
     }
-    $scope.renderProductIsSoldOut = function (){
+    $scope.renderProductIsSoldOut = function () {
         $http.get("/rest/product_all/isSoldOut").then(resp => {
             $scope.items = resp.data
             $scope.itemType = "soldout";
 
         })
     }
-    $scope.HiddenProDuct = function (productId){
-            $http.get("/rest/product_all/hiddenProduct?productId="+productId).then(resp => {
-                $scope.items = resp.data
-            }).catch(error => {
-            })
+    $scope.HiddenProDuct = function (productId) {
+        $http.get("/rest/product_all/hiddenProduct?productId=" + productId).then(resp => {
+            $scope.items = resp.data
+        }).catch(error => {
+        })
 
     }
-    $scope.ActiveProduct = function (productId){
-            $http.get("/rest/product_all/activeProduct?productId="+productId).then(resp => {
-                $scope.items = resp.data
-            }).catch(error => {
-            })
-        }
-
+    $scope.ActiveProduct = function (productId) {
+        $http.get("/rest/product_all/activeProduct?productId=" + productId).then(resp => {
+            $scope.items = resp.data
+        }).catch(error => {
+        })
+    }
 
     $scope.initialize();
+
     $scope.pager = {
         page: 0,
         size: 3,
@@ -150,6 +138,8 @@ app.controller("product_ctrl", function($scope, $http){
             this.page--;
         }
     }
+
+    $scope.initialize();
 });
 
 

@@ -22,8 +22,6 @@ app.controller("product_ctrl", function ($scope, $http) {
     $scope.discounts = [];
 
 
-
-
     $scope.initialize = function () {
         $scope.getBrands();
         $scope.getDirectory();
@@ -96,36 +94,36 @@ app.controller("product_ctrl", function ($scope, $http) {
     }
 
     $scope.submit = function () {
-                $scope.addProduct()
-                    .then(function () {
-                        return $scope.addProductImages();
-                    })
-                    // .then(function () {
-                    //     return $scope.addProductInformationType();
-                    // })
-                    .then(function () {
-                        return $scope.addCategoryLv1();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryLv2();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryLv1Detail();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryLv2Detail();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryQuantity();
-                    })
-                    .then(function () {
-                        return $scope.setTotalQuantity();
-                    })
-                    .catch(function (error) {
-                        // Xử lý lỗi nếu có
-                        console.error(error);
-                    });
-            };
+        $scope.addProduct()
+            .then(function () {
+                return $scope.addProductImages();
+            })
+            // .then(function () {
+            //     return $scope.addProductInformationType();
+            // })
+            .then(function () {
+                return $scope.addCategoryLv1();
+            })
+            .then(function () {
+                return $scope.addCategoryLv2();
+            })
+            .then(function () {
+                return $scope.addCategoryLv1Detail();
+            })
+            .then(function () {
+                return $scope.addCategoryLv2Detail();
+            })
+            .then(function () {
+                return $scope.addCategoryQuantity();
+            })
+            .then(function () {
+                return $scope.setTotalQuantity();
+            })
+            .catch(function (error) {
+                // Xử lý lỗi nếu có
+                console.error(error);
+            });
+    };
     $scope.addProduct = function () {
         return $http.post("/api/product/addProduct"
             + "?productName=" + $scope.productName + "&&productBrandId=" + $scope.productBrand.brandId + "&&productDirectoryId=" + $scope.ProductDirectory.directoryLv1Id + "&&productDescription=" + $scope.productDescription + "&&productDiscount=" + $scope.productDiscount + "&&productPrice=" + $scope.productPrice
@@ -163,7 +161,7 @@ app.controller("product_ctrl", function ($scope, $http) {
     // }
 
     $scope.addProductInformationType = function () {
-        let promises = $scope.InformationTypes.map(function(informationType) {
+        let promises = $scope.InformationTypes.map(function (informationType) {
             return $http.post("/api/product/addProductInfo?value=" + informationType.selectedValue.detailInformationTypeName + "&&infomationTypeId=" + informationType.informationTypeId)
                 .then(function (response) {
                     console.log(response.data);
@@ -202,12 +200,11 @@ app.controller("product_ctrl", function ($scope, $http) {
     };
 
 
-
     $scope.addCategoryLv1Detail = function () {
         let categoryLv1Details = $scope.classificationList1.map(function (item) {
             return item;
         });
-        return $http.post("/api/product/addCategoryLv1_Detail", { categoryLv1Details: categoryLv1Details })
+        return $http.post("/api/product/addCategoryLv1_Detail", {categoryLv1Details: categoryLv1Details})
             .then(
                 function (response) {
                     $scope.categoryLv1Details = response.data;
@@ -224,7 +221,7 @@ app.controller("product_ctrl", function ($scope, $http) {
         let categoryLv2Details = $scope.classificationList2.map(function (item) {
             return item;
         });
-        return $http.post("/api/product/addCategoryLv2_Detail", { categoryLv2Details: categoryLv2Details })
+        return $http.post("/api/product/addCategoryLv2_Detail", {categoryLv2Details: categoryLv2Details})
             .then(
                 function (response) {
                     $scope.categoryLv2Details = response.data;
@@ -265,22 +262,22 @@ app.controller("product_ctrl", function ($scope, $http) {
         });
     };
 
-    $scope.setTotalQuantity = function (){
+    $scope.setTotalQuantity = function () {
         $scope.totalQuantity = $scope.quantities.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        let totalQuantity =  $scope.totalQuantity;
-        $http.post("/api/product/setTotalQuantity?totalQuantity="  + totalQuantity)
-             .then(function (response) {
-                 Swal.fire({
-                     position: "center",
-                     icon: "success",
-                     title: "Thêm Thành Công Sản Phẩm",
-                     showConfirmButton: false,
-                     timer: 1500
-                 });
-                 console.log(response)
-        }) .catch(function (error) {
-                // Xử lý lỗi nếu có
-                console.error(error);
+        let totalQuantity = $scope.totalQuantity;
+        $http.post("/api/product/setTotalQuantity?totalQuantity=" + totalQuantity)
+            .then(function (response) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Thêm Thành Công Sản Phẩm",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                console.log(response)
+            }).catch(function (error) {
+            // Xử lý lỗi nếu có
+            console.error(error);
         });
     }
 

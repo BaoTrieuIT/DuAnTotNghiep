@@ -42,7 +42,7 @@ app.config(function ($routeProvider) {
         })
         .when("/product_all", {
             templateUrl: "/admin/product_all.html",
-            controller: "product_ctrl"
+            controller: "manage_product_ctrl"
         })
         .when("/product_add", {
             templateUrl: "/admin/product_add.html",

@@ -13,7 +13,7 @@ public interface OrderDetailService {
 
     List<OrderDetail> getAllOrderDetails();
 
-    void deleteOrderDetail(Integer id);
+    void deleteOrderId(Integer id);
 
     List<OrderDetail> findByOrderId(Integer orderId);
 
