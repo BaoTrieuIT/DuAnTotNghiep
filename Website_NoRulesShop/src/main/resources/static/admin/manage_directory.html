@@ -238,7 +238,12 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-1 form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox">
+                                                            <input
+                                                                    id="{{directoryLv1.directoryLv1Id}}"
+                                                                    class="form-check-input"
+                                                                    type="checkbox"
+                                                                    onchange="changeIsActiveDirectoryLv1(this)"
+                                                                   ng-checked="directoryLv1.isActive">
                                                         </div>
                                                     </li>
                                                 </ul>

@@ -20,4 +20,7 @@ public interface DirectoryLv1Service {
 
     default void deleteDirectories(List<Integer> directoryLv1Ids){
     };
+
+
+    List<DirectoryLv1> getByIsActive(Boolean isActive);
 }

@@ -27,7 +27,7 @@ app.controller("product_ctrl", function ($scope, $http) {
         $scope.getDirectory();
     }
     $scope.getDirectory = function () {
-        $http.get("/rest/manage_directoryLv1/").then(resp => {
+        $http.get("/rest/manage_directoryLv1/isActive").then(resp => {
             $scope.directoryLv1s = resp.data
         })
     };

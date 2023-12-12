@@ -179,5 +179,28 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
     };
 
 
+    // edit
+    $scope.hiddenDirectoryLv1 =  function (isActive, directoryLv1Id) {
+        console.log(`isactive =  ${isActive}  and directory lv1 id =  ${directoryLv1Id}`)
+    }
+
+
+
+
     $scope.initialize();
 })
+
+function changeIsActiveDirectoryLv1(ele) {
+    let isActive = ele.checked;
+    let id = ele.id;
+    $.ajax({
+        url: `/rest/manage_directoryLv1/changeIsActive/${id}?isActive=${isActive}`,
+        method: "GET",
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+}

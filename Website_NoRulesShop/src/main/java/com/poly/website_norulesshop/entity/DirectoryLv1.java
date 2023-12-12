@@ -19,6 +19,9 @@ public class DirectoryLv1 {
     @Column(name = "directory_lv1_name")
     private String directoryLv1Name;
 
+    @Column(name = "is_active")
+    private Boolean isActive = true;
+
     @ManyToOne
     @JoinColumn(name = "directory_id")
     private Directory directory;

@@ -12,5 +12,5 @@ import com.poly.website_norulesshop.entity.DirectoryLv1;
 public interface DirectoryLv1Repository extends JpaRepository<DirectoryLv1, Integer> {
     // Các phương thức đặc thù cho bảng DirectoryLv1 (nếu cần)
     List<DirectoryLv1> findByDirectory(Directory directory);
-
+    List<DirectoryLv1> findByIsActive(Boolean isActive);
 }

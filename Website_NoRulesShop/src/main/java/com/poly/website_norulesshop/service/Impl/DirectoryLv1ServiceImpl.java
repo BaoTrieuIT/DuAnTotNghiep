@@ -51,4 +51,9 @@ public class DirectoryLv1ServiceImpl implements DirectoryLv1Service {
             directoryLv1Repository.deleteById(directoryId);
         }
     }
+
+    @Override
+    public List<DirectoryLv1> getByIsActive(Boolean isActive) {
+        return directoryLv1Repository.findByIsActive(isActive);
+    }
 }

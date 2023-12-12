@@ -1,7 +1,9 @@
 package com.poly.website_norulesshop.controller.admin;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,12 @@ public class DirectoryLv1Controller {
     public List<DirectoryLv1> getListDirectoryLv1List(){
         return directoryLv1Service.getAllDirectoryLv1s();
     }
+
+    @GetMapping("isActive")
+    public List<DirectoryLv1> getListDirectoryLv1ListIsActive(){
+        return directoryLv1Service.getByIsActive(true);
+    }
+
     @PostMapping("{id}")
     public DirectoryLv1 post(@RequestBody DirectoryLv1 lv1,@PathVariable("id") String id) {
         Directory directory = directoryService.getDirectoryById(Integer.parseInt(id));
@@ -52,6 +60,28 @@ public class DirectoryLv1Controller {
         }
     }
 
+
+
+    @GetMapping("/changeIsActive/{id}")
+    public ResponseEntity<?> changeIsActive(@PathVariable Integer id, @RequestParam Boolean isActive){
+        Map<String, Object> result = new HashMap<>();
+        try {
+            DirectoryLv1 directoryLv1 = directoryLv1Service.getDirectoryLv1ById(id);
+            if(directoryLv1 != null){
+                directoryLv1.setIsActive(isActive);
+                DirectoryLv1 updatedDirectoryLv1 =  directoryLv1Service.saveDirectoryLv1(directoryLv1);
+                result.put("status","success");
+                result.put("data",updatedDirectoryLv1);
+            }else{
+                result.put("status","failed");
+                result.put("detail","not found dirtory lv1 with this id = " + id);
+            }
+        }catch (Exception e){
+            result.put("status","error");
+            result.put("detail",e.toString());
+        }
+        return ResponseEntity.ok(result);
+    }
 
 
 
