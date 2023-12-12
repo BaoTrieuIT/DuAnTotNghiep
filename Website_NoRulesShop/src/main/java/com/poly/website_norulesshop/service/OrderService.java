@@ -16,7 +16,7 @@ public interface OrderService {
 
     List<Order> getAllOrders();
 
-    void deleteOrder(Integer id);
+    void deleteById(Integer orderId);
 
     List<Order> findByUserId(Integer accountId);
 

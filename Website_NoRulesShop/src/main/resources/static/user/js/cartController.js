@@ -214,7 +214,7 @@ app.controller("cart_ctrl", function ($scope, $http) {
                     this.paymentStatus = {paymentStatusId: 2};
                     this.paymentMethod = {paymentMethodId: 2};
                     order = angular.copy(this);
-                    console.log(order);
+                    $scope.cart.clear()
                     $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
                         window.location.href = resp.data.paymentUrl;
                     }).catch(error => {

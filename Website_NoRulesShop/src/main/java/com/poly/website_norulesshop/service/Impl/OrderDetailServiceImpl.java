@@ -35,7 +35,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public void deleteOrderId(Integer id) {
-        orderDetailRepository.deleteByOrderId(id);
+        try {
+            orderDetailRepository.deleteByOrderId(id);
+            System.out.println("orderDetailRepository deleted successfully");
+        } catch (Exception e) {
+            System.err.println("Error deleting orderDetailRepository: " + e.getMessage());
+        }
     }
 
     @Override

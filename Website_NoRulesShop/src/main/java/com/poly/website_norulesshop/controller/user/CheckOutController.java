@@ -61,15 +61,15 @@ public class CheckOutController {
                                       @RequestParam("vnp_PayDate") String vnp_PayDate,
                                       @RequestParam("vnp_TransactionStatus") String vnp_TransactionStatus) {
         if (vnp_TransactionStatus.equalsIgnoreCase("00")) {
+            System.out.println("Run this");
             Order order = orderService.getOrderById(id);
             List<OrderDetail> orderDetail = orderDetailService.findByOrderId(order.getOrderId());
             model.addAttribute("order", order);
             model.addAttribute("orderDetail", orderDetail);
             model.addAttribute("title", "Xác nhận đơn hàng");
         } else {
-            System.out.println(id);
             orderDetailService.deleteOrderId(id);
-            orderService.deleteOrder(id);
+            orderService.deleteById(id);
             return "redirect:/home/checkout-page";
         }
         return "user/order_confirm";
