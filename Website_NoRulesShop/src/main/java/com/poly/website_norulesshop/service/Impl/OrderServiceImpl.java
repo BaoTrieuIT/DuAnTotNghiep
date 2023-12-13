@@ -126,7 +126,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> getAllOrdersDashboard() {
         List<Object[]> revenueList = orderRepository.getRevenueByMonth();
         return revenueList.stream()
-                .map(data -> new OrderDTO((int) data[0], (int) data[1], (BigDecimal) data[2]))
+                .map(data -> new OrderDTO((int) data[0], (int) data[1], (Long) data[2]))
                 .collect(Collectors.toList());
     }
 

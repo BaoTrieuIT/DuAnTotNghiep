@@ -30,7 +30,7 @@ public class DashboardController {
     @Autowired
     OrderDetailService orderDetailService;
 
-    @GetMapping("revenue")
+    @GetMapping("revenueList")
     public List<OrderDTO> getTotalRevenue() {
         return orderService.getAllOrdersDashboard();
     }
@@ -49,8 +49,6 @@ public class DashboardController {
     //Sales
     @GetMapping("sales/{timeSales}")
     public Integer getToTalSales(@PathVariable("timeSales") String time) {
-
-
         return switch (time) {
             case "sales_today" -> orderDetailService.totalSales(time);
             case "sales_month" -> orderDetailService.totalSales(time);

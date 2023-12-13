@@ -18,6 +18,8 @@ app.controller("dashboard_ctrl", function ($scope, $http, $rootScope) {
         $http.get(`/rest/dashboard/revenue/${timeRevenue}`).then(resp => {
             $scope.revenue = resp.data;
         })
+
+
     }
 
     $scope.updateCardTitle = function () {
@@ -93,52 +95,86 @@ app.controller("dashboard_ctrl", function ($scope, $http, $rootScope) {
         $scope.selectedFilter = filter;
         $scope.updateCardTitle();
     };
-    var chart = new ApexCharts(document.querySelector("#columnChart"), {
-        series: [{
-            name: 'Doanh thu',
-            data: [123.423, 440.523, 523.451, 745.223, 234.523, 235.234, 534.433, 252.352, 235.232]
-        }],
-        chart: {
-            type: 'bar',
-            height: 350
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
+    let revenueDataList;
+
+// Make an asynchronous request
+    $http.get(`/rest/dashboard/revenueList`).then(resp => {
+        revenueDataList = resp.data;
+
+        // Process the data and render the chart inside the then block
+        let combinedData = revenueDataList.map(function (data) {
+            return {
+                label: data.month + '/' + data.year,
+                data: data.total
+            };
+        });
+
+        combinedData.sort(function (a, b) {
+            var dateA = new Date('01 ' + a.label);
+            var dateB = new Date('01 ' + b.label);
+            return dateA - dateB;
+        });
+
+        // Combine labels and data into a pair of values
+        let labels = combinedData.map(function (item) {
+            return item.label;
+        });
+
+        let chartData = combinedData.map(function (item) {
+            return item.data;
+        });
+
+        // Use the processed data to render the chart
+        var chart = new ApexCharts(document.querySelector("#columnChart"), {
+            series: [{
+                name: 'Doanh thu',
+                data: chartData
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
             },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        },
-        yaxis: {
-            title: {
-                text: 'Vietnam đồng'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return "đ " + val
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: labels,
+            },
+            yaxis: {
+                title: {
+                    text: 'Vietnam đồng'
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return "đ " + val
+                    }
                 }
             }
-        }
-    });
+        });
 
-    // Render the chart
-    chart.render();
+        // Render the chart
+        chart.render();
+    })
+        .catch(error => {
+            console.error('Error fetching revenue data:', error);
+        });
     $scope.initialize();
 })
 app.filter('vndFormat', function () {
@@ -159,6 +195,4 @@ app.filter('vndFormat', function () {
 
         return formattedRevenue + 'đ';
     };
-
-
 });

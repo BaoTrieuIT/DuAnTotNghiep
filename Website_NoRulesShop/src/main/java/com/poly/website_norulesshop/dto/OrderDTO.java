@@ -14,5 +14,5 @@ import java.math.BigDecimal;
 public class OrderDTO {
     private int month;
     private int year;
-    private BigDecimal total;
+    private Long total;
 }
