@@ -27,17 +27,6 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
 
 
     $scope.doGetOrderAwaitingConfirm = function () {
-        // $.ajax({
-        //     url: "/rest/order_manage/awaitingConfirm",
-        //     method: "GET",
-        //     success: function (data) {
-        //         if (data.status = "Success") {
-        //             $scope.orderAwatingConfirm = data.data;
-        //         } else {
-        //             $scope.orderAwatingConfirm = null;
-        //         }
-        //     }
-        // })
         $http.get("/rest/order_manage/awaitingConfirm").then(resp => {
             $scope.orderAwatingConfirm = resp.data;
         })
@@ -45,17 +34,6 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
 
 
     $scope.doGetOrderInTransit = function () {
-        // $.ajax({
-        //     url: "/rest/order_manage/inTransit",
-        //     method: "GET",
-        //     success: function (data) {
-        //         if (data.status = "Success") {
-        //             $scope.orderInTransit = data.data;
-        //         } else {
-        //             $scope.orderInTransit = null;
-        //         }
-        //     }
-        // })
         $http.get("/rest/order_manage/inTransit").then(resp => {
             $scope.orderInTransit = resp.data;
         })
@@ -63,34 +41,12 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
 
 
     $scope.doGetOrderHasBeenShipped = function () {
-        // $.ajax({
-        //     url: "/rest/order_manage/hasBeenShipped",
-        //     method: "GET",
-        //     success: function (data) {
-        //         if (data.status = "Success") {
-        //             $scope.orderHasBeenShipped = data.data;
-        //         } else {
-        //             $scope.orderHasBeenShipped = null;
-        //         }
-        //     }
-        // })
         $http.get("/rest/order_manage/hasBeenShipped").then(resp => {
             $scope.orderHasBeenShipped = resp.data;
         })
     };
 
     $scope.doGetOrderDeliveryComplete = function () {
-        // $.ajax({
-        //     url: "/rest/order_manage/deliveryComplete",
-        //     method: "GET",
-        //     success: function (data) {
-        //         if (data.status = "Success") {
-        //             $scope.orderDeliveryComplete = data.data;
-        //         } else {
-        //             $scope.orderDeliveryComplete = null;
-        //         }
-        //     }
-        // })
         $http.get("/rest/order_manage/deliveryComplete").then(resp => {
             $scope.orderDeliveryComplete = resp.data;
         })
@@ -98,19 +54,8 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
 
 
     $scope.doGetOrderHasBeenCanceled = function () {
-        // $.ajax({
-        //     url: "/rest/order_manage/hasBeenCanceled",
-        //     method: "GET",
-        //     success: function (data) {
-        //         if (data.status = "Success") {
-        //             $scope.orderHasBeenCanceled = data.data;
-        //         } else {
-        //             $scope.orderHasBeenCanceled = null;
-        //         }
-        //     }
-        // })
         $http.get("/rest/order_manage/hasBeenCanceled").then(resp => {
-            $scope.orderDeliveryComplete = resp.data;
+            $scope.orderHasBeenCanceled = resp.data;
         })
     };
 
@@ -146,24 +91,6 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
-                // $.ajax({
-                //     url: '/rest/order_manage/updateOrderStatus?orderId=' + orderId + '&&statusId=' + statusId,
-                //     method: "GET",
-                //     success: function (data) {
-                //         Swal.fire(
-                //             'Cập Nhật Hoàn Tất!',
-                //             "Trạng Thái Đã Được Chuyển Thành " + status,
-                //             'success'
-                //         );
-                //     },
-                //     error: function (error) {
-                //         Swal.fire(
-                //             'Thất Bại!',
-                //             "Cập Nhật Trạng Thái Thất Bại",
-                //             'error'
-                //         );
-                //     }
-                // })
                 $http.get('/rest/order_manage/updateOrderStatus', {
                     params: {
                         orderId: orderId,

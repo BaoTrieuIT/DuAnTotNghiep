@@ -34,6 +34,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
             "AND DATE(od.order.orderTime) = CURRENT_DATE")
     Integer countSalesAndToday();
 
-    @Query("DELETE FROM OrderDetail o WHERE o.order.orderId =: orderId")
+    @Modifying
+    @Query("DELETE FROM OrderDetail o WHERE o.order.orderId = :orderId")
     void deleteByOrderId(@Param("orderId") Integer orderId);
 }

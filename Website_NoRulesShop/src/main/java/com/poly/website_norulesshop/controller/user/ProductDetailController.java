@@ -53,8 +53,10 @@ public class ProductDetailController {
         List<Product> products = productService.getProductByBrandId(brandId);
         List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
+        Brand brand = brandService.getBrandById(brandId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
+        model.addAttribute("brand", brand);
         model.addAttribute("productsRelate", products);
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);

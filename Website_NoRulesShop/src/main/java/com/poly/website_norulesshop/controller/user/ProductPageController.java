@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.controller.user;
 
+import com.poly.website_norulesshop.config.GlobalFlag;
 import com.poly.website_norulesshop.entity.*;
 import com.poly.website_norulesshop.service.*;
 import com.poly.website_norulesshop.utils.FilterCategoryCriteria;
@@ -67,6 +68,7 @@ public class ProductPageController {
                 filterCriteria.getPriceSort(),
                 page,
                 PAGE_SIZE);
+        GlobalFlag.flag_2 = false;
         model.addAttribute("brandId", filterCriteria.getBrandId());
         model.addAttribute("directoryId", filterCriteria.getDirectoryLv1Id());
         model.addAttribute("priceSort", filterCriteria.getPriceSort());

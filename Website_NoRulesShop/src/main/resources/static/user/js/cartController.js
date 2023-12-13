@@ -3,7 +3,56 @@ app.controller("cart_ctrl", function ($scope, $http) {
         $http.get("/rest/paymenMethod").then(resp => {
             $scope.paymentMethods = resp.data;
         });
+        $http.get("/rest/flag").then(resp => {
+            let flag = resp.data;
+            if (flag === true) {
+                $scope.cart.clear();
+            }
+        });
+
     }
+    $scope.updateStatus = function (orderId) {
+        Swal.fire({
+            title: "!",
+            text: 'Bạn có chắc chắn muốn huỷ đơn hàng không ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // $http.post('/home/order-update/' + orderId)
+                Promise.all([post(orderId), reloadWithDelay(3000)])
+                    .then(results => {
+                        console.log("All jobs completed successfully");
+                        console.log("Results:", results);
+                    })
+                    .catch(error => {
+                        console.error("An error occurred:", error);
+                    });
+            }
+        });
+    }
+
+    function post(orderId) {
+        return new Promise((resolve, reject) => {
+            $http.post('/home/order-update/' + orderId)
+                .then(response => resolve(response.data))
+                .catch(error => reject(error));
+        });
+    }
+
+    function reloadWithDelay(delay) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                location.reload();
+                resolve(); // Resolving immediately after location.reload()
+            }, delay);
+        });
+    }
+
     $scope.init();
     var $cart = $scope.cart = {
         items: [],
@@ -25,28 +74,48 @@ app.controller("cart_ctrl", function ($scope, $http) {
         },
         async add(productId, quantity, categoryLv1Id, categoryLv2Id) { // thêm sản phẩm vào giỏ hàng
             if (categoryLv1Id == null || categoryLv2Id == null) {
-                alert("Vui lòng chọn kích thước và màu sắc");
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi",
+                    text: "Vui lòng chọn kích thước và màu sắc",
+                });
                 return false;
             }
             if (quantity === undefined || quantity < 1 || isNaN(quantity)) {
-                alert("Vui lòng nhập số lượng");
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi",
+                    text: "Vui lòng nhập số lượng",
+                });
                 return false;
             }
             try {
                 const maxQty = await this.getMaxQuantity(productId, categoryLv1Id, categoryLv2Id);
                 if (quantity > maxQty) {
-                    alert("Không đủ số lượng");
+                    Swal.fire({
+                        icon: "error",
+                        title: "Lỗi",
+                        text: "Không đủ số lượng",
+                    });
                     return false;
                 }
                 const item = this.findCartItem(productId);
                 if (item && item.qty <= 0) {
                     if (item && item.qty + quantity > maxQty) {
-                        alert("Không đủ số lượng");
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi",
+                            text: "Không đủ số lượng",
+                        });
                         return false;
                     }
                 } else {
                     if (item && (item.qty + quantity) - item.qty > maxQty) {
-                        alert("Không đủ số lượng");
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi",
+                            text: "Không đủ số lượng",
+                        });
                         return false;
                     }
                 }
@@ -59,7 +128,11 @@ app.controller("cart_ctrl", function ($scope, $http) {
                 location.reload()
                 return true;
             } catch (error) {
-                alert("Error");
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi",
+                    text: "Lỗi rồi",
+                });
                 console.error(error);
                 return false;
             }
@@ -80,7 +153,11 @@ app.controller("cart_ctrl", function ($scope, $http) {
                     this.saveToLocalStorage();
                 })
                 .catch(error => {
-                        alert("Update lỗi!");
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi",
+                            text: "Lỗi rồi",
+                        });
                         console.log(error);
                     }
                 );
@@ -101,12 +178,20 @@ app.controller("cart_ctrl", function ($scope, $http) {
                         location.reload();
                     })
                     .catch(error => {
-                            alert("Update lỗi!");
+                            Swal.fire({
+                                icon: "error",
+                                title: "Lỗi",
+                                text: "Lỗi rồi",
+                            });
                             console.log(error);
                         }
                     );
             } catch (error) {
-                console.error(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi",
+                    text: "Lỗi rồi",
+                });
                 // Handle errors as needed
             }
         },
@@ -120,7 +205,11 @@ app.controller("cart_ctrl", function ($scope, $http) {
             $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
                 location.reload()
             }).catch(error => {
-                alert("Update lỗi!")
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi",
+                    text: "Lỗi rồi",
+                });
                 console.log(error)
             })
 
@@ -194,6 +283,11 @@ app.controller("cart_ctrl", function ($scope, $http) {
         },
         purchase() {
             if (this.recipientName === "" && this.phoneNumber === "" && this.specifiedAddress === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Lỗi",
+                    text: "Vui lòng điền các thông tin nhận hàng",
+                });
             } else {
                 this.totalPrice = $cart.amount;
                 var order
@@ -201,24 +295,31 @@ app.controller("cart_ctrl", function ($scope, $http) {
                     this.paymentStatus = {paymentStatusId: 1};
                     this.paymentMethod = {paymentMethodId: 1};
                     order = angular.copy(this);
-                    console.log(order);
                     // Thực hiện đặt hàng
                     $http.post("/rest/order", order).then(resp => {
                         $cart.clear();
                         location.href = "/home/order-confirm/" + resp.data.orderId;
                     }).catch(error => {
-                        alert("Đặt hàng lỗi!")
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi",
+                            text: "Lỗi rồi",
+                        });
                         console.log(error)
                     })
                 } else if (this.paymentMethodId === 2) {
                     this.paymentStatus = {paymentStatusId: 2};
                     this.paymentMethod = {paymentMethodId: 2};
                     order = angular.copy(this);
-                    $scope.cart.clear()
+                    // $scope.cart.clear()
                     $http.post(`/rest/payment/${this.totalPrice}`, order).then(resp => {
                         window.location.href = resp.data.paymentUrl;
                     }).catch(error => {
-                        alert("Đặt hàng lỗi!")
+                        Swal.fire({
+                            icon: "error",
+                            title: "Lỗi",
+                            text: "Lỗi rồi",
+                        });
                         console.log(error)
                     })
                 }

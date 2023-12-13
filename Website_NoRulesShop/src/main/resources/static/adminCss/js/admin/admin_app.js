@@ -20,24 +20,8 @@ app.config(function ($routeProvider) {
             controller: "directoryLv1_ctrl",
             controller: "directory_ctrl"
         })
-        .when("/manage_shipping", {
-            templateUrl: "/admin/manage_shipping.html",
-            controller: "shipping_ctrl"
-        })
-        .when("/setting_shipping", {
-            templateUrl: "/admin/setting_shipping.html",
-            controller: "shipping_ctrl"
-        })
         .when("/order_all", {
             templateUrl: "/admin/order_all.html",
-            controller: "order_ctrl"
-        })
-        .when("/order_cancel", {
-            templateUrl: "/admin/order_cancel.html",
-            controller: "order_ctrl"
-        })
-        .when("/order_back", {
-            templateUrl: "/admin/order_back.html",
             controller: "order_ctrl"
         })
         .when("/product_all", {

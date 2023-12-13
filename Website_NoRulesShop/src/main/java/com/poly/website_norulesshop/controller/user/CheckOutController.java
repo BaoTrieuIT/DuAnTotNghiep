@@ -1,5 +1,6 @@
 package com.poly.website_norulesshop.controller.user;
 
+import com.poly.website_norulesshop.config.GlobalFlag;
 import com.poly.website_norulesshop.entity.*;
 import com.poly.website_norulesshop.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class CheckOutController {
         model.addAttribute("paymentMethod", paymentMethodList);
         model.addAttribute("acc", session.getAttribute("acc"));
         model.addAttribute("title", "Thanh toán đơn hàng");
-
+        GlobalFlag.flag_2 = false;
         return "user/checkout_page";
     }
 
@@ -61,15 +62,16 @@ public class CheckOutController {
                                       @RequestParam("vnp_PayDate") String vnp_PayDate,
                                       @RequestParam("vnp_TransactionStatus") String vnp_TransactionStatus) {
         if (vnp_TransactionStatus.equalsIgnoreCase("00")) {
-            System.out.println("Run this");
             Order order = orderService.getOrderById(id);
             List<OrderDetail> orderDetail = orderDetailService.findByOrderId(order.getOrderId());
             model.addAttribute("order", order);
             model.addAttribute("orderDetail", orderDetail);
+            GlobalFlag.flag_2 = true;
             model.addAttribute("title", "Xác nhận đơn hàng");
         } else {
-            orderDetailService.deleteOrderId(id);
+//            orderDetailService.deleteByOrderId(id);
             orderService.deleteById(id);
+            GlobalFlag.flag_2 = false;
             return "redirect:/home/checkout-page";
         }
         return "user/order_confirm";

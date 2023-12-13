@@ -6,6 +6,7 @@ import com.poly.website_norulesshop.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -34,7 +35,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
 
     @Override
-    public void deleteOrderId(Integer id) {
+    @Transactional
+    public void deleteByOrderId(Integer id) {
         try {
             orderDetailRepository.deleteByOrderId(id);
             System.out.println("orderDetailRepository deleted successfully");
