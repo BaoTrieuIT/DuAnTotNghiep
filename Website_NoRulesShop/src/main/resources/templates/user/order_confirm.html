@@ -72,8 +72,9 @@
                                 </button>
                             </th:block>
                             <th:block th:if="${order.orderStatus.orderStatusId == 1}">
-                                <form th:action="@{'/home/order-update/'+${order.orderId}}" method="post">
-                                    <button type="submit" class="btn btn-primary">
+                                <form>
+                                    <button type="submit" class="btn btn-primary"
+                                            th:attr="ng-click=@{|updateStatus(*{order.orderId})|}">
                                         Hủy đơn hàng
                                     </button>
                                 </form>
