@@ -188,8 +188,12 @@
                                     <img th:src="@{'/user/img/products/' + ${image.getImage_url}}"
                                          th:alt="${limit.index}"
                                          th:class="${limit.index % 2 == 0 ? '' : 'second_image img-responsive'}"
-                                         style="width: 278px; height  : 388px" />
+                                         style="width: 385px; height  : 501px" />
                                 </a>
+                            </div>
+                            <div class="flags" th:if="${!productAccessories.getDiscount().isNaN()}">
+                                <div class="sale card"
+                                     th:text="'Sale ' + ${#numbers.formatDecimal(productAccessories.getDiscount() * 100, 0, 'COMMA', 0, 'DEFAULT')} + ' %'"></div>
                             </div>
                         </div>
                         <div class="thumb-description">

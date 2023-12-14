@@ -28,6 +28,6 @@ public class PaymentMethod {
     // Getters and setters
 
     @JsonIgnore
-    @OneToMany(mappedBy = "paymentMethod")
+    @OneToMany(mappedBy = "paymentMethod", fetch = FetchType.LAZY)
     List<Order> orderList;
 }

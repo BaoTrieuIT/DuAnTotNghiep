@@ -40,6 +40,7 @@ public class Order {
     private String tradingCode;
     @Column(name = "total")
     private Integer totalPrice;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -63,7 +64,7 @@ public class Order {
     private Integer paymentMethodId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<OrderDetail> orderDetailList;
     // Getters and setters
 }

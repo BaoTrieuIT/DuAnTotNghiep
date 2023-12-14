@@ -23,6 +23,6 @@ public class Gender {
     private String genderName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "gender")
+    @OneToMany(mappedBy = "gender", fetch = FetchType.LAZY)
     private List<Directory> directoryList;
 }

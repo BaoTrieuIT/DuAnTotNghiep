@@ -6,11 +6,14 @@ import com.poly.website_norulesshop.utils.FilterCategoryCriteria;
 import com.poly.website_norulesshop.utils.FilterCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -49,15 +52,16 @@ public class ProductDetailController {
     public String getProductDetails(Model model,
                                     @PathVariable("productId") int productId,
                                     @PathVariable("brandId") int brandId) {
+
         Product product = productService.getProductById(productId);
-        List<Product> products = productService.getProductByBrandId(brandId);
+        List<Product> productsBrand = productService.getProductByBrandId(brandId);
         List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         Brand brand = brandService.getBrandById(brandId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
         model.addAttribute("brand", brand);
-        model.addAttribute("productsRelate", products);
+        model.addAttribute("productsRelate", shufflePageContent(productsBrand));
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);
         model.addAttribute("categoryLv1Id", null);
@@ -94,20 +98,21 @@ public class ProductDetailController {
             model.addAttribute("categoryLv1Id", categoryLv1Id);
             model.addAttribute("categoryLv2Id", categoryLv2Id);
             model.addAttribute("quantity", categoryQuantity);
-
         } else {
             List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
             model.addAttribute("category", categoryQuantityList);
             model.addAttribute("quantity", -1);
-
         }
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
         model.addAttribute("productImages", productImageList);
-
         return "user/product_details";
     }
 
-
+    private List<Product> shufflePageContent(List<Product> products) {
+        List<Product> shuffledProducts = new ArrayList<>(products);
+        Collections.shuffle(shuffledProducts);
+        return shuffledProducts;
+    }
 }

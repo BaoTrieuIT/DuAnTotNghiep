@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.entity;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "voucher")
 public class Voucher {
     @Id
@@ -37,7 +42,7 @@ public class Voucher {
     private Integer quantityAvailable;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "voucher")
+    @OneToMany(mappedBy = "voucher", fetch = FetchType.LAZY)
     private List<Order> orderList;
 
     // Getters and setters

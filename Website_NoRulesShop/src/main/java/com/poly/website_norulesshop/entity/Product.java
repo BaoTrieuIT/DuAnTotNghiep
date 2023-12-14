@@ -61,20 +61,17 @@ public class Product {
 
     @JsonIgnore
     // Getters and setters
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     List<CategoryQuantity> categoryQuantityList;
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     List<OrderDetail> orderDetailList;
     @JsonIgnore
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     List<ProductDiscount> productDiscounts;
     @JsonIgnore
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<ProductImage> productImageList;
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    List<ProductInformationType> informationTypeList;
 
 
 }

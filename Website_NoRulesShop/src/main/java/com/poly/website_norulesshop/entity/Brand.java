@@ -33,12 +33,12 @@ public class Brand implements Serializable {
     private String anotherInformation;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     List<BrandImage> brandImageList;
     // Getters and setters
 
     @JsonIgnore
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
     List<Product> productList;
 
     // Getters and setters

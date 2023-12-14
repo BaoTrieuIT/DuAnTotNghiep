@@ -11,7 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "feedback")
 public class Feedback {
     @Id
@@ -32,6 +36,6 @@ public class Feedback {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "feedback")
+    @OneToMany(mappedBy = "feedback", fetch = FetchType.LAZY)
     List<FeedbackImage> feedbackImageList;
 }

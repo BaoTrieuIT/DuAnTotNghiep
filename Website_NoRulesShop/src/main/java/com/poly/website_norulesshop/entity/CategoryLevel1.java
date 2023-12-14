@@ -1,4 +1,5 @@
 package com.poly.website_norulesshop.entity;
+
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,7 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "category_level_1")
 public class CategoryLevel1 {
 
@@ -20,7 +25,7 @@ public class CategoryLevel1 {
 
     private String category_level_1_name;
     @JsonIgnore
-    @OneToMany(mappedBy = "categoryLevel1")
+    @OneToMany(mappedBy = "categoryLevel1", fetch = FetchType.LAZY)
     List<CategoryLevel1Detail> categoryLevel1DetailList;
     // Getters and setters
 }

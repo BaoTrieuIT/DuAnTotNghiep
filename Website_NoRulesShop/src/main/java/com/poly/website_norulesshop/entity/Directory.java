@@ -29,7 +29,7 @@ public class Directory {
     private Gender gender;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "directory")
+    @OneToMany(mappedBy = "directory", fetch = FetchType.LAZY)
     private List<DirectoryLv1> directoryLv1List;
 
     // Getters and setters

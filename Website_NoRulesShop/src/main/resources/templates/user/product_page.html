@@ -35,6 +35,10 @@
                                                  th:class="${limit.index % 2 == 0 ? '' : 'second_image img-responsive'}"
                                                  style="width: 278px; height  : 388px" />
                                         </a>
+                                        <div class="flags" th:if="${!product.getDiscount().isNaN()}">
+                                            <div class="sale card"
+                                                 th:text="'Sale ' + ${#numbers.formatDecimal(product.getDiscount() * 100, 0, 'COMMA', 0, 'DEFAULT')} + ' %'"></div>
+                                        </div>
                                     </div>
                                     <div class="thumb-description">
                                         <div class="caption">

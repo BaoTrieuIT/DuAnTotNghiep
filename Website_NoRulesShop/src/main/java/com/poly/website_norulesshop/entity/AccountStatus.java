@@ -20,7 +20,7 @@ public class AccountStatus {
     private String accountStatusName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "accountStatus")
+    @OneToMany(mappedBy = "accountStatus", fetch = FetchType.LAZY)
     public List<Account> accountList;
 
 }

@@ -7,19 +7,22 @@ import com.poly.website_norulesshop.utils.FilterCategoryCriteria;
 import com.poly.website_norulesshop.utils.FilterCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
 @RequestMapping("home")
 @SessionAttributes("filterCriteria")
 public class ProductPageController {
-    private static final int PAGE_SIZE = 6;
+    private static final int PAGE_SIZE = 8;
     @Autowired
     ProductService productService;
 
@@ -61,6 +64,7 @@ public class ProductPageController {
         List<Directory> directoryList = directoryService.getAllDirectories();
         List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
         List<Brand> brandList = brandService.getAllBrands();
+
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
                 filterCriteria.getDirectoryLv1Id(),
@@ -69,10 +73,10 @@ public class ProductPageController {
                 page,
                 PAGE_SIZE);
         GlobalFlag.flag_2 = false;
+
         model.addAttribute("brandId", filterCriteria.getBrandId());
         model.addAttribute("directoryId", filterCriteria.getDirectoryLv1Id());
         model.addAttribute("priceSort", filterCriteria.getPriceSort());
-
         model.addAttribute("directoryList", directoryList);
         model.addAttribute("directoryLV1List", directoryLV1List);
         model.addAttribute("brand", brandList);
@@ -104,7 +108,7 @@ public class ProductPageController {
         model.addAttribute("directoryList", directoryList);
         model.addAttribute("directoryLV1List", directoryLV1List);
         model.addAttribute("brand", brandList);
-        model.addAttribute("productPage", productPage);
+        model.addAttribute("productPage", shufflePageContent(productPage));
         model.addAttribute("title", "Sản phẩm");
         return "redirect:/home/product";
     }
@@ -142,7 +146,6 @@ public class ProductPageController {
                 page,
                 PAGE_SIZE
         );
-
         List<Directory> directoryList = directoryService.getAllDirectories();
         List<DirectoryLv1> directoryLV1List = directoryLv1Service.getAllDirectoryLv1s();
         List<Brand> brandList = brandService.getAllBrands();
@@ -154,7 +157,6 @@ public class ProductPageController {
         model.addAttribute("directoryList", directoryList);
         model.addAttribute("brand", brandList);
         model.addAttribute("directoryLV1List", directoryLV1List);
-
         model.addAttribute("productPage", productPage);
 
         return "user/product_page";
@@ -181,8 +183,14 @@ public class ProductPageController {
         model.addAttribute("brand", brandList);
         model.addAttribute("directoryLV1List", directoryLV1List);
         model.addAttribute("title", "Tất cả sản phẩm");
-        model.addAttribute("productPage", productPage);
+        model.addAttribute("productPage", productPage
+        );
         return "user/product_page";
     }
 
+    private Page<Product> shufflePageContent(Page<Product> page) {
+        List<Product> shuffledProducts = new ArrayList<>(page.getContent());
+        Collections.shuffle(shuffledProducts);
+        return new PageImpl<>(shuffledProducts, page.getPageable(), page.getTotalElements());
+    }
 }

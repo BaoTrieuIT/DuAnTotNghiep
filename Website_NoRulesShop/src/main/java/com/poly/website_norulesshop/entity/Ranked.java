@@ -16,6 +16,6 @@ public class Ranked {
     private String rank_name;
     private Integer minimum_point;
     @JsonIgnore
-    @OneToMany(mappedBy = "ranked")
+    @OneToMany(mappedBy = "ranked", fetch = FetchType.LAZY)
     public List<Account> accountList;
 }

@@ -26,6 +26,6 @@ public class PaymentStatus {
 
     // Getters and setters
     @JsonIgnore
-    @OneToMany(mappedBy = "paymentStatus")
+    @OneToMany(mappedBy = "paymentStatus", fetch = FetchType.LAZY)
     List<Order> orderList;
 }

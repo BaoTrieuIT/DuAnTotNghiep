@@ -56,13 +56,13 @@ public class Account {
     @JoinColumn(name = "account_status_id")
     private AccountStatus accountStatus;
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     public List<Feedback> feedbackList;
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     public List<Order> orderList;
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     List<Points> pointsList;
 
     public boolean hasRole(String roleName) {

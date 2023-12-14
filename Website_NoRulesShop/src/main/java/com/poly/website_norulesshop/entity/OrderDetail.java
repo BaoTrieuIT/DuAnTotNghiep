@@ -45,7 +45,7 @@ public class OrderDetail {
     private CategoryQuantity categoryQuantity;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "orderDetail")
+    @OneToMany(mappedBy = "orderDetail", fetch = FetchType.LAZY)
     public List<Feedback> feedbackList;
     // Getters and setters
 }
