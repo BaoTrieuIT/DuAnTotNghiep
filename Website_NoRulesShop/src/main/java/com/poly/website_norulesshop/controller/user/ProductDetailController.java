@@ -86,6 +86,7 @@ public class ProductDetailController {
     @RequestMapping(value = "/product-details/filter", method = {RequestMethod.GET, RequestMethod.POST})
     public String filterCategory(Model model,
                                  @RequestParam("productId") Integer productId,
+                                 @RequestParam("brandId") Integer brandId,
                                  @RequestParam(name = "categoryLv1Id", required = false) Integer categoryLv1Id,
                                  @RequestParam(name = "categoryLv2Id", required = false) Integer categoryLv2Id
     ) {
@@ -103,6 +104,8 @@ public class ProductDetailController {
             model.addAttribute("category", categoryQuantityList);
             model.addAttribute("quantity", -1);
         }
+        List<Product> productsBrand = productService.getProductByBrandId(brandId);
+        model.addAttribute("productsRelate", shufflePageContent(productsBrand));
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);

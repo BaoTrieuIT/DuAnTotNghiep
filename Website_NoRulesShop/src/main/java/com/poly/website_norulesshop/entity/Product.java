@@ -67,9 +67,6 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     List<OrderDetail> orderDetailList;
     @JsonIgnore
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    List<ProductDiscount> productDiscounts;
-    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<ProductImage> productImageList;
 
