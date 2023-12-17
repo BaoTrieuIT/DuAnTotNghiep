@@ -20,7 +20,7 @@ public interface AccountService {
 
     Account findByEmail(String email);
 
-//    Account update(Account account);
+   Boolean checkPassword(String username, String pasword);
 
     Account update(Account account);
 

@@ -46,14 +46,14 @@ public class MyAccountController {
                          @Valid @ModelAttribute Account acc,
                          Model model,
                          BindingResult result,
-                         @RequestParam("password") String oldPassword,
+                         @RequestParam("oldPassword") String oldPassword,
                          @RequestParam("newPassword") String newPassword,
                          @RequestParam("comfirmPassword") String comfirmPassword,
                          @RequestParam(value = "changePassword", required = false, defaultValue = "false") boolean changePassword,
                          Principal principal) throws IOException {
         // Lấy thông tin tài khoản từ username của người đăng nhập
         // Kiểm tra họ tên không để trống và không có kí tự đặc biệt hoặc số
-        if (acc.getFullname() == null || acc.getFullname().trim().isEmpty() || !acc.getFullname().matches("^[a-zA-Z\\s]+$")) {
+        if (acc.getFullname() == null || !acc.getFullname().matches("^[a-zA-Z\\s]+$") || acc.getFullname().trim().isEmpty()) {
             result.rejectValue("fullname", "error.account", "Họ và tên không hợp lệ");
             return "user/my_account";
         }
@@ -79,6 +79,10 @@ public class MyAccountController {
         }
         // Kiểm tra mật khẩu nếu có sự thay đổi
         if (changePassword) {
+            if (!accountService.checkPassword(principal.getName(), oldPassword)) {
+                result.rejectValue("oldPassword", "error.account", "Mật khẩu hiện tại không đúng");
+                return "user/my_account";
+            }
             if (!newPassword.equals(comfirmPassword)) {
                 result.rejectValue("password", "error.account", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
                 return "user/my_account";
@@ -89,6 +93,7 @@ public class MyAccountController {
             acc.setPassword(oldPassword);
             System.out.println("!Change");
         }
+
         try {
             String originalFileName = file.getOriginalFilename();
             FileUploadUtil.saveFile(UPLOAD_DIRECTORY, originalFileName, file);

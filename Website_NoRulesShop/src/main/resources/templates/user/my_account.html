@@ -99,11 +99,20 @@
                                                                                                    khẩu</label>
                             </div>
                             <div id="account-change-password" class="">
+                                <div class="form-group">
+                                    <label for="oldPassword">Nhập mật khẩu hiện tại<span
+                                            class="required">*</span></label>
+                                    <input type="password" class="form-control" id="oldPassword" autocomplete="new-password"
+                                           name="password" th:field="*{password}">
+
+                                    <p class="invalid-feedback" id="oldpasswordErrorDiv">Điền mật khẩu hiện tại</p>
+<!--                                    <div th:errors="*{password}" th:if="${#fields.hasErrors('oldPassword')}"></div>-->
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group required-field">
-                                            <label for="password">Mật khẩu mới</label>
-                                            <input type="password" class="form-control" id="password"
+                                            <label for="newPassword">Mật khẩu mới</label>
+                                            <input type="password" class="form-control" id="newPassword"
                                                    name="newPassword">
                                         </div>
                                     </div>

@@ -121,6 +121,15 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Boolean checkPassword(String username, String pasword) {
+        // Lấy thông tin tài khoản từ cơ sở dữ liệu dựa trên tên người dùng
+        Account account = accountRepository.findByUsername(username);
+
+        // Kiểm tra xem mật khẩu hiện tại có khớp với mật khẩu trong cơ sở dữ liệu hay không
+        return passwordEncoder.matches(pasword, account.getPassword());
+    }
+
+    @Override
     public void updateAccount_frUser(Account updatedAccount, String newPassword) {
         // Lấy tài khoản từ session
 

@@ -15,7 +15,6 @@ function displayImage() {
         reader.readAsDataURL(file);
     }
 }
-
 function updateAndReload() {
     var formData = new FormData(document.getElementById("myaccount-form"));
     var progressBar = document.getElementById("progress-bar");
@@ -56,7 +55,7 @@ function updateAndReload() {
         window.location.reload();
     }).catch(error => {
         console.error("Lỗi khi upload ảnh:", error);
-        document.getElementById("phoneErrorDiv").innerText = "Đã xảy ra lỗi khi upload ảnh";
+        document.getElementById("imgErrorDiv").innerText = "Đã xảy ra lỗi khi upload ảnh";
         // Ẩn thanh tiến trình nếu có lỗi
         progressContainer.style.display = "none";
     });
@@ -89,13 +88,13 @@ Array.prototype.slice.call(needsValidation)
             form.classList.add('was-validated')
         }, false)
     })
-
 document.addEventListener("DOMContentLoaded", function () {
     var emailInput = document.getElementById("acc-email");
     var fullnameInput = document.getElementById("fullname");
     var birthdayInput = document.getElementById("birthday");
-    var phonenumberInput = document.getElementById("phone_number")
-    var newPassword = document.getElementById('password');
+    var phonenumberInput = document.getElementById("phone_number");
+    var oldPassword = document.getElementById('oldPassword');
+    var newPassword = document.getElementById('newPassword');
     var confirmPassword = document.getElementById('comfirmPassword');
 
     emailInput.addEventListener("input", function () {
@@ -113,11 +112,48 @@ document.addEventListener("DOMContentLoaded", function () {
     confirmPassword.addEventListener('input', function () {
         validateNewPassword(newPassword.value, confirmPassword.value);
     });
+    oldPassword.addEventListener('input',function (){
+        validateOldPassword(oldPassword.value);
+    })
 });
+function validateOldPassword(oldPassword){
+    var errorDiv = document.getElementById('oldpasswordErrorDiv');
+    var oldpassword = oldPassword.value.trim();
+
+    if (!oldpassword) {
+        errorDiv.innerHTML = "Không để mật khẩu hiện tại trống";
+        errorDiv.style.display = 'block';
+     }
+    // else {
+    //     // Sử dụng Ajax để gửi yêu cầu đến server và kiểm tra mật khẩu cũ
+    //     // Đây chỉ là một ví dụ, bạn cần thay thế bằng cách thực hiện thực tế của bạn.
+    //     // Trong môi trường thực tế, bạn cần xác thực mật khẩu trên server và trả về kết quả.
+    //     // Ở đây, tôi giả sử có một API endpoint '/api/check-password' trên server để kiểm tra mật khẩu.
+    //     // Gửi yêu cầu Ajax đến server
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/api/check-password',
+    //         data: {password: oldpassword},
+    //         success: function (response) {
+    //             if (response.valid) {
+    //                 // Mật khẩu hợp lệ, ẩn thông báo lỗi
+    //                 errorDiv.style.display = 'none';
+    //             } else {
+    //                 // Mật khẩu không hợp lệ, hiển thị thông báo lỗi
+    //                 errorDiv.innerHTML = "Sai mật khẩu hiện tại";
+    //                 errorDiv.style.display = 'block';
+    //             }
+    //         },
+    //         error: function () {
+    //             // Xử lý lỗi nếu có
+    //             console.error("Error checking old password");
+    //         }
+    //     });
+    // }
+}
 
 function validateNewPassword(newPassword, confirmPassword) {
     var errorDiv = document.getElementById('password-mismatch-error');
-
     if (newPassword.length < 6) {
         document.getElementById('comfirmPassword').setCustomValidity("Mật khẩu mới phải có ít nhất 6 ký tự")
         errorDiv.innerHTML = "Mật khẩu mới phải có ít nhất 6 ký tự";
