@@ -51,10 +51,8 @@ public class AddProductController {
     CategoryLevel1DetailService categoryLevel1DetailService;
     @Autowired
     CategoryLevel2DetailService categoryLevel2DetailService;
-    CategoryLevel1 addCategoryLevel1= new CategoryLevel1();
-    CategoryLevel2 addCategoryLevel2 = new CategoryLevel2();
-    CategoryLevel2Detail addCategoryLevel2Detail =  new CategoryLevel2Detail();
-    CategoryLevel1Detail addCategoryLevel1Detail = new CategoryLevel1Detail();
+
+
 
 
     private CategoryLevel1 currentCategoryLevel1;
@@ -72,7 +70,8 @@ public class AddProductController {
              @RequestParam String productDirectoryId,
              @RequestParam String productDescription,
             @RequestParam Double productPrice,
-            @RequestParam Double productDiscount
+            @RequestParam Double productDiscount,
+            @RequestParam Integer productTotalQuantity
     ){
         try{
             Product product = new Product();
@@ -85,10 +84,11 @@ public class AddProductController {
             product.setCreateDate(new Date());
             product.setPriceOld(productPrice);
             product.setDiscount(productDiscount);
-            if(productDiscount > 0 && productDiscount <= 1){
-                product.setPriceNew(productPrice * productDiscount );
-            }else if(productDiscount > 1 && productDiscount  <= 100 ){
-                product.setPriceNew(productPrice * productDiscount / 100 );
+            product.setTotalQuantity(productTotalQuantity);
+            if(productDiscount > 0 && productDiscount < 1){
+                product.setPriceNew(productPrice *  (1 - productDiscount) );
+            }else if(productDiscount >= 1 && productDiscount  <= 100 ){
+                product.setPriceNew(productPrice -  productPrice * productDiscount / 100 );
             }else if(productDiscount > 100){
                 product.setPriceNew(productPrice - productDiscount);
             }else{
@@ -97,6 +97,7 @@ public class AddProductController {
             currentProduct = productService.saveProduct(product);
             return currentProduct;
         }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
