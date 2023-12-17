@@ -50,6 +50,8 @@ public class AddProductController {
     CategoryLevel1Detail addCategoryLevel1Detail = new CategoryLevel1Detail();
 
 
+
+
     private CategoryLevel1 currentCategoryLevel1;
     private CategoryLevel2 currentCategoryLevel2;
 
@@ -65,9 +67,10 @@ public class AddProductController {
             @RequestParam String productDirectoryId,
             @RequestParam String productDescription,
             @RequestParam Double productPrice,
-            @RequestParam Double productDiscount
-    ) {
-        try {
+            @RequestParam Double productDiscount,
+            @RequestParam Integer productTotalQuantity
+    ){
+        try{
             Product product = new Product();
             product.setProductName(productName);
             Brand brand = brandService.getBrandById(Integer.parseInt(productBrandId));
@@ -78,18 +81,20 @@ public class AddProductController {
             product.setCreateDate(new Date());
             product.setPriceOld(productPrice);
             product.setDiscount(productDiscount);
-            if (productDiscount > 0 && productDiscount <= 1) {
-                product.setPriceNew(productPrice * productDiscount);
-            } else if (productDiscount > 1 && productDiscount <= 100) {
-                product.setPriceNew(productPrice * productDiscount / 100);
-            } else if (productDiscount > 100) {
+            product.setTotalQuantity(productTotalQuantity);
+            if(productDiscount > 0 && productDiscount < 1){
+                product.setPriceNew(productPrice *  (1 - productDiscount) );
+            }else if(productDiscount >= 1 && productDiscount  <= 100 ){
+                product.setPriceNew(productPrice -  productPrice * productDiscount / 100 );
+            }else if(productDiscount > 100){
                 product.setPriceNew(productPrice - productDiscount);
             } else {
                 System.out.println("error");
             }
             currentProduct = productService.saveProduct(product);
             return currentProduct;
-        } catch (Exception e) {
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }

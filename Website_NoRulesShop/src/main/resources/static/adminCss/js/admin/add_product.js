@@ -94,45 +94,60 @@ app.controller("product_ctrl", function ($scope, $http) {
     }
 
     $scope.submit = function () {
-        $scope.addProduct()
-            .then(function () {
-                return $scope.addProductImages();
-            })
-            // .then(function () {
-            //     return $scope.addProductInformationType();
-            // })
-            .then(function () {
-                return $scope.addCategoryLv1();
-            })
-            .then(function () {
-                return $scope.addCategoryLv2();
-            })
-            .then(function () {
-                return $scope.addCategoryLv1Detail();
-            })
-            .then(function () {
-                return $scope.addCategoryLv2Detail();
-            })
-            .then(function () {
-                return $scope.addCategoryQuantity();
-            })
-            .then(function () {
-                return $scope.setTotalQuantity();
-            })
-            .catch(function (error) {
-                // Xử lý lỗi nếu có
-                console.error(error);
-            });
+        if (true) {
+            $scope.validateProductInfomation();
+        } else {
+            if (!$scope.showclassification1) {
+                $scope.addProduct().then(() => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Thêm Thành Công Sản Phẩm",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+            } else {
+                $scope.addProduct()
+                    .then(function () {
+                        return $scope.addProductImages();
+                    })
+                    // .then(function () {
+                    //     return $scope.addProductInformationType();
+                    // })
+                    .then(function () {
+                        return $scope.addCategoryLv1();
+                    })
+                    .then(function () {
+                        return $scope.addCategoryLv2();
+                    })
+                    .then(function () {
+                        return $scope.addCategoryLv1Detail();
+                    })
+                    .then(function () {
+                        return $scope.addCategoryLv2Detail();
+                    })
+                    .then(function () {
+                        return $scope.addCategoryQuantity();
+                    })
+                    .then(function () {
+                        return $scope.setTotalQuantity();
+                    })
+                    .catch(function (error) {
+                        // Xử lý lỗi nếu có
+                        console.error(error);
+                    });
+            }
+        }
     };
     $scope.addProduct = function () {
         return $http.post("/api/product/addProduct"
-            + "?productName=" + $scope.productName + "&&productBrandId=" + $scope.productBrand.brandId + "&&productDirectoryId=" + $scope.ProductDirectory.directoryLv1Id + "&&productDescription=" + $scope.productDescription + "&&productDiscount=" + $scope.productDiscount + "&&productPrice=" + $scope.productPrice
+            + "?productName=" + $scope.productName + "&&productBrandId=" + $scope.productBrand.brandId + "&&productDirectoryId=" + $scope.ProductDirectory.directoryLv1Id + "&&productDescription=" + $scope.productDescription + "&&productDiscount=" + $scope.productDiscount + "&&productPrice=" + $scope.productPrice + "&&productTotalQuantity=" + $scope.productQuantity
         ).then(function (response) {
                 $scope.addingProduct = response.data;
             },
             function (error) {
                 console.error('Lỗi khi thêm sản phẩm:', error);
-                throw error; // Ném lỗi để catch ở hàm submit
             })
     }
 
@@ -281,6 +296,85 @@ app.controller("product_ctrl", function ($scope, $http) {
         });
     }
 
+
+    $scope.validateProductInfomation = function () {
+        function validateAndReturnResult(input) {
+            const validationResult = validateInput(input);
+            return validationResult.valid;
+        }
+
+        // Sử dụng hàm validate cho từng trường input hoặc select
+        const isProductImageValid = validateAndReturnResult(document.getElementById("product-image-input"));
+        const isProductNameValid =   validateAndReturnResult(document.getElementById("product-name"));
+        const isProductPriceValid = validateAndReturnResult(document.getElementById("product-price"));
+        const isProductDiscountValid = validateAndReturnResult(document.getElementById("product-discount"));
+        const isProductBrandValid = validateAndReturnResult(document.getElementById("product-brand"));
+        const isProductDirectoryLv1Valid = validateAndReturnResult(document.getElementById("product-directory-lv1"));
+        const isProductDirectoryDescriptionValid = validateAndReturnResult(document.getElementById("product-description"));
+        const isProductQuantity = validateAndReturnResult(document.getElementById("product-quantity"));
+
+        $scope.classificationList1.forEach(item=>{
+            console.log(item);
+        });
+        $scope.classificationList2.forEach(item =>{
+            console.log(item)
+        })
+
+        // if($scope.showclassification1== true){
+        //     $scope.classificationList1.forEach(item =>{
+        //
+        //     })
+        // }else if($scope.showclassification2 == true){
+        //     $scope.classificationList2.forEach(item =>{
+        //         console.log(item);
+        //     })
+        // }
+
+
+        if(isProductImageValid && isProductNameValid && isProductPriceValid && isProductDiscountValid && isProductBrandValid && isProductDirectoryLv1Valid && isProductDirectoryDescriptionValid && isProductQuantity){
+            if ($scope.productPrice < $scope.productDiscount) {
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Giảm Giá Không Thể Lớn Hơn Giá Sản Phẩm",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return false;
+            }
+            else if($scope.productPrice > 100000000){
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Giá Sản Phẩm Quá Lớn",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return false;
+            }else if($scope.productPrice > 100000000){
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Giá Sản Phẩm Quá Lớn",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return false;
+            }else if($scope.productQuantity > 10000){
+                Swal.fire({
+                    position: "center",
+                    icon: "warning",
+                    title: "Số Lượng Sản Phẩm Quá Lớn",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return false;
+            }
+            return true;
+        }else{
+            return false;
+        }
+    }
 });
 
 

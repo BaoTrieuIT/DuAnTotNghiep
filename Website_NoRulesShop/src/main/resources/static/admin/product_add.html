@@ -15,32 +15,40 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Hình Ảnh Sản Phẩm</label>
                         <div class="col-sm-10">
-                            <input class="form-control" type="file" id="HinhAnh" accept="image/*"
-                                   onchange="angular.element(this).scope().productImagesChanged(this)" multiple>
+                            <input id="product-image-input" class="form-control" type="file" id="HinhAnh"
+                                   accept="image/*"
+                                   onchange="validateInput(this), angular.element(this).scope().productImagesChanged(this)"
+                                   multiple>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Tên Sản Phẩm</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" ng-model="productName" placeholder="VD : Áo Phông">
+                            <input onchange="validateInput(this)" id="product-name" type="text" class="form-control"
+                                   ng-model="productName" placeholder="VD : Áo Phông">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Giá</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" ng-model="productPrice" placeholder="VD : 10000 -> 10000 VND">
+                            <input onchange="validateInput(this)" id="product-price" type="number" class="form-control"
+                                   ng-model="productPrice" placeholder="VD : 10000 -> 10000 VND">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Giảm Giá</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" ng-model="productDiscount" placeholder="VD : 0.2 hoặc 20 hoặc 1000 -> 20% hoặc 1000 đồng">
+                            <input onchange="validateInput(this)" id="product-discount" type="number"
+                                   class="form-control" ng-model="productDiscount"
+                                   placeholder="VD : 0.2 hoặc 20 hoặc 1000 -> 20% hoặc 1000 đồng">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Thương Hiệu</label>
                         <div class="col-sm-10">
-                            <select class="form-select" aria-label="Default select example" ng-model="productBrand">
+                            <select onchange="validateInput(this)" id="product-brand" class="form-select"
+                                    aria-label="Default select example" ng-model="productBrand">
+                                <option value="">Vui Lòng Chọn Thương Hiệu</option>
                                 <option ng-repeat="brand in brands" ng-value="brand">{{brand.brandName}}</option>
                             </select>
                         </div>
@@ -48,8 +56,10 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Loại Sản Phẩm</label>
                         <div class="col-sm-10">
-                            <select class="form-select" aria-label="Default select example" ng-model="ProductDirectory"
+                            <select onchange="validateInput(this)" id="product-directory-lv1" class="form-select"
+                                    aria-label="Default select example" ng-model="ProductDirectory"
                                     ng-change="ChangeSelectedDirectoryLv1()">
+                                <option value="">Vui Lòng Chọn Loại Sản Phẩm</option>
                                 <option ng-repeat="directoryLv1 in directoryLv1s" ng-value="directoryLv1">
                                     {{directoryLv1.directoryLv1Name}}
                                 </option>
@@ -57,10 +67,17 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Kho Hàng</label>
+                        <div class="col-sm-10">
+                            <input onchange="validateInput(this)" id="product-quantity" type="text" class="form-control" ng-model="productQuantity">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
                         <div class="col-sm-10">
-                            <textarea ng-model="productDescription" class="form-control" style="height: 100px"
-                                      placeholder="Một Số Chi Tiết Về Sản Phẩm Của Bạn"></textarea>
+                            <textarea onchange="validateInput(this)" id="product-description"
+                                      ng-model="productDescription" class="form-control" style="height: 100px"
+                                      placeholder="Một Số Chi Tiết Về Sản Phẩm Của Bạn" ng-value=""></textarea>
                         </div>
                     </div>
                 </form><!-- End General Form Elements -->
@@ -128,15 +145,11 @@
                                         ng-hide="showclassification1">Thêm Phâm Loại
                                 </button>
                             </div>
-                            <div class="col-sm-12"><label class="col-sm-2 col-form-label">Giá</label><input type="text"
-                                                                                                            class="form-control"
-                                                                                                            ng-model="productAdd.price">
-                            </div>
-                            <div class="col-sm-12"><label class="col-sm-2 col-form-label">Kho Hàng</label><input
-                                    type="text"
-                                    class="form-control"
-                                    ng-model="productAdd.quantity">
-                            </div>
+                            <!--                            <div id="product-" class="col-sm-12"><label class="col-sm-2 col-form-label">Giá</label><input type="text"-->
+                            <!--                                                                                                            class="form-control"-->
+                            <!--                                                                                                            ng-model="productAdd.price">-->
+                            <!--                            </div>-->
+
                         </div>
                         <div class="col-sm-10 row">
                             <div ng-show="showclassification1">
@@ -167,19 +180,19 @@
                             </div>
                         </div>
                         <div class="row mb-2" ng-show="showclassification1">
-<!--                            <div class="row col-sm-12" style="padding: 10px 0">-->
-<!--                                <label class="col-sm-2 col-form-label">Danh sách phân loại hàng</label>-->
-<!--                                <div class="col-sm-3">-->
-<!--                                    <input type="text" class="form-control">-->
-<!--                                </div>-->
-<!--                                <div class="col-sm-3">-->
-<!--                                    <input type="text" class="form-control">-->
-<!--                                </div>-->
-<!--                                <div class="col-sm-3">-->
-<!--                                    <input type="text" class="form-control">-->
-<!--                                </div>-->
-<!--                                <button type="button" class="btn btn-primary col-sm-1">Áp Dụng</button>-->
-<!--                            </div>-->
+                            <!--                            <div class="row col-sm-12" style="padding: 10px 0">-->
+                            <!--                                <label class="col-sm-2 col-form-label">Danh sách phân loại hàng</label>-->
+                            <!--                                <div class="col-sm-3">-->
+                            <!--                                    <input type="text" class="form-control">-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-sm-3">-->
+                            <!--                                    <input type="text" class="form-control">-->
+                            <!--                                </div>-->
+                            <!--                                <div class="col-sm-3">-->
+                            <!--                                    <input type="text" class="form-control">-->
+                            <!--                                </div>-->
+                            <!--                                <button type="button" class="btn btn-primary col-sm-1">Áp Dụng</button>-->
+                            <!--                            </div>-->
                             <div class="col-sm-10">
 
                                 <!--                                <table class="table table-bordered">-->
@@ -224,11 +237,14 @@
                                     </tr>
                                     </thead>
                                     <tbody ng-repeat="item1 in classificationList1">
-                                        <tr ng-repeat="item2 in classificationList2">
-                                            <td ng-show="$index == 0" rowspan="{{classificationList2.length}}">{{item1}}</td>
-                                            <td ng-show="showclassification2">{{item2}}</td>
-                                            <td><input type="number" placeholder="Số Lượng" ng-model="quantities[$parent.$index * classificationList2.length + $index]"></td>
-                                        </tr>
+                                    <tr ng-repeat="item2 in classificationList2">
+                                        <td ng-show="$index == 0" rowspan="{{classificationList2.length}}">{{item1}}
+                                        </td>
+                                        <td ng-show="showclassification2">{{item2}}</td>
+                                        <td><input type="number" placeholder="Số Lượng"
+                                                   ng-model="quantities[$parent.$index * classificationList2.length + $index]">
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -238,5 +254,5 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary" ng-click="submit()">Thêm Sản Phẩm</button>
+    <div class="text-center col-12"><button type="button" class="btn btn-primary text-center" ng-click="submit()">Thêm Sản Phẩm</button></div>
 </main>

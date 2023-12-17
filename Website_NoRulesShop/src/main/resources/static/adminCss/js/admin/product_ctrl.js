@@ -5,6 +5,7 @@ app.controller("manage_product_ctrl", function ($scope, $http) {
     $scope.search_product_name = "";
     $scope.minValue = 0;
     $scope.maxValue = 10000000;
+    $scope.backupItem = [];
 
     $scope.filterByPrice = function () {
         $http.get("rest/product_all/")
@@ -31,66 +32,70 @@ app.controller("manage_product_ctrl", function ($scope, $http) {
         }
     }
 
-    const rangeInput = document.querySelectorAll(".range-input input"),
-        priceInput = document.querySelectorAll(".price-input input"),
-        range = document.querySelector(".slider .progress");
-    let priceGap = 1000000;
+    // const rangeInput = document.querySelectorAll(".range-input input"),
+    //     priceInput = document.querySelectorAll(".price-input input"),
+    //     range = document.querySelector(".slider .progress");
+    // let priceGap = 1000000;
 
-    priceInput.forEach(input => {
-        input.addEventListener("input", e => {
-            let minPrice = parseInt(priceInput[0].value),
-                maxPrice = parseInt(priceInput[1].value);
+    // priceInput.forEach(input => {
+    //     input.addEventListener("input", e => {
+    //         let minPrice = parseInt(priceInput[0].value),
+    //             maxPrice = parseInt(priceInput[1].value);
+    //
+    //         if ((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max) {
+    //             if (e.target.className === "input-min") {
+    //                 rangeInput[0].value = minPrice;
+    //                 range.style.left = ((minPrice / rangeInput[0].max) * 1000) + "%";
+    //             } else {
+    //                 rangeInput[1].value = maxPrice;
+    //                 range.style.right = 1000 - (maxPrice / rangeInput[1].max) * 1000 + "%";
+    //             }
+    //         }
+    //     });
+    // });
+    //
+    // rangeInput.forEach(input => {
+    //     input.addEventListener("input", e => {
+    //         let minVal = parseInt(rangeInput[0].value),
+    //             maxVal = parseInt(rangeInput[1].value);
+    //
+    //         if ((maxVal - minVal) < priceGap) {
+    //             if (e.target.className === "range-min") {
+    //                 rangeInput[0].value = maxVal - priceGap
+    //             } else {
+    //                 rangeInput[1].value = minVal + priceGap;
+    //             }
+    //         } else {
+    //             priceInput[0].value = minVal;
+    //             priceInput[1].value = maxVal;
+    //             range.style.left = ((minVal / rangeInput[0].max) * 1000) + "%";
+    //             range.style.right = 1000 - (maxVal / rangeInput[1].max) * 1000 + "%";
+    //         }
+    //     });
+    // });
 
-            if ((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max) {
-                if (e.target.className === "input-min") {
-                    rangeInput[0].value = minPrice;
-                    range.style.left = ((minPrice / rangeInput[0].max) * 1000) + "%";
-                } else {
-                    rangeInput[1].value = maxPrice;
-                    range.style.right = 1000 - (maxPrice / rangeInput[1].max) * 1000 + "%";
-                }
-            }
-        });
-    });
-
-    rangeInput.forEach(input => {
-        input.addEventListener("input", e => {
-            let minVal = parseInt(rangeInput[0].value),
-                maxVal = parseInt(rangeInput[1].value);
-
-            if ((maxVal - minVal) < priceGap) {
-                if (e.target.className === "range-min") {
-                    rangeInput[0].value = maxVal - priceGap
-                } else {
-                    rangeInput[1].value = minVal + priceGap;
-                }
-            } else {
-                priceInput[0].value = minVal;
-                priceInput[1].value = maxVal;
-                range.style.left = ((minVal / rangeInput[0].max) * 1000) + "%";
-                range.style.right = 1000 - (maxVal / rangeInput[1].max) * 1000 + "%";
-            }
-        });
-    });
     $scope.renderProductIsHidden = function () {
+        $scope.items = [];
         $http.get("/rest/product_all/isHidden").then(resp => {
             $scope.items = resp.data
+            $scope.backupItem = resp.data;
             $scope.itemType = "hidden";
         })
     }
     $scope.renderProductIsActive = function () {
+        $scope.items = [];
         $http.get("/rest/product_all/isActive").then(resp => {
             $scope.items = resp.data
+            $scope.backupItem = resp.data;
             $scope.itemType = "active";
         })
-
-
     }
     $scope.renderProductIsSoldOut = function () {
+        $scope.items = [];
         $http.get("/rest/product_all/isSoldOut").then(resp => {
+            $scope.backupItem = resp.data;
             $scope.items = resp.data
             $scope.itemType = "soldout";
-
         })
     }
     $scope.HiddenProDuct = function (productId) {
@@ -98,7 +103,6 @@ app.controller("manage_product_ctrl", function ($scope, $http) {
             $scope.items = resp.data
         }).catch(error => {
         })
-
     }
     $scope.ActiveProduct = function (productId) {
         $http.get("/rest/product_all/activeProduct?productId=" + productId).then(resp => {
@@ -106,9 +110,6 @@ app.controller("manage_product_ctrl", function ($scope, $http) {
         }).catch(error => {
         })
     }
-
-    $scope.initialize();
-
     $scope.pager = {
         page: 0,
         size: 3,
@@ -139,8 +140,17 @@ app.controller("manage_product_ctrl", function ($scope, $http) {
         }
     }
 
+    $scope.filterProduct = function () {
+        $scope.items = [];
+        $scope.backupItem.forEach(item => {
+            if (item.productName.includes($scope.search_product_name) && item.priceNew <= $scope.maxValue && item.priceNew >= $scope.minValue) {
+                $scope.items.push(item);
+            }
+        })
+    }
     $scope.initialize();
 });
+
 
 
 
