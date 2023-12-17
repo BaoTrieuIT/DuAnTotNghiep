@@ -30,6 +30,7 @@ public class ProductController {
 
     @GetMapping("/searchByNameProductOnline")
     private List<Product> SearchByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
+        System.out.println("Active");
         if (!productName.isEmpty()) {
             return filterByPrice(productService.SearchProductActiveByName(productName), min, max);
         } else {
@@ -39,6 +40,7 @@ public class ProductController {
 
     @GetMapping("/searchByNameProductHidden")
     public List<Product> searchProductSoldoutByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
+        System.out.println("Hidden");
         if (!productName.isEmpty()) {
             return filterByPrice(productService.SearchProductHiddenByName(productName), min, max);
         } else {
@@ -48,6 +50,7 @@ public class ProductController {
 
     @GetMapping("/searchByNameProductSoldout")
     public List<Product> SearchProductIsHiddenByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
+        System.out.println("sold out");
         if (!productName.isEmpty()) {
             return filterByPrice(productService.SearchProductSoldoutByName(productName), min, max);
         } else {
@@ -98,9 +101,9 @@ public class ProductController {
         } else {
             System.out.println("filtering...");
             for (Product product : listProduct) {
-//                if ((product.getPriceMin() <= max && product.getPriceMin() > min) || (product.getPriceMax() <= max && product.getPriceMax() > min)) {
-//                    listToReturn.add(product);
-//                }
+                if ((product.getPriceNew() <= max && product.getPriceNew() > min) || (product.getPriceNew() <= max && product.getPriceNew() > min)) {
+                    listToReturn.add(product);
+                }
             }
         }
         if (listToReturn.isEmpty()) {
