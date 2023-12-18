@@ -334,6 +334,7 @@ function readUrl(input) {
     }
 
 }
+
 function readUrl1(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -353,6 +354,6 @@ if (previewImage) {
         });
     });
 } else {
-    console.error("Element with id 'previewImage' not found");
+    console.log("Element with id 'previewImage' not found");
 }
 

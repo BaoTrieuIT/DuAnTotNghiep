@@ -164,14 +164,18 @@ app.controller('AddAccountController', ['$scope', '$http', '$location', '$timeou
                 console.log("Error", error);
             });
         } else {
-            $http.put(`/rest/manage_account/${item.account_id}`, item).then(function (resp) {
-                var index = $scope.items.findIndex(p => p.account_id === item.account_id);
-                $scope.items[index] = item;
-                AccountService.setAlert('Thành công!');
-                $location.path('/manage_account').search('success', 'true');
-            }).catch(error => {
-                console.log("Error", error);
-            });
+           if($scope.myForm.$valid){
+               $http.put(`/rest/manage_account/${item.account_id}`, item).then(function (resp) {
+                   var index = $scope.items.findIndex(p => p.account_id === item.account_id);
+                   $scope.items[index] = item;
+                   AccountService.setAlert('Thành công!');
+                   $location.path('/manage_account').search('success', 'true');
+               }).catch(error => {
+                   console.log("Error", error);
+               });
+           }else{
+               console.log("Form không hợp lệ")
+           }
         }
     }
     $scope.reset = function () {
