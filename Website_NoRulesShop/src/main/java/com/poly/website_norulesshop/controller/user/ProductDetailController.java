@@ -64,6 +64,7 @@ public class ProductDetailController {
         model.addAttribute("productsRelate", shufflePageContent(productsBrand));
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);
+        model.addAttribute("categoryQuantityId", null);
         model.addAttribute("categoryLv1Id", null);
         model.addAttribute("categoryLv2Id", null);
         return "user/product_details";
@@ -78,6 +79,7 @@ public class ProductDetailController {
         model.addAttribute("products", product);
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);
+        model.addAttribute("categoryQuantityId", null);
         model.addAttribute("categoryLv1Id", null);
         model.addAttribute("categoryLv2Id", null);
         return "user/product_details";
@@ -94,8 +96,10 @@ public class ProductDetailController {
         if (categoryLv1Id != null || categoryLv2Id != null) {
             List<CategoryQuantity> categoryQuantityList = categoryQuantityService.filterList(productId, categoryLv1Id, categoryLv2Id);
             Integer categoryQuantity = categoryQuantityService.getTotalQuantity(productId, categoryLv1Id, categoryLv2Id);
-            System.out.println(categoryQuantity);
+            Integer categoryQuantityId = categoryQuantityService.getOne(productId, categoryLv1Id, categoryLv2Id);
+
             model.addAttribute("category", categoryQuantityList);
+            model.addAttribute("categoryQuantityId", categoryQuantityId);
             model.addAttribute("categoryLv1Id", categoryLv1Id);
             model.addAttribute("categoryLv2Id", categoryLv2Id);
             model.addAttribute("quantity", categoryQuantity);

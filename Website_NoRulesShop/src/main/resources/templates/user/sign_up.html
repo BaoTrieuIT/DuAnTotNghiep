@@ -52,18 +52,6 @@
                                         </div>
                                         <!-- End .col-md-4 -->
                                     </div>
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-5">-->
-<!--                                            <div class="form-group required-field">-->
-<!--                                                <label for="phone_number">Your number <span-->
-<!--                                                        class="required">*</span></label>-->
-<!--                                                <input type="text" class="form-control" id="phone_number"-->
-<!--                                                       name="phone_number" th:field="*{phone_number}" required>-->
-<!--                                            </div>-->
-<!--                                            &lt;!&ndash; End .form-group &ndash;&gt;-->
-<!--                                        </div>-->
-<!--                                        &lt;!&ndash; End .col-md-4 &ndash;&gt;-->
-<!--                                    </div>-->
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="form-group required-field">
@@ -124,12 +112,12 @@
 
                                 <div class="d-flex pt-2">
                                     <div class="d-flex flex-column align-items-center justify-content-center">
-                                        <div>Hay đăng nhập qua: </div></div>
-                                    <a href="#" class="login100-social-item bg1">
+                                        <div>hoặc Đăng ký bằng: </div></div>
+                                    <a th:href="@{/oauth2/authorization/facebook}" class="login100-social-item bg1">
                                         <i class="fa-brands fa-facebook"></i>
                                     </a>
                                     </a>
-                                    <a href="#" class="login100-social-item bg3">
+                                    <a th:href="@{/oauth2/authorization/google}" class="login100-social-item bg3">
                                         <i class="fa-brands fa-google"></i>
                                     </a>
                                 </div>

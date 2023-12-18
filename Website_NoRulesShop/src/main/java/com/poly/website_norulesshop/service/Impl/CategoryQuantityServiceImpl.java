@@ -45,8 +45,13 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
     }
 
     @Override
-    public CategoryQuantity getOne(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
-        return categoryQuantityRepository.getOne(productId, categoryLv1DetailId, categoryLv2DetailId);
+    public CategoryQuantity getOne(Integer productId, Integer categoryQuantity) {
+        return categoryQuantityRepository.getOne(productId, categoryQuantity);
+    }
+
+    @Override
+    public Integer getOne(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
+        return categoryQuantityRepository.getOneId(productId, categoryLv1DetailId, categoryLv2DetailId);
     }
 //
 //    @Override
@@ -76,6 +81,11 @@ public class CategoryQuantityServiceImpl implements CategoryQuantityService {
     @Override
     public Integer getTotalQuantity(Integer productId, Integer categoryLv1DetailId, Integer categoryLv2DetailId) {
         return categoryQuantityRepository.getQuantity(productId, categoryLv1DetailId, categoryLv2DetailId);
+    }
+
+    @Override
+    public Integer getTotalQuantity(Integer productId, Integer categoryQuantityId) {
+        return categoryQuantityRepository.getQuantity(productId, categoryQuantityId);
     }
 
 

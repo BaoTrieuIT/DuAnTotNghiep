@@ -45,12 +45,24 @@ public interface CategoryQuantityRepository extends JpaRepository<CategoryQuanti
             , @Param("categoryLv2Id") Integer categoryLv2Id);
 
     @Query("SELECT cq FROM CategoryQuantity cq WHERE cq.product.productId = :productId " +
+            "and cq.category_quantity_id = :categoryQuantity ")
+    CategoryQuantity getOne(
+            @Param("productId") Integer productId
+            , @Param("categoryQuantity") Integer categoryQuantity);
+
+    @Query("SELECT cq.category_quantity_id FROM CategoryQuantity cq WHERE cq.product.productId = :productId " +
             "and cq.categoryLevel1Detail.category_level_1_detail_id = :categoryLv1Id " +
             "and cq.categoryLevel2Detail.category_level_2_detail_id = :categoryLv2Id")
-    CategoryQuantity getOne(
+    Integer getOneId(
             @Param("productId") Integer productId
             , @Param("categoryLv1Id") Integer categoryLv1Id
             , @Param("categoryLv2Id") Integer categoryLv2Id);
+
+    @Query("SELECT cq.quantity FROM CategoryQuantity cq WHERE cq.product.productId = :productId " +
+            "and cq.category_quantity_id = :categoryQuantity")
+    Integer getQuantity(
+            @Param("productId") Integer productId
+            , @Param("categoryQuantity") Integer categoryQuantity);
 
     @Query("SELECT cq.quantity FROM CategoryQuantity cq WHERE cq.product.productId = :productId " +
             "and cq.categoryLevel1Detail.category_level_1_detail_id = :categoryLv1Id " +

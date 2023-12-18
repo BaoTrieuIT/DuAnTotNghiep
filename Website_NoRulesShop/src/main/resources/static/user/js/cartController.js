@@ -53,122 +53,138 @@ app.controller("cart_ctrl", function ($scope, $http) {
         });
     }
 
+    $scope.number = 0; // Initialize index
+
+    // ... other controller logic ...
+
+    $scope.incrementIndex = function () {
+        $scope.number++;
+    };
     $scope.init();
     var $cart = $scope.cart = {
         items: [],
-        minus(item) {
+        minus(item, productId, quantity, categoryQuantityId) {
             if (item.qty > 1) {
                 item.qty--;
-                this.saveToLocalStorage();
+                $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryQuantityId}/${item.qty}`).then(respQuantity => {
+                    item.qty--;
+                    this.saveToLocalStorage();
+                    location.reload()
+                }).catch(error => {
+                    this.showError("error", "Lỗi", "Lỗi rồi");
+                    console.log(error)
+                })
+            } else {
+                this.showError("error", "Lỗi", "Số lượng sản phẩm sai");
+                return false;
             }
         },
-        plus(item) {
-            var maxQty = 0;
-            $http.get(`/rest/getMaxQty/${item.productId}/${item.categoryQuantity.categoryLevel1Detail.category_level_1_detail_id}/${item.categoryQuantity.categoryLevel2Detail.category_level_2_detail_id}`).then(response => {
-                maxQty = response.data;
-                if (item.qty < maxQty) {
-                    item.qty++;
-                    this.saveToLocalStorage();
+        plus(item, productId, quantity, categoryQuantityId) {
+            $http.get(`/rest/getMaxQty/${productId}/${categoryQuantityId}`).then(response => {
+                const maxQty = response.data;
+                if (item && (item.qty + quantity) - item.qty > maxQty) {
+                    this.showError("error", "Lỗi", "Không đủ số lượng");
+                    return false;
                 }
+                console.log("Before", item.qty)
+                console.log("Before", quantity)
+                $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryQuantityId}/${item.qty}`).then(respQuantity => {
+                    item.qty++;
+                    console.log("AFTER", item.qty)
+                    console.log("AFTER", quantity)
+                    this.saveToLocalStorage();
+                    location.reload()
+                }).catch(error => {
+                    this.showError("error", "Lỗi", "Lỗi rồi");
+                    console.log(error)
+                })
             });
         },
-        async add(productId, quantity, categoryLv1Id, categoryLv2Id) { // thêm sản phẩm vào giỏ hàng
+        async add(productId, quantity, categoryLv1Id, categoryLv2Id, categoryQuantityId) { // thêm sản phẩm vào giỏ hàng
             if (categoryLv1Id == null || categoryLv2Id == null) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Lỗi",
-                    text: "Vui lòng chọn kích thước và màu sắc",
-                });
+                this.showError("error", "Lỗi", "Vui lòng chọn kích thước và màu sắc");
                 return false;
             }
             if (quantity === undefined || quantity < 1 || isNaN(quantity)) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Lỗi",
-                    text: "Vui lòng nhập số lượng",
-                });
+                this.showError("error", "Lỗi", "Vui lòng nhập số lượng");
+
                 return false;
             }
             try {
-                const maxQty = await this.getMaxQuantity(productId, categoryLv1Id, categoryLv2Id);
+                const maxQty = await this.getMaxQuantity(productId, categoryQuantityId);
                 if (quantity > maxQty) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Lỗi",
-                        text: "Không đủ số lượng",
-                    });
+                    this.showError("error", "Lỗi", "Không đủ số lượng");
                     return false;
                 }
-                const item = this.findCartItem(productId);
+                const item = this.findCartItem(productId, categoryQuantityId);
                 if (item && item.qty <= 0) {
                     if (item && item.qty + quantity > maxQty) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Lỗi",
-                            text: "Không đủ số lượng",
-                        });
+                        this.showError("error", "Lỗi", "Không đủ số lượng");
                         return false;
                     }
                 } else {
                     if (item && (item.qty + quantity) - item.qty > maxQty) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Lỗi",
-                            text: "Không đủ số lượng",
-                        });
+                        this.showError("error", "Lỗi", "Không đủ số lượng");
                         return false;
                     }
                 }
                 if (item) {
-                    await this.updateCartItem(item, quantity, productId, categoryLv1Id, categoryLv2Id);
+                    await this.updateCartItem(item, quantity, productId, categoryQuantityId);
                 } else {
-                    await this.addNewItemToCart(productId, categoryLv1Id, categoryLv2Id, quantity);
+                    await this.addNewItemToCart(productId, categoryLv1Id, categoryLv2Id, quantity, categoryQuantityId);
                 }
                 this.redirect("/home/product-details/filter", productId, categoryLv1Id, categoryLv2Id);
                 location.reload()
                 return true;
             } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Lỗi",
-                    text: "Lỗi rồi",
-                });
+                this.showError("error", "Lỗi", "Lỗi cập nhật giỏ hàng");
                 console.error(error);
                 return false;
             }
         },
-        async getMaxQuantity(productId, categoryLv1Id, categoryLv2Id) {
-            const response = await $http.get(`/rest/getMaxQty/${productId}/${categoryLv1Id}/${categoryLv2Id}`);
-            return response.data;
-        },
-        findCartItem(productId) {
-            return this.items.find(item => item.productId === productId);
+        remove(productId, quantity, categoryQuantityId) { // xóa sản phẩm khỏi giỏ hàng
+            const itemIndex = this.findCartItem(productId, categoryQuantityId);
+            $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryQuantityId}/${quantity}`).then(respQuantity => {
+                this.items.splice(itemIndex, 1);
+                this.saveToLocalStorage();
+                location.reload()
+            }).catch(error => {
+                this.showError("error", "Lỗi", "Lỗi rồi");
+                console.log(error)
+            })
         },
 
-        async updateCartItem(item, quantity, productId, categoryLv1Id, categoryLv2Id) {
+        async getMaxQuantity(productId, categoryQuantityId) {
+            const response = await $http.get(`/rest/getMaxQty/${productId}/${categoryQuantityId}`);
+            return response.data;
+        },
+        findCartItem(productId, categoryQuantityId) {
+            return this.items.find(item => item.productId === productId
+                && item.categoryQuantity[0].category_quantity_id === categoryQuantityId
+            );
+        },
+
+
+        async updateCartItem(item, quantity, productId, categoryQuantityId) {
             item.qty += quantity;
-            await $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`)
+            await $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryQuantityId}/${quantity}`)
                 .then(resp => {
                     location.reload();
                     this.saveToLocalStorage();
                 })
                 .catch(error => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Lỗi",
-                            text: "Lỗi rồi",
-                        });
+                        this.showError("error", "Lỗi", "Lỗi cập nhật giỏ hàng");
                         console.log(error);
                     }
                 );
         },
-        async addNewItemToCart(productId, categoryLv1Id, categoryLv2Id, quantity) {
+        async addNewItemToCart(productId, categoryLv1Id, categoryLv2Id, quantity, categoryQuantityId) {
             try {
                 const productResponse = await $http.get(`/rest/products/${productId}`);
                 const imageResponse = await $http.get(`/rest/productImages/${productId}`);
                 const categoryResponse = await $http.get(`/rest/categoryQuantity/${productId}/${categoryLv1Id}/${categoryLv2Id}`);
 
-                await $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`)
+                await $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryQuantityId}/${quantity}`)
                     .then(respQuantity => {
                         productResponse.data.qty = quantity;
                         productResponse.data.categoryQuantity = categoryResponse.data;
@@ -178,20 +194,12 @@ app.controller("cart_ctrl", function ($scope, $http) {
                         location.reload();
                     })
                     .catch(error => {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Lỗi",
-                                text: "Lỗi rồi",
-                            });
+                            this.showError("error", "Lỗi", "Lỗi thêm sản phẩm");
                             console.log(error);
                         }
                     );
             } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Lỗi",
-                    text: "Lỗi rồi",
-                });
+                this.showError("error", "Lỗi", "Lỗi get");
                 // Handle errors as needed
             }
         },
@@ -199,21 +207,13 @@ app.controller("cart_ctrl", function ($scope, $http) {
             const url = `${baseURL}?productId=${productId}&categoryLv1Id=${categoryLv1Id}&categoryLv2Id=${categoryLv2Id}`;
         },
 
-        remove(productId, quantity, categoryLv1Id, categoryLv2Id) { // xóa sản phẩm khỏi giỏ hàng
-            var index = this.items.findIndex(item => item.productId === productId);
-            this.items.splice(index, 1);
-            $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryLv1Id}/${categoryLv2Id}/${quantity}`).then(respQuantity => {
-                location.reload()
-            }).catch(error => {
-                Swal.fire({
-                    icon: "error",
-                    title: "Lỗi",
-                    text: "Lỗi rồi",
-                });
-                console.log(error)
-            })
 
-            this.saveToLocalStorage();
+        showError(icon, title, message) {
+            Swal.fire({
+                icon: icon,
+                title: title,
+                text: message,
+            });
         },
         clear() { // Xóa sạch các mặt hàng trong giỏ
             this.items = []

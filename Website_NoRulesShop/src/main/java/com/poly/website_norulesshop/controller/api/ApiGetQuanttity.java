@@ -16,11 +16,10 @@ public class ApiGetQuanttity {
     @Autowired
     CategoryQuantityService categoryQuantityService;
 
-    @GetMapping("{productId}/{categoryLv1Id}/{categoryLv2Id}")
+    @GetMapping("{productId}/{categoryQuantityId}")
     public Integer getQuantity(@PathVariable("productId") Integer productId,
-                               @PathVariable("categoryLv1Id") Integer categoryLv1Id,
-                               @PathVariable("categoryLv2Id") Integer categoryLv2Id) {
-        return categoryQuantityService.getTotalQuantity(productId, categoryLv1Id, categoryLv2Id);
+                               @PathVariable("categoryQuantityId") Integer categoryQuantityId) {
+        return categoryQuantityService.getTotalQuantity(productId, categoryQuantityId);
 
     }
 

@@ -158,7 +158,7 @@
                                                 <tbody>
                                                 <tr ng-repeat="item in cart.items">
                                                     <td class="text-center">
-                                                        <a ng-href="/home/product-details/productId={{item.productId}}">
+                                                        <a ng-href="/home/product-details/productId={{item.productId}}/brandId={{item.brand.brandId}}">
                                                             <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
                                                                  alt="{{item.productImageList[0].image_url}}"
                                                                  title="{{item.productImageList[0].image_url}}"
@@ -183,8 +183,7 @@
                                                            ng-click="cart.remove(
                                                                         item.productId,
                                                                         item.qty,
-                                                                        item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_id,
-                                                                        item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_id)"><i
+                                                                        item.categoryQuantity[0].category_quantity_id)"><i
                                                                 class="material-icons">close</i>
                                                         </a>
                                                     </td>

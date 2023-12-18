@@ -45,16 +45,12 @@
                             <!--                            <input type="hidden" name="productId" ng-model="item.productId" value="{{item.productId}}" />-->
                             <td class="table-remove">
                                 <button
-                                        ng-click="cart.remove(
-                                                        item.productId,
-                                                        item.qty,
-                                                        item.categoryQuantity[0].categoryLevel1Detail.category_level_1_detail_id,
-                                                        item.categoryQuantity[0].categoryLevel2Detail.category_level_2_detail_id)">
+                                        ng-click="cart.remove(item.productId,item.qty,item.categoryQuantity[0].category_quantity_id)">
                                     <i class="material-icons">delete</i>
                                 </button>
                             </td>
                             <td class="table-image">
-                                <a ng-href="/home/product-details/productId={{item.productId}}">
+                                <a ng-href="/home/product-details/productId={{item.productId}}/brandId={{item.brand.brandId}}">
                                     <img ng-src="/user/img/products/{{item.productImageList[0].image_url}}"
                                          alt="{{item.productImageList[0].image_url}}"
                                          title="{{item.productImageList[0].image_url}}" />
@@ -71,12 +67,20 @@
 
                             <td class="table-p-price"><p>{{item.priceNew | vndFormat }}</p></td>
                             <td class="table-p-qty">
-                                <button class="minus btn" ng-click="cart.minus(item)">-
+                                <button class="minus btn"
+                                        ng-click="cart.minus(item,
+                                                             item.productId,
+                                                             item.qty,
+                                                             item.categoryQuantity[0].category_quantity_id)">-
                                 </button>
                                 <label>
                                     <input type="number" min="1" ng-model="item.qty" readonly />
                                 </label>
-                                <button class="plus btn" ng-click="cart.plus(item)"
+                                <button class="plus btn"
+                                        ng-click="cart.plus(item,
+                                                            item.productId,
+                                                            item.qty,
+                                                            item.categoryQuantity[0].category_quantity_id)"
                                 >+
                                 </button>
                             </td>

@@ -26,12 +26,11 @@ public class ApiCategoryQuantityController {
         return categoryQuantityService.filterList(productId, categoryLv1Id, categoryLv2Id);
     }
 
-    @PostMapping("/rest/categoryQuantitywhenAdd/{productId}/{categoryLv1Id}/{categoryLv2Id}/{quantity}")
+    @PostMapping("/rest/categoryQuantitywhenAdd/{productId}/{categoryQuantityId}/{quantity}")
     public CategoryQuantity updateQuantitywhenAdd(@PathVariable("productId") Integer productId,
-                                                  @PathVariable("categoryLv1Id") Integer categoryLv1Id,
-                                                  @PathVariable("categoryLv2Id") Integer categoryLv2Id,
+                                                  @PathVariable("categoryQuantityId") Integer categoryQuantityId,
                                                   @PathVariable("quantity") Integer quantity) {
-        CategoryQuantity categoryQuantity = categoryQuantityService.getOne(productId, categoryLv1Id, categoryLv2Id);
+        CategoryQuantity categoryQuantity = categoryQuantityService.getOne(productId, categoryQuantityId);
         categoryQuantity.setQuantity(categoryQuantity.getQuantity() - quantity);
         Product product = productService.getProductById(productId);
         product.setTotalQuantity(product.getTotalQuantity() - quantity);
@@ -39,12 +38,11 @@ public class ApiCategoryQuantityController {
         return categoryQuantityService.saveCategoryQuantity(categoryQuantity);
     }
 
-    @PostMapping("/rest/categoryQuantitywhenRemove/{productId}/{categoryLv1Id}/{categoryLv2Id}/{quantity}")
+    @PostMapping("/rest/categoryQuantitywhenRemove/{productId}/{categoryQuantityId}/{quantity}")
     public CategoryQuantity updateQuantitywhenRemove(@PathVariable("productId") Integer productId,
-                                                     @PathVariable("categoryLv1Id") Integer categoryLv1Id,
-                                                     @PathVariable("categoryLv2Id") Integer categoryLv2Id,
+                                                     @PathVariable("categoryQuantityId") Integer categoryQuantityId,
                                                      @PathVariable("quantity") Integer quantity) {
-        CategoryQuantity categoryQuantity = categoryQuantityService.getOne(productId, categoryLv1Id, categoryLv2Id);
+        CategoryQuantity categoryQuantity = categoryQuantityService.getOne(productId, categoryQuantityId);
         categoryQuantity.setQuantity(categoryQuantity.getQuantity() + quantity);
         Product product = productService.getProductById(productId);
         product.setTotalQuantity(product.getTotalQuantity() + quantity);
