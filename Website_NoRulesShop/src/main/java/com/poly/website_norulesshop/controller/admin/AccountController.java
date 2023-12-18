@@ -74,8 +74,7 @@ public class AccountController {
                         if (!Files.exists(path)) {
                             Files.createDirectories(path);
                         }
-                        String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-                        String fileName = file.getOriginalFilename() + extension; // Adjust the file format based on your image type
+                        String fileName = file.getOriginalFilename() ; // Adjust the file format based on your image type
                         Path filePath = Paths.get(directoryPath, fileName);
 
                         Files.write(filePath, file.getBytes());

@@ -68,8 +68,8 @@ public class BrandController {
                 if (!Files.exists(path1)) {
                     Files.createDirectories(path1);
                 }
-                String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-                String fileName1 = file.getOriginalFilename() + extension; //
+
+                String fileName1 = file.getOriginalFilename() ; //
                 Path filePath1 = Paths.get(directoryPath1, fileName1);
 
                 Files.write(filePath1, file.getBytes());
