@@ -32,12 +32,14 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
     $scope.initialize = function () {
         $http.get("/rest/manage_account").then(resp => {
             $scope.items = resp.data;
+            $scope.items.birthday = new Date($scope.items.birthday);
         })
         $http.get("/rest/manage_account/getAccountInfo").then(resp => {
             $scope.Account = resp.data;
         })
 
     }
+
     $scope.itemToHide = null;
     $scope.setItemToHide = function (item) {
         $scope.itemToHide = item;
@@ -76,19 +78,26 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
     $scope.initialize();
     $scope.pager = {
         page: 0,
-        size: 3,
+        size: 4,
         get items() {
-            if (this.page < 0) {
-                this.last();
+            if ($scope.items && Array.isArray($scope.items)) { // Kiểm tra xem items đã được khởi tạo và là một mảng không
+                if (this.page < 0) {
+                    this.last();
+                }
+                if (this.page >= this.count) {
+                    this.first();
+                }
+                var start = this.page * this.size;
+                return $scope.items.slice(start, start + this.size);
+            } else {
+                return []; // Trả về một mảng trống hoặc giá trị mặc định phù hợp với logic của bạn
             }
-            if (this.page >= this.count) {
-                this.first();
-            }
-            var start = this.page * this.size;
-            return $scope.items.slice(start, start + this.size)
         },
         get count() {
-            return Math.ceil(1.0 * $scope.items.length / this.size);
+            if ($scope.items && $scope.items.length) {
+                return Math.ceil(1.0 * $scope.items.length / this.size);
+            }
+            return 0; // Hoặc giá trị mặc định phù hợp với logic của bạn
         },
         first() {
             this.page = 0;
