@@ -57,8 +57,7 @@
                         <label class="col-sm-2 col-form-label">Loại Sản Phẩm</label>
                         <div class="col-sm-10">
                             <select onchange="validateInput(this)" id="product-directory-lv1" class="form-select"
-                                    aria-label="Default select example" ng-model="ProductDirectory"
-                                    ng-change="ChangeSelectedDirectoryLv1()">
+                                    aria-label="Default select example" ng-model="ProductDirectory">
                                 <option value="">Vui Lòng Chọn Loại Sản Phẩm</option>
                                 <option ng-repeat="directoryLv1 in directoryLv1s" ng-value="directoryLv1">
                                     {{directoryLv1.directoryLv1Name}}
@@ -98,36 +97,6 @@
                                         ng-options="detailInformationType.detailInformationTypeName for detailInformationType in InformationType.detailInfoList">
                                 </select>
                             </div>
-                            <!--                            <div ng-switch-when="Check Box">-->
-                            <!--                                <div class="col-sm-10">-->
-                            <!--                                    <div class="form-check">-->
-                            <!--                                        <input class="form-check-input" type="checkbox" id="gridCheck1">-->
-                            <!--                                        <label class="form-check-label" for="gridCheck1">-->
-                            <!--                                            Example checkbox-->
-                            <!--                                            Example checkbox-->
-                            <!--                                        </label>-->
-                            <!--                                    </div>-->
-                            <!--                                    <div class="form-check">-->
-                            <!--                                        <input class="form-check-input" type="checkbox" id="gridCheck2" checked="">-->
-                            <!--                                        <label class="form-check-label" for="gridCheck2">-->
-                            <!--                                            Example checkbox 2-->
-                            <!--                                        </label>-->
-                            <!--                                    </div>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-
-                            <!--                            <div ng-switch-when="Choose File">-->
-                            <!--                                <input class="form-control" type="file" multiple>-->
-                            <!--                            </div>-->
-                            <!--                            <div ng-switch-when="Text">-->
-                            <!--                                <input type="text" class="form-control">-->
-                            <!--                            </div>-->
-                            <!--                            <div ng-switch-when="Choose File">-->
-                            <!--                                <input class="form-control" type="file" multiple>-->
-                            <!--                            </div>-->
-                            <!--                            <div ng-switch-when="Text Area">-->
-                            <!--                                <textarea class="form-control" style="height: 100px"></textarea>-->
-                            <!--                            </div>-->
                         </div>
                     </div>
                 </form><!-- End General Form Elements -->
@@ -145,21 +114,16 @@
                                         ng-hide="showclassification1">Thêm Phâm Loại
                                 </button>
                             </div>
-                            <!--                            <div id="product-" class="col-sm-12"><label class="col-sm-2 col-form-label">Giá</label><input type="text"-->
-                            <!--                                                                                                            class="form-control"-->
-                            <!--                                                                                                            ng-model="productAdd.price">-->
-                            <!--                            </div>-->
-
                         </div>
                         <div class="col-sm-10 row">
                             <div ng-show="showclassification1">
                                 <label class="col-sm-2 col-form-label">Nhóm Phân Loại 1</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" ng-model="classificationGround1">
+                                    <input id="classificationGround1" type="text" class="form-control" ng-model="classificationGround1">
                                 </div>
                                 <label class="col-sm-2 col-form-label">Phân Loại Hàng</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" ng-model="classificationText1"
+                                    <input id="classificationText1" type="text" class="form-control" ng-model="classificationText1"
                                            ng-change="changedInClassfication()">
                                 </div>
                                 <button class="btn btn-primary mb-2" style="margin: 10px 0"
@@ -167,58 +131,21 @@
                                     Loại 2
                                 </button>
                             </div>
-                            <div ng-show="showclassification2"><label class="col-sm-2 col-form-label">Nhóm Phân Loại
+                            <div ng-show="showclassification2"><label class="col-sm-2 col-form-label py-2">Nhóm Phân Loại
                                 2</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" ng-model="classificationGround2">
+                                    <input id="classificationGround2" type="text" class="form-control" ng-model="classificationGround2">
                                 </div>
                                 <label class="col-sm-2 col-form-label">Phân Loại Hàng</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" ng-model="classificationText2"
+                                    <input id="classificationText2" type="text" class="form-control" ng-model="classificationText2"
                                            ng-change="changedInClassfication()">
                                 </div>
                             </div>
                         </div>
                         <div class="row mb-2" ng-show="showclassification1">
-                            <!--                            <div class="row col-sm-12" style="padding: 10px 0">-->
-                            <!--                                <label class="col-sm-2 col-form-label">Danh sách phân loại hàng</label>-->
-                            <!--                                <div class="col-sm-3">-->
-                            <!--                                    <input type="text" class="form-control">-->
-                            <!--                                </div>-->
-                            <!--                                <div class="col-sm-3">-->
-                            <!--                                    <input type="text" class="form-control">-->
-                            <!--                                </div>-->
-                            <!--                                <div class="col-sm-3">-->
-                            <!--                                    <input type="text" class="form-control">-->
-                            <!--                                </div>-->
-                            <!--                                <button type="button" class="btn btn-primary col-sm-1">Áp Dụng</button>-->
-                            <!--                            </div>-->
                             <div class="col-sm-10">
-
-                                <!--                                <table class="table table-bordered">-->
-                                <!--                                    <thead>-->
-                                <!--                                    <tr>-->
-                                <!--                                        <th scope="col" ng-if="!classificationGround1">Phân Loại 1</th>-->
-                                <!--                                        <th scope="col" ng-if="classificationGround1">{{classificationGround1}}</th>-->
-                                <!--                                        <th scope="col" ng-if="!classificationGround2 && showclassification2">Phân Loại 2</th>-->
-                                <!--                                        <th scope="col" ng-if="classificationGround2 && showclassification2">{{classificationGround2}}</th>-->
-                                <!--                                        <th scope="col">Giá</th>-->
-                                <!--                                        <th scope="col">Kho Hàng</th>-->
-                                <!--                                        <th scope="col">Giảm Giá</th>-->
-                                <!--                                    </tr>-->
-                                <!--                                    </thead>-->
-                                <!--                                    <tbody>-->
-                                <!--                                    <tr ng-repeat="item1 in classificationList1" >-->
-                                <!--                                       <td>{{item1}}</td>-->
-                                <!--                                        <td ng-repeat="item2  in classificationList2"></td>-->
-                                <!--                                        <td ng-repeat="item2  in classificationList2"><input type="number"></td>-->
-                                <!--                                        <td ng-repeat="item2  in classificationList2"><input type="number"></td>-->
-                                <!--                                        <td ng-repeat="item2  in classificationList2"><input type="number"></td>-->
-                                <!--                                    </tr>-->
-                                <!--                                    </tbody>-->
-                                <!--                                </table>-->
-
-                                <table style="width:100%" class="table table-bordered">
+                                <table style="width:100%" class="table table-bordered mt-2">
                                     <thead>
                                     <tr>
                                         <th ng-show="showclassification1 == true && classificationGround1 != ''">
@@ -230,18 +157,18 @@
                                         <th ng-show="showclassification2 == true && classificationGround2 != ''">
                                             {{classificationGround2}}
                                         </th>
-                                        <th ng-show="showclassification2 == true && classificationGround2 == ''">Phân
+                                        <th class="" ng-show="showclassification2 == true && classificationGround2 == ''">Phân
                                             Loại 2
                                         </th>
                                         <th>Kho Hàng</th>
                                     </tr>
                                     </thead>
                                     <tbody ng-repeat="item1 in classificationList1">
-                                    <tr ng-repeat="item2 in classificationList2">
+                                    <tr class="mb-3" ng-repeat="item2 in classificationList2">
                                         <td ng-show="$index == 0" rowspan="{{classificationList2.length}}">{{item1}}
                                         </td>
                                         <td ng-show="showclassification2">{{item2}}</td>
-                                        <td><input type="number" placeholder="Số Lượng"
+                                        <td><input  class="category-quantity form-control py-2" type="number" placeholder="Số Lượng"
                                                    ng-model="quantities[$parent.$index * classificationList2.length + $index]">
                                         </td>
                                     </tr>
