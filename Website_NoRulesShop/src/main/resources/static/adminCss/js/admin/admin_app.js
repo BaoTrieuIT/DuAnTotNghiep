@@ -47,9 +47,13 @@ app.config(function ($routeProvider) {
         }).when("/orderDetail", {
         templateUrl: "/admin/orderDetail.html",
         controller: "order_detail_ctrl"
-    })
+        })
+        .when("/editProduct", {
+            templateUrl: "/admin/editProduct.html",
+            controller: "edit_product_controller"
+        })
         .otherwise({
             templateUrl: "/admin/index.html",
             controller: "dashboard_ctrl"
-        });
+        })
 })
