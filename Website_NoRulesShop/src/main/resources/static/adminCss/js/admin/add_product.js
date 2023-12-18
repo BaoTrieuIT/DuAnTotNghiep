@@ -85,61 +85,47 @@ app.controller("product_ctrl", function ($scope, $http) {
         $scope.classificationList2 = $scope.classificationText2.split(",");
     }
 
-    $scope.changeProductImage = function (inputFile) {
-        console.log(inputFile);
-    }
 
     $scope.productImagesChanged = function (element) {
         $scope.productImages = element.files;
     }
 
-    $scope.submit = function () {
-        if (true) {
-            $scope.validateProductInfomation();
-        } else {
-            if (!$scope.showclassification1) {
-                $scope.addProduct().then(() => {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Thêm Thành Công Sản Phẩm",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                })
+    $scope.submit = async function () {
+        try {
+            const isValidProductInfo = await $scope.validateProductInformation();
+
+            if (isValidProductInfo) {
+                await $scope.addProduct();
+                if ($scope.showclassification1) {
+                    await $scope.addProductImages();
+                    await $scope.addCategoryLv1();
+                    await $scope.addCategoryLv2();
+                    await $scope.addCategoryLv1Detail();
+                    await $scope.addCategoryLv2Detail();
+                    await $scope.addCategoryQuantity();
+                    await $scope.setTotalQuantity();
+                }
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Thêm Thành Công Sản Phẩm",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else {
-                $scope.addProduct()
-                    .then(function () {
-                        return $scope.addProductImages();
-                    })
-                    // .then(function () {
-                    //     return $scope.addProductInformationType();
-                    // })
-                    .then(function () {
-                        return $scope.addCategoryLv1();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryLv2();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryLv1Detail();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryLv2Detail();
-                    })
-                    .then(function () {
-                        return $scope.addCategoryQuantity();
-                    })
-                    .then(function () {
-                        return $scope.setTotalQuantity();
-                    })
-                    .catch(function (error) {
-                        // Xử lý lỗi nếu có
-                        console.error(error);
-                    });
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Thông Tin Sản Phẩm Không Hợp Lệ",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }
+        } catch (error) {
+            console.error("Đã xảy ra lỗi:", error);
         }
     };
+
     $scope.addProduct = function () {
         return $http.post("/api/product/addProduct"
             + "?productName=" + $scope.productName + "&&productBrandId=" + $scope.productBrand.brandId + "&&productDirectoryId=" + $scope.ProductDirectory.directoryLv1Id + "&&productDescription=" + $scope.productDescription + "&&productDiscount=" + $scope.productDiscount + "&&productPrice=" + $scope.productPrice + "&&productTotalQuantity=" + $scope.productQuantity
@@ -163,8 +149,7 @@ app.controller("product_ctrl", function ($scope, $http) {
             headers: {'Content-Type': undefined}
         })
             .then(function (response) {
-                console.log("   Lưu tệp tin thành công");
-                // Xử lý sau khi request thành công
+
             })
             .catch(function (error) {
                 console.error('Lưu tệp tin thất bại:', error);
@@ -187,7 +172,6 @@ app.controller("product_ctrl", function ($scope, $http) {
                     throw error; // Ném lỗi để catch ở hàm submit
                 });
         });
-
         return Promise.all(promises);
     };
 
@@ -264,10 +248,6 @@ app.controller("product_ctrl", function ($scope, $http) {
 
                 $http.post("/api/product/addCategoryQuantity", categoryQuantityDTO)
                     .then(function (response) {
-                        // Xử lý kết quả trả về khi request thành công
-                        console.log("doing");
-                        console.log(response.data);
-
                     })
                     .catch(function (error) {
                         // Xử lý lỗi nếu có
@@ -289,7 +269,6 @@ app.controller("product_ctrl", function ($scope, $http) {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                console.log(response)
             }).catch(function (error) {
             // Xử lý lỗi nếu có
             console.error(error);
@@ -297,84 +276,133 @@ app.controller("product_ctrl", function ($scope, $http) {
     }
 
 
-    $scope.validateProductInfomation = function () {
-        function validateAndReturnResult(input) {
-            const validationResult = validateInput(input);
-            return validationResult.valid;
-        }
-
-        // Sử dụng hàm validate cho từng trường input hoặc select
-        const isProductImageValid = validateAndReturnResult(document.getElementById("product-image-input"));
-        const isProductNameValid =   validateAndReturnResult(document.getElementById("product-name"));
-        const isProductPriceValid = validateAndReturnResult(document.getElementById("product-price"));
-        const isProductDiscountValid = validateAndReturnResult(document.getElementById("product-discount"));
-        const isProductBrandValid = validateAndReturnResult(document.getElementById("product-brand"));
-        const isProductDirectoryLv1Valid = validateAndReturnResult(document.getElementById("product-directory-lv1"));
-        const isProductDirectoryDescriptionValid = validateAndReturnResult(document.getElementById("product-description"));
-        const isProductQuantity = validateAndReturnResult(document.getElementById("product-quantity"));
-
-        $scope.classificationList1.forEach(item=>{
-            console.log(item);
+    $scope.validateProductInformation = function () {
+        return new Promise((resolve, reject) => {
+            validateBasicInformation()
+                .then(resultBasic => {
+                    if (!resultBasic) {
+                        resolve(false);
+                    } else {
+                        validatePurchaseInformation().then(resultPurchase => {
+                            resolve(resultPurchase);
+                        }).catch(e => {
+                            console.error(e);
+                            resolve(false);
+                        });
+                    }
+                }).catch(e => {
+                console.error(e);
+                resolve(false);
+            });
         });
-        $scope.classificationList2.forEach(item =>{
-            console.log(item)
-        })
-
-        // if($scope.showclassification1== true){
-        //     $scope.classificationList1.forEach(item =>{
-        //
-        //     })
-        // }else if($scope.showclassification2 == true){
-        //     $scope.classificationList2.forEach(item =>{
-        //         console.log(item);
-        //     })
-        // }
-
-
-        if(isProductImageValid && isProductNameValid && isProductPriceValid && isProductDiscountValid && isProductBrandValid && isProductDirectoryLv1Valid && isProductDirectoryDescriptionValid && isProductQuantity){
-            if ($scope.productPrice < $scope.productDiscount) {
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Giảm Giá Không Thể Lớn Hơn Giá Sản Phẩm",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                return false;
-            }
-            else if($scope.productPrice > 100000000){
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Giá Sản Phẩm Quá Lớn",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                return false;
-            }else if($scope.productPrice > 100000000){
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Giá Sản Phẩm Quá Lớn",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                return false;
-            }else if($scope.productQuantity > 10000){
-                Swal.fire({
-                    position: "center",
-                    icon: "warning",
-                    title: "Số Lượng Sản Phẩm Quá Lớn",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                return false;
-            }
-            return true;
-        }else{
-            return false;
-        }
     }
+
+
+    function validateBasicInformation() {
+        return new Promise((resolve, reject) => {
+            try {
+                let isProductImageValid = validateAndReturnResult(document.getElementById("product-image-input"));
+                let isProductNameValid = validateAndReturnResult(document.getElementById("product-name"));
+                let isProductPriceValid = validateAndReturnResult(document.getElementById("product-price"));
+                let isProductDiscountValid = validateAndReturnResult(document.getElementById("product-discount"));
+                let isProductBrandValid = validateAndReturnResult(document.getElementById("product-brand"));
+                let isProductDirectoryLv1Valid = validateAndReturnResult(document.getElementById("product-directory-lv1"));
+                let isProductDirectoryDescriptionValid = validateAndReturnResult(document.getElementById("product-description"));
+                let isProductQuantity = validateAndReturnResult(document.getElementById("product-quantity"));
+                let result = isProductImageValid && isProductNameValid && isProductPriceValid && isProductDiscountValid && isProductBrandValid && isProductDirectoryLv1Valid && isProductDirectoryDescriptionValid && isProductQuantity;
+                resolve(result);
+            } catch (e) {
+                console.error(e);
+                resolve(false);
+            }
+        });
+    }
+
+    function validatePurchaseInformation() {
+        return new Promise((resolve, reject) => {
+            validateCategoryQuantities().then(resultQuantities => {
+                if (!resultQuantities) {
+                    resolve(false);
+                } else {
+                    validateCategoryGroup().then(resultGroup => {
+                        resolve(resultGroup);
+                    }).catch(e => {
+                        console.error(e);
+                        resolve(false);
+                    });
+                }
+            }).catch(e => {
+                console.error(e);
+                resolve(false);
+            });
+        });
+    }
+
+    function validateCategoryQuantities() {
+        return new Promise((resolve, reject) => {
+            try {
+                let result = true;
+                let categoryQuantitiesInputs = document.querySelectorAll(".category-quantity");
+                categoryQuantitiesInputs.forEach(categoryQuantityInput => {
+                    if (categoryQuantityInput.value == '') {
+                        categoryQuantityInput.style.borderColor = "red";
+                        result = false;
+                    }
+                })
+                resolve(result);
+            } catch (e) {
+                reject(e);
+            }
+        })
+    }
+
+    function validateCategoryGroup() {
+        return new Promise((resolve, reject) => {
+            let group1 = document.getElementById("classificationGround1");
+            let group2 = document.getElementById("classificationGround2");
+            let list1 = document.getElementById("classificationText1");
+            console.log(list1);
+            let list2 = document.getElementById("classificationText2");
+            console.log(list2)
+
+            if ($scope.showclassification1) {
+                if (group1.value == '') {
+                    group1.style.borderColor = "red";
+                    resolve(false);
+                } else {
+                    group1.style.borderColor = "green";
+                }
+                if (list1.value == '') {
+                    list1.style.borderColor = "red";
+                    resolve(false);
+                } else {
+                    list1.style.borderColor = "green";
+                }
+                if ($scope.showclassification2) {
+                    if (group2.value == '') {
+                        group2.style.borderColor = "red";
+                        resolve(false);
+                    } else {
+                        group2.style.borderColor = "green";
+                    }
+
+                    if (list2.value == '') {
+                        list2.style.borderColor = "red";
+                        resolve(false);
+                    } else {
+                        list2.style.borderColor = "green";
+                    }
+                }
+            }
+            resolve(true);
+        })
+    }
+
+    function validateAndReturnResult(input) {
+        const validationResult = validateInput(input);
+        return validationResult.valid;
+    }
+
 });
 
 
