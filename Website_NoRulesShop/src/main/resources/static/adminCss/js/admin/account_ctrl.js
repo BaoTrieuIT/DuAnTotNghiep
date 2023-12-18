@@ -75,6 +75,151 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         $location.path('/account_add');
     };
     $scope.initialize();
+    $scope.pagerActive = {
+        page: 0,
+        size: 4,
+        get items() {
+            if ($scope.items && Array.isArray($scope.items)) {
+                // Lọc các mục có accountStatusName là 'Active'
+                const activeItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Active');
+
+                if (this.page < 0) {
+                    this.last();
+                }
+                if (this.page >= this.count) {
+                    this.first();
+                }
+                var start = this.page * this.size;
+                return activeItems.slice(start, start + this.size);
+            } else {
+                return [];
+            }
+        },
+        get count() {
+            if ($scope.items && Array.isArray($scope.items)) {
+                // Đếm số lượng mục có accountStatusName là 'Active'
+                const activeItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Active');
+                return Math.ceil(1.0 * activeItems.length / this.size);
+            }
+            return 0;
+        },
+        first() {
+            this.page = 0;
+        },
+        last() {
+            const activeItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Active');
+            const totalPages = Math.ceil(activeItems.length / this.size);
+            this.page = totalPages ? totalPages - 1 : 0;
+        },
+        next() {
+            const activeItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Active');
+            if (this.page < Math.ceil(1.0 * activeItems.length / this.size) - 1) {
+                this.page++;
+            }
+        },
+        prev() {
+            if (this.page > 0) {
+                this.page--;
+            }
+        }
+    };
+    $scope.pagerInactive = {
+        page: 0,
+        size: 4,
+        get items() {
+            if ($scope.items && Array.isArray($scope.items)) {
+                // Lọc các mục có accountStatusName là 'Active'
+                const inactiveItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Inactive');
+
+                if (this.page < 0) {
+                    this.last();
+                }
+                if (this.page >= this.count) {
+                    this.first();
+                }
+                var start = this.page * this.size;
+                return inactiveItems.slice(start, start + this.size);
+            } else {
+                return [];
+            }
+        },
+        get count() {
+            if ($scope.items && Array.isArray($scope.items)) {
+                // Đếm số lượng mục có accountStatusName là 'Active'
+                const inactiveItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Inactive');
+                return Math.ceil(1.0 * inactiveItems.length / this.size);
+            }
+            return 0;
+        },
+        first() {
+            this.page = 0;
+        },
+        last() {
+            const inactiveItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Inactive');
+            const totalPages = Math.ceil(inactiveItems.length / this.size);
+            this.page = totalPages ? totalPages - 1 : 0;
+        },
+
+        next() {
+            const activeItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Inactive');
+            if (this.page < Math.ceil(1.0 * activeItems.length / this.size) - 1) {
+                this.page++;
+            }
+        },
+        prev() {
+            if (this.page > 0) {
+                this.page--;
+            }
+        }
+    };
+    $scope.pagerSuspended = {
+        page: 0,
+        size: 4,
+        get items() {
+            if ($scope.items && Array.isArray($scope.items)) {
+                // Lọc các mục có accountStatusName là 'Active'
+                const suspendedItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Suspended');
+
+                if (this.page < 0) {
+                    this.last();
+                }
+                if (this.page >= this.count) {
+                    this.first();
+                }
+                var start = this.page * this.size;
+                return suspendedItems.slice(start, start + this.size);
+            } else {
+                return [];
+            }
+        },
+        get count() {
+            if ($scope.items && Array.isArray($scope.items)) {
+                // Đếm số lượng mục có accountStatusName là 'Active'
+                const suspendedItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Suspended');
+                return Math.ceil(1.0 * suspendedItems.length / this.size);
+            }
+            return 0;
+        },
+        first() {
+            this.page = 0;
+        },
+        last() {
+            const suspendedItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Suspended');
+            const totalPages = Math.ceil(suspendedItems.length / this.size);
+            this.page = totalPages.length ? totalPages.length - 1 : 0;
+        },
+        next() {
+            const suspendedItems = $scope.items.filter(item =>item.accountStatus && item.accountStatus.accountStatusName === 'Suspended');
+            if (this.page < Math.ceil(1.0 * suspendedItems.length / this.size) - 1) {
+                this.page++;
+            }
+        },
+        prev() {
+            if (this.page > 0) {
+                this.page--;
+            }
+        }
+    };
     $scope.pager = {
         page: 0,
         size: 4,

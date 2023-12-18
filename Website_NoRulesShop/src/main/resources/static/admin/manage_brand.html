@@ -138,15 +138,15 @@
                                                 <label class="col-sm-2 col-form-label" style="margin-top: 6px;">Hình ảnh
                                                     mẫu</label>
                                                 <div class="col-md-2 form-group inputDnD">
+                                                    <img id="previewImage" src="{{form.logoUrl}}" alt="Image" style=" max-height: 100px;border: 1px solid #dee2e6;padding: 17px;border-radius: 5px;">
+                                                    <label for="inputFile" class="btn btn-info custom-file-upload" style="display: table;margin-top: 10px;">Chọn tệp</label>
                                                     <input type="file"
                                                            name="fileName"
                                                            ng-model="form.logoUrl"
                                                            class="form-control-file text-primary font-weight-bold"
-                                                           id="inputFile" accept="image/*" onchange="readUrl(this)"
+                                                           id="inputFile" accept="image/*" onchange="readUrl1(this)"
                                                            data-title="+"
-                                                           style="display: none;" required>
-                                                    <img id="previewImage" src="{{form.logoUrl}}" alt="Image" style=" max-height: 100px;border: 1px solid #dee2e6;padding: 17px;border-radius: 5px;">
-                                                    <p class="add-img">Hình ảnh</p>
+                                                           style="display: none" required>
                                                 </div>
 
                                             </div>
@@ -265,21 +265,3 @@
 
 
 </main><!-- End #main -->
-<script>
-    function readUrl(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                var imageElement = document.getElementById("previewImage");
-                imageElement.src = e.target.result;
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    document.getElementById("previewImage").addEventListener("click", function () {
-        document.getElementById("inputFile").click();
-    });
-
-</script>
