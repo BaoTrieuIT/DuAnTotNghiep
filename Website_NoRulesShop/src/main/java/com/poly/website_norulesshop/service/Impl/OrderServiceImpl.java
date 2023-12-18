@@ -60,7 +60,6 @@ public class OrderServiceImpl implements OrderService {
     public void deleteById(Integer orderId) {
         try {
             orderRepository.deleteById(orderId);
-            System.out.println("Order deleted successfully");
         } catch (Exception e) {
             System.err.println("Error deleting order: " + e.getMessage());
         }

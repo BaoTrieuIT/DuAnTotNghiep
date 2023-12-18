@@ -75,7 +75,6 @@ public class AccountServiceImpl implements AccountService {
     private AccountDTO convertEntityToDto(Account account) {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setUsername(account.getUsername());
-        System.out.println(account.getUsername());
         return accountDTO;
     }
 
@@ -136,7 +135,6 @@ public class AccountServiceImpl implements AccountService {
         Optional<Account> existingAccountOptional = accountRepository
                 .findById(updatedAccount.getAccount_id());
         Account existingAccount = existingAccountOptional.get();
-        System.out.println(existingAccount.getPassword());
         if (newPassword.equals("")) {
             existingAccount.setUsername(updatedAccount.getUsername());
             existingAccount.setFullname(updatedAccount.getFullname());

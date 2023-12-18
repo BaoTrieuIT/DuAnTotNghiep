@@ -39,7 +39,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     public void deleteByOrderId(Integer id) {
         try {
             orderDetailRepository.deleteByOrderId(id);
-            System.out.println("orderDetailRepository deleted successfully");
         } catch (Exception e) {
             System.err.println("Error deleting orderDetailRepository: " + e.getMessage());
         }

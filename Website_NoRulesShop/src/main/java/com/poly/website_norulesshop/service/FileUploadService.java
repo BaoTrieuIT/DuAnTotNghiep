@@ -37,7 +37,6 @@ public class FileUploadService {
                 byte[] bytes = file.getBytes();
                 Path path = Paths.get(uploadDir + "\\" + fileName);
                 Files.write(path, bytes);
-                System.out.println("Lưu Thành Công: " + fileName);
             }
         } catch (Exception e) {
             System.out.println("Lỗi khi lưu tệp tin: " + e.getMessage());

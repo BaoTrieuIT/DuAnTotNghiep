@@ -7,7 +7,6 @@
  */
 (function () {
     "use strict";
-
     /**
      * Easy selector helper function
      */
@@ -43,9 +42,11 @@
      */
     if (select('.toggle-sidebar-btn')) {
         on('click', '.toggle-sidebar-btn', function (e) {
-            select('body').classList.toggle('toggle-sidebar')
-        })
+            console.log('Button clicked');
+            select('body').classList.toggle('toggle-sidebar');
+        });
     }
+
 
     /**
      * Search bar toggle
@@ -346,14 +347,15 @@ function readUrl1(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-var previewImage = document.getElementById("previewImage");
-if (previewImage) {
-    previewImage.addEventListener("click", function() {
-        document.getElementById("previewImage").addEventListener("click", function () {
-            document.getElementById("inputFile").click();
-        });
-    });
-} else {
-    console.log("Element with id 'previewImage' not found");
-}
+
+// var previewImage = document.getElementById("previewImage");
+// if (previewImage) {
+//     previewImage.addEventListener("click", function () {
+//         document.getElementById("previewImage").addEventListener("click", function () {
+//             document.getElementById("inputFile").click();
+//         });
+//     });
+// } else {
+//     console.log("Element with id 'previewImage' not found");
+// }
 

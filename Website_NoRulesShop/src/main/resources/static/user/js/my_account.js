@@ -15,6 +15,7 @@ function displayImage() {
         reader.readAsDataURL(file);
     }
 }
+
 function updateAndReload() {
     var formData = new FormData(document.getElementById("myaccount-form"));
     var progressBar = document.getElementById("progress-bar");
@@ -34,7 +35,6 @@ function updateAndReload() {
         onUploadProgress: function (progressEvent) {
             if (progressEvent.lengthComputable) {
                 let percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
-                console.log(percentComplete);
                 progressBar.style.width = percentComplete + "%";
                 progressBar.setAttribute("aria-valuenow", percentComplete.toFixed(2)); // Cập nhật giá trị aria-valuenow
                 progressText.innerText = percentComplete.toFixed(2) + "%";
@@ -112,19 +112,19 @@ document.addEventListener("DOMContentLoaded", function () {
     confirmPassword.addEventListener('input', function () {
         validateNewPassword(newPassword.value, confirmPassword.value);
     });
-    oldPassword.addEventListener('input',function (){
+    oldPassword.addEventListener('input', function () {
         validateOldPassword(oldPassword.value);
     })
 });
 
-function validateOldPassword(oldPassword){
+function validateOldPassword(oldPassword) {
     var errorDiv = document.getElementById('oldpasswordErrorDiv');
     var oldpassword = oldPassword.value.trim();
 
     if (!oldpassword) {
         errorDiv.innerHTML = "Không để mật khẩu hiện tại trống";
         errorDiv.style.display = 'block';
-     }
+    }
     // else {
     //     // Sử dụng Ajax để gửi yêu cầu đến server và kiểm tra mật khẩu cũ
     //     // Đây chỉ là một ví dụ, bạn cần thay thế bằng cách thực hiện thực tế của bạn.
@@ -169,8 +169,6 @@ function validateNewPassword(newPassword, confirmPassword) {
             errorDiv.style.display = 'block';
         }
     }
-    console.log("newPassword: " + newPassword);
-    console.log("confirmPassword: " + confirmPassword);
 }
 
 function validateEmail(emailInput) {
@@ -206,7 +204,6 @@ function validateBirthday(birthdayInput) {
     if (today.getMonth() < birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
         age--;
     }
-    console.log(age);
     if (age < 12 || age > 120) {
         birthdayInput.setCustomValidity("Ngày sinh không đủ 12 tuổi");
         document.getElementById("birthdayErrorDiv").innerText = "Ngày sinh không đủ 12 tuổi hoặc không hợp lệ";

@@ -36,18 +36,14 @@ app.config(function ($routeProvider) {
             templateUrl: "/admin/product_report.html",
             controller: "product_ctrl"
         })
-        .when("/manager_voucher", {
-            templateUrl: "/admin/manager_voucher.html",
-            controller: "manager_voucher_ctrl"
-        })
         .when("/discount", {
             templateUrl: "/admin/discount.html",
             controller: "discount_ctrl"
-
-        }).when("/orderDetail", {
-        templateUrl: "/admin/orderDetail.html",
-        controller: "order_detail_ctrl"
-    })
+        })
+        .when("/orderDetail", {
+            templateUrl: "/admin/orderDetail.html",
+            controller: "order_detail_ctrl"
+        })
         .otherwise({
             templateUrl: "/admin/index.html",
             controller: "dashboard_ctrl"

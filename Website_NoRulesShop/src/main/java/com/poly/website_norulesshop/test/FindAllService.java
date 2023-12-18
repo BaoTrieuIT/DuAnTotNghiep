@@ -173,7 +173,6 @@ public class FindAllService {
 //
 //    public void printAllValuesInList(List<?> list) {
 //        for (Object item : list) {
-//            System.out.println(item);
 //        }
 //    }
 

@@ -88,7 +88,6 @@ public class SecurityConfig {
                         .successHandler((request, response, authentication) -> {
                             String username = authentication.getName();
                             Account acc = accountService.findByUsername(username);
-                            System.out.println(authentication.getAuthorities());
                             session.setAttribute("authentication", authentication);
                             session.setAttribute("acc", acc);
                             response.sendRedirect("/");
@@ -133,8 +132,6 @@ public class SecurityConfig {
                                         } else {
                                             String username = customOauth2Account.getUsername();
                                             String clientName = customOauth2Account.getOauth2ClientNames();
-                                            System.out.println("email: " + email + ", client: " + clientName +
-                                                    ", username: " + username);
                                             accountService.processOAuthPostLogin(email, clientName);
                                             session.setAttribute("authentication", authentication);
                                             session.setAttribute("acc", existingUser);

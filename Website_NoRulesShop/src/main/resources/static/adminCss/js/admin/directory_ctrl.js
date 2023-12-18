@@ -39,30 +39,29 @@ app.service('DataSharingService', function ($timeout) {
 });
 
 
-app.controller("directory_ctrl", function ($scope, $http, DataSharingService,$timeout) {
+app.controller("directory_ctrl", function ($scope, $http, DataSharingService, $timeout) {
 
-    console.log("Before :",DataSharingService.getData())
     $scope.$watch(function () {
         return DataSharingService.getData()
     }, function (newDirectory, oldDirectory) {
-        console.log("After: ",DataSharingService.getData())
         if (newDirectory !== oldDirectory) {
             $scope.Messsuccess = newDirectory.messsuccess;
             $scope.Messerror = newDirectory.messerror;
             $scope.Messwarning = newDirectory.messwarning;
             $scope.message = newDirectory.message;
-            console.log(newDirectory)
         }
     });
+
     function setAutoCloseTime() {
         // Đóng thông báo tự động
-        var closeTimeout = $timeout(function() {
+        var closeTimeout = $timeout(function () {
             $scope.Messsuccess = false
             $scope.Messerror = false
             $scope.Messwarning = false
             $scope.message = ""
         }, 10000); // 10000 là 10s
     }
+
     $scope.initialize = function () {
         $http.get("/rest/manage_gender").then(resp => {
             $scope.genders = resp.data
@@ -97,7 +96,6 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService,$ti
 
     $scope.ClickDirectory = function (directoryId) {
         if (directoryId === undefined) {
-            console.log("error");
         } else {
             $scope.filterByDirectoryId = function (directoryLv1) {
                 return directoryLv1.directory.directoryId === directoryId;
@@ -123,8 +121,7 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService,$ti
             $scope.Messwarning = true;
             $scope.Messsuccess = false
             $scope.Messerror = false
-            $scope.message = "Danh mục " +`${item.directoryName} đã tồn tại`
-            console.log($scope.message)
+            $scope.message = "Danh mục " + `${item.directoryName} đã tồn tại`
             $('#create_directory').modal('hide');
             setAutoCloseTime()
         } else {
@@ -136,7 +133,6 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService,$ti
                 $scope.Messwarning = false;
                 $scope.Messsuccess = true
                 $scope.message = "Thêm danh mục thành công"
-                console.log($scope.message)
                 $('#create_directory').modal('hide');
                 setAutoCloseTime()
             }).catch(error => {
@@ -146,7 +142,6 @@ app.controller("directory_ctrl", function ($scope, $http, DataSharingService,$ti
                 $scope.Messwarning = false
                 $scope.Messerror = true
                 $scope.message = "Lỗi thêm mới danh mục"
-                console.log($scope.message)
                 $('#create_directory').modal('hide');
             });
         }

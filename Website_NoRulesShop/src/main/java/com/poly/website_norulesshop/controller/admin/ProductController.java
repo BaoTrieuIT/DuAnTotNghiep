@@ -68,9 +68,7 @@ public class ProductController {
 
         List<Product> listToReturn = new ArrayList<>();
         if (listProduct.isEmpty()) {
-            System.out.println("List trong");
         } else {
-            System.out.println("filtering...");
             for (Product product : listProduct) {
                 if ((product.getPriceNew() <= max && product.getPriceNew() > min) || (product.getPriceNew() <= max && product.getPriceNew() > min)) {
                     listToReturn.add(product);
@@ -78,7 +76,6 @@ public class ProductController {
             }
         }
         if (listToReturn.isEmpty()) {
-            System.out.println("empty list");
         }
         return listToReturn;
     }

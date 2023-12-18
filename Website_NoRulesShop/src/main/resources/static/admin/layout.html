@@ -39,18 +39,13 @@
 </head>
 <body ng-app="app">
 <header ng-include="'/admin/menu/header.html'"></header>
-<div ng-include="'/admin/menu/sidebar.html'"></div>
-<main>
-    <p class="ng-view"></p>
-</main>
+<aside ng-include="'/admin/menu/sidebar.html'"></aside>
+<main class="ng-view"></main>
 <footer ng-include="'/admin/menu/footer.html'"></footer>
 <a href="#"
    class="back-to-top d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i>
 </a>
-<!-- Vendor JS Files -->
-<!--	<script href="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
-<!--	<script href="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>-->
 <script src="/angular-1.8.2/angular.js"></script>
 <script src="/angular-1.8.2/angular-route.js"></script>
 <script src="/adminCss/vendor/apexcharts/apexcharts.min.js"></script>
@@ -73,7 +68,6 @@
 <script src="/adminCss/js/admin/order_ctrl.js"></script>
 <script src="/adminCss/js/admin/order_ctrl.js"></script>
 <script src="/adminCss/js/admin/discount_ctrl.js"></script>
-<script src="/adminCss/js/admin/manager_voucher_ctrl.js"></script>
 <script src="/adminCss/js/admin/brand_ctrl.js"></script>
 <script src="/adminCss/js/admin/add_product.js"></script>
 <script src="/adminCss/js/admin/dashboard_ctrl.js"></script>

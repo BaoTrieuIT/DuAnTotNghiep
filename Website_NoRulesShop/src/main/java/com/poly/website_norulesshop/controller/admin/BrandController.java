@@ -38,18 +38,21 @@ public class BrandController {
     public List<Brand> getAll() {
         return brandService.getAllBrands();
     }
+
     @PostMapping
     public Brand post(@RequestBody Brand brand) {
         brand.setIsActive(true);
         brandService.saveBrand(brand);
         return brand;
     }
+
     @PostMapping("/upload")
     public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file) {
         try {
             if (file != null && !file.isEmpty()) {
                 String directoryPath = "src/main/resources/static/admin/images/";
                 Path path = Paths.get(directoryPath);
+
 
                 if (!Files.exists(path)) {
                     Files.createDirectories(path);
@@ -69,7 +72,7 @@ public class BrandController {
                     Files.createDirectories(path1);
                 }
 
-                String fileName1 = file.getOriginalFilename() ; //
+                String fileName1 = file.getOriginalFilename(); //
                 Path filePath1 = Paths.get(directoryPath1, fileName1);
 
                 Files.write(filePath1, file.getBytes());
@@ -79,7 +82,7 @@ public class BrandController {
                 Brand brand = new Brand();
                 brand.setLogoUrl(imagePath);
                 return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
-            }else {
+            } else {
                 // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
                 return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
             }
@@ -88,10 +91,11 @@ public class BrandController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tải ảnh lên.");
         }
     }
+
     @GetMapping("/image/{fileName:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String fileName) throws MalformedURLException {
         String userHome = System.getProperty("user.home");
-        Resource resource = new UrlResource("file:" +  userHome + File.separator + "imagesBrand/" + fileName);
+        Resource resource = new UrlResource("file:" + userHome + File.separator + "imagesBrand/" + fileName);
 
         if (resource.exists() && resource.isReadable()) {
             return ResponseEntity.ok()
@@ -101,6 +105,7 @@ public class BrandController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @PutMapping("{brandId}")
     public Brand put(@PathVariable("brandId") Integer id, @RequestBody Brand brand) {
         return brandService.update(brand);

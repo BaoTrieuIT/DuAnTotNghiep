@@ -164,7 +164,6 @@ public class ProductPageController {
 
     @RequestMapping("/search")
     public String searchProducts(Model model, @Param("keyword") String keyword, @ModelAttribute("filterCriteria") FilterCriteria filterCriteria, @RequestParam(defaultValue = "0") int page) {
-        System.out.println(keyword);
         Page<Product> productPage = productService.productPaginateWithFilter(
                 filterCriteria.getBrandId(),
                 filterCriteria.getDirectoryLv1Id(),

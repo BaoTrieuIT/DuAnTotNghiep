@@ -50,8 +50,6 @@ public class AddProductController {
     CategoryLevel1Detail addCategoryLevel1Detail = new CategoryLevel1Detail();
 
 
-
-
     private CategoryLevel1 currentCategoryLevel1;
     private CategoryLevel2 currentCategoryLevel2;
 
@@ -69,8 +67,8 @@ public class AddProductController {
             @RequestParam Double productPrice,
             @RequestParam Double productDiscount,
             @RequestParam Integer productTotalQuantity
-    ){
-        try{
+    ) {
+        try {
             Product product = new Product();
             product.setProductName(productName);
             Brand brand = brandService.getBrandById(Integer.parseInt(productBrandId));
@@ -82,18 +80,18 @@ public class AddProductController {
             product.setPriceOld(productPrice);
             product.setDiscount(productDiscount);
             product.setTotalQuantity(productTotalQuantity);
-            if(productDiscount > 0 && productDiscount < 1){
-                product.setPriceNew(productPrice *  (1 - productDiscount) );
-            }else if(productDiscount >= 1 && productDiscount  <= 100 ){
-                product.setPriceNew(productPrice -  productPrice * productDiscount / 100 );
-            }else if(productDiscount > 100){
+            if (productDiscount > 0 && productDiscount < 1) {
+                product.setPriceNew(productPrice * (1 - productDiscount));
+            } else if (productDiscount >= 1 && productDiscount <= 100) {
+                product.setPriceNew(productPrice - productPrice * productDiscount / 100);
+            } else if (productDiscount > 100) {
                 product.setPriceNew(productPrice - productDiscount);
             } else {
                 System.out.println("error");
             }
             currentProduct = productService.saveProduct(product);
             return currentProduct;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -103,7 +101,6 @@ public class AddProductController {
     @PostMapping("addProductImages")
     public List<ProductImage> addProductImages(@RequestPart("files") List<MultipartFile> files) throws IOException {
 //        tạo
-        System.out.println("here");
         Map<String, MultipartFile> fileMap = new HashMap<>();
 //        lấy product đã lưu vào session từ lúc thêm sản phẩm
 //        Tạo File Name và gắn vào hashmap để có thể lưu file name không bị trùng
@@ -114,7 +111,6 @@ public class AddProductController {
             if (lastIndex >= 0) {
                 extension = System.currentTimeMillis() + String.valueOf(files.lastIndexOf(file)) + originalFilename.substring(lastIndex);
             }
-            System.out.println(extension);
             fileMap.put(extension, file);
         }
 //       upload ảnh
@@ -125,7 +121,6 @@ public class AddProductController {
 
             ProductImage productImage = new ProductImage();
             productImage.setImage_url(key);
-            System.out.println(key);
             productImage.setProduct(currentProduct);
             productImageService.saveProductImage(productImage);
         }
@@ -179,7 +174,6 @@ public class AddProductController {
             categoryLevel2Detail.setCategoryLevel2(currentCategoryLevel2);
             categoryLevel2Details.add(categoryLevel2DetailService.saveCategoryLevel2Detail(categoryLevel2Detail));
         }
-        System.out.println(categoryLevel2Details);
         return categoryLevel2Details;
     }
 

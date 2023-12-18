@@ -1,4 +1,4 @@
-app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
+app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
     $scope.initialize = function () {
         $http.get("/rest/manage_directory").then(resp => {
             $scope.directoryLv1_all = resp.data;
@@ -7,37 +7,37 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
             $scope.items = resp.data
         })
         $scope.form = {
-            brandName: undefined ,
-            websiteUrl:undefined,
-            anotherInformation:undefined,
+            brandName: undefined,
+            websiteUrl: undefined,
+            anotherInformation: undefined,
         };
     }
     $scope.isHidden = false;
     $scope.showAlert = false;
     $scope.showAlert1 = false;
-    $scope.edit = function(item){
+    $scope.edit = function (item) {
         $scope.form = angular.copy(item);
         $scope.form.imagePath = item.logoUrl;
         $scope.isHidden = true;
         $scope.disabled = true;
         $('a[href="#add-brand"]').tab('show');
     }
-    $scope.them = function (){
+    $scope.them = function () {
         $scope.isHidden = false;
         var inputFile = document.getElementById("inputFile");
         var previewImage = document.getElementById("previewImage");
-        inputFile.value= "";
+        inputFile.value = "";
         previewImage.src = "";
         $scope.form = {
-            brandName: undefined ,
-            websiteUrl:undefined,
-            anotherInformation:undefined,
+            brandName: undefined,
+            websiteUrl: undefined,
+            anotherInformation: undefined,
         };
-        $scope.disabled= false;
+        $scope.disabled = false;
         $('a[href="#add-brand"]').tab('show');
     }
-    $scope.create = function() {
-        if($scope.form.brandName !== undefined && $scope.form.websiteUrl !== undefined && $scope.form.anotherInformation  !== undefined){
+    $scope.create = function () {
+        if ($scope.form.brandName !== undefined && $scope.form.websiteUrl !== undefined && $scope.form.anotherInformation !== undefined) {
             var item = angular.copy($scope.form);
             var inputFile = document.getElementById("inputFile");
             var previewImage = document.getElementById("previewImage");
@@ -48,80 +48,76 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                 formData.append("fileName", inputFile.files[0]);
                 $http.post('/rest/manage_brand/upload', formData, {
                     transformRequest: angular.identity,
-                    headers: { 'Content-Type': undefined }
-                }).then(function(response) {
+                    headers: {'Content-Type': undefined}
+                }).then(function (response) {
                     var data = response.data;
                     var successMessage = data.message;
                     // Lấy đường dẫn hoặc tên tệp ảnh từ response
                     var imagePath = data.imagePath;
-                    console.log(successMessage);
-                    console.log("Image path: " + imagePath);
                     // Cập nhật thuộc tính logo_url của thương hiệu
                     item.logoUrl = imagePath;
 
                     // Tạo thương hiệu sau khi đã cập nhật logo_url
-                    $http.post('/rest/manage_brand', item).then(function(resp) {
+                    $http.post('/rest/manage_brand', item).then(function (resp) {
                         $scope.items.push(resp.data);
                         $scope.succes = "Thêm thành công";
                         $scope.showAlert = true;
-                        $timeout(function() {
+                        $timeout(function () {
                             $scope.showAlert = false;
                             $scope.succes = "";
                         }, 2000);
                         $scope.form = {
-                            brandName: undefined ,
-                            websiteUrl:undefined,
-                            anotherInformation:undefined,
+                            brandName: undefined,
+                            websiteUrl: undefined,
+                            anotherInformation: undefined,
                         };
-                        inputFile.value= "";
+                        inputFile.value = "";
                         previewImage.src = "";
                         $('a[href="#manager-brand"]').tab('show');
-                    }).catch(function(error) {
+                    }).catch(function (error) {
                         $scope.succes = "Lỗi thêm!";
                         console.log("Error", error);
                     });
-                }).catch(function(error) {
+                }).catch(function (error) {
                     $scope.succes = "Lỗi tải lên ảnh!";
                     console.log("Error", error);
                 });
-            }else{
+            } else {
 
                 $scope.succes1 = "Vui lòng chọn ảnh";
                 $scope.showAlert1 = true;
-                $timeout(function() {
+                $timeout(function () {
                     $scope.showAlert1 = false;
                     $scope.succes1 = "";
                 }, 3000);
             }
-        }else{
+        } else {
             $scope.succes1 = "Vui lòng nhập đủ thông tin";
             $scope.showAlert1 = true;
-            $timeout(function() {
+            $timeout(function () {
                 $scope.showAlert1 = false;
                 $scope.succes1 = "";
             }, 2000);
         }
     }
-    $scope.update = function(){
+    $scope.update = function () {
 
-        if($scope.form.brandName !== undefined && $scope.form.websiteUrl !== undefined && $scope.form.anotherInformation  !== undefined){
-        var item = angular.copy($scope.form);
-        var inputFile = document.getElementById("inputFile");
-        var formData = new FormData();
-        if (inputFile.files.length > 0) {
-            formData.append("fileName", inputFile.files[0]);
-            $http.post('/rest/manage_brand/upload', formData, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            }).then(function(response) {
-                var data = response.data;
-                var successMessage = data.message;
-                // Lấy đường dẫn hoặc tên tệp ảnh từ response
-                var imagePath = data.imagePath;
-                console.log(successMessage);
-                console.log("Image path: " + imagePath);
-                // Cập nhật thuộc tính logo_url của thương hiệu
-                item.logoUrl = imagePath;
+        if ($scope.form.brandName !== undefined && $scope.form.websiteUrl !== undefined && $scope.form.anotherInformation !== undefined) {
+            var item = angular.copy($scope.form);
+            var inputFile = document.getElementById("inputFile");
+            var formData = new FormData();
+            if (inputFile.files.length > 0) {
+                formData.append("fileName", inputFile.files[0]);
+                $http.post('/rest/manage_brand/upload', formData, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }).then(function (response) {
+                    var data = response.data;
+                    var successMessage = data.message;
+                    // Lấy đường dẫn hoặc tên tệp ảnh từ response
+                    var imagePath = data.imagePath;
+                    // Cập nhật thuộc tính logo_url của thương hiệu
+                    item.logoUrl = imagePath;
 
                     // Tạo thương hiệu sau khi đã cập nhật logo_url
                     $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
@@ -131,11 +127,11 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
 
                         $scope.showAlert = true;
                         $('a[href="#manager-brand"]').tab('show');
-                        $timeout(function() {
+                        $timeout(function () {
                             $scope.showAlert = false;
                             $scope.succes = "";
                         }, 2000);
-                        $scope.disabled= false;
+                        $scope.disabled = false;
                         $scope.form = {};
 
                     })
@@ -143,20 +139,20 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                             $scope.succes = "Lỗi cập nhật sản phẩm!";
                             console.log("Error", error);
                         });
-                }).catch(function(error) {
+                }).catch(function (error) {
                     $scope.succes = "Loi tai len anh!";
                     console.log("Error", error);
                 });
-            }else {
+            } else {
                 // Tạo thương hiệu sau khi đã cập nhật logo_url
                 $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
                     var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                     $scope.items[index] = item;
                     $scope.succes = "Cập nhật sản phẩm thành công!";
-                    $scope.disabled= false;
+                    $scope.disabled = false;
                     $scope.showAlert = true;
                     $('a[href="#manager-brand"]').tab('show');
-                    $timeout(function() {
+                    $timeout(function () {
                         $scope.showAlert = false;
                         $scope.succes = "";
                     }, 2000);
@@ -168,37 +164,37 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                         console.log("Error", error);
                     });
             }
-        }else{
+        } else {
             $scope.succes1 = "Vui lòng nhập đủ thông tin";
             $scope.showAlert1 = true;
-            $timeout(function() {
+            $timeout(function () {
                 $scope.showAlert1 = false;
                 $scope.succes1 = "";
             }, 2000);
         }
 
     }
-    $scope.reset = function(){
+    $scope.reset = function () {
         $scope.form = {};
         $scope.isHidden = false;
-        $scope.succes="";
-        $scope.disabled= false;
+        $scope.succes = "";
+        $scope.disabled = false;
     }
     $scope.itemToHide = null;
 
-    $scope.setItemToHide = function(item) {
+    $scope.setItemToHide = function (item) {
         $scope.itemToHide = item;
     }
-    $scope.hidden = function(item){
+    $scope.hidden = function (item) {
         item.isActive = false;
-        $http.put(`/rest/manage_brand/${item.brandId}`, item).then(function(resp) {
+        $http.put(`/rest/manage_brand/${item.brandId}`, item).then(function (resp) {
             var index = $scope.items.findIndex(p => p.brandId === item.brandId);
             $scope.items[index] = item;
         })
     }
-    $scope.show = function(item){
+    $scope.show = function (item) {
         item.isActive = true;
-        $http.put(`/rest/manage_brand/${item.brandId}`, item).then(function(resp) {
+        $http.put(`/rest/manage_brand/${item.brandId}`, item).then(function (resp) {
             var index = $scope.items.findIndex(p => p.brandId === item.brandId);
             $scope.items[index] = item;
         })
@@ -209,7 +205,7 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
         size: 10,
         get items() {
             if ($scope.items) {
-                var activeBrands = $scope.items.filter(function(brand) {
+                var activeBrands = $scope.items.filter(function (brand) {
                     return brand.isActive === true;
                 });
                 if (this.page < 0) {
@@ -225,9 +221,9 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                 return 0;
             }
         },
-        get count(){
+        get count() {
             if ($scope.items) {
-                var activeBrands = $scope.items.filter(function(brand) {
+                var activeBrands = $scope.items.filter(function (brand) {
                     return brand.isActive === true;
                 });
                 return Math.ceil(1.0 * activeBrands.length / this.size);
@@ -236,16 +232,16 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                 return 0;
             }
         },
-        first(){
+        first() {
             this.page = 0;
         },
-        last(){
+        last() {
             this.page = this.count - 1;
         },
-        next(){
+        next() {
             this.page++;
         },
-        prev(){
+        prev() {
             this.page--;
         }
     }
@@ -254,7 +250,7 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
         size: 10,
         get items() {
             if ($scope.items) {
-                var activeBrands = $scope.items.filter(function(brand) {
+                var activeBrands = $scope.items.filter(function (brand) {
                     return brand.isActive === false;
                 });
                 if (this.page < 0) {
@@ -270,9 +266,9 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                 return 0;
             }
         },
-        get count(){
+        get count() {
             if ($scope.items) {
-                var activeBrands = $scope.items.filter(function(brand) {
+                var activeBrands = $scope.items.filter(function (brand) {
                     return brand.isActive === false;
                 });
                 return Math.ceil(1.0 * activeBrands.length / this.size);
@@ -281,16 +277,16 @@ app.controller("brand_ctrl", function ($scope, $http,$timeout,$window) {
                 return 0;
             }
         },
-        first(){
+        first() {
             this.page = 0;
         },
-        last(){
+        last() {
             this.page = this.count - 1;
         },
-        next(){
+        next() {
             this.page++;
         },
-        prev(){
+        prev() {
             this.page--;
         }
     }

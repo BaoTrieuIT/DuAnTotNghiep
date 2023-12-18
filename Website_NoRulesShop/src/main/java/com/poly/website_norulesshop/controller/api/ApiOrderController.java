@@ -40,7 +40,6 @@ public class ApiOrderController {
 
     @PostMapping
     public Order purchase(@RequestBody JsonNode orderData) {
-        System.out.println("OrderData: " + orderData);
         return orderService.createData(orderData);
     }
 }

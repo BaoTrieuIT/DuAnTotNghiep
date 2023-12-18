@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Collection;
+
 @Component
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        MyAccountDetails  myAccountDetails = (MyAccountDetails) authentication.getPrincipal();
-        System.out.println("Username" + myAccountDetails.getUsername());
+        MyAccountDetails myAccountDetails = (MyAccountDetails) authentication.getPrincipal();
         Collection<? extends GrantedAuthority> authorities = myAccountDetails.getAuthorities();
         authorities.forEach(auth -> System.out.println(auth.getAuthority()));
-        super.onAuthenticationSuccess(request,response,authentication);
+        super.onAuthenticationSuccess(request, response, authentication);
     }
 }

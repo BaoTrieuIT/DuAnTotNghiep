@@ -154,7 +154,6 @@
     for (let i = 0; i <= 5; i++) {
         const inputCell = document.getElementById(`input-${i}`);
         inputCell.addEventListener("keyup", () => {
-            console.log(event.keyCode)
             if (event.key === "Backspace") {
                 // Set the numbers array to empty.
                 numbers = [];
@@ -165,7 +164,6 @@
             if (event.keyCode > 47 && event.keyCode < 58) {
                 // Add the number from the input cell to the array.
                 numbers.push(inputCell.value);
-                console.log(numbers.length)
                 // If the array contains 6 numbers, join them into a string.
                 if (numbers.length === 6) {
                     const string = numbers.join("");

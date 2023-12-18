@@ -81,7 +81,6 @@ public class CheckOutController {
     @GetMapping("order-history")
     public String orderHistory(Model model, Principal principal) {
         Integer accountId = generalService.usernameHandler(principal);
-        System.out.println(accountId);
         try {
             List<Order> orderList = orderService.findByUserId(accountId);
             model.addAttribute("orderList", orderList);

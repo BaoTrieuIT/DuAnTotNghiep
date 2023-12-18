@@ -88,10 +88,8 @@ public class MyAccountController {
                 return "user/my_account";
             }
             acc.setPassword(newPassword);
-            System.out.println("Change");
         } else {
             acc.setPassword(oldPassword);
-            System.out.println("!Change");
         }
 
         try {
