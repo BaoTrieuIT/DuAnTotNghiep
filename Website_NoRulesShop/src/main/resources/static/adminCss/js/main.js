@@ -334,3 +334,25 @@ function readUrl(input) {
     }
 
 }
+function readUrl1(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var imageElement = document.getElementById("previewImage");
+            imageElement.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+var previewImage = document.getElementById("previewImage");
+if (previewImage) {
+    previewImage.addEventListener("click", function() {
+        document.getElementById("previewImage").addEventListener("click", function () {
+            document.getElementById("inputFile").click();
+        });
+    });
+} else {
+    console.error("Element with id 'previewImage' not found");
+}
+

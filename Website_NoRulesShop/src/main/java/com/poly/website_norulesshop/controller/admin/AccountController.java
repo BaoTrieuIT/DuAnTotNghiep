@@ -35,19 +35,20 @@ public class AccountController {
 
     @Autowired
     AccountStatusService accountStatusService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
     @Autowired
     RoleService roleService;
+
     @Autowired
     SessionService sessionService;
+
     @GetMapping("/getAccountInfo")
     public Account getAccountInfo() {
         Account account = sessionService.get("acc");
         return account;
     }
             @PostMapping("/upload")
-            public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file, @RequestParam("floatingPassword") String password) {
+            public ResponseEntity<String> uploadImage(@RequestParam("fileName") MultipartFile file) {
                 try {
                     if (file != null && !file.isEmpty()) {
                         String directoryPath1 = "src/main/resources/static/admin/imagesAccount/";
@@ -76,7 +77,6 @@ public class AccountController {
                         String imagePath = fileName;
                         // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
                         Account account1 = new Account();
-                        System.out.println(password);
                         account1.setAvatar_url(imagePath);
                         return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
                     }else {

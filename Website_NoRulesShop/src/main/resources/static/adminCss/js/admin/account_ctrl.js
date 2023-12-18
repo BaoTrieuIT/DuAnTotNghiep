@@ -32,7 +32,6 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
     $scope.initialize = function () {
         $http.get("/rest/manage_account").then(resp => {
             $scope.items = resp.data;
-            $scope.items.birthday = new Date($scope.items.birthday);
         })
         $http.get("/rest/manage_account/getAccountInfo").then(resp => {
             $scope.Account = resp.data;
@@ -121,7 +120,12 @@ app.controller('AddAccountController', ['$scope', '$http', '$location', '$timeou
         $http.get("/rest/manage_account/getAccountInfo").then(resp => {
             $scope.Account = resp.data;
             $scope.form = AccountService.getEditedAccount();
-            $scope.form.birthday = new Date($scope.form.birthday);
+            if( $scope.form && $scope.form.birthday != null){
+                $scope.form.birthday = new Date($scope.form.birthday);
+            }else{
+                return 0;
+            }
+
             if ($scope.form.account_id === $scope.Account.account_id) {
                 $scope.disable = true;
             }
