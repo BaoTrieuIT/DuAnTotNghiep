@@ -27,6 +27,7 @@
             <div class="contact-form-area col-sm-7">
                 <div class="contact-form-inner">
                     <h4 class="text-capitalize">Cho Chúng Tôi Biết Dự Án Của Bạn</h4>
+                    <div id="result"></div>
                     <form th:action="@{/home/contact-us}" id="contact-form" method="post">
                         <div class="row">
                             <div class="col-md-12">
@@ -55,7 +56,6 @@
                         </div>
                         <button onclick="sendContactInformation()" type="button" class="submit-btn default-btn btn-primary btn">Gửi</button>
                         <p class="form-messege"></p>
-
                     </form>
                 </div>
             </div>
