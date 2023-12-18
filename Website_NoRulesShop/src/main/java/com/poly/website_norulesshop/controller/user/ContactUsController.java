@@ -16,28 +16,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/home")
 public class ContactUsController {
 
-    @Autowired
-    private JavaMailSender emailSender;
+
     @Autowired
     EmailService emailService;
+
     @GetMapping("/contact-us")
     public String showContactForm(Model model) {
         model.addAttribute("contactUsForm", new ContactUsForm());
         return "user/contact_us";
     }
 
-    @PostMapping("/contact-us")
-    public String submitContactForm(ContactUsForm contactUsForm) {
-        // Send email
-        sendEmail(contactUsForm);
-
-        // Redirect to a confirmation page
-        return "redirect:/contact-success";
-    }
-
-    private void sendEmail(ContactUsForm contactUsForm) {
-        //String to = "vietnhqps22017@fpt.edu.vn";
-        String to = "canhdang341@gmail.com";
-        emailService.sendEmailContactUs(to,contactUsForm.getEmail(),contactUsForm.getMessage(),contactUsForm.getSubject(),contactUsForm.getFirstname(),contactUsForm.getLastname());
-    }
+//    @PostMapping("/contact-us")
+//    public String submitContactForm(ContactUsForm contactUsForm) {
+//        // Send email
+//        sendEmail(contactUsForm);
+//
+//        // Redirect to a confirmation page
+//        return "user/.";
+//    }
+//
+//    private void sendEmail(ContactUsForm contactUsForm) {
+//        String to = "vietnhqps22017@fpt.edu.vn";
+////        String to = "canhdang341@gmail.com";
+//        emailService.sendEmailContactUs(to,contactUsForm.getEmail(),contactUsForm.getMessage(),contactUsForm.getSubject(),contactUsForm.getFirstname(),contactUsForm.getLastname());
+//    }
 }

@@ -85,30 +85,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
-    @Override
-    public List<Product> SearchProductActiveByName(String productName) {
-        productName = "%" + productName + "%";
-        return productRepository.findProductByProductNameLikeAndIsRemoved(productName, false);
-    }
-
-    @Override
-    public List<Product> SearchProductHiddenByName(String productName) {
-        productName = "%" + productName + "%";
-        return productRepository.findProductByProductNameLikeAndIsRemoved(productName, true);
-    }
-
-    @Override
-    public List<Product> SearchProductSoldoutByName(String productName) {
-        productName = "%" + productName + "%";
-        List<Product> listProductIsSoldOutAndNameBy = productRepository.findProductByProductNameLike(productName);
-        List<Product> productListToReturn = new ArrayList<>();
-        for (Product product : listProductIsSoldOutAndNameBy) {
-            if (product.getTotalQuantity() == 0) {
-                productListToReturn.add(product);
-            }
-        }
-        return productListToReturn;
-    }
 
     @Override
     public Product findProductWithImagesById(Integer id) {

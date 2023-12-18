@@ -65,8 +65,8 @@ public class EmailServiceImpl implements EmailService {
 //        message.setTo(to);
 //        message.setSubject(subject);
 //        message.setText("First Name: " + firstName + "\nLast Name: " + lastName + "\nEmail: " + email + "\n\n" + content);
-        content = "First Name: " + firstName + "\nLast Name: " + lastName + "\nEmail: " + email + "\n\n";
-        sendEmail(to, content, subject, null, EmailType.EMAIL_SEND_CODE);
+        content = "First Name: " + firstName + "\nLast Name: " + lastName + "\nEmail: " + email + "\n\n" + "Message : " + content;
+        sendEmail(to, content, subject, null, EmailType.CONTACT_US);
 //        mailSender.send(message);
     }
 

@@ -12,7 +12,8 @@
             <th scope="col">Trạng thái</th>
             <th scope="col">Thông tin thêm</th>
             <th scope="col">Brand</th>
-            <th scope="col">Giá</th>
+            <th scope="col">Giá Cũ</th>
+            <th scope="col">Giá Mới</th>
             <th scope="col">Thao tác</th>
         </tr>
         </thead>
@@ -25,7 +26,8 @@
             <td style="height: 130px">{{item.isRemoved}}</td>
             <td style="height: 130px">{{item.productDescription}}</td>
             <td style="height: 130px">{{item.brand.brandId}}</td>
-            <td style="height: 130px">{{item.priceMin}} - {{item.priceMax}}</td>
+            <td style="height: 130px"><strike>{{item.priceOld}}</strike></td>
+            <td style="height: 130px">{{item.priceNew}}</td>
             <td>
                 <button style="width: 55px; font-size: 11px; " type="button" class="btn btn-outline-secondary">Edit</button>
 

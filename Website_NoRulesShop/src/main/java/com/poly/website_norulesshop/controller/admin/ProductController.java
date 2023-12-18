@@ -28,35 +28,6 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/searchByNameProductOnline")
-    private List<Product> SearchByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
-        System.out.println("Active");
-        if (!productName.isEmpty()) {
-            return filterByPrice(productService.SearchProductActiveByName(productName), min, max);
-        } else {
-            return filterByPrice(productService.isActive(), min, max);
-        }
-    }
-
-    @GetMapping("/searchByNameProductHidden")
-    public List<Product> searchProductSoldoutByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
-        System.out.println("Hidden");
-        if (!productName.isEmpty()) {
-            return filterByPrice(productService.SearchProductHiddenByName(productName), min, max);
-        } else {
-            return filterByPrice(productService.isHidden(), min, max);
-        }
-    }
-
-    @GetMapping("/searchByNameProductSoldout")
-    public List<Product> SearchProductIsHiddenByName(@RequestParam String productName, @RequestParam Integer min, @RequestParam Integer max) {
-        System.out.println("sold out");
-        if (!productName.isEmpty()) {
-            return filterByPrice(productService.SearchProductSoldoutByName(productName), min, max);
-        } else {
-            return filterByPrice(productService.isSoldOut(), min, max);
-        }
-    }
 
     @GetMapping("/isHidden")
     public List<Product> isHidden() {

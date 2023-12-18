@@ -20,10 +20,7 @@
             <!--Google map-->
             <div id="map-container-google-1" class="z-depth-1-half map-container col-sm-12 mb-50"
                  style="height: 500px">
-                <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d59512.74927226758!2d72.81491575568408!3d21.210153908095307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m5!1s0x3be04efc0f8687bd%3A0xc783857ba5d79622!2sTemplateTrip%2C+4030%2C+Central+Bazzar%2C+opp.+Varachha+Police+Station%2C+Varachha+Main+Road%2C+Surat%2C+Gujarat+395006!3m2!1d21.2100775!2d72.84993519999999!4m0!5e0!3m2!1sen!2sin!4v1565339377691!5m2!1sen!2sin"
-                        width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d1959.2213371034197!2d106.62797468876255!3d10.853896381552559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x31752bee0b0ef9e5%3A0x5b4da59e47aa97a8!2zQ8O0bmcgVmnDqm4gUGjhuqduIE3hu4FtIFF1YW5nIFRydW5nLCBDw7RuZyB2acOqbiBwaOG6p24gbeG7gW0gUXVhbmcgUVRTQyBCdWlsZGluZyAxLCBUcnVuZywgUCBRLjEyLCBUaMOgbmggcGjhu5EgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!3m2!1d10.8538211!2d106.6278284!5e0!3m2!1svi!2s!4v1702884956107!5m2!1svi!2s" width="100%" height="500" style="border:0;" allowfullscreen="allowfullscreen" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             <!--Google Maps-->
@@ -35,7 +32,7 @@
                             <div class="col-md-12">
                                 <label for="firstname" class="float-left">First Name<span
                                         class="required">*</span></label>
-                                <input type="text" name="firstname" id="firstname" class="float-right" required>
+                                <input  type="text" name="firstname" id="firstname" class="float-right" required>
                             </div>
                             <div class="col-md-12">
                                 <label for="lastname" class="float-left">Last Name<span
@@ -46,7 +43,7 @@
                                 <label for="email" class="float-left">Email<span class="required">*</span></label>
                                 <input type="text" name="email" id="email" class="float-right" required>
                             </div>
-                            <div class="col-md-12">
+                            <div hidden="hidden" class="col-md-12">
                                 <label for="subject" class="float-left">Subject<span
                                         class="required">*</span></label>
                                 <input type="text" name="subject" id="subject" class="float-right" required>
@@ -56,8 +53,9 @@
                                 <textarea name="message" id="message" class="float-right"></textarea>
                             </div>
                         </div>
-                        <input type="submit" class="submit-btn default-btn btn-primary btn" value="Send Email">
+                        <button onclick="sendContactInformation()" type="button" class="submit-btn default-btn btn-primary btn">Gửi</button>
                         <p class="form-messege"></p>
+
                     </form>
                 </div>
             </div>

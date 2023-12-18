@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         validateOldPassword(oldPassword.value);
     })
 });
+
 function validateOldPassword(oldPassword){
     var errorDiv = document.getElementById('oldpasswordErrorDiv');
     var oldpassword = oldPassword.value.trim();
