@@ -6,19 +6,25 @@ import com.poly.website_norulesshop.service.BrandService;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin("*")
 @RestController
@@ -53,8 +59,22 @@ public class BrandController {
                 Path filePath = Paths.get(directoryPath, fileName);
                 Files.write(filePath, file.getBytes());
 
+
+                // Get the user's home directory
+                String userHome = System.getProperty("user.home");
+                String directoryPath1 = userHome + File.separator + "imagesBrand/";
+                Path path1 = Paths.get(directoryPath1);
+
+                if (!Files.exists(path1)) {
+                    Files.createDirectories(path1);
+                }
+                String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                String fileName1 = file.getOriginalFilename() + extension; //
+                Path filePath1 = Paths.get(directoryPath1, fileName1);
+
+                Files.write(filePath1, file.getBytes());
                 // Lưu đường dẫn của ảnh vào cơ sở dữ liệu
-                String imagePath = "images/" + fileName;
+                String imagePath = fileName1;
                 // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
                 Brand brand = new Brand();
                 brand.setLogoUrl(imagePath);
@@ -66,6 +86,19 @@ public class BrandController {
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi tải ảnh lên.");
+        }
+    }
+    @GetMapping("/image/{fileName:.+}")
+    public ResponseEntity<Resource> getImage(@PathVariable String fileName) throws MalformedURLException {
+        String userHome = System.getProperty("user.home");
+        Resource resource = new UrlResource("file:" +  userHome + File.separator + "imagesBrand/" + fileName);
+
+        if (resource.exists() && resource.isReadable()) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG) // Điều này có thể thay đổi tùy thuộc vào định dạng ảnh của bạn
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
     @PutMapping("{brandId}")

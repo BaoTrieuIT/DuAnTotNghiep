@@ -61,6 +61,11 @@ public class AccountController {
                         Path filePath1 = Paths.get(directoryPath1, fileName1);
                         Files.write(filePath1, file.getBytes());
 
+                        String directoryPath2 = "src/main/resources/static/user/img/avatar/";
+                        String fileName2 = file.getOriginalFilename();
+                        Path filePath2 = Paths.get(directoryPath2, fileName2);
+                        Files.write(filePath2, file.getBytes());
+
                         // Get the user's home directory
                         String userHome = System.getProperty("user.home");
                         String directoryPath = userHome + File.separator + "imagesAccount/";
@@ -69,7 +74,8 @@ public class AccountController {
                         if (!Files.exists(path)) {
                             Files.createDirectories(path);
                         }
-                        String fileName = UUID.randomUUID().toString(); // Adjust the file format based on your image type
+                        String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                        String fileName = file.getOriginalFilename() + extension; // Adjust the file format based on your image type
                         Path filePath = Paths.get(directoryPath, fileName);
 
                         Files.write(filePath, file.getBytes());

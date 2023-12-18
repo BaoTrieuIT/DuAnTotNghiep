@@ -296,14 +296,18 @@ app.controller('AddAccountController', ['$scope', '$http', '$location', '$timeou
                 console.log("Image path: " + imagePath);
                 // Cập nhật thuộc tính logo_url của thương hiệu
                 item.avatar_url = imagePath;
-                $http.put(`/rest/manage_account/${item.account_id}`, item).then(function (resp) {
-                    var index = $scope.items.findIndex(p => p.account_id === item.account_id);
-                    $scope.items[index] = item;
-                    AccountService.setAlert('Thành công!');
-                    $location.path('/manage_account').search('success', 'true');
-                }).catch(error => {
+                if($scope.myForm.$valid) {
+                    $http.put(`/rest/manage_account/${item.account_id}`, item).then(function (resp) {
+                        var index = $scope.items.findIndex(p => p.account_id === item.account_id);
+                        $scope.items[index] = item;
+                        AccountService.setAlert('Thành công!');
+                        $location.path('/manage_account').search('success', 'true');
+                    }).catch(error => {
+                        console.log("Error", error);
+                    });
+                }else {
                     console.log("Error", error);
-                });
+                }
             }).catch(function (error) {
                 $scope.succes = "Loi tai len anh!";
                 console.log("Error", error);
