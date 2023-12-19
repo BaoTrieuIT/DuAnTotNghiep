@@ -5,11 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.poly.website_norulesshop.dto.EditProductDTO;
+import com.poly.website_norulesshop.service.BrandService;
+import com.poly.website_norulesshop.service.DirectoryLv1Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.poly.website_norulesshop.entity.Product;
 import com.poly.website_norulesshop.service.ProductService;
+
+import javax.xml.transform.Result;
 
 @CrossOrigin("*")
 @RestController
@@ -22,6 +28,12 @@ public class ProductController {
     Map<String, Boolean> softMap = new HashMap<>();
 
     List<Product> listProduct = new ArrayList<>();
+
+
+    @Autowired
+    BrandService brandService;
+    @Autowired
+    DirectoryLv1Service directoryLv1Service;
 
     @GetMapping
     public List<Product> getAll() {
@@ -63,20 +75,14 @@ public class ProductController {
         return productService.isHidden();
     }
 
-
-    public List<Product> filterByPrice(List<Product> listProduct, Integer min, Integer max) {
-
-        List<Product> listToReturn = new ArrayList<>();
-        if (listProduct.isEmpty()) {
-        } else {
-            for (Product product : listProduct) {
-                if ((product.getPriceNew() <= max && product.getPriceNew() > min) || (product.getPriceNew() <= max && product.getPriceNew() > min)) {
-                    listToReturn.add(product);
-                }
-            }
+    @PutMapping("/updateProduct")
+    public Product updateProduct(@RequestBody Product product){
+        if(product.getPriceNew() == product.getPriceNew()){
+            product.setDiscount(null);
+        }else{
+            product.setDiscount((product.getPriceOld() - product.getPriceNew())/product.getPriceOld());
         }
-        if (listToReturn.isEmpty()) {
-        }
-        return listToReturn;
+        productService.saveProduct(product);
+        return product;
     }
 }

@@ -1,5 +1,4 @@
-app.controller("manage_product_ctrl", function ($scope, $http
-                                                // , sharing_product_data, $location
+app.controller("manage_product_ctrl", function ($scope, $http, sharing_product_data, $location
 ) {
     $scope.initialize = function () {
         $scope.renderProductIsActive();
@@ -86,12 +85,10 @@ app.controller("manage_product_ctrl", function ($scope, $http
     $scope.initialize();
 
 //    edit Product
-//     $scope.editProduct = function (productId) {
-//         sharing_product_data.setProductId(productId);
-//         $location.path = "/editProduct";
-//     }
-
-
+    $scope.editProduct = function (productId) {
+        sharing_product_data.setProductId(productId);
+        $location.path("/editProduct");
+    }
 });
 
 

@@ -59,14 +59,17 @@ public class Product {
     @JoinColumn(name = "directory_lv1_id")
     private DirectoryLv1 directoryLv1;
 
-    @JsonIgnore
+//    @JsonIgnore
     // Getters and setters
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     List<CategoryQuantity> categoryQuantityList;
     @JsonIgnore
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     List<OrderDetail> orderDetailList;
-    @JsonIgnore
+
+
+
+//    @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<ProductImage> productImageList;
 
