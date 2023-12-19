@@ -162,15 +162,17 @@
     <div class="container">
         <div class="tabs">
             <ul class="nav nav-tabs justify-content-start">
-                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#product-tab1" id="tab1">
-                    <div class="tab-title">Mô tả thương hiệu</div>
-                </a></li>
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#product-tab1" id="tab1">
+                        <div class="tab-title">Mô tả thương hiệu</div>
+                    </a>
+                </li>
 
             </ul>
         </div>
         <div class="tab-content float-left w-100">
             <div class="tab-pane active" id="product-tab1" role="tabpanel" aria-labelledby="tab1">
-                <div class="description">
+                <div class="description" th:text="${brand.getAnotherInformation()}">
 
                 </div>
             </div>

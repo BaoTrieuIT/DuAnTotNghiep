@@ -71,12 +71,16 @@ public class ProductDetailController {
     }
 
     @GetMapping("/product-details/clear")
-    public String clear(Model model, @RequestParam("productId") Integer productId) {
+    public String clear(Model model, @RequestParam("productId") Integer productId, @RequestParam("brandId") Integer brandId) {
         Product product = productService.getProductById(productId);
         List<CategoryQuantity> categoryQuantityList = categoryQuantityService.findByProductId(productId);
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
+        Brand brand = brandService.getBrandById(brandId);
+        List<Product> productsBrand = productService.getProductByBrandId(brandId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
+        model.addAttribute("brand", brand);
+        model.addAttribute("productsRelate", productsBrand);
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);
         model.addAttribute("categoryQuantityId", null);
@@ -108,11 +112,13 @@ public class ProductDetailController {
             model.addAttribute("category", categoryQuantityList);
             model.addAttribute("quantity", -1);
         }
+        Brand brand = brandService.getBrandById(brandId);
         List<Product> productsBrand = productService.getProductByBrandId(brandId);
         model.addAttribute("productsRelate", productsBrand);
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
+        model.addAttribute("brand", brand);
         model.addAttribute("productImages", productImageList);
         return "user/product_details";
     }
