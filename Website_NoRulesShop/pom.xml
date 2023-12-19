@@ -166,6 +166,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>docker-spring-boot</finalName>
     </build>
     <repositories>
         <repository>
