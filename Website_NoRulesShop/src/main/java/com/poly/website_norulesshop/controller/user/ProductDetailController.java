@@ -61,7 +61,7 @@ public class ProductDetailController {
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);
         model.addAttribute("brand", brand);
-        model.addAttribute("productsRelate", shufflePageContent(productsBrand));
+        model.addAttribute("productsRelate", productsBrand);
         model.addAttribute("category", categoryQuantityList);
         model.addAttribute("productImages", productImageList);
         model.addAttribute("categoryQuantityId", null);
@@ -109,7 +109,7 @@ public class ProductDetailController {
             model.addAttribute("quantity", -1);
         }
         List<Product> productsBrand = productService.getProductByBrandId(brandId);
-        model.addAttribute("productsRelate", shufflePageContent(productsBrand));
+        model.addAttribute("productsRelate", productsBrand);
         List<ProductImage> productImageList = productImageService.findByProductId(productId);
         model.addAttribute("title", product.getProductName());
         model.addAttribute("products", product);

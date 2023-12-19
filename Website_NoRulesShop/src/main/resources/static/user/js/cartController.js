@@ -64,9 +64,9 @@ app.controller("cart_ctrl", function ($scope, $http) {
     var $cart = $scope.cart = {
         items: [],
         minus(item, productId, quantity, categoryQuantityId) {
+            const qty = 1;
             if (item.qty > 1) {
-                item.qty--;
-                $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryQuantityId}/${item.qty}`).then(respQuantity => {
+                $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryQuantityId}/${qty}`).then(respQuantity => {
                     item.qty--;
                     this.saveToLocalStorage();
                     location.reload()
@@ -82,13 +82,12 @@ app.controller("cart_ctrl", function ($scope, $http) {
         plus(item, productId, quantity, categoryQuantityId) {
             $http.get(`/rest/getMaxQty/${productId}/${categoryQuantityId}`).then(response => {
                 const maxQty = response.data;
-                if (item && (item.qty + quantity) - item.qty > maxQty) {
+                const qty = 1;
+                if (item && (item.qty + qty) - item.qty > maxQty) {
                     this.showError("error", "Lỗi", "Không đủ số lượng");
                     return false;
                 }
-                console.log("Before", item.qty)
-                console.log("Before", quantity)
-                $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryQuantityId}/${item.qty}`).then(respQuantity => {
+                $http.post(`/rest/categoryQuantitywhenAdd/${productId}/${categoryQuantityId}/${qty}`).then(respQuantity => {
                     item.qty++;
                     console.log("AFTER", item.qty)
                     console.log("AFTER", quantity)
@@ -143,8 +142,8 @@ app.controller("cart_ctrl", function ($scope, $http) {
             }
         },
         remove(productId, quantity, categoryQuantityId) { // xóa sản phẩm khỏi giỏ hàng
-            const itemIndex = this.findCartItem(productId, categoryQuantityId);
             $http.post(`/rest/categoryQuantitywhenRemove/${productId}/${categoryQuantityId}/${quantity}`).then(respQuantity => {
+                const itemIndex = this.findCartItemIndex(productId, categoryQuantityId);
                 this.items.splice(itemIndex, 1);
                 this.saveToLocalStorage();
                 location.reload()
@@ -158,12 +157,16 @@ app.controller("cart_ctrl", function ($scope, $http) {
             const response = await $http.get(`/rest/getMaxQty/${productId}/${categoryQuantityId}`);
             return response.data;
         },
+        findCartItemIndex(productId, categoryQuantityId) {
+            return this.items.findIndex(item => item.productId === productId
+                && item.categoryQuantity[0].category_quantity_id === categoryQuantityId
+            );
+        },
         findCartItem(productId, categoryQuantityId) {
             return this.items.find(item => item.productId === productId
                 && item.categoryQuantity[0].category_quantity_id === categoryQuantityId
             );
         },
-
 
         async updateCartItem(item, quantity, productId, categoryQuantityId) {
             item.qty += quantity;

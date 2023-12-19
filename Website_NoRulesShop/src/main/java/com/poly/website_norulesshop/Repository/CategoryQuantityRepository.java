@@ -45,7 +45,7 @@ public interface CategoryQuantityRepository extends JpaRepository<CategoryQuanti
             , @Param("categoryLv2Id") Integer categoryLv2Id);
 
     @Query("SELECT cq FROM CategoryQuantity cq WHERE cq.product.productId = :productId " +
-            "and cq.category_quantity_id = :categoryQuantity ")
+            "and cq.category_quantity_id = :categoryQuantity")
     CategoryQuantity getOne(
             @Param("productId") Integer productId
             , @Param("categoryQuantity") Integer categoryQuantity);

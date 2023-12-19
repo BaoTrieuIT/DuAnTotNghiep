@@ -68,20 +68,15 @@
                             <td class="table-p-price"><p>{{item.priceNew | vndFormat }}</p></td>
                             <td class="table-p-qty">
                                 <button class="minus btn"
-                                        ng-click="cart.minus(item,
-                                                             item.productId,
-                                                             item.qty,
-                                                             item.categoryQuantity[0].category_quantity_id)">-
+                                        ng-click="cart.minus(item,item.productId,item.qty,item.categoryQuantity[0].category_quantity_id)">
+                                    -
                                 </button>
                                 <label>
                                     <input type="number" min="1" ng-model="item.qty" readonly />
                                 </label>
                                 <button class="plus btn"
-                                        ng-click="cart.plus(item,
-                                                            item.productId,
-                                                            item.qty,
-                                                            item.categoryQuantity[0].category_quantity_id)"
-                                >+
+                                        ng-click="cart.plus(item,item.productId,item.qty,item.categoryQuantity[0].category_quantity_id)">
+                                    +
                                 </button>
                             </td>
                             <td class="table-total"><p>{{item.priceNew * item.qty | vndFormat }}</p></td>
