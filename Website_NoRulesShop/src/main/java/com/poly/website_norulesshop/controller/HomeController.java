@@ -60,6 +60,6 @@ public class HomeController {
         model.addAttribute("title", "Trang chủ");
         model.addAttribute("filteredProduct", filteredProduct);
         GlobalFlag.flag_2 = false;
-        return "user/index";
+        return "/user/index";
     }
 }
