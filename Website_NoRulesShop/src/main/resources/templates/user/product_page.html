@@ -24,7 +24,7 @@
                     <div class="tab-pane grid fade active" id="grid" role="tabpanel">
                         <div class="row">
                             <div class="product-layouts col-lg-3 col-md-3 col-sm-6 col-xs-6"
-                                 th:each="product : ${productPage.content}">
+                                 th:each="product : ${productPage.content}" th:if="${product.isRemoved == false}">
                                 <div class="product-thumb">
                                     <div class="image zoom">
                                         <a th:href="@{'/home/product-details/productId=' + ${product.getProductId()} + '/brandId=' +${product.getBrand.getBrandId()} }"

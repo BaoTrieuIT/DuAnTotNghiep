@@ -37,6 +37,7 @@ public class MyAccountController {
 
     @GetMapping("/my-account")
     public String index(Model model) throws InterruptedException {
+        model.addAttribute("title", "Tài khoản của tôi");
         return "user/my_account";
     }
 
