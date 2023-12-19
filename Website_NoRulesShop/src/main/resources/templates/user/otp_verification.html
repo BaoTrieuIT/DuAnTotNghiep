@@ -8,8 +8,8 @@
         data-source-url="/user/img/banner/parallax.jpg"
         style="background-image: url('/user/img/banner/parallax.jpg');
         background-position: 50% 0.809717%;">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">OTP Verification</li>
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Xác thực OTP</li>
     </ol>
 </nav>
 <div class="main-content w-100 float-left blog-list">
@@ -18,11 +18,12 @@
             <div class="products-grid col-xl-9 col-lg-8 order-lg-2 ">
                 <div class="row">
                     <div class="col-lg-12 order-lg-last account-content">
-                        <h4>OTP Verification</h4>
+                        <h4>Mã xác thực OTP</h4>
                         <form th:action="@{/send-otp}" class="myacoount-form" method="post">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div><span>A code has been sent to</span> <span th:text="${email}"></span>
+                                    <div><span>Một mã code đã được gửi đến Email:</span> <span
+                                            th:text="${email}"></span>
                                     </div>
                                     <div th:if="${param.error != null}">
                                         <div class="alert alert-danger mb-3">
@@ -54,7 +55,7 @@
                                         <span class="d-block" id="resend"></span>
                                     </div>
                                     <div class="checkbox-link d-flex justify-content-between">
-                                        <div class="right-col"><a href="/home/update-email">Update Email</a>
+                                        <div class="right-col"><a href="/home/update-email">Cập nhật Email</a>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +68,7 @@
                                 <div class="form-footer-center">
                                     <input type="hidden" id="hiddenInputField" name="fullCode" />
                                     <button type="submit" class="btn btn-primary btn-primary"
-                                            formaction="/home/check-code">Submit
+                                            formaction="/home/check-code">Xác nhận
                                     </button>
 
                                 </div>
@@ -128,21 +129,20 @@
         var s = remaining % 60;
         m = m < 10 ? "0" + m : m;
         s = s < 10 ? "0" + s : s;
-        document.getElementById("countdown").innerHTML = `Time left: ${m} : ${s}`;
+        document.getElementById("countdown").innerHTML = `Thời gian còn lại: ${m} : ${s}`;
         remaining -= 1;
         if (remaining >= 0 && timerOn) {
             setTimeout(function () {
                 timer(remaining);
             }, 1000);
-            document.getElementById("resend").innerHTML = `
-    `;
+            document.getElementById("resend").innerHTML = ``;
             return;
         }
         if (!timerOn) {
             return;
         }
-        document.getElementById("resend").innerHTML = `Don't receive the code?
-  			<a class="font-weight-bold text-primary cursor" onclick="timer(60)">Resend </a>`;
+        document.getElementById("resend").innerHTML = `Không nhận được code?
+  			<a class="font-weight-bold text-primary cursor" onclick="timer(60)">Gửi lại mã </a>`;
     }
 
     timer(60);

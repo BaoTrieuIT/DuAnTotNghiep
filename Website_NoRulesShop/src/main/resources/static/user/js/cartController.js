@@ -24,10 +24,8 @@ app.controller("cart_ctrl", function ($scope, $http) {
         }).then((result) => {
             if (result.isConfirmed) {
                 // $http.post('/home/order-update/' + orderId)
-                Promise.all([post(orderId), reloadWithDelay(3000)])
+                Promise.all([post(orderId), reloadWithDelay(5000)])
                     .then(results => {
-                        console.log("All jobs completed successfully");
-                        console.log("Results:", results);
                     })
                     .catch(error => {
                         console.error("An error occurred:", error);
