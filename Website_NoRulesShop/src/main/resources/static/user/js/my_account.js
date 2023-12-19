@@ -320,7 +320,8 @@ function change() {
     let address = document.getElementById("address").value;
     let changepassword = document.getElementById("change-password-checkbox").checked;
     let newPassword = document.getElementById("newPassword").value;
-
+    let avatar_url = document.getElementById("selectedImage").src;
+    console.log(avatar_url);
     let changeAccountDTO = {
         fullname : fullname,
         birthday: birthday,
@@ -392,9 +393,8 @@ function renderCurrentAccount(currentAccount) {
     let formattedDate = date.toISOString().split('T')[0];
     document.getElementById("birthday").value = formattedDate;
     document.getElementById("address").value = currentAccount.address;
-    let selectedImage = document.getElementById('selectedImage');
-    selectedImage.src = `/static/user/img/avatar/${currentAccount.avatar_url}`;
-
+    let selectedImage = document.getElementById("selectedImage");
+    selectedImage.src = `/user/img/avatar/${currentAccount.avatar_url}`;
 }
 
 
@@ -412,6 +412,7 @@ function validatePhoneNumber(phoneNumberInput) {
     }
     return result;
 }
+
 function validateBirthday(birthdayInput){
     var birthday = new Date(birthdayInput.value);
     var today = new Date();
