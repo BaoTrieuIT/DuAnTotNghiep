@@ -89,6 +89,14 @@ app.controller("manage_product_ctrl", function ($scope, $http, sharing_product_d
         sharing_product_data.setProductId(productId);
         $location.path("/editProduct");
     }
+    $scope.formatDate =  function(dateString) {
+        const date = new Date(dateString); // Chuyển chuỗi thành đối tượng Date
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
 });
 
 

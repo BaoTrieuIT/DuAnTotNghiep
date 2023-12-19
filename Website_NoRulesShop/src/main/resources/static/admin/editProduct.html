@@ -66,9 +66,7 @@
                 </form><!-- End General Form Elements -->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Table with hoverable rows</h5>
-
-                        <!-- Table with hoverable rows -->
+                        <h5 class="card-title">Thông Tin Bán Hàng</h5>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -80,7 +78,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="categoryQuantity in categoryQuantities">
-                                    <th scope="row">{{categoryQuantity.category_quantity_id}}</th>
+                                    <th scope="row">{{$index + 1}}</th>
                                     <td>{{categoryQuantity.categoryLevel1Detail.category_level_1_detail_name}}</td>
                                     <td>{{categoryQuantity.categoryLevel2Detail.category_level_2_detail_name}}</td>
                                     <td><input class="form-control" type="number" min="0" max="1000" ng-model="categoryQuantities[$index].quantity"></td>

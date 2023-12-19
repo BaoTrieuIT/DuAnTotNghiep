@@ -13,14 +13,14 @@ app.controller("edit_product_ctrl", function ($scope, $http, sharing_product_dat
     $scope.initialize = function () {
         let productId = sharing_product_data.getProductId();
         if(!productId){
-            // $location.path("/product_all");
+            $location.path("/product_all");
         }else{
-
+            getDirectoryLv1();
+            getBrands();
+            getProductInformation(productId); // Gọi hàm để lấy thông tin sản phẩm
+            getCategoryQuantity(productId);
         }
-        getDirectoryLv1();
-        getBrands();
-        getProductInformation(1); // Gọi hàm để lấy thông tin sản phẩm
-        getCategoryQuantity(1);
+
     };
 
     function getCategoryQuantity(productId) {
@@ -34,6 +34,7 @@ app.controller("edit_product_ctrl", function ($scope, $http, sharing_product_dat
             $scope.brands = resp.data
         })
     }
+
     function getDirectoryLv1() {
         $http.get("/rest/manage_directoryLv1").then(resp => {
             $scope.directoryLv1s = resp.data
