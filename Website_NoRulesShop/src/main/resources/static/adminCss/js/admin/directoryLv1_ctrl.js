@@ -38,7 +38,7 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
 //     }
     $scope.creatDirLv1 = function (direcId) {
         var dlv1 = angular.copy($scope.form)
-        $http.post('/rest/directoryLv1/' + direcId, dlv1).then(resp => {
+        $http.post('/rest/manage_directoryLv1/' + direcId, dlv1).then(resp => {
             $scope.ListdirectoryLv1.push(resp.data);
             $scope.form = {};
             $('#create_directory_lv1_' + direcId).modal('hide');
@@ -73,7 +73,7 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             alert("ID không hợp lệ.");
             return;
         }
-        $http.put(`/rest/directoryLv1/update/${item.directoryLv1Id}`, item).then(resp => {
+        $http.put(`/rest/manage_directoryLv1/update/${item.directoryLv1Id}`, item).then(resp => {
             var index = $scope.ListdirectoryLv1.findIndex(p => p.directoryLv1Id === item.directoryLv1Id);
             if (index === -1) {
                 var data = DataSharingService.getData();
@@ -98,7 +98,7 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
             data.messwarning = false;
             data.messsuccess = false;
             data.messerror = true;
-            data.message = "Tạo danh mục thất bại";
+            data.message = "Cập nhật danh mục thất bại";
             DataSharingService.setData(data)
             console.log("Error", error);
         });
@@ -131,7 +131,7 @@ app.controller("directoryLv1_ctrl", function ($scope, $http, DataSharingService)
         // Gửi các ID đã chọn lên máy chủ để xóa
         $http({
             method: 'DELETE',
-            url: '/rest/directoryLv1/delete',
+            url: '/rest/manage_directoryLv1/delete',
             data: selectedIds, // Gửi mảng các ID cần xóa
             headers: {'Content-Type': 'application/json;charset=utf-8'}
         }).then(function (response) {
