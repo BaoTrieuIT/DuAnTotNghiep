@@ -57,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
         account.setUsername(accountDTO.getUsername());
         account.setEmail(accountDTO.getEmail());
         account.setCreate_date(currentDate);
+        account.setFullname(accountDTO.getUsername());
         account.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
         account.setProvider(Provider.LOCAL);
         account.setAvatar_url("phong.png");
