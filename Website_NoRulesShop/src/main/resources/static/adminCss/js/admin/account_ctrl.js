@@ -80,9 +80,7 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         size: 4,
         get items() {
             if ($scope.items && Array.isArray($scope.items)) {
-                // Lọc các mục có accountStatusName là 'Active'
                 const activeItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Active');
-
                 if (this.page < 0) {
                     this.last();
                 }
@@ -97,7 +95,6 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         },
         get count() {
             if ($scope.items && Array.isArray($scope.items)) {
-                // Đếm số lượng mục có accountStatusName là 'Active'
                 const activeItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Active');
                 return Math.ceil(1.0 * activeItems.length / this.size);
             }
@@ -128,7 +125,6 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         size: 4,
         get items() {
             if ($scope.items && Array.isArray($scope.items)) {
-                // Lọc các mục có accountStatusName là 'Active'
                 const inactiveItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Inactive');
 
                 if (this.page < 0) {
@@ -145,7 +141,6 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         },
         get count() {
             if ($scope.items && Array.isArray($scope.items)) {
-                // Đếm số lượng mục có accountStatusName là 'Active'
                 const inactiveItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Inactive');
                 return Math.ceil(1.0 * inactiveItems.length / this.size);
             }
@@ -177,7 +172,6 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         size: 4,
         get items() {
             if ($scope.items && Array.isArray($scope.items)) {
-                // Lọc các mục có accountStatusName là 'Active'
                 const suspendedItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Suspended');
 
                 if (this.page < 0) {
@@ -194,7 +188,6 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         },
         get count() {
             if ($scope.items && Array.isArray($scope.items)) {
-                // Đếm số lượng mục có accountStatusName là 'Active'
                 const suspendedItems = $scope.items.filter(item => item.accountStatus && item.accountStatus.accountStatusName === 'Suspended');
                 return Math.ceil(1.0 * suspendedItems.length / this.size);
             }
@@ -224,7 +217,7 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
         page: 0,
         size: 4,
         get items() {
-            if ($scope.items && Array.isArray($scope.items)) { // Kiểm tra xem items đã được khởi tạo và là một mảng không
+            if ($scope.items && Array.isArray($scope.items)) {
                 if (this.page < 0) {
                     this.last();
                 }
@@ -234,14 +227,12 @@ app.controller("account_ctrl", function ($scope, $http, $location, $timeout, Acc
                 var start = this.page * this.size;
                 return $scope.items.slice(start, start + this.size);
             } else {
-                return []; // Trả về một mảng trống hoặc giá trị mặc định phù hợp với logic của bạn
             }
         },
         get count() {
             if ($scope.items && $scope.items.length) {
                 return Math.ceil(1.0 * $scope.items.length / this.size);
             }
-            return 0; // Hoặc giá trị mặc định phù hợp với logic của bạn
         },
         first() {
             this.page = 0;
@@ -290,9 +281,7 @@ app.controller('AddAccountController', ['$scope', '$http', '$location', '$timeou
             }).then(function (response) {
                 var data = response.data;
                 var successMessage = data.message;
-                // Lấy đường dẫn hoặc tên tệp ảnh từ response
                 var imagePath = data.imagePath;
-                // Cập nhật thuộc tính logo_url của thương hiệu
                 item.avatar_url = imagePath;
                 if ($scope.myForm.$valid) {
                     $http.put(`/rest/manage_account/${item.account_id}`, item).then(function (resp) {

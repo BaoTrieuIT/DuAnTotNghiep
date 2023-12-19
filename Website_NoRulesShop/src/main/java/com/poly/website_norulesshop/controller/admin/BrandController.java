@@ -63,7 +63,6 @@ public class BrandController {
                 Files.write(filePath, file.getBytes());
 
 
-                // Get the user's home directory
                 String userHome = System.getProperty("user.home");
                 String directoryPath1 = userHome + File.separator + "imagesBrand/";
                 Path path1 = Paths.get(directoryPath1);
@@ -74,16 +73,13 @@ public class BrandController {
 
                 String fileName1 = file.getOriginalFilename(); //
                 Path filePath1 = Paths.get(directoryPath1, fileName1);
-
                 Files.write(filePath1, file.getBytes());
-                // Lưu đường dẫn của ảnh vào cơ sở dữ liệu
+
                 String imagePath = fileName1;
-                // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
                 Brand brand = new Brand();
                 brand.setLogoUrl(imagePath);
                 return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
             } else {
-                // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
                 return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
             }
         } catch (IOException e) {
@@ -99,7 +95,7 @@ public class BrandController {
 
         if (resource.exists() && resource.isReadable()) {
             return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG) // Điều này có thể thay đổi tùy thuộc vào định dạng ảnh của bạn
+                    .contentType(MediaType.IMAGE_JPEG)
                     .body(resource);
         } else {
             return ResponseEntity.notFound().build();

@@ -74,18 +74,15 @@ public class AccountController {
                         if (!Files.exists(path)) {
                             Files.createDirectories(path);
                         }
-                        String fileName = file.getOriginalFilename() ; // Adjust the file format based on your image type
+                        String fileName = file.getOriginalFilename() ;
                         Path filePath = Paths.get(directoryPath, fileName);
-
                         Files.write(filePath, file.getBytes());
-                        // Now you can save the imagePath into your database or perform other operations
+
                         String imagePath = fileName;
-                        // Lưu imagePath vào cơ sở dữ liệu cho brand hoặc sản phẩm tương ứng
                         Account account1 = new Account();
                         account1.setAvatar_url(imagePath);
                         return ResponseEntity.ok("{\"message\": \"Tải ảnh lên thành công.\", \"imagePath\": \"" + imagePath + "\"}");
                     }else {
-                        // Người dùng không cung cấp file ảnh mới, không thay đổi ảnh
                         return ResponseEntity.ok("{\"message\": \"Không có file ảnh mới được cung cấp.\"}");
                     }
                 } catch (IOException e) {
@@ -100,7 +97,7 @@ public class AccountController {
 
         if (resource.exists() && resource.isReadable()) {
             return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG) // Điều này có thể thay đổi tùy thuộc vào định dạng ảnh của bạn
+                    .contentType(MediaType.IMAGE_JPEG)
                     .body(resource);
         } else {
             return ResponseEntity.notFound().build();

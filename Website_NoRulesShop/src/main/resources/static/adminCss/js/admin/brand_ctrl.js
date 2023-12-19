@@ -114,12 +114,8 @@ app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
                 }).then(function (response) {
                     var data = response.data;
                     var successMessage = data.message;
-                    // Lấy đường dẫn hoặc tên tệp ảnh từ response
                     var imagePath = data.imagePath;
-                    // Cập nhật thuộc tính logo_url của thương hiệu
                     item.logoUrl = imagePath;
-
-                    // Tạo thương hiệu sau khi đã cập nhật logo_url
                     $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
                         var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                         $scope.items[index] = item;
@@ -144,7 +140,6 @@ app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
                     console.log("Error", error);
                 });
             } else {
-                // Tạo thương hiệu sau khi đã cập nhật logo_url
                 $http.put(`/rest/manage_brand/${item.brandId}`, item).then(resp => {
                     var index = $scope.items.findIndex(p => p.brandId === item.brandId);
                     $scope.items[index] = item;
@@ -217,7 +212,6 @@ app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
                 var start = this.page * this.size;
                 return activeBrands.slice(start, start + this.size)
             } else {
-                // Trả về một giá trị mặc định hoặc xử lý lỗi tại đây nếu $scope.items là undefined.
                 return 0;
             }
         },
@@ -228,7 +222,6 @@ app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
                 });
                 return Math.ceil(1.0 * activeBrands.length / this.size);
             } else {
-                // Trả về một giá trị mặc định hoặc xử lý lỗi tại đây nếu $scope.items là undefined.
                 return 0;
             }
         },
@@ -262,7 +255,6 @@ app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
                 var start = this.page * this.size;
                 return activeBrands.slice(start, start + this.size)
             } else {
-                // Trả về một giá trị mặc định hoặc xử lý lỗi tại đây nếu $scope.items là undefined.
                 return 0;
             }
         },
@@ -273,7 +265,6 @@ app.controller("brand_ctrl", function ($scope, $http, $timeout, $window) {
                 });
                 return Math.ceil(1.0 * activeBrands.length / this.size);
             } else {
-                // Trả về một giá trị mặc định hoặc xử lý lỗi tại đây nếu $scope.items là undefined.
                 return 0;
             }
         },
