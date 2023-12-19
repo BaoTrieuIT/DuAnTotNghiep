@@ -46,8 +46,7 @@ public class MyAccountRestController {
     }
 
     @PutMapping("/changeAccountInfo")
-    public ResponseEntity<?> changeAccoungInfo(@RequestParam("image") MultipartFile file,
-                                               @RequestBody ChangeAccountDTO changeAccountDTO) {
+    public ResponseEntity<?> changeAccountInfo(@RequestBody ChangeAccountDTO changeAccountDTO) {
         Map<String, Object> result = null;
         try {
             result = new HashMap<>();
@@ -59,13 +58,6 @@ public class MyAccountRestController {
                 currentAccount.setAddress(changeAccountDTO.getAddress());
                 if (changeAccountDTO.getChangePassword()) {
                     currentAccount.setPassword(passwordEncoder.encode(changeAccountDTO.getNewPassword()));
-                }
-                try {
-                    String originalFileName = file.getOriginalFilename();
-                    FileUploadUtil.saveFile(UPLOAD_DIRECTORY, originalFileName, file);
-                    currentAccount.setAvatar_url(originalFileName);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
                 }
                 result.put("status", "success");
                 result.put("data", currentAccount);

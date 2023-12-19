@@ -31,7 +31,7 @@ public class FileUploadService {
     }
 
 
-    private void saveFile(String fileName, MultipartFile file) {
+    public void saveFile(String fileName, MultipartFile file) {
         try {
             if (!file.isEmpty()) {
                 byte[] bytes = file.getBytes();
@@ -43,4 +43,20 @@ public class FileUploadService {
             System.out.println("Lỗi khi lưu tệp tin: " + e.getMessage());
         }
     }
+
+    public void saveFileByPathAndByName(String fileName, MultipartFile file, String url) {
+        try {
+            if (!file.isEmpty()) {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(url + "\\" + fileName);
+                Files.write(path, bytes);
+                System.out.println("Lưu Thành Công: " + fileName);
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi khi lưu tệp tin: " + e.getMessage());
+
+        }
+    }
+
+
 }

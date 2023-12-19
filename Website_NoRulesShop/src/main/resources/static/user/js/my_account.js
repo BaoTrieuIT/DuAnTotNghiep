@@ -1,5 +1,5 @@
 function displayImage() {
-    var fileInput = document.getElementById('fileInput');
+    var fileInput = document.getElementById('avt-image-file');
     var selectedImage = document.getElementById('selectedImage');
 
     var file = fileInput.files[0];
@@ -277,10 +277,10 @@ function changeInfomation() {
 
         if (valid) {
             if (checkbox.checked) {
-                checkPassowrdMatchWithCurrentAccount().then(result =>{
-                    if(result.status == "success"){
+                checkPassowrdMatchWithCurrentAccount().then(result => {
+                    if (result.status == "success") {
                         change();
-                    }else if(result.status == "not match"){
+                    } else if (result.status == "not match") {
                         Swal.fire({
                             icon: 'error',
                             title: 'Thất Bại!',
@@ -290,7 +290,7 @@ function changeInfomation() {
                     }
                 });
             } else {
-               change();
+                change();
             }
         }
     }).catch(error => {
@@ -320,10 +320,29 @@ function change() {
     let address = document.getElementById("address").value;
     let changepassword = document.getElementById("change-password-checkbox").checked;
     let newPassword = document.getElementById("newPassword").value;
-    let avatar_url = document.getElementById("selectedImage").src;
-    console.log(avatar_url);
+    let avatarImageFile = document.getElementById("avt-image-file").files[0];
+
+
+    if (avatarImageFile) {
+        let formData = new FormData();
+        formData.append("file", avatarImageFile);
+        $.ajax({
+            url: '/api/uploadFile/saveAvatar',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log("thanh cong")
+            },
+            error: function(xhr, status, error) {
+                console.log("that bai")
+            }
+        });
+
+    }
     let changeAccountDTO = {
-        fullname : fullname,
+        fullname: fullname,
         birthday: birthday,
         phonenumber: phonenumber,
         address: address,
@@ -333,7 +352,7 @@ function change() {
 
     $.ajax({
         url: "/api/my-account/changeAccountInfo",
-        method:"PUT",
+        method: "PUT",
         data: JSON.stringify(changeAccountDTO),
         contentType: "application/json",
         success: function (data) {
@@ -345,6 +364,12 @@ function change() {
             });
         },
         error: function (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Không Thành Công!',
+                text: 'Thay Đổi Thông Tin Không Thành Công.',
+                confirmButtonText: 'OK'
+            });
             console.log(error);
         }
     })
@@ -413,7 +438,7 @@ function validatePhoneNumber(phoneNumberInput) {
     return result;
 }
 
-function validateBirthday(birthdayInput){
+function validateBirthday(birthdayInput) {
     var birthday = new Date(birthdayInput.value);
     var today = new Date();
     var age = today.getFullYear() - birthday.getFullYear();
@@ -432,6 +457,7 @@ function validateBirthday(birthdayInput){
         return true;
     }
 }
+
 function validateInput(inputElement) {
     // Lấy giá trị từ phần tử nhập liệu
     var inputValue = inputElement.value.trim(); // Trim() để loại bỏ khoảng trắng ở đầu và cuối chuỗi
