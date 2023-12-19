@@ -1,6 +1,4 @@
 <div class="card-body">
-
-
     <!-- Table with hoverable rows -->
     <table class="table datatable">
         <thead>
@@ -29,7 +27,7 @@
             <td style="height: 130px"><strike>{{item.priceOld}}</strike></td>
             <td style="height: 130px">{{item.priceNew}}</td>
             <td>
-                <button style="width: 55px; font-size: 11px; " type="button" class="btn btn-outline-secondary">Edit</button>
+                <button style="width: 55px; font-size: 11px; " type="button" class="btn btn-outline-secondary" ng-click="editProduct(item.productId)">Edit</button>
 
 <!--                <div class="dropdown">-->
 <!--                    <button style="font-size: 11px;" type="button" class="btn btn-outline-secondary">More</button>-->

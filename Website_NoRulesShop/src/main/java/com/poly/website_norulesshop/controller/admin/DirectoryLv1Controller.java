@@ -18,7 +18,7 @@ import com.poly.website_norulesshop.service.DirectoryService;
 
 @CrossOrigin("*")
 @RestController
- @RequestMapping("/rest/manage_directoryLv1/")
+ @RequestMapping("/rest/manage_directoryLv1")
 // @RequestMapping("/rest/directoryLv1")
 public class DirectoryLv1Controller {
     @Autowired

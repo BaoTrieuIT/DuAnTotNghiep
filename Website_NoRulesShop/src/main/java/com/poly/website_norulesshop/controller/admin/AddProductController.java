@@ -44,10 +44,6 @@ public class AddProductController {
     CategoryLevel1DetailService categoryLevel1DetailService;
     @Autowired
     CategoryLevel2DetailService categoryLevel2DetailService;
-    CategoryLevel1 addCategoryLevel1 = new CategoryLevel1();
-    CategoryLevel2 addCategoryLevel2 = new CategoryLevel2();
-    CategoryLevel2Detail addCategoryLevel2Detail = new CategoryLevel2Detail();
-    CategoryLevel1Detail addCategoryLevel1Detail = new CategoryLevel1Detail();
 
 
     private CategoryLevel1 currentCategoryLevel1;

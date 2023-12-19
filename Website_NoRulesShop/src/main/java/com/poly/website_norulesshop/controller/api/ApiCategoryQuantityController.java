@@ -19,6 +19,12 @@ public class ApiCategoryQuantityController {
     @Autowired
     ProductService productService;
 
+
+    @GetMapping("rest/categoryQuantity/{productId}")
+    public List<CategoryQuantity> getCategoryQuantities(@PathVariable Integer productId){
+        return categoryQuantityService.findByProductId(productId);
+    }
+
     @GetMapping("/rest/categoryQuantity/{productId}/{categoryLv1Id}/{categoryLv2Id}")
     public List<CategoryQuantity> getOne(@PathVariable("productId") Integer productId,
                                          @PathVariable("categoryLv1Id") Integer categoryLv1Id,
