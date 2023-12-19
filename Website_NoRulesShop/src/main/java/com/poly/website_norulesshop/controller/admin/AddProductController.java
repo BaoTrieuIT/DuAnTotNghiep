@@ -76,7 +76,6 @@ public class AddProductController {
             product.setPriceOld(productPrice);
             product.setPriceNew(productDiscount);
             product.setDiscount((productPrice - productDiscount) / productPrice);
-            product.setDiscount(productDiscount);
 //            product.setTotalQuantity(productTotalQuantity);
 //            if (productDiscount > 0 && productDiscount < 1) {
 //                product.setPriceNew(productPrice * (1 - productDiscount));

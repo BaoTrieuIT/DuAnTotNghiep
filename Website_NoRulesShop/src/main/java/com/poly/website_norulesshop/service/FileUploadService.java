@@ -18,7 +18,7 @@ import java.util.List;
 public class FileUploadService {
 
 
-    String uploadDir = "src\\main\\resources\\static\\user\\imag\\products";
+    String uploadDir = "src\\main\\resources\\static\\user\\img\\products";
     private static final Object lock = new Object();
 
 
