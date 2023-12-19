@@ -252,8 +252,19 @@ function validateInfomation() {
                 MatchPassword = matchPasswords(document.getElementById("newPassword").value, document.getElementById("confirmPassword").value);
             }
             let validatePhoneNumberValidResult = validatePhoneNumber(document.getElementById("phone_number"));
-
-            resolve(usernameResult && fullNameResult && emailResult && phoneNumberResult && birthdayResult && addressResult && currentPasswordResult && newPasswordResult && ConfirmPassword && MatchPassword && validatePhoneNumberValidResult);
+            let vaidateBirthdayValidResult = validateBirthday(document.getElementById("birthday"));
+            resolve(usernameResult
+                && fullNameResult
+                && emailResult
+                && phoneNumberResult
+                && birthdayResult
+                && addressResult
+                && currentPasswordResult
+                && newPasswordResult
+                && ConfirmPassword
+                && MatchPassword
+                && validatePhoneNumberValidResult
+                && vaidateBirthdayValidResult);
         } catch (e) {
             reject(e);
         }
@@ -339,7 +350,7 @@ function change() {
 }
 
 function matchPasswords(newPassword, confirmPassword) {
-    if (newPassword != confirmPassword) {
+    if (newPassword !== confirmPassword) {
         document.getElementById("confirmPassword").style.borderColor = "red";
         document.getElementById("confirmPassword").parentElement.querySelectorAll(".feedback")[0].innerHTML = "Mật khẩu không trùng khớp";
         return false;
@@ -401,7 +412,25 @@ function validatePhoneNumber(phoneNumberInput) {
     }
     return result;
 }
+function validateBirthday(birthdayInput){
+    var birthday = new Date(birthdayInput.value);
+    var today = new Date();
+    var age = today.getFullYear() - birthday.getFullYear();
 
+    if (today.getMonth() < birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
+        age--;
+    }
+    console.log(age);
+    if (age < 12 || age > 120) {
+        birthdayInput.style.borderColor = "red";
+        birthdayInput.parentElement.querySelectorAll(".feedback")[0].innerHTML = "Ngày sinh không đủ 12 tuổi hoặc không hợp lệ";
+        return false;
+    } else {
+        birthdayInput.style.borderColor = "green";
+        birthdayInput.parentElement.querySelectorAll(".feedback")[0].innerHTML = "";
+        return true;
+    }
+}
 function validateInput(inputElement) {
     // Lấy giá trị từ phần tử nhập liệu
     var inputValue = inputElement.value.trim(); // Trim() để loại bỏ khoảng trắng ở đầu và cuối chuỗi
