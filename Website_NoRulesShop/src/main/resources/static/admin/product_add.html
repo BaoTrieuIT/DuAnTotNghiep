@@ -40,7 +40,7 @@
                         <div class="col-sm-10">
                             <input onchange="validateInput(this)" id="product-discount" type="number"
                                    class="form-control" ng-model="productDiscount"
-                                   placeholder="VD : 0.2 hoặc 20 hoặc 1000 -> 20% hoặc 1000 đồng">
+                                   placeholder="VD : 10000 -> 10000 VND">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -68,7 +68,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Kho Hàng</label>
                         <div class="col-sm-10">
-                            <input onchange="validateInput(this)" id="product-quantity" type="text" class="form-control" ng-model="productQuantity">
+                            <input onchange="validateInput(this)" min="0" max="1000" id="product-quantity" type="number" class="form-control" ng-model="productQuantity">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -119,11 +119,11 @@
                             <div ng-show="showclassification1">
                                 <label class="col-sm-2 col-form-label">Nhóm Phân Loại 1</label>
                                 <div class="col-sm-5">
-                                    <input id="classificationGround1" type="text" class="form-control" ng-model="classificationGround1">
+                                    <input disabled id="classificationGround1" type="text" class="form-control" ng-model="classificationGround1">
                                 </div>
                                 <label class="col-sm-2 col-form-label">Phân Loại Hàng</label>
                                 <div class="col-sm-10">
-                                    <input id="classificationText1" type="text" class="form-control" ng-model="classificationText1"
+                                    <input   id="classificationText1" type="text" class="form-control" ng-model="classificationText1"
                                            ng-change="changedInClassfication()">
                                 </div>
                                 <button class="btn btn-primary mb-2" style="margin: 10px 0"
@@ -134,7 +134,7 @@
                             <div ng-show="showclassification2"><label class="col-sm-2 col-form-label py-2">Nhóm Phân Loại
                                 2</label>
                                 <div class="col-sm-5">
-                                    <input id="classificationGround2" type="text" class="form-control" ng-model="classificationGround2">
+                                    <input disabled id="classificationGround2" type="text" class="form-control" ng-model="classificationGround2">
                                 </div>
                                 <label class="col-sm-2 col-form-label">Phân Loại Hàng</label>
                                 <div class="col-sm-10">
@@ -164,14 +164,14 @@
                                     </tr>
                                     </thead>
                                     <tbody ng-repeat="item1 in classificationList1">
-                                    <tr class="mb-3" ng-repeat="item2 in classificationList2">
-                                        <td ng-show="$index == 0" rowspan="{{classificationList2.length}}">{{item1}}
-                                        </td>
-                                        <td ng-show="showclassification2">{{item2}}</td>
-                                        <td><input  class="category-quantity form-control py-2" type="number" placeholder="Số Lượng"
-                                                   ng-model="quantities[$parent.$index * classificationList2.length + $index]">
-                                        </td>
-                                    </tr>
+                                        <tr class="mb-3" ng-repeat="item2 in classificationList2">
+                                            <td ng-show="$index == 0" rowspan="{{classificationList2.length}}">{{item1}}
+                                            </td>
+                                            <td ng-show="showclassification2">{{item2}}</td>
+                                            <td><input  min="0"  max="1000" class="category-quantity form-control py-2" type="number" placeholder="Số Lượng"
+                                                       ng-model="quantities[$parent.$index * classificationList2.length + $index]">
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

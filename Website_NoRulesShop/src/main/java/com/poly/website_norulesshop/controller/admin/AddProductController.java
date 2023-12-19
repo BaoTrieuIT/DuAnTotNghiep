@@ -74,17 +74,19 @@ public class AddProductController {
             product.setProductDescription(productDescription);
             product.setCreateDate(new Date());
             product.setPriceOld(productPrice);
+            product.setPriceNew(productDiscount);
+            product.setDiscount((productPrice - productDiscount) / productPrice);
             product.setDiscount(productDiscount);
-            product.setTotalQuantity(productTotalQuantity);
-            if (productDiscount > 0 && productDiscount < 1) {
-                product.setPriceNew(productPrice * (1 - productDiscount));
-            } else if (productDiscount >= 1 && productDiscount <= 100) {
-                product.setPriceNew(productPrice - productPrice * productDiscount / 100);
-            } else if (productDiscount > 100) {
-                product.setPriceNew(productPrice - productDiscount);
-            } else {
-                System.out.println("error");
-            }
+//            product.setTotalQuantity(productTotalQuantity);
+//            if (productDiscount > 0 && productDiscount < 1) {
+//                product.setPriceNew(productPrice * (1 - productDiscount));
+//            } else if (productDiscount >= 1 && productDiscount <= 100) {
+//                product.setPriceNew(productPrice - productPrice * productDiscount / 100);
+//            } else if (productDiscount > 100) {
+//                product.setPriceNew(productPrice - productDiscount);
+//            } else {
+//                System.out.println("error");
+//            }
             currentProduct = productService.saveProduct(product);
             return currentProduct;
         } catch (Exception e) {
@@ -114,7 +116,6 @@ public class AddProductController {
 //       thêm dữ liệu vào productImage
         for (Map.Entry<String, MultipartFile> entry : fileMap.entrySet()) {
             String key = entry.getKey();
-
             ProductImage productImage = new ProductImage();
             productImage.setImage_url(key);
             productImage.setProduct(currentProduct);
@@ -125,9 +126,7 @@ public class AddProductController {
 
 
     @PostMapping("addCategoryLv1")
-    public CategoryLevel1 addCategoryLv1(
-            @RequestParam("categoryName") String categoryLv1Name
-    ) {
+    public CategoryLevel1 addCategoryLv1(@RequestParam("categoryName") String categoryLv1Name) {
         CategoryLevel1 categoryLevel1 = new CategoryLevel1();
         categoryLevel1.setCategory_level_1_name(categoryLv1Name);
         currentCategoryLevel1 = categoryLevel1Service.saveCategoryLevel1(categoryLevel1);

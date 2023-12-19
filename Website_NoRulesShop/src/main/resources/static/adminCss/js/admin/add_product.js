@@ -7,8 +7,8 @@ app.controller("product_ctrl", function ($scope, $http) {
     $scope.showclassification1 = false;
     $scope.showclassification2 = false;
 
-    $scope.classificationGround1 = "";
-    $scope.classificationGround2 = "";
+    $scope.classificationGround1 = "Màu Sắc";
+    $scope.classificationGround2 = "Size";
 
     $scope.CategoryPriceArr = [];
     $scope.CategoryQuantityArr = [];

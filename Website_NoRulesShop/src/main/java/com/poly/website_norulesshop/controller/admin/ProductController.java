@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.poly.website_norulesshop.dto.EditProductDTO;
+import com.poly.website_norulesshop.entity.CategoryQuantity;
 import com.poly.website_norulesshop.service.BrandService;
 import com.poly.website_norulesshop.service.CategoryQuantityService;
 import com.poly.website_norulesshop.service.DirectoryLv1Service;
@@ -86,10 +87,16 @@ public class ProductController {
         }else{
             editProductDTO.getProduct().setDiscount((editProductDTO.getProduct().getPriceOld() - editProductDTO.getProduct().getPriceNew())/editProductDTO.getProduct().getPriceOld());
         }
-        productService.saveProduct(editProductDTO.getProduct());
         editProductDTO.getCategoryQuantities().forEach(categoryQuantity -> {
             categoryQuantityService.saveCategoryQuantity(categoryQuantity);
         });
+
+        Integer totalQuantity =  0;
+        for (CategoryQuantity categoryQuantity : editProductDTO.getCategoryQuantities()) {
+            totalQuantity += categoryQuantity.getQuantity();
+        }
+        editProductDTO.getProduct().setTotalQuantity(totalQuantity);
+        productService.saveProduct(editProductDTO.getProduct());
         return editProductDTO.getProduct();
     }
 }
