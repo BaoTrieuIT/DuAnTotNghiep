@@ -1,13 +1,13 @@
-    package com.poly.website_norulesshop.dto;
+package com.poly.website_norulesshop.dto;
 
-    import lombok.Data;
+import com.poly.website_norulesshop.entity.CategoryQuantity;
+import com.poly.website_norulesshop.entity.Product;
+import lombok.Data;
 
-    @Data
-    public class EditProductDTO {
-        String productName;
-        Double productPrice;
-        Double productDiscount;
-        Integer brandId;
-        Integer directoryLv1Id;
-        String productDescription;
-    }
+import java.util.List;
+
+@Data
+public class EditProductDTO {
+    Product product;
+    List<CategoryQuantity> categoryQuantities;
+}

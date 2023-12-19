@@ -20,8 +20,15 @@ app.controller("edit_product_ctrl", function ($scope, $http, sharing_product_dat
         getDirectoryLv1();
         getBrands();
         getProductInformation(1); // Gọi hàm để lấy thông tin sản phẩm
+        getCategoryQuantity(1);
     };
 
+    function getCategoryQuantity(productId) {
+        $http.get(`/rest/categoryQuantity/${productId}`).then(resp => {
+            $scope.categoryQuantities = resp.data;
+        })
+    }
+    
     function getBrands() {
         $http.get("/rest/manage_brand").then(resp => {
             $scope.brands = resp.data
@@ -57,10 +64,14 @@ app.controller("edit_product_ctrl", function ($scope, $http, sharing_product_dat
         testingUpdateProduct();
     }
     function testingUpdateProduct() {
+        let editProductDTO = {
+            product: $scope.product,
+            categoryQuantities: $scope.categoryQuantities
+        }
         $http({
             method: 'PUT',
             url: `/rest/product_all/updateProduct`,
-            data: $scope.product, // Dữ liệu JSON
+            data: editProductDTO, // Dữ liệu JSON
             headers: {
                 'Content-Type': 'application/json' // Xác định loại dữ liệu là JSON
             }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.poly.website_norulesshop.dto.EditProductDTO;
 import com.poly.website_norulesshop.service.BrandService;
+import com.poly.website_norulesshop.service.CategoryQuantityService;
 import com.poly.website_norulesshop.service.DirectoryLv1Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class ProductController {
     Map<String, Boolean> softMap = new HashMap<>();
 
     List<Product> listProduct = new ArrayList<>();
+
+    @Autowired
+    CategoryQuantityService categoryQuantityService;
 
 
     @Autowired
@@ -76,13 +80,16 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct")
-    public Product updateProduct(@RequestBody Product product){
-        if(product.getPriceNew() == product.getPriceNew()){
-            product.setDiscount(null);
+    public Object updateProduct(@RequestBody EditProductDTO editProductDTO){
+        if(editProductDTO.getProduct().getPriceNew() == editProductDTO.getProduct().getPriceNew()){
+            editProductDTO.getProduct().setDiscount(null);
         }else{
-            product.setDiscount((product.getPriceOld() - product.getPriceNew())/product.getPriceOld());
+            editProductDTO.getProduct().setDiscount((editProductDTO.getProduct().getPriceOld() - editProductDTO.getProduct().getPriceNew())/editProductDTO.getProduct().getPriceOld());
         }
-        productService.saveProduct(product);
-        return product;
+        productService.saveProduct(editProductDTO.getProduct());
+        editProductDTO.getCategoryQuantities().forEach(categoryQuantity -> {
+            categoryQuantityService.saveCategoryQuantity(categoryQuantity);
+        });
+        return editProductDTO.getProduct();
     }
 }

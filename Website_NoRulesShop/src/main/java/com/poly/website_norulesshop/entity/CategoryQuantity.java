@@ -1,6 +1,5 @@
 package com.poly.website_norulesshop.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,11 +26,13 @@ public class CategoryQuantity {
     @JoinColumn(name = "category_level_2_detail_id")
     private CategoryLevel2Detail categoryLevel2Detail;
 
-
-
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+
+
+
+
     // Getters and setters
 }
