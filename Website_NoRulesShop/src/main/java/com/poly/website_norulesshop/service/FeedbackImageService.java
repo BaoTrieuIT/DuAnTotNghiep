@@ -1,16 +1,17 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.FeedbackImage;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.FeedbackImage;
 @Service
 public interface FeedbackImageService {
     FeedbackImage saveFeedbackImage(FeedbackImage feedbackImage);
 
-    FeedbackImage getFeedbackImageById(Long id);
+    FeedbackImage getFeedbackImageById(Integer id);
 
     List<FeedbackImage> getAllFeedbackImages();
 
-    void deleteFeedbackImage(Long id);
+    void deleteFeedbackImage(Integer id);
 }

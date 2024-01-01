@@ -24,20 +24,20 @@
             <td>{{order.phoneNumber}}</td>
             <td>{{order.tradingCode}}</td>
             <td>{{order.specifiedAddress}}</td>
-            <td>{{order.orderTime}}</td>
-            <td>{{order.orderUpdateTime}}</td>
+            <td>{{formatDate(order.orderTime)}}</td>
+            <td>{{formatDate(order.orderUpdateTime)}}</td>
             <td>{{order.totalPrice}}</td>
             <td>{{order.paymentStatus.paymentStatusName}}</td>
             <td>{{order.orderStatus.orderStatusName}}</td>
             <td>{{order.paymentMethod.paymentMethodName}}</td>
             <td>
-                <a class="btn btn-primary"  ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
+                <a class="btn btn-primary" ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
             </td>
             <td>
-                <a class="btn btn-warning"  ng-click="updateStatus(order.orderId,3);">Đơn Hàng Đang Được Giao</a>
+                <a class="btn btn-warning" ng-click="updateStatus(order.orderId,3);">Đơn Hàng Đang Được Giao</a>
             </td>
             <td>
-                <a class="btn btn-danger"  ng-click="updateStatus(order.orderId,5)">Hủy Đơn Hàng</a>
+                <a class="btn btn-danger" ng-click="updateStatus(order.orderId,5)">Hủy Đơn Hàng</a>
             </td>
         </tr>
 

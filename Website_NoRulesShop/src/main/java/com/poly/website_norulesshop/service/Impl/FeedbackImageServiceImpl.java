@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.FeedbackImageRepository;
-import com.poly.website_norulesshop.entity.FeedbackImage;
-import com.poly.website_norulesshop.service.FeedbackImageService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.FeedbackImageRepository;
+import com.poly.website_norulesshop.entity.FeedbackImage;
+import com.poly.website_norulesshop.service.FeedbackImageService;
 
 @Service
 public class FeedbackImageServiceImpl implements FeedbackImageService {
@@ -24,7 +25,7 @@ public class FeedbackImageServiceImpl implements FeedbackImageService {
     }
 
     @Override
-    public FeedbackImage getFeedbackImageById(Long id) {
+    public FeedbackImage getFeedbackImageById(Integer id) {
         return feedbackImageRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class FeedbackImageServiceImpl implements FeedbackImageService {
     }
 
     @Override
-    public void deleteFeedbackImage(Long id) {
+    public void deleteFeedbackImage(Integer id) {
         feedbackImageRepository.deleteById(id);
     }
 }

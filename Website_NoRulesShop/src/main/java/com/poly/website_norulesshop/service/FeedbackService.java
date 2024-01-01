@@ -1,16 +1,17 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.Feedback;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.Feedback;
 @Service
 public interface FeedbackService {
     Feedback saveFeedback(Feedback feedback);
 
-    Feedback getFeedbackById(Long id);
+    Feedback getFeedbackById(Integer id);
 
     List<Feedback> getAllFeedbacks();
 
-    void deleteFeedback(Long id);
+    void deleteFeedback(Integer id);
 }

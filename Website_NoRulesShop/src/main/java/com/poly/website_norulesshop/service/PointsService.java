@@ -1,16 +1,17 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.Points;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.Points;
 @Service
 public interface PointsService {
     Points savePoints(Points points);
 
-    Points getPointsById(Long id);
+    Points getPointsById(Integer id);
 
     List<Points> getAllPoints();
 
-    void deletePoints(Long id);
+    void deletePoints(Integer id);
 }

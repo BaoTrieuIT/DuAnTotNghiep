@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PaymentStatusRepository extends JpaRepository<PaymentStatus, Long> {
+public interface PaymentStatusRepository extends JpaRepository<PaymentStatus, Integer> {
     // Các phương thức đặc thù cho bảng PaymentStatus (nếu cần)
 }

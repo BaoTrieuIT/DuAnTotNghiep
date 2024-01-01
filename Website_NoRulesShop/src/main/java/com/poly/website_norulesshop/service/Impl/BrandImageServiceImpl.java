@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.BrandImageRepository;
-import com.poly.website_norulesshop.entity.BrandImage;
-import com.poly.website_norulesshop.service.BrandImageService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.BrandImageRepository;
+import com.poly.website_norulesshop.entity.BrandImage;
+import com.poly.website_norulesshop.service.BrandImageService;
 
 @Service
 public class BrandImageServiceImpl implements BrandImageService {
@@ -24,7 +25,7 @@ public class BrandImageServiceImpl implements BrandImageService {
     }
 
     @Override
-    public BrandImage getBrandImageById(Long id) {
+    public BrandImage getBrandImageById(Integer id) {
         return brandImageRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class BrandImageServiceImpl implements BrandImageService {
     }
 
     @Override
-    public void deleteBrandImage(Long id) {
+    public void deleteBrandImage(Integer id) {
         brandImageRepository.deleteById(id);
     }
 }

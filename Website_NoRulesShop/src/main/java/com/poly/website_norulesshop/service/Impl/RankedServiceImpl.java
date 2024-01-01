@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.RankedRepository;
-import com.poly.website_norulesshop.entity.Ranked;
-import com.poly.website_norulesshop.service.RankedService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.RankedRepository;
+import com.poly.website_norulesshop.entity.Ranked;
+import com.poly.website_norulesshop.service.RankedService;
 
 @Service
 public class RankedServiceImpl implements RankedService {
@@ -24,7 +25,7 @@ public class RankedServiceImpl implements RankedService {
     }
 
     @Override
-    public Ranked getRankedById(Long id) {
+    public Ranked getRankedById(Integer id) {
         return rankedRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class RankedServiceImpl implements RankedService {
     }
 
     @Override
-    public void deleteRanked(Long id) {
+    public void deleteRanked(Integer id) {
         rankedRepository.deleteById(id);
     }
 }

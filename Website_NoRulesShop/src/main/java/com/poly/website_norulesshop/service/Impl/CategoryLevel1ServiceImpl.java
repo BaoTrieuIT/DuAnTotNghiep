@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.CategoryLevel1Repository;
-import com.poly.website_norulesshop.entity.CategoryLevel1;
-import com.poly.website_norulesshop.service.CategoryLevel1Service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.CategoryLevel1Repository;
+import com.poly.website_norulesshop.entity.CategoryLevel1;
+import com.poly.website_norulesshop.service.CategoryLevel1Service;
 
 @Service
 public class CategoryLevel1ServiceImpl implements CategoryLevel1Service {
@@ -24,7 +25,7 @@ public class CategoryLevel1ServiceImpl implements CategoryLevel1Service {
     }
 
     @Override
-    public CategoryLevel1 getCategoryLevel1ById(Long id) {
+    public CategoryLevel1 getCategoryLevel1ById(Integer id) {
         return categoryLevel1Repository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class CategoryLevel1ServiceImpl implements CategoryLevel1Service {
     }
 
     @Override
-    public void deleteCategoryLevel1(Long id) {
+    public void deleteCategoryLevel1(Integer id) {
         categoryLevel1Repository.deleteById(id);
     }
 }

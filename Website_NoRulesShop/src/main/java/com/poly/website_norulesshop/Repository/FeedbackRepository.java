@@ -1,10 +1,11 @@
 package com.poly.website_norulesshop.Repository;
 
-import com.poly.website_norulesshop.entity.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.poly.website_norulesshop.entity.Feedback;
+
 @Repository
-public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
+public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
     // Các phương thức đặc thù cho bảng Feedback (nếu cần)
 }

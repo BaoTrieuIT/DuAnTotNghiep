@@ -8,9 +8,10 @@ import java.util.List;
 public interface RankedService {
     Ranked saveRanked(Ranked ranked);
 
-    Ranked getRankedById(Long id);
+    Ranked getRankedById(Integer id);
 
     List<Ranked> getAllRankeds();
 
-    void deleteRanked(Long id);
+    void deleteRanked(Integer
+     id);
 }

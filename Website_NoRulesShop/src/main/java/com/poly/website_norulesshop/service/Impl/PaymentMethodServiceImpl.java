@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.PaymentMethodRepository;
-import com.poly.website_norulesshop.entity.PaymentMethod;
-import com.poly.website_norulesshop.service.PaymentMethodService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.PaymentMethodRepository;
+import com.poly.website_norulesshop.entity.PaymentMethod;
+import com.poly.website_norulesshop.service.PaymentMethodService;
 
 @Service
 public class PaymentMethodServiceImpl implements PaymentMethodService {
@@ -24,7 +25,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     }
 
     @Override
-    public PaymentMethod getPaymentMethodById(Long id) {
+    public PaymentMethod getPaymentMethodById(Integer id) {
         return paymentMethodRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     }
 
     @Override
-    public void deletePaymentMethod(Long id) {
+    public void deletePaymentMethod(Integer id) {
         paymentMethodRepository.deleteById(id);
     }
 }

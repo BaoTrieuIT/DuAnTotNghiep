@@ -1,16 +1,17 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.Voucher;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.Voucher;
 @Service
 public interface VoucherService {
     Voucher saveVoucher(Voucher voucher);
 
-    Voucher getVoucherById(Long id);
+    Voucher getVoucherById(Integer id);
 
     List<Voucher> getAllVouchers();
 
-    void deleteVoucher(Long id);
+    void deleteVoucher(Integer id);
 }

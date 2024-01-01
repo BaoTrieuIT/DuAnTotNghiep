@@ -1,25 +1,19 @@
 package com.poly.website_norulesshop.service;
 
-import java.util.Map;
-import java.util.UUID;
-
-import lombok.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
-import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileUploadService {
 
 
     String uploadDir = "src\\main\\resources\\static\\user\\img\\products";
-    private static final Object lock = new Object();
 
 
     public void saveFiles(Map<String, MultipartFile> fileMap) throws IOException {

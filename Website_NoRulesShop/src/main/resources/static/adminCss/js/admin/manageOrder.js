@@ -116,7 +116,13 @@ app.controller("order_ctrl", function ($scope, $http, $location, order_service) 
             }
         });
     }
-
+    $scope.formatDate = function (dateString) {
+        const date = new Date(dateString); // Chuyển chuỗi thành đối tượng Date
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
     $scope.initialize();
 
 })
@@ -178,5 +184,6 @@ app.controller("order_detail_ctrl", function ($scope, $http, $location, order_se
     $scope.calculateTotalPrice = function () {
         return totalPriceSum;
     };
+
     $scope.initialize();
 })

@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.PaymentStatusRepository;
-import com.poly.website_norulesshop.entity.PaymentStatus;
-import com.poly.website_norulesshop.service.PaymentStatusService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.PaymentStatusRepository;
+import com.poly.website_norulesshop.entity.PaymentStatus;
+import com.poly.website_norulesshop.service.PaymentStatusService;
 
 @Service
 public class PaymentStatusServiceImpl implements PaymentStatusService {
@@ -24,7 +25,7 @@ public class PaymentStatusServiceImpl implements PaymentStatusService {
     }
 
     @Override
-    public PaymentStatus getPaymentStatusById(Long id) {
+    public PaymentStatus getPaymentStatusById(Integer id) {
         return paymentStatusRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class PaymentStatusServiceImpl implements PaymentStatusService {
     }
 
     @Override
-    public void deletePaymentStatus(Long id) {
+    public void deletePaymentStatus(Integer id) {
         paymentStatusRepository.deleteById(id);
     }
 }

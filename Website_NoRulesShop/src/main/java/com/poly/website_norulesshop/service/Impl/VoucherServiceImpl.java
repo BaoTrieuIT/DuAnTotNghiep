@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.VoucherRepository;
-import com.poly.website_norulesshop.entity.Voucher;
-import com.poly.website_norulesshop.service.VoucherService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.VoucherRepository;
+import com.poly.website_norulesshop.entity.Voucher;
+import com.poly.website_norulesshop.service.VoucherService;
 
 @Service
 public class VoucherServiceImpl implements VoucherService {
@@ -24,7 +25,7 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public Voucher getVoucherById(Long id) {
+    public Voucher getVoucherById(Integer id) {
         return voucherRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class VoucherServiceImpl implements VoucherService {
     }
 
     @Override
-    public void deleteVoucher(Long id) {
+    public void deleteVoucher(Integer id) {
         voucherRepository.deleteById(id);
     }
 }

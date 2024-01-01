@@ -16,27 +16,27 @@
         </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="order in orderAwatingConfirm">
-                <th scope="row">{{order.orderId}}</th>
-                <td>{{order.recipientName}}</td>
-                <td>{{order.phoneNumber}}</td>
-                <td>{{order.tradingCode}}</td>
-                <td>{{order.specifiedAddress}}</td>
-                <td>{{order.orderTime}}</td>
-                <td>{{order.totalPrice}}</td>
-                <td>{{order.paymentStatus.paymentStatusName}}</td>
-                <td>{{order.orderStatus.orderStatusName}}</td>
-                <td>{{order.paymentMethod.paymentMethodName}}</td>
-                <td>
-                    <a class="btn btn-primary"  ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
-                </td>
-                <td>
-                    <a class="btn btn-warning"  ng-click="updateStatus(order.orderId,2);">Đơn Hàng Đã Xuất Kho</a>
-                </td>
-                <td>
-                    <a class="btn btn-danger"  ng-click="updateStatus(order.orderId,5)">Hủy Đơn Hàng</a>
-                </td>
-            </tr>
+        <tr ng-repeat="order in orderAwatingConfirm">
+            <th scope="row">{{order.orderId}}</th>
+            <td>{{order.recipientName}}</td>
+            <td>{{order.phoneNumber}}</td>
+            <td>{{order.tradingCode}}</td>
+            <td>{{order.specifiedAddress}}</td>
+            <td>{{formatDate(order.orderTime)}}</td>
+            <td>{{order.totalPrice}}</td>
+            <td>{{order.paymentStatus.paymentStatusName}}</td>
+            <td>{{order.orderStatus.orderStatusName}}</td>
+            <td>{{order.paymentMethod.paymentMethodName}}</td>
+            <td>
+                <a class="btn btn-primary" ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
+            </td>
+            <td>
+                <a class="btn btn-warning" ng-click="updateStatus(order.orderId,2);">Đơn Hàng Đã Xuất Kho</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" ng-click="updateStatus(order.orderId,5)">Hủy Đơn Hàng</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

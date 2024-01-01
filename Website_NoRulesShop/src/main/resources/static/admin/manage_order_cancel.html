@@ -1,37 +1,37 @@
 <div class="table">
     <table class="table">
         <thead>
-            <tr>
-                <th scope="col">Sản Phẩm</th>
-                <th scope="col">Tên Người Đặt</th>
-                <th scope="col">Số Điện Thoại</th>
-                <th scope="col">Mã đặt hàng</th>
-                <th scope="col">Địa Chỉ</th>
-                <th scope="col">Ngày Đặt</th>
-                <th scope="col">Tỗng tiền</th>
-                <th scope="col">Tình Trạng Thanh Toán</th>
-                <th scope="col">Trạng Thái Đơn Hàng</th>
-                <th scope="col">Phương thức thanh toán</th>
-                <th scope="col">Thao tác</th>
-            </tr>
+        <tr>
+            <th scope="col">Sản Phẩm</th>
+            <th scope="col">Tên Người Đặt</th>
+            <th scope="col">Số Điện Thoại</th>
+            <th scope="col">Mã đặt hàng</th>
+            <th scope="col">Địa Chỉ</th>
+            <th scope="col">Ngày Đặt</th>
+            <th scope="col">Tỗng tiền</th>
+            <th scope="col">Tình Trạng Thanh Toán</th>
+            <th scope="col">Trạng Thái Đơn Hàng</th>
+            <th scope="col">Phương thức thanh toán</th>
+            <th scope="col">Thao tác</th>
+        </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="order in orderHasBeenCanceled">
-                <th scope="row">{{order.orderId}}</th>
-                <td>{{order.recipientName}}</td>
-                <td>{{order.phoneNumber}}</td>
-                <td>{{order.tradingCode}}</td>
-                <td>{{order.specifiedAddress}}</td>
-                <td>{{order.orderTime}}</td>
-                <td>{{order.orderUpdateTime}}</td>
-                <td>{{order.totalPrice}}</td>
-                <td>{{order.paymentStatus.paymentStatusName}}</td>
-                <td>{{order.orderStatus.orderStatusName}}</td>
-                <td>{{order.paymentMethod.paymentMethodName}}</td>
-                <td>
-                    <a class="btn btn-primary"  ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
-                </td>
-            </tr>
+        <tr ng-repeat="order in orderHasBeenCanceled">
+            <th scope="row">{{order.orderId}}</th>
+            <td>{{order.recipientName}}</td>
+            <td>{{order.phoneNumber}}</td>
+            <td>{{order.tradingCode}}</td>
+            <td>{{order.specifiedAddress}}</td>
+            <td>{{formatDate(order.orderTime)}}</td>
+            <td>{{formatDate(order.orderUpdateTime)}}</td>
+            <td>{{order.totalPrice}}</td>
+            <td>{{order.paymentStatus.paymentStatusName}}</td>
+            <td>{{order.orderStatus.orderStatusName}}</td>
+            <td>{{order.paymentMethod.paymentMethodName}}</td>
+            <td>
+                <a class="btn btn-primary" ng-click="showOrderDetail(order.orderId)">Xem Chi Tiết Đơn Hàng</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>

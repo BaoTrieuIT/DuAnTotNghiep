@@ -1,16 +1,17 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.PaymentStatus;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.PaymentStatus;
 @Service
 public interface PaymentStatusService {
     PaymentStatus savePaymentStatus(PaymentStatus paymentStatus);
 
-    PaymentStatus getPaymentStatusById(Long id);
+    PaymentStatus getPaymentStatusById(Integer id);
 
     List<PaymentStatus> getAllPaymentStatuses();
 
-    void deletePaymentStatus(Long id);
+    void deletePaymentStatus(Integer id);
 }

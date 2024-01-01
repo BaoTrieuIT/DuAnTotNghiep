@@ -1,10 +1,10 @@
 package com.poly.website_norulesshop.service;
 
-import com.poly.website_norulesshop.entity.Order;
-import com.poly.website_norulesshop.entity.OrderStatus;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.entity.OrderStatus;
 
 @Service
 public interface OrderStatusService {

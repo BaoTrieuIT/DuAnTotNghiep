@@ -23,8 +23,8 @@
             <td>{{order.phoneNumber}}</td>
             <td>{{order.tradingCode}}</td>
             <td>{{order.specifiedAddress}}</td>
-            <td>{{order.orderTime}}</td>
-            <td>{{order.orderUpdateTime}}</td>
+            <td>{{formatDate(order.orderTime)}}</td>
+            <td>{{formatDate(order.orderUpdateTime)}}</td>
             <td>{{order.totalPrice}}</td>
             <td>{{order.paymentStatus.paymentStatusName}}</td>
             <td>{{order.orderStatus.orderStatusName}}</td>

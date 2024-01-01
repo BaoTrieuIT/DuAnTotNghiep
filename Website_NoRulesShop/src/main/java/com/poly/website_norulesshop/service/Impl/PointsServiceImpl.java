@@ -1,12 +1,13 @@
 package com.poly.website_norulesshop.service.Impl;
 
-import com.poly.website_norulesshop.Repository.PointsRepository;
-import com.poly.website_norulesshop.entity.Points;
-import com.poly.website_norulesshop.service.PointsService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.poly.website_norulesshop.Repository.PointsRepository;
+import com.poly.website_norulesshop.entity.Points;
+import com.poly.website_norulesshop.service.PointsService;
 
 @Service
 public class PointsServiceImpl implements PointsService {
@@ -24,7 +25,7 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
-    public Points getPointsById(Long id) {
+    public Points getPointsById(Integer id) {
         return pointsRepository.findById(id).orElse(null);
     }
 
@@ -34,7 +35,7 @@ public class PointsServiceImpl implements PointsService {
     }
 
     @Override
-    public void deletePoints(Long id) {
+    public void deletePoints(Integer id) {
         pointsRepository.deleteById(id);
     }
 }
